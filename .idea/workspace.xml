@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="Jetty hinzugefügt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +102,7 @@
       <workItem from="1701549606317" duration="2834000" />
       <workItem from="1701612224735" duration="4436000" />
       <workItem from="1701617188954" duration="532000" />
+      <workItem from="1701624245704" duration="2117000" />
     </task>
     <task id="LOCAL-00001" summary="Jetty hinzugefügt">
       <option name="closed" value="true" />
