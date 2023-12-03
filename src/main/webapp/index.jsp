@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Fortnite</h2>
+<h2>Fotnite</h2>
 </body>
 </html>
