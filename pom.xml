@@ -13,6 +13,7 @@
 
     <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
       <maven.compiler.target>17</maven.compiler.target>
       <maven.compiler.source>17</maven.compiler.source>
 
@@ -37,7 +38,7 @@
       <dependency>
           <groupId>org.hibernate.orm</groupId>
           <artifactId>hibernate-c3p0</artifactId>
-          <version>6.1.7.Final</version>
+          <version>6.2.3.Final</version>
       </dependency>
 
       <dependency>
