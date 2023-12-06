@@ -1,13 +1,14 @@
 package org.example.servlets;
 
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.*;
-import jakarta.servlet.http.*;
-
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "login",value = "/login")
+@WebServlet(name = "loginServlet",value = "/login")
 public class loginServlet extends HttpServlet {
 
 
@@ -21,9 +22,9 @@ public class loginServlet extends HttpServlet {
         if ("testuser".equals(benutzername) && "1".equals(passwort)) {
             // Weiterleitung zur erfolgreichen Anmeldung
             response.sendRedirect("dashboard.jsp");
-        } else {
+        } //else {
             // Fehlermeldung oder Weiterleitung zur Login-Seite
             response.sendRedirect("register.jsp");
-        }
+        //}
     }
 }

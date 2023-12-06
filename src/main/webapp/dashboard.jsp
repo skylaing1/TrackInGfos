@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="with=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="bilder/iconoffice.png" type="image/icon type"> <!-- Icon neben titel -->
+    <link rel="icon" href="image/iconoffice.png" type="image/icon type"> <!-- Icon neben titel -->
     <title>ACME GmbH | Flex Office</title>
 </head>
 <body>

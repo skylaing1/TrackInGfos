@@ -24,7 +24,7 @@
             <h1>Willkommen zurück</h1>
         </header>
         <section>
-            <form id= "login" action="login" method="post" class="login-form">  <!-- Bei Abschluss(Knopf) wird Dash.html geöffnet -->
+            <form action="${pageContext.request.contextPath}/login" method="post" class="login-form">  <!-- Bei Abschluss(Knopf) wird Dash.html geöffnet -->
                 <div class="input-group">
                     <label for="benutzername">Benutzername</label>
                     <input type="text" name="benutzername"  placeholder="Benutzername" id="benutzername" required> <!-- Eingabe Personalnummer -->
