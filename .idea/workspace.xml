@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="Jetty hinzugefügt">
+    <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="ENDLICH!!!!!!!!!!!!!! SERVLETS GEFIXXT FUNKTIONEREN JEZT&#10;JETTY VERSION AKTUALISIERT UND JAKARTA SERVLET AUF VERSION 6 JEZT">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +119,9 @@
       <workItem from="1701674167786" duration="2133000" />
       <workItem from="1701861111415" duration="1193000" />
       <workItem from="1701862318651" duration="2567000" />
+      <workItem from="1701951549893" duration="153000" />
+      <workItem from="1701951726479" duration="380000" />
+      <workItem from="1701953269443" duration="1292000" />
     </task>
     <task id="LOCAL-00001" summary="Jetty hinzugefügt">
       <option name="closed" value="true" />
@@ -136,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701616973155</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ENDLICH!!!!!!!!!!!!!! SERVLETS GEFIXXT FUNKTIONEREN JEZT&#10;JETTY VERSION AKTUALISIERT UND JAKARTA SERVLET AUF VERSION 6 JEZT">
+      <option name="closed" value="true" />
+      <created>1701939225905</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701939225905</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +167,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Jetty hinzugefügt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jetty hinzugefügt" />
+    <MESSAGE value="ENDLICH!!!!!!!!!!!!!! SERVLETS GEFIXXT FUNKTIONEREN JEZT&#10;JETTY VERSION AKTUALISIERT UND JAKARTA SERVLET AUF VERSION 6 JEZT" />
+    <option name="LAST_COMMIT_MESSAGE" value="ENDLICH!!!!!!!!!!!!!! SERVLETS GEFIXXT FUNKTIONEREN JEZT&#10;JETTY VERSION AKTUALISIERT UND JAKARTA SERVLET AUF VERSION 6 JEZT" />
   </component>
 </project>
