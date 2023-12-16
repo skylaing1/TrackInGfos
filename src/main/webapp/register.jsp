@@ -29,13 +29,13 @@
 <section class="wrapper">
   <div class="content">
     <header>
-      <h1>Willkommen zurück</h1>
+      <h1>Passwort erstellen</h1>
     </header>
     <section>
       <form action="index.html" class="login-form">  <!-- Bei Abschluss(Knopf) wird Dash.html geöffnet -->
         <div class="input-group">
-          <label for="benutzername">Benutzername</label>
-          <input type="text" placeholder="User" id="benutzername" required> <!-- Eingabe benutzername -->
+          <label for="E-Mail">E-Mail</label>
+          <input type="text" placeholder="Max.Mustermann@TrackIn.com" id="E-Mail" required> <!-- Eingabe benutzername -->
         </div>
         <div class="input-group">
           <label for="personalnummer">Personalnummer</label>
@@ -53,7 +53,9 @@
           <label for="passwordrepeat">Passwort wiederholen</label>
           <input type="password" placeholder="Passwort" id="passwordrepeat" required> <!-- Eingabe Passwort wiederholen -->
         </div>
+        <a class="NoDecoration" href="index.jsp">Du hast bereits ein Passwort?</a> <!-- Link zu Login -->
         <div class="input-group"><button name="button" type="submit">Registrieren</button></div> <!-- Knopf Form submit -->
+
       </form>
     </section>
   </div>

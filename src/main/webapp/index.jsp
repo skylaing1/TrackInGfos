@@ -33,7 +33,7 @@
                     <label for="passwort">Password</label>
                     <input type="password" name="passwort" placeholder="Passwort" id="passwort" required> <!-- Eingabe Passwort -->
                 </div>
-                <a class="NoDecoration" >Noch Kein Passwort?</a>
+                <a class="NoDecoration" href="register.jsp">Noch Kein Passwort?</a>
                 <div class="input-group"><button name="button" type="submit">Anmelden</button></div> <!-- Knopf Form submit -->
             </form>
         </section>
