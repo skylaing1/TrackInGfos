@@ -30,22 +30,17 @@
                     <input type="text" name="benutzername"  placeholder="Benutzername" id="benutzername" required> <!-- Eingabe Personalnummer -->
                 </div>
                 <div class="input-group">
-                    <label for="passwort">Passwort</label>
-                    <input type="passwort" name="passwort" placeholder="Passwort" id="passwort" required> <!-- Eingabe Passwort -->
+                    <label for="passwort">Password</label>
+                    <input type="password" name="passwort" placeholder="Passwort" id="passwort" required> <!-- Eingabe Passwort -->
                 </div>
                 <a class="NoDecoration" >Noch Kein Passwort?</a>
-                <div class="input-group">
-                    <button name="button" type="submit">Anmelden</button>
-                </div> <!-- Knopf Form submit -->
+                <div class="input-group"><button name="button" type="submit">Anmelden</button></div> <!-- Knopf Form submit -->
             </form>
         </section>
     </div>
 </section>
 </body>
 </html>
-
-
-
 
 <!-- Todo
 Design verbessern
