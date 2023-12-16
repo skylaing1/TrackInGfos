@@ -5,8 +5,8 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3307/TrackInDatabase</property>
-        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.url">jdbc:mysql://trackincuma.mysql.database.azure.com:3306/trackindatabase?&amp;ampuseSSL=true&amp;requireSSL=true&amp;verifyServerCertificate=false&amp;serverSslCert=TrackInGfos\Datenbank\DigiCertGlobalRootCA.crt.pem</property>
+        <property name="hibernate.connection.username">admincuma</property>
         <property name="hibernate.connection.password">G9#xYp$2zLs!vT7*</property>
         <!-- JDBC connection pool settings -->
         <property name="hibernate.c3p0.min_size">5</property>
