@@ -22,5 +22,5 @@ public class LoginData {
     @JoinColumn(name = "mitarbeiter_personalNummer")
     private Mitarbeiter mitarbeiter;
 
-
+ //sett und getter
 }
