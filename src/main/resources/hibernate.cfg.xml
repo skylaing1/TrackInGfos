@@ -23,7 +23,8 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         <!-- Mention annotated class -->
-        <!-- <mapping class="com.example.model.YourEntityClass" /> -->
+        <mapping class="org.example.entities.LoginData"/>
+        <mapping class="org.example.entities.Mitarbeiter"/>
     </session-factory>
 
 </hibernate-configuration>
