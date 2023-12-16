@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="hibernate.cfg.xml/Hibernate">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.49">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.51">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -920,8 +920,7 @@
     </schema>
     <schema id="292" parent="1" name="trackindatabase">
       <Current>1</Current>
-      <IntrospectionTimestamp>2023-12-05.19:34:55</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-12-05.17:34:55</LocalIntrospectionTimestamp>
+      <LastIntrospectionLocalTimestamp>2023-12-05.17:34:55</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <table id="293" parent="292" name="benutzer">
