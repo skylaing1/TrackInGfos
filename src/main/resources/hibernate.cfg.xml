@@ -5,7 +5,7 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://trackincuma.mysql.database.azure.com:3306/trackindatabase?&amp;ampuseSSL=true&amp;requireSSL=true&amp;verifyServerCertificate=false&amp;serverSslCert=TrackInGfos\Datenbank\DigiCertGlobalRootCA.crt.pem</property>
+        <property name="hibernate.connection.url">jdbc:mysql://trackincuma.mysql.database.azure.com:3306/trackindatabase?&amp;ampuseSSL=true&amp;requireSSL=true&amp;verifyServerCertificate=false&amp;serverSslCert=TrackInGfos\Datenbank\DigiCertGlobalRootCA.crt.pem</property> //t
         <property name="hibernate.connection.username">admincuma</property>
         <property name="hibernate.connection.password">G9#xYp$2zLs!vT7*</property>
         <!-- JDBC connection pool settings -->
@@ -23,7 +23,8 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         <!-- Mention annotated class -->
-        <!-- <mapping class="com.example.model.YourEntityClass" /> -->
+        <mapping class="org.example.entities.LoginData"/>
+        <mapping class="org.example.entities.Mitarbeiter"/>
     </session-factory>
 
 </hibernate-configuration>
