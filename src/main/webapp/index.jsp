@@ -26,12 +26,12 @@
         <section>
             <form action="${pageContext.request.contextPath}/login" method="post" class="login-form">  <!-- Bei Abschluss(Knopf) wird Dash.html geöffnet -->
                 <div class="input-group">
-                    <label for="benutzername">Benutzername</label>
-                    <input type="text" name="benutzername"  placeholder="Benutzername" id="benutzername" required> <!-- Eingabe Personalnummer -->
+                    <label for="email">E-Mail</label>
+                    <input type="text" name="email"  placeholder="Max-Mustermann@TrackIn.com" id="email" required> <!-- Eingabe Personalnummer -->
                 </div>
                 <div class="input-group">
-                    <label for="passwort">Password</label>
-                    <input type="password" name="passwort" placeholder="Passwort" id="passwort" required> <!-- Eingabe Passwort -->
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="Passwort" id="password" required> <!-- Eingabe Passwort -->
                 </div>
                 <a class="NoDecoration" >Noch Kein Passwort?</a>
                 <div class="input-group"><button name="button" type="submit">Anmelden</button></div> <!-- Knopf Form submit -->
