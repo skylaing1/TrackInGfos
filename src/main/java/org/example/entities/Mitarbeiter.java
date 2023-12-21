@@ -24,6 +24,9 @@ public class Mitarbeiter {
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;
 
+    public Mitarbeiter() {
+    }
+    public int getPersonalNummer() {return personalNummer;}
 
-    // Konstruktor, Getter und Sette
+
 }

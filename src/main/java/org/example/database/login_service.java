@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.example.entities.LoginData;
 
-public class LoginService {
+public class login_service {
 
     public static boolean authenticateUser(String email, String password) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
@@ -15,7 +15,7 @@ public class LoginService {
 
             // Benutzer mit der gegebenen E-Mail-Adresse aus der Datenbank abrufen
             LoginData loginData = (LoginData) session.createQuery("FROM LoginData WHERE email = :email")
-                    .setParameter("email", email)
+                    .setParameter("email", email.toLowerCase())
                     .uniqueResult();
 
             session.getTransaction().commit();

@@ -32,26 +32,26 @@
       <h1>Passwort erstellen</h1>
     </header>
     <section>
-      <form action="index.html" class="login-form">  <!-- Bei Abschluss(Knopf) wird Dash.html geöffnet -->
+      <form action="/register" method="post" class="login-form">  <!-- Bei Abschluss(Knopf) wird Dash.html geöffnet -->
         <div class="input-group">
           <label for="E-Mail">E-Mail</label>
-          <input type="text" placeholder="Max.Mustermann@TrackIn.com" id="E-Mail" required> <!-- Eingabe benutzername -->
+          <input type="text" name="email" placeholder="Max.Mustermann@TrackIn.com" id="E-Mail" required> <!-- Eingabe benutzername -->
         </div>
         <div class="input-group">
           <label for="personalnummer">Personalnummer</label>
-          <input type="text" placeholder="Personalnummer" id="personalnummer" required> <!-- Eingabe Personalnummer -->
+          <input type="text" name="personalnummer" placeholder="Personalnummer" id="personalnummer" required> <!-- Eingabe Personalnummer -->
         </div>
         <div class="input-group">
           <label for="geburtsdatum">Geburtsdatum</label>
-          <input type="date" placeholder="1.1.2000" id="geburtsdatum" required> <!-- Eingabe Geburtsdatum -->
+          <input type="date" name="geburtsdatum" placeholder="1.1.2000" id="geburtsdatum" required> <!-- Eingabe Geburtsdatum -->
         </div>
         <div class="input-group">
           <label for="passwort">Passwort</label>
-          <input type="password" placeholder="Passwort" id="passwort" required> <!-- Eingabe Passwort -->
+          <input type="password" name="password" placeholder="Passwort" id="passwort" required> <!-- Eingabe Passwort -->
         </div>
         <div class="input-group">
           <label for="passwordrepeat">Passwort wiederholen</label>
-          <input type="password" placeholder="Passwort" id="passwordrepeat" required> <!-- Eingabe Passwort wiederholen -->
+          <input type="password" name="passwordrepeat" placeholder="Passwort" id="passwordrepeat" required> <!-- Eingabe Passwort wiederholen -->
         </div>
         <a class="NoDecoration" href="index.jsp">Du hast bereits ein Passwort?</a> <!-- Link zu Login -->
         <div class="input-group"><button name="button" type="submit">Registrieren</button></div> <!-- Knopf Form submit -->

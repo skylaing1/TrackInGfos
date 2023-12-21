@@ -1,8 +1,13 @@
 MYSQL ROOT= G9#xYp$2zLs!vT7*
 
+Datenbank Regeln:
 
+1. Um ein Datensatz in Logindata zu Erstellen muss der Datensatz in der Mitarbeiter Tabelle voll ausgefüllt werden
+2. Emails werden KLein geschrieben in die Datenbank eingetragen
 
 //DB MySql
+-- MySQL Workbench Forward Engineering
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -14,39 +19,41 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema trackindatabase
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS trackindatabase DEFAULT CHARACTER SET utf8 ;
-USE trackindatabase ;
+CREATE SCHEMA IF NOT EXISTS `trackindatabase` DEFAULT CHARACTER SET utf8 ;
+USE `trackindatabase` ;
 
 -- -----------------------------------------------------
--- Table trackindatabase.Mitarbeiter
+-- Table `trackindatabase`.`Mitarbeiter`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS trackindatabase.Mitarbeiter (
-personalNummer INT UNSIGNED NOT NULL,
-name VARCHAR(30) NOT NULL,
-vorname VARCHAR(30) NOT NULL,
-geburtsdatum DATE NOT NULL,
-PRIMARY KEY (personalNummer))
+CREATE TABLE IF NOT EXISTS `trackindatabase`.`Mitarbeiter` (
+`personalNummer` INT NOT NULL,
+`name` VARCHAR(20) NOT NULL,
+`vorname` VARCHAR(20) NOT NULL,
+`geburtsdatum` DATE NOT NULL,
+PRIMARY KEY (`personalNummer`),
+UNIQUE INDEX `personalNummer_UNIQUE` (`personalNummer` ASC) VISIBLE
+)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table trackindatabase.LoginData
+-- Table `trackindatabase`.`LoginData`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS trackindatabase.LoginData (
-credentials_id INT NOT NULL,
-email VARCHAR(45) NULL,
-passwort VARCHAR(45) NULL,
-mitarbeiter_personalNummer INT UNSIGNED NOT NULL,
-PRIMARY KEY (credentials_id, mitarbeiter_personalNummer),
-INDEX fk_login_data_Mitarbeiter_idx (mitarbeiter_personalNummer ASC) VISIBLE,
-UNIQUE INDEX email_UNIQUE (email ASC) VISIBLE,
-CONSTRAINT fk_login_data_Mitarbeiter
-FOREIGN KEY (mitarbeiter_personalNummer)
-REFERENCES trackindatabase.Mitarbeiter (personalNummer)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `trackindatabase`.`LoginData` (
+`credentials_id` INT NOT NULL AUTO_INCREMENT,
+`email` VARCHAR(60) NULL,
+`passwort` CHAR(64) NULL,
+`Mitarbeiter_personalNummer` INT NOT NULL,
+PRIMARY KEY (`credentials_id`, `Mitarbeiter_personalNummer`),
+UNIQUE INDEX `credentials_id_UNIQUE` (`credentials_id` ASC) VISIBLE,
+UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+INDEX `fk_LoginData_Mitarbeiter_idx` (`Mitarbeiter_personalNummer` ASC) VISIBLE,
+CONSTRAINT `fk_LoginData_Mitarbeiter`
+FOREIGN KEY (`Mitarbeiter_personalNummer`)
+REFERENCES `trackindatabase`.`Mitarbeiter` (`personalNummer`)
+ON DELETE CASCADE
+ON UPDATE NO ACTION
+)
 ENGINE = InnoDB;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

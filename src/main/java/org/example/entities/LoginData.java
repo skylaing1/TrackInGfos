@@ -19,12 +19,31 @@ public class LoginData {
     private String passwort;
 
     @OneToOne
-    @JoinColumn(name = "mitarbeiter_personalNummer")
+    @JoinColumn(name = "mitarbeiter_personalNummer", referencedColumnName = "personalNummer")
     private Mitarbeiter mitarbeiter;
+
+    public LoginData() {
+    }
 
     public String getPasswort() {
         return passwort;
     }
 
-    //sett und getter
+    public String getEmail() {
+        return email;
+    }
+
+
+
+    public void setMitarbeiter(Mitarbeiter mitarbeiter) {
+        this.mitarbeiter = mitarbeiter;
+    }
+
+    public void setPasswort(String password) {
+        this.passwort = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

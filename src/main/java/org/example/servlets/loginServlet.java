@@ -4,7 +4,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.database.LoginService;
+import org.example.database.login_service;
 
 import java.io.IOException;
 
@@ -20,7 +20,7 @@ public class loginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         // Authentifizierung mit Hilfe der LoginService-Klasse
-       if (LoginService.authenticateUser(email, password)) {
+       if (login_service.authenticateUser(email, password)) {
            response.sendRedirect("dashboard.jsp");
        } else {
            response.sendRedirect("register.jsp");
