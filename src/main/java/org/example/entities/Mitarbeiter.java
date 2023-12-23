@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "Mitarbeiter")
 public class Mitarbeiter {
 
+
     @Id
     @Column(name = "personalNummer")
     private int personalNummer;
@@ -28,5 +29,8 @@ public class Mitarbeiter {
     }
     public int getPersonalNummer() {return personalNummer;}
 
+    public Date getGeburtsdatum() {
+        return this.geburtsdatum;
+    }
 
 }

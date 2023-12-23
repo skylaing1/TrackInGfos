@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.example.entities.LoginData;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class login_service {
 
@@ -21,8 +22,8 @@ public class login_service {
             session.getTransaction().commit();
 
             if (loginData != null) {
-                // Passwort abgleichen (einfach für Testzwecke)
-                return password.equals(loginData.getPasswort());
+                // Eingegebenes Passwort verschlüsseln und mit dem in der Datenbank gespeicherten Passwort vergleichen
+                return BCrypt.checkpw(password, loginData.getPasswort());
             } else {
                 return false; // Benutzer mit der gegebenen E-Mail-Adresse nicht gefunden
             }

@@ -15,15 +15,17 @@ public class loginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
 
 
-        // Benutzername und Passwort aus dem Formular erhalten
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // Authentifizierung mit Hilfe der LoginService-Klasse
+
+        //Todo: Angemeldet bleiben hinzufügen / Cookies Implementieren / Sessions Implementieren
+
        if (login_service.authenticateUser(email, password)) {
            response.sendRedirect("dashboard.jsp");
        } else {
-           response.sendRedirect("register.jsp");
+           response.sendRedirect("index.jsp");
        }
 
 

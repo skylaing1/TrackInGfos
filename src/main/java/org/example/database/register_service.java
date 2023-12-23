@@ -1,5 +1,7 @@
 package org.example.database;
 
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
@@ -17,9 +19,12 @@ public class register_service {
             Transaction transaction = session.beginTransaction();
 
             try {
+
+                String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+
                 LoginData loginData = new LoginData();
-                loginData.setEmail(email);
-                loginData.setPasswort(password);
+                loginData.setEmail(email.toLowerCase());
+                loginData.setPasswort(hashedPassword);
                 loginData.setMitarbeiter(mitarbeiter);
 
                 session.save(loginData);
@@ -37,6 +42,12 @@ public class register_service {
             e.printStackTrace();
         }
     }
+
+    public static boolean comparePassword(String password, String password2) {
+        return password.equals(password2);
+    }
+
+
 
     public static Mitarbeiter getMitarbeiterByPersonalNummer(int personalNummer) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();

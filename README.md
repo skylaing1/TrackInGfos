@@ -3,7 +3,8 @@ MYSQL ROOT= G9#xYp$2zLs!vT7*
 Datenbank Regeln:
 
 1. Um ein Datensatz in Logindata zu Erstellen muss der Datensatz in der Mitarbeiter Tabelle voll ausgefüllt werden
-2. Emails werden KLein geschrieben in die Datenbank eingetragen
+2. Emails werden klLein geschrieben in die Datenbank eingetragen und die Namen
+3. Wir Benutzen Bcrypt zum verschlüsseln der Passwörter
 
 //DB MySql
 -- MySQL Workbench Forward Engineering
@@ -41,7 +42,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `trackindatabase`.`LoginData` (
 `credentials_id` INT NOT NULL AUTO_INCREMENT,
 `email` VARCHAR(60) NULL,
-`passwort` CHAR(64) NULL,
+`passwort` VARCHAR(60) NULL,
 `Mitarbeiter_personalNummer` INT NOT NULL,
 PRIMARY KEY (`credentials_id`, `Mitarbeiter_personalNummer`),
 UNIQUE INDEX `credentials_id_UNIQUE` (`credentials_id` ASC) VISIBLE,
