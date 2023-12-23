@@ -24,8 +24,10 @@ public class loginServlet extends HttpServlet {
 
        if (login_service.authenticateUser(email, password)) {
            response.sendRedirect("dashboard.jsp");
+           //Todo: Erfolgsmeldung
        } else {
            response.sendRedirect("index.jsp");
+           //Todo: Fehlermeldung: Login fehlgeschlagen
        }
 
 
