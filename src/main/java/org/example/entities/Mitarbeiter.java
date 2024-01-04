@@ -33,4 +33,8 @@ public class Mitarbeiter {
         return this.geburtsdatum;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
 }

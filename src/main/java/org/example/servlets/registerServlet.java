@@ -21,6 +21,7 @@ public class registerServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String name = request.getParameter("name");
         String passwordrepeat = request.getParameter("passwordrepeat");
         String personalNummer = request.getParameter("personalnummer");
         Date geburtsdatum = Date.valueOf(request.getParameter("geburtsdatum"));
@@ -29,39 +30,34 @@ public class registerServlet extends HttpServlet {
 
         // Todo: Email ungültig prüfen: Prefix .com z.b./ Email bereits vergeben prüfen
         // Todo: Passwort ungültig prüfen: mindestens 8 Zeichen, mindestens 1 Großbuchstabe, mindestens 1 Zahl, mindestens 1 Sonderzeichen
-
+        // Todo: Eingabe in die Datenbank in Kleinbuchstaben umwandeln / Außer Passwort
         if (mitarbeiter != null) {
-
-            if (mitarbeiter.getGeburtsdatum() != geburtsdatum) {
-
+            if (mitarbeiter.getName() != name) {
                 if (password.length() >= 8 && !password.matches("[^!§$%&/()?=]+")) {
-
                     if (register_service.comparePassword(password, passwordrepeat)) {
-
                         if (email != null && email.contains("@")) {
-
                             register_service.registerUser(email, password, mitarbeiter);
                             response.sendRedirect("index.jsp");
-                            // Todo: Erfolgsmeldung
                         } else {
-                            response.sendRedirect("register.jsp");
+                            //response.getWriter().println("Ungültige E-Mail-Adresse");
                             // Todo: Fehlermeldung: Ungültige E-Mail-Adresse
                         }
-
+                        // Todo: Erfolgsmeldung
                     } else {
                         response.sendRedirect("register.jsp");
                         // Todo:  Fehlermeldung: Passwörter stimmen nicht überein
                     }
 
                 } else {
-                    response.sendRedirect("register.jsp");
                     // Todo:  Fehlermeldung: Passwort muss mindestens 8 Zeichen lang sein oder ein sonderzeichen beinhalten
+                    response.getWriter().println("Passwort muss mindestens 8 Zeichen lang sein oder ein sonderzeichen beinhalten");
                 }
 
             } else {
                     response.sendRedirect("register.jsp");
                     //Todo:  Fehlermeldung: Geburtsdatum stimmt nicht überein
                 }
+
 
         } else {
             response.sendRedirect("register.jsp");
