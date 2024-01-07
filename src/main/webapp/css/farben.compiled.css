@@ -1,0 +1,19 @@
+:root, [data-bs-theme=dark] {
+  --bs-lvl1: #121212;
+  --bs-lvl2: #1f1f1f;
+  --bs-lvl3: #383838;
+  --bs-sidebar: #242526;
+  --headername-colour: #ffffff;
+}
+
+[data-bs-theme=light] {
+  --bs-lvl1: #dddfeb;
+  --bs-lvl2: #f8f9fc;
+  --bs-lvl3: ;
+  --bs-sidebar: #fff;
+  --headername-colour: #000000;
+}
+
+.text-gray-600 {
+  color: var(--headername-colour) !important;
+}

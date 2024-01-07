@@ -1,65 +1,54 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: cumae
-  Date: 05.12.2023
-  Time: 18:59
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="dark" lang="en" data-bss-forced-theme="dark">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="with=device-width, initial-scale=1.0">
-  <link rel="icon" href="bilder/iconoffice.png" type="image/icon type"> <!-- Icon steht neben dem Titel !-->
-  <link rel="stylesheet" href="css/style.css"> <!-- CSS datei Verbindung -->
-  <title>Registrierung | Flex Office</title>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register - TrackIn</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
+    <link rel="stylesheet" href="css/bs-theme-overrides.css">
+    <link rel="stylesheet" href="css/farben.compiled.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body class="VScrollbar">
-<nav>
-  <ul>
-    <li><a href="dashboard.jsp">Dashboard</a></li>
-    <li><a href="">Ipsum</a></li>
-    <li><a href="">Dolor</a></li>
-    <li><a href="">Sit</a></li>
-    <h2 class="login_title">ACME GmbH</h2>
-  </ul>
-</nav>
-<section class="wrapper">
-  <div class="content">
-    <header>
-      <h1>Passwort erstellen</h1>
-    </header>
-    <section>
-      <form action="/register" method="post" class="login-form">  <!-- Bei Abschluss(Knopf) wird Dash.html geöffnet -->
-        <div class="input-group">
-          <label for="E-Mail">E-Mail</label>
-          <input type="text" name="email" placeholder="Max.Mustermann@TrackIn.com" id="E-Mail" required> <!-- Eingabe benutzername -->
-        </div>
-        <div class="input-group">
-          <label for="personalnummer">Personalnummer</label>
-          <input type="text" name="personalnummer" placeholder="Personalnummer" id="personalnummer" required> <!-- Eingabe Personalnummer -->
-        </div>
-        <div class="input-group">
-          <label for="geburtsdatum">Geburtsdatum</label>
-          <input type="date" name="geburtsdatum" placeholder="1.1.2000" id="geburtsdatum" required> <!-- Eingabe Geburtsdatum -->
-        </div>
-        <div class="input-group">
-          <label for="passwort">Passwort</label>
-          <input type="password" name="password" placeholder="Passwort" id="passwort" required> <!-- Eingabe Passwort -->
-        </div>
-        <div class="input-group">
-          <label for="passwordrepeat">Passwort wiederholen</label>
-          <input type="password" name="passwordrepeat" placeholder="Passwort" id="passwordrepeat" required> <!-- Eingabe Passwort wiederholen -->
-        </div>
-        <a class="NoDecoration" href="index.jsp">Du hast bereits ein Passwort?</a> <!-- Link zu Login -->
-        <div class="input-group"><button name="button" type="submit">Registrieren</button></div> <!-- Knopf Form submit -->
 
-      </form>
-    </section>
-  </div>
-</section>
+<body class="bg-gradient-primary" style="background: url(&quot;img/background/pexels-photo-6985128.jpeg&quot;) center / cover no-repeat;">
+<div class="container" style="opacity: 1;padding-bottom: 0px;">
+    <div class="card shadow-lg o-hidden border-0 my-5">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-flex">
+                    <div class="flex-grow-1 bg-register-image" style="opacity: 1;background: url(&quot;img/Forgotpassword-rafiki.png&quot;) center / cover no-repeat, var(--bs-purple);"></div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 class="text-dark mb-4">Benutzer Registrieren!</h4>
+                        </div>
+                        <form class="user">
+                            <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Adresse" name="email" required=""></div>
+                            <div class="row mb-3">
+                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="number" id="exampleFirstName" placeholder="Personalnummer" inputmode="numeric" name="personalnummer" required=""></div>
+                                <div class="col-sm-6"><input class="form-control form-control-user" type="text" id="exampleLastName" name="name" required="" placeholder="Nachname"></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password" minlength="8" maxlength="67" required=""></div>
+                                <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Passwort Wiederholen" name="password_repeat" required=""></div>
+                            </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Benutzer Registrieren!</button>
+                            <hr>
+                        </form>
+                        <div class="text-center"></div>
+                        <div class="text-center"><a class="small" href="login.jsp">Du hast bereits einen Benutzer? Login!</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/bootstrap.js"></script>
+<script src="js/sidebar.js"></script>
 </body>
+
 </html>
-<!-- Todo: Date und Personalnummer Kleiner Machen und Nebeneinander -->
