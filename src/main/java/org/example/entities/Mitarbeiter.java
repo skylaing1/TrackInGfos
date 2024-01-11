@@ -22,6 +22,9 @@ public class Mitarbeiter {
     @Column(name = "geburtsdatum")
     private Date geburtsdatum;
 
+    @Column(name = "onetimepassword")
+    private String onetimepassword;
+
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;
 
@@ -35,6 +38,10 @@ public class Mitarbeiter {
 
     public String getName(){
         return this.name;
+    }
+
+    public String getOnetimepassword() {
+        return this.onetimepassword;
     }
 
 }

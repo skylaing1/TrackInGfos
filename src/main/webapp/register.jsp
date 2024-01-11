@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Register - TrackIn</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="css/bs-theme-overrides.css">
@@ -20,35 +20,36 @@
         <div class="card-body p-0">
             <div class="row">
                 <div class="col-lg-5 d-none d-lg-flex">
-                    <div class="flex-grow-1 bg-register-image" style="opacity: 1;background: url(&quot;img/Forgotpassword-rafiki.png&quot;) center / cover no-repeat, var(--bs-purple);"></div>
+                    <div class="flex-grow-1 bg-register-image" style="opacity: 1;background: url(&quot;img/Forgot%20password-rafiki.png&quot;) center / cover no-repeat, var(--bs-purple);"></div>
                 </div>
                 <div class="col-lg-7">
                     <div class="p-5">
                         <div class="text-center">
                             <h4 class="text-dark mb-4">Benutzer Registrieren!</h4>
                         </div>
-                        <form class="user">
+                        <form class="user" action="/register" method="POST">
                             <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Adresse" name="email" required=""></div>
                             <div class="row mb-3">
                                 <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="number" id="exampleFirstName" placeholder="Personalnummer" inputmode="numeric" name="personalnummer" required=""></div>
-                                <div class="col-sm-6"><input class="form-control form-control-user" type="text" id="exampleLastName" name="name" required="" placeholder="Nachname"></div>
+                                <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleLastName" name="oneTimePassword" required="" placeholder="Einmal Passwort" title="Das Einmalpasswort erhalten Sie direkt von der Personalabteilung."></div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password" minlength="8" maxlength="67" required=""></div>
-                                <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Passwort Wiederholen" name="password_repeat" required=""></div>
-                            </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Benutzer Registrieren!</button>
+                                <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Neues Passwort" name="password" minlength="8" maxlength="67" required=""></div>
+                                <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Neues Passwort Wiederholen" name="password_repeat" required=""></div>
+                            </div>
+                            <hr><button class="btn btn-primary d-block btn-user w-100" type="submit">Benutzer Registrieren!</button>
                             <hr>
                         </form>
                         <div class="text-center"></div>
-                        <div class="text-center"><a class="small" href="login.jsp">Du hast bereits einen Benutzer? Login!</a></div>
+                        <div class="text-center"><a class="small" href="index.jsp">Du hast bereits einen Benutzer? Login!</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="js/bootstrap.js"></script>
-<script src="js/sidebar.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

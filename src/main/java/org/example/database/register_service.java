@@ -15,7 +15,6 @@ public class register_service {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
              Session session = factory.openSession()) {
 
-            // Beginne die Transaktion außerhalb des Try-with-Resources-Blocks
             Transaction transaction = session.beginTransaction();
 
             try {

@@ -4,9 +4,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="Jetty hinzugefügt">
+    <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="BS">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/calendar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/calendar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/dashboard.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/datenschutz.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/Forgot password-rafiki.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/Mobile login-rafiki (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar2.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar3.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar4.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar5.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/dogs/image3.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/impressum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/managment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/timemanag.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b9195532-b0c2-4da8-b6fa-23624a9bf3a5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b9195532-b0c2-4da8-b6fa-23624a9bf3a5.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_05_12_2023_17_36_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_05_12_2023_17_36__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2023_21_59_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2023_21_59__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/database/register_service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/database/register_service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/Mitarbeiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Mitarbeiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/servlets/registerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/servlets/registerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/404.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/404.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/TrackIn.bsdesign" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/calendar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/calendar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/farben.compiled.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/farben.compiled.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/datenschutz.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/datenschutz.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/impressum.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/impressum.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/managment.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/managment.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/profil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/profil.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/timemanag.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/timemanag.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,12 +66,22 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Haupt" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/webapp/assets/css/sidebar.css" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -34,7 +94,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -50,12 +110,21 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Maven.Run Dev Server.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.TrackIn [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.TrackIn [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.TrackIn [jetty:run...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.TrackIn [org.eclipse.jetty:jetty-maven-plugin:11.0.15:help].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.TrackIn [org.eclipse.jetty:jetty-maven-plugin:11.0.15:run-war].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.TrackIn [org.eclipse.jetty:jetty-maven-plugin:11.0.15:run].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cumae/Desktop/Gfos Projekt/TrackIn&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cumae/Desktop/Gfos Projekt/TrackIn/src/main/webapp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -68,9 +137,23 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp" />
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp" />
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\js" />
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\assets\js" />
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\assets\css" />
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\jsp" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn validate -Dmaven.plugin.validation=VERBOSE" />
+      <command value="mvn jetty:run -Djetty.scanIntervalSeconds=1 " />
     </option>
   </component>
   <component name="RunManager">
@@ -89,6 +172,7 @@
                 <option value="jetty:run" />
               </list>
             </option>
+            <option name="multimoduleDir" />
             <option name="pomFileName" />
             <option name="profilesMap">
               <map />
@@ -103,6 +187,13 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-temurin-17.0.9-3183f394aec4-842bf14d" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -119,6 +210,48 @@
       <workItem from="1701674167786" duration="2133000" />
       <workItem from="1701861111415" duration="1193000" />
       <workItem from="1701862318651" duration="2567000" />
+      <workItem from="1702817775843" duration="33000" />
+      <workItem from="1702818048757" duration="5839000" />
+      <workItem from="1702999867130" duration="2861000" />
+      <workItem from="1703081207016" duration="2774000" />
+      <workItem from="1703085183558" duration="884000" />
+      <workItem from="1703086114250" duration="157000" />
+      <workItem from="1703086286594" duration="162000" />
+      <workItem from="1703086464532" duration="168000" />
+      <workItem from="1703086659351" duration="1350000" />
+      <workItem from="1703162368680" duration="8734000" />
+      <workItem from="1703171828077" duration="152000" />
+      <workItem from="1703182569087" duration="7683000" />
+      <workItem from="1703253133039" duration="2390000" />
+      <workItem from="1703366425087" duration="2808000" />
+      <workItem from="1703612774847" duration="3293000" />
+      <workItem from="1703625619395" duration="11000" />
+      <workItem from="1703692770966" duration="266000" />
+      <workItem from="1703693052006" duration="1201000" />
+      <workItem from="1703713911085" duration="877000" />
+      <workItem from="1703807177057" duration="600000" />
+      <workItem from="1703809320661" duration="344000" />
+      <workItem from="1703955526267" duration="1974000" />
+      <workItem from="1704126259703" duration="5681000" />
+      <workItem from="1704213691427" duration="1311000" />
+      <workItem from="1704230877731" duration="2798000" />
+      <workItem from="1704287018641" duration="1398000" />
+      <workItem from="1704321678574" duration="600000" />
+      <workItem from="1704381573579" duration="25000" />
+      <workItem from="1704382753124" duration="3000" />
+      <workItem from="1704406845912" duration="4000" />
+      <workItem from="1704480615585" duration="297000" />
+      <workItem from="1704553162915" duration="2000" />
+      <workItem from="1704554548857" duration="1286000" />
+      <workItem from="1704569267193" duration="3473000" />
+      <workItem from="1704573934538" duration="154000" />
+      <workItem from="1704580040381" duration="2037000" />
+      <workItem from="1704642515222" duration="4591000" />
+      <workItem from="1704660484706" duration="2777000" />
+      <workItem from="1704820540670" duration="46000" />
+      <workItem from="1704894203556" duration="1000" />
+      <workItem from="1704898036808" duration="1000" />
+      <workItem from="1704984471491" duration="6065000" />
     </task>
     <task id="LOCAL-00001" summary="Jetty hinzugefügt">
       <option name="closed" value="true" />
@@ -136,7 +269,71 @@
       <option name="project" value="LOCAL" />
       <updated>1701616973155</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Hibernate Mapping">
+      <option name="closed" value="true" />
+      <created>1702759094872</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702759094872</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Hibernate Mapping">
+      <option name="closed" value="true" />
+      <created>1702759262655</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702759262655</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Login mit Datenbank daten abgleich">
+      <option name="closed" value="true" />
+      <created>1703002698162</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703002698162</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Erste Registerierungs Funktion die Funktioniert Datenbank Geänder damit Logindata gelöscht wird wenn der Mitarbeiter Gelöscht wird aber nich Anders Herum">
+      <option name="closed" value="true" />
+      <created>1703171909839</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1703171909839</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Verschlüsselung des Passwortes mit Bcrypt, Registerirungsfunktion, Passwort Vergleich Datenbank angepasst u.s.w">
+      <option name="closed" value="true" />
+      <created>1703366623718</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1703366623718</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Todos Hinzugefügt">
+      <option name="closed" value="true" />
+      <created>1703369961214</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1703369961214</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Bessere Formatierung">
+      <option name="closed" value="true" />
+      <created>1703692973930</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1703692973930</updated>
+    </task>
+    <task id="LOCAL-00010" summary="BS">
+      <option name="closed" value="true" />
+      <created>1704820581032</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1704820581032</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +353,18 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Jetty hinzugefügt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jetty hinzugefügt" />
+    <MESSAGE value="Hibernate Mapping" />
+    <MESSAGE value="Login mit Datenbank daten abgleich" />
+    <MESSAGE value="Erste Registerierungs Funktion die Funktioniert Datenbank Geänder damit Logindata gelöscht wird wenn der Mitarbeiter Gelöscht wird aber nich Anders Herum" />
+    <MESSAGE value="Verschlüsselung des Passwortes mit Bcrypt, Registerirungsfunktion, Passwort Vergleich Datenbank angepasst u.s.w" />
+    <MESSAGE value="Todos Hinzugefügt" />
+    <MESSAGE value="Bessere Formatierung" />
+    <MESSAGE value="Neue Website habe dafür 5 Tage gebraucht&#10;Nicht Vergessen Bootstrap.js soll später durch eigen JS ersetzt werden nicht löschen und zu Übungszwecken nutzen" />
+    <MESSAGE value="BS" />
+    <option name="LAST_COMMIT_MESSAGE" value="BS" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

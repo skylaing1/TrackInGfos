@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - TrackIn</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Page Not Found - TrackIn</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
@@ -38,7 +38,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="index.jsp">
+                        <a href="dashboard.jsp">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -77,7 +77,7 @@
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <a href="404.jsp">
+                    <a href="index.jsp">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>
@@ -101,7 +101,7 @@
             <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light" style="backdrop-filter: opacity(1);opacity: 0.86;background: var(--bs-lvl2);">
                 <div class="container-fluid"><button class="btn d-md-none rounded-circle me-3 togglenew" id="sidebarToggleTop" type="button" onclick="mobileToggle"><i class="fas fa-bars"></i></button>
                     <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group" style="border-width: 1px;"><input class="form-control border-0 small" type="text" placeholder="Suche  ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                        <div class="input-group" style="border-width: 1px;"><input class="form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                     </form>
                     <ul class="navbar-nav flex-nowrap ms-auto" style="color: rgb(221, 223, 235);">
                         <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
@@ -153,7 +153,13 @@
                 </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Verwaltung</h3>
+                <div class="text-center mt-5">
+                    <div class="error mx-auto" data-text="404">
+                        <p class="m-0">404</p>
+                    </div>
+                    <p class="text-dark mb-5 lead">Seite nicht Gefunden!</p>
+                    <p class="mb-0">It looks like you found a glitch in the matrix...</p><a href="/">← Zurück zum Dashboard</a>
+                </div>
             </div>
         </div>
         <footer class="text-center" style="background: #3b3b3b;">
@@ -178,7 +184,8 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="js/bootstrap.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/calendar.js"></script>
 <script src="js/sidebar.js"></script>
 </body>
 

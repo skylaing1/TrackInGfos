@@ -21,10 +21,9 @@ public class registerServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String name = request.getParameter("name");
-        String passwordrepeat = request.getParameter("passwordrepeat");
+        String password_repeat = request.getParameter("password_repeat");
         String personalNummer = request.getParameter("personalnummer");
-        Date geburtsdatum = Date.valueOf(request.getParameter("geburtsdatum"));
+        String oneTimePassword = request.getParameter("oneTimePassword");
 
         Mitarbeiter mitarbeiter = register_service.getMitarbeiterByPersonalNummer(Integer.parseInt(personalNummer));
 
@@ -32,38 +31,34 @@ public class registerServlet extends HttpServlet {
         // Todo: Passwort ungültig prüfen: mindestens 8 Zeichen, mindestens 1 Großbuchstabe, mindestens 1 Zahl, mindestens 1 Sonderzeichen
         // Todo: Eingabe in die Datenbank in Kleinbuchstaben umwandeln / Außer Passwort
         if (mitarbeiter != null) {
-            if (mitarbeiter.getName() != name) {
-                if (password.length() >= 8 && !password.matches("[^!§$%&/()?=]+")) {
-                    if (register_service.comparePassword(password, passwordrepeat)) {
-                        if (email != null && email.contains("@")) {
-                            register_service.registerUser(email, password, mitarbeiter);
-                            response.sendRedirect("index.jsp");
-                        } else {
-                            //response.getWriter().println("Ungültige E-Mail-Adresse");
-                            // Todo: Fehlermeldung: Ungültige E-Mail-Adresse
-                        }
-                        // Todo: Erfolgsmeldung
-                    } else {
-                        response.sendRedirect("register.jsp");
-                        // Todo:  Fehlermeldung: Passwörter stimmen nicht überein
-                    }
 
+            if (mitarbeiter.getOnetimepassword().equals(oneTimePassword)) {
+
+                if (register_service.comparePassword(password, password_repeat)) {
+
+                    register_service.registerUser(email, password, mitarbeiter);
+                    response.sendRedirect("index.jsp");
+
+                    // Todo: Erfolgsmeldung
                 } else {
-                    // Todo:  Fehlermeldung: Passwort muss mindestens 8 Zeichen lang sein oder ein sonderzeichen beinhalten
-                    response.getWriter().println("Passwort muss mindestens 8 Zeichen lang sein oder ein sonderzeichen beinhalten");
-                }
 
-            } else {
                     response.sendRedirect("register.jsp");
-                    //Todo:  Fehlermeldung: Geburtsdatum stimmt nicht überein
+                    // Todo: Fehlermeldung: Passwörter stimmen nicht überein
                 }
+            } else {
 
+                response.sendRedirect("index.jsp");
+                //Todo: Fehlermeldung: One-Time-Password falsch
+            }
 
         } else {
-            response.sendRedirect("register.jsp");
-            // Todo:  Fehlermeldung: Mitarbeiter nicht gefunden
+            response.sendRedirect("404.jsp");
+            // Todo: Fehlermeldung: Mitarbeiter nicht gefunden / Personalnummer falsch
         }
 
+
     }
+
+    //Todo: Nur ein Account pro Mitarbeiter
 
 }
