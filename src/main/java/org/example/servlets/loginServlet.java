@@ -1,9 +1,7 @@
 package org.example.servlets;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import org.example.database.login_service;
 
 import java.io.IOException;
@@ -13,6 +11,12 @@ public class loginServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
+        HttpSession session = request.getSession();
+        System.out.println(session.getId());
+        String sessionID = session.getId();
+        Cookie sessionCookie = new Cookie("JSESSIONID", sessionID);
+        response.addCookie(sessionCookie);
+        System.out.println(sessionCookie.getValue());
 
 
 
