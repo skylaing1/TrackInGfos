@@ -23,7 +23,10 @@ public class SessionCookieCheckFilter implements Filter {
         String requestURI = httpRequest.getRequestURI();
 
         // Überprüfen, ob es sich um die Login- oder Registrierungsseite handelt
-        if (requestURI.contains("login") || requestURI.contains("register")) {
+
+
+        if (requestURI.contains("login") || requestURI.contains("register") ) {
+
             chain.doFilter(request, response);
             return;
         }
@@ -32,6 +35,7 @@ public class SessionCookieCheckFilter implements Filter {
 
         // Überprüfen, ob eine gültige Sitzung vorhanden ist
         if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
+
 
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
         } else {
