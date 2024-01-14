@@ -25,6 +25,7 @@ public class SessionCookieCheckFilter implements Filter {
         // Überprüfen, ob es sich um die Login- oder Registrierungsseite handelt
         if (requestURI.endsWith("/index.jsp") || requestURI.endsWith("/register.jsp")) {
 
+
             chain.doFilter(request, response);
             return;
         }
@@ -32,12 +33,13 @@ public class SessionCookieCheckFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
 
         // Überprüfen, ob eine gültige Sitzung vorhanden ist
-        if (session == null || session.getAttribute("SessionUsername") == null) {
+        if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
 
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/index.jsp");
         } else {
             // Gültige Sitzung, lassen Sie die Anfrage durch den Filter
             chain.doFilter(request, response);
+
         }
     }
 

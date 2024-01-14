@@ -5,7 +5,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.database.LoginDataDAO;
 import org.example.database.login_service;
+import org.example.entities.LoginData;
+import org.example.entities.Mitarbeiter;
 
 import java.io.IOException;
 
@@ -23,15 +26,17 @@ public class loginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
+        LoginData loginData = LoginDataDAO.getLoginDataByEmail(email);
+        Mitarbeiter mitarbeiter = loginData.getMitarbeiter();
 
         //Todo: Angemeldet bleiben hinzufügen / Cookies Implementieren / Sessions Implementieren
 
-       if (login_service.authenticateUser(email, password)) {
+       if (login_service.authenticateUser(email, password, loginData)) {
 
 
            HttpSession session = request.getSession();
-           session.setAttribute("SessionUsername", );
+           session.setAttribute("SessionMitarbeiter", mitarbeiter);
+              response.sendRedirect("dashboard.jsp");
 
            //Todo: Erfolgsmeldung
        } else {

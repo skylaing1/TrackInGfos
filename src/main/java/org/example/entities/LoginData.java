@@ -46,4 +46,8 @@ public class LoginData {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Mitarbeiter getMitarbeiter() {
+        return mitarbeiter;
+    }
 }
