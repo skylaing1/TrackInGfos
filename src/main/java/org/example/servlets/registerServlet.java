@@ -4,10 +4,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.database.LoginDataDAO;
 import org.example.database.MitarbeiterDAO;
 import org.example.database.login_service;
 import org.example.database.register_service;
 import org.example.entities.Mitarbeiter;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -37,8 +39,8 @@ public class registerServlet extends HttpServlet {
 
                 if (register_service.comparePassword(password, password_repeat)) {
 
-
-                    register_service.registerUser(email, password, mitarbeiter);
+                    String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+                    LoginDataDAO.registerLoginData(email, hashedPassword, mitarbeiter);
                     response.sendRedirect("index.jsp");
 
                     // Todo: Erfolgsmeldung

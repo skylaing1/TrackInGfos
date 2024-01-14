@@ -36,8 +36,9 @@ public class loginServlet extends HttpServlet {
 
            HttpSession session = request.getSession();
            session.setAttribute("SessionMitarbeiter", mitarbeiter);
-              response.sendRedirect("dashboard.jsp");
+           response.sendRedirect("dashboard.jsp");
 
+           System.out.println("Login erfolgreich");
            //Todo: Erfolgsmeldung
        } else {
            response.sendRedirect("index.jsp");

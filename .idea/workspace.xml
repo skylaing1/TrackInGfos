@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="BS">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/database/MitarbeiterDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/filter/SessionCookieCheckFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b9195532-b0c2-4da8-b6fa-23624a9bf3a5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b9195532-b0c2-4da8-b6fa-23624a9bf3a5.xml" afterDir="false" />
+    <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="Session und DAO">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/database/LoginDataDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/database/LoginDataDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/database/register_service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/database/register_service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/filter/SessionCookieCheckFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/filter/SessionCookieCheckFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/servlets/loginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/servlets/loginServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/servlets/registerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/servlets/registerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +287,23 @@
       <option name="project" value="LOCAL" />
       <updated>1704820581032</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="test">
+      <option name="closed" value="true" />
+      <created>1705247320498</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705247320498</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Session und DAO">
+      <option name="closed" value="true" />
+      <created>1705248401582</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705248401582</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +331,9 @@
     <MESSAGE value="Bessere Formatierung" />
     <MESSAGE value="Neue Website habe dafür 5 Tage gebraucht&#10;Nicht Vergessen Bootstrap.js soll später durch eigen JS ersetzt werden nicht löschen und zu Übungszwecken nutzen" />
     <MESSAGE value="BS" />
-    <option name="LAST_COMMIT_MESSAGE" value="BS" />
+    <MESSAGE value="test" />
+    <MESSAGE value="Session und DAO" />
+    <option name="LAST_COMMIT_MESSAGE" value="Session und DAO" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
