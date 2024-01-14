@@ -4,6 +4,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.database.MitarbeiterDAO;
 import org.example.database.login_service;
 import org.example.database.register_service;
 import org.example.entities.Mitarbeiter;
@@ -25,7 +26,7 @@ public class registerServlet extends HttpServlet {
         String personalNummer = request.getParameter("personalnummer");
         String oneTimePassword = request.getParameter("oneTimePassword");
 
-        Mitarbeiter mitarbeiter = register_service.getMitarbeiterByPersonalNummer(Integer.parseInt(personalNummer));
+        Mitarbeiter mitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(Integer.parseInt(personalNummer));
 
         // Todo: Email ungültig prüfen: Prefix .com z.b./ Email bereits vergeben prüfen
         // Todo: Passwort ungültig prüfen: mindestens 8 Zeichen, mindestens 1 Großbuchstabe, mindestens 1 Zahl, mindestens 1 Sonderzeichen
@@ -35,6 +36,7 @@ public class registerServlet extends HttpServlet {
             if (mitarbeiter.getOnetimepassword().equals(oneTimePassword)) {
 
                 if (register_service.comparePassword(password, password_repeat)) {
+
 
                     register_service.registerUser(email, password, mitarbeiter);
                     response.sendRedirect("index.jsp");
