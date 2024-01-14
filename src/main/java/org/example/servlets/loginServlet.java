@@ -40,8 +40,10 @@ public class loginServlet extends HttpServlet {
 
            System.out.println("Login erfolgreich");
            //Todo: Erfolgsmeldung
+
        } else {
-           response.sendRedirect("index.jsp");
+           System.out.println("Login erfolgreich nicht");
+           response.sendRedirect("login.jsp");
            //Todo: Fehlermeldung: Login fehlgeschlagen
        }
 

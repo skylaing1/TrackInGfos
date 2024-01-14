@@ -41,7 +41,7 @@
                             <hr>
                         </form>
                         <div class="text-center"></div>
-                        <div class="text-center"><a class="small" href="index.jsp">Du hast bereits einen Benutzer? Login!</a></div>
+                        <div class="text-center"><a class="small" href="login.jsp">Du hast bereits einen Benutzer? Login!</a></div>
                     </div>
                 </div>
             </div>

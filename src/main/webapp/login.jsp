@@ -29,7 +29,7 @@
                                 <div class="text-center">
                                     <h4 class="text-dark mb-4">Willkommen Zurück!</h4>
                                 </div>
-                                <form class="user" action="/login" method="post">
+                                <form class="user" action="${pageContext.request.contextPath}/login" method="post">
                                     <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Adresse" name="email"></div>
                                     <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Passwort" name="password"></div>
                                     <div class="mb-3">

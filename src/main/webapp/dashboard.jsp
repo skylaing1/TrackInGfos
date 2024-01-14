@@ -79,7 +79,7 @@
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <a href="index.jsp">
+                    <a href="login.jsp">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>

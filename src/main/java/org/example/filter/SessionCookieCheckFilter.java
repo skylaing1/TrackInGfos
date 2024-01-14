@@ -13,43 +13,32 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter("/*")
+@WebFilter("/*") // Filter für alle URLs
 public class SessionCookieCheckFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-
         String requestURI = httpRequest.getRequestURI();
 
         // Überprüfen, ob es sich um die Login- oder Registrierungsseite handelt
-        HttpSession session = httpRequest.getSession(false);
-
-        if (requestURI.endsWith("/index.jsp") || requestURI.endsWith("/register.jsp")) {
-
-            // Überprüfen, ob bereits ein Mitarbeiter in der Session vorhanden ist
-            if (session != null && session.getAttribute("SessionMitarbeiter") != null) {
-                // Mitarbeiter bereits angemeldet, nichts tun
-                chain.doFilter(request, response);
-            } else {
-                // Weiter zu Login oder Register, da kein Mitarbeiter in der Session vorhanden ist
-                chain.doFilter(request, response);
-            }
-        } else {
-
-            if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
-                // Kein Mitarbeiter in der Session, auf die Login-Seite umleiten
-                httpResponse.sendRedirect(httpRequest.getContextPath() + "/index.jsp");
-            } else {
-                // Gültige Sitzung, lassen Sie die Anfrage durch den Filter
-                chain.doFilter(request, response);
-            }
+        if (requestURI.contains("login") || requestURI.contains("register")) {
+            chain.doFilter(request, response);
+            return;
         }
 
+        HttpSession session = httpRequest.getSession(false);
 
+        // Überprüfen, ob eine gültige Sitzung vorhanden ist
+        if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
 
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
+        } else {
+            // Gültige Sitzung, lassen Sie die Anfrage durch den Filter
+            chain.doFilter(request, response);
+
+        }
     }
 
-    // Weitere Filter-Methoden (init, destroy) können implementiert werden
 }
