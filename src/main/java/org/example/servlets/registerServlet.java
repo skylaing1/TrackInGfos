@@ -4,6 +4,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.example.database.LoginDataDAO;
 import org.example.database.MitarbeiterDAO;
 import org.example.database.login_service;
@@ -19,6 +20,16 @@ public class registerServlet extends HttpServlet {
 
 
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("SessionMitarbeiter") != null) {
+
+            response.sendRedirect("/dashboard");
+            return;
+        }
+
+        request.getRequestDispatcher("WEB-INF/register.jsp").forward(request, response);
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
 

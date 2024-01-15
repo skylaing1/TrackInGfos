@@ -6,16 +6,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - TrackIn</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
-    <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="css/farben.compiled.css">
-    <link rel="stylesheet" href="css/Footer-Dark-Multi-Column-icons.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../resources/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../resources/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="../resources/css/bs-theme-overrides.css">
+    <link rel="stylesheet" href="../resources/css/farben.compiled.css">
+    <link rel="stylesheet" href="../resources/css/Footer-Dark-Multi-Column-icons.css">
+    <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -25,7 +25,7 @@
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
+               <img src="../resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -40,7 +40,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="dashbaord.jsp">
+                        <a href="/dashboard">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -58,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="kontakt.jsp">
+                        <a href="">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">Analytics</span>
                         </a>
@@ -79,7 +79,7 @@
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <a href="login.jsp">
+                    <a href="/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>
@@ -395,8 +395,8 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="js/sidebar.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/js/sidebar.js"></script>
 </body>
 
 </html>

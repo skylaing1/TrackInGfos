@@ -21,12 +21,11 @@ public class SessionCookieCheckFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String requestURI = httpRequest.getRequestURI();
+        boolean isStaticResource = ((HttpServletRequest) request).getRequestURI().startsWith("/resources/");
 
         // Überprüfen, ob es sich um die Login- oder Registrierungsseite handelt
 
-
-        if (requestURI.contains("login") || requestURI.contains("register") ) {
-
+        if (requestURI.contains("login") || requestURI.contains("register") || isStaticResource ) {
             chain.doFilter(request, response);
             return;
         }
@@ -37,7 +36,7 @@ public class SessionCookieCheckFilter implements Filter {
         if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
 
 
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
+            httpResponse.sendRedirect("/login");
         } else {
             // Gültige Sitzung, lassen Sie die Anfrage durch den Filter
             chain.doFilter(request, response);

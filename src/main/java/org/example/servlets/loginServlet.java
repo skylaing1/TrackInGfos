@@ -16,7 +16,14 @@ import java.io.IOException;
 public class loginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("SessionMitarbeiter") != null) {
 
+            response.sendRedirect("/dashboard");
+            return;
+        }
+
+        request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
     }
 
 
@@ -36,7 +43,7 @@ public class loginServlet extends HttpServlet {
 
            HttpSession session = request.getSession();
            session.setAttribute("SessionMitarbeiter", mitarbeiter);
-           response.sendRedirect("dashboard.jsp");
+           response.sendRedirect("/dashboard");
 
            System.out.println("Login erfolgreich");
            //Todo: Erfolgsmeldung

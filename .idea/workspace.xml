@@ -4,14 +4,68 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="Session und DAO">
+    <list default="true" id="f09946ef-c645-4562-aeb5-7f48e80d0161" name="Changes" comment="Filter Für Loggin">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/servlets/dashboardServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/servlets/logoutServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/filter/SessionCookieCheckFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/filter/SessionCookieCheckFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/servlets/loginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/servlets/loginServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/servlets/registerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/servlets/registerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/404.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/404.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/impressum.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/impressum.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/bootstrap/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/calendar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/calendar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/Footer-Dark-Multi-Column-icons.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/Footer-Dark-Multi-Column-icons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/bs-theme-overrides.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bs-theme-overrides.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/calendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/calendar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/farben.compiled.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/farben.compiled.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/datenschutz.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/datenschutz.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/FontAwesome.otf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/FontAwesome.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-brands-400.eot" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-brands-400.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-brands-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-brands-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-brands-400.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-brands-400.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-brands-400.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-brands-400.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-brands-400.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-brands-400.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-regular-400.eot" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-regular-400.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-regular-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-regular-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-regular-400.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-regular-400.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-regular-400.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-regular-400.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-regular-400.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-regular-400.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-solid-900.eot" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-solid-900.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-solid-900.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-solid-900.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-solid-900.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-solid-900.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-solid-900.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-solid-900.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fa-solid-900.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fa-solid-900.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fontawesome-all.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fontawesome-all.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fontawesome-webfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fontawesome-webfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fontawesome-webfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fontawesome-webfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fonts/fontawesome5-overrides.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/fontawesome5-overrides.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/Forgot password-rafiki.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/Forgot password-rafiki.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/Mobile login-rafiki (1).png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/Mobile login-rafiki (1).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar1.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/avatars/avatar1.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/avatars/avatar2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar3.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/avatars/avatar3.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar4.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/avatars/avatar4.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/avatars/avatar5.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/avatars/avatar5.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/background/pexels-photo-6985128.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/background/pexels-photo-6985128.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/dogs/image2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/dogs/image2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/dogs/image3.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/dogs/image3.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/impressum.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/impressum.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/managment.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/managment.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/profil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/profil.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/timemanag.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/timemanag.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +129,6 @@
     &quot;Maven.TrackIn [org.eclipse.jetty:jetty-maven-plugin:11.0.15:run].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
@@ -98,11 +151,11 @@
       <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\WEB-INF" />
+      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\resources" />
       <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\bootstrap\css" />
       <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp" />
       <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\js" />
-      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\assets\js" />
-      <recent name="C:\Users\cumae\Desktop\Gfos Projekt\TrackIn\src\main\webapp\assets\css" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -207,6 +260,7 @@
       <workItem from="1704894203556" duration="1000" />
       <workItem from="1704898036808" duration="1000" />
       <workItem from="1704984471491" duration="6065000" />
+      <workItem from="1705323702526" duration="4272000" />
     </task>
     <task id="LOCAL-00001" summary="Jetty hinzugefügt">
       <option name="closed" value="true" />
@@ -312,7 +366,23 @@
       <option name="project" value="LOCAL" />
       <updated>1705251881671</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Filter und Index zu Login umbennant">
+      <option name="closed" value="true" />
+      <created>1705254729538</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1705254729538</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Filter Für Loggin">
+      <option name="closed" value="true" />
+      <created>1705257401768</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1705257401768</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +412,9 @@
     <MESSAGE value="BS" />
     <MESSAGE value="test" />
     <MESSAGE value="Session und DAO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Session und DAO" />
+    <MESSAGE value="Filter und Index zu Login umbennant" />
+    <MESSAGE value="Filter Für Loggin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Filter Für Loggin" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

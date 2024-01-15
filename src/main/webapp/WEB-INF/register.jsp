@@ -6,21 +6,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Register - TrackIn</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
-    <link rel="stylesheet" href="css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="css/farben.compiled.css">
+    <link rel="stylesheet" href="../resources/css/bs-theme-overrides.css">
+    <link rel="stylesheet" href="../resources/css/farben.compiled.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
-<body class="bg-gradient-primary" style="background: url(&quot;img/background/pexels-photo-6985128.jpeg&quot;) center / cover no-repeat;">
+<body class="bg-gradient-primary" style="background: url(&quot;resources/img/background/pexels-photo-6985128.jpeg&quot;) center / cover no-repeat;">
 <div class="container" style="opacity: 1;padding-bottom: 0px;">
     <div class="card shadow-lg o-hidden border-0 my-5">
         <div class="card-body p-0">
             <div class="row">
                 <div class="col-lg-5 d-none d-lg-flex">
-                    <div class="flex-grow-1 bg-register-image" style="opacity: 1;background: url(&quot;img/Forgot%20password-rafiki.png&quot;) center / cover no-repeat, var(--bs-purple);"></div>
+                    <div class="flex-grow-1 bg-register-image" style="opacity: 1;background: url(&quot;resources/img/Forgot%20password-rafiki.png&quot;) center / cover no-repeat, var(--bs-purple);"></div>
                 </div>
                 <div class="col-lg-7">
                     <div class="p-5">
@@ -48,7 +48,7 @@
         </div>
     </div>
 </div>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 
