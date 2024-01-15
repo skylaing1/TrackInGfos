@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(name = "dashboardServlet", value = "/dashboard")
-public class dashboardServlet extends HttpServlet {
+@WebServlet(name = "calendarServlet", value = "/calendar")
+public class calendarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/calendar.jsp").forward(request, response);
     }
 
 }

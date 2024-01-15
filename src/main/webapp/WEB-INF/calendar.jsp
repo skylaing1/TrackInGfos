@@ -6,14 +6,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Blank Page - TrackIn</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
-    <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="css/farben.compiled.css">
-    <link rel="stylesheet" href="css/Footer-Dark-Multi-Column-icons.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../resources/css/bs-theme-overrides.css">
+    <link rel="stylesheet" href="../resources/css/calendar.css">
+    <link rel="stylesheet" href="../resources/css/farben.compiled.css">
+    <link rel="stylesheet" href="../resources/css/Footer-Dark-Multi-Column-icons.css">
+    <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -23,7 +24,7 @@
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
+               <img src="../resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -38,37 +39,37 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="dashboard.jsp">
+                        <a href="/dashboard">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="timemanag.jsp">
+                        <a href="timemanag.html">
                             <i class='bx bx-time icon'></i>
                             <span class="text nav-text">Zeiterfassung</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="calendar.jsp">
+                        <a href="calendar.html">
                             <i class='bx bx-calendar icon' ></i>
                             <span class="text nav-text">Kalender</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="kontakt.jsp">
+                        <a href="kontakt.html">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">Analytics</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="profil.jsp">
+                        <a href="profil.html">
                             <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="managment.jsp">
+                        <a href="managment.html">
                             <i class='bx bx-group icon' ></i>
                             <span class="text nav-text">Mitarbeiter</span>
                         </a>
@@ -77,7 +78,7 @@
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <a href="404.jsp">
+                    <a href="404.html">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>
@@ -143,7 +144,7 @@
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="img/avatars/avatar1.jpeg"></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
@@ -153,14 +154,44 @@
                 </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-1">Blank Page</h3>
+                <h3 class="text-dark mb-1">Kalendar</h3>
+                <div class="row">
+                    <div id="app" class="calendar mt-5 p-3 text-dark">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="header d-flex justify-content-between align-items-center">
+                                    <button onclick="changeYear(-1)" class="btn btn-primary">Previous Year</button>
+                                    <h2 id="year" class="mb-0">2024</h2>
+                                    <button onclick="changeYear(1)" class="btn btn-primary">Next Year</button>
+                                </div>
+                                <div class="legend mt-3">
+                                    <ul class="legend-list">
+                                        <li class="legend-item"><span class="legend-box present"></span>Anwesend</li>
+                                        <li class="legend-item"><span class="legend-box business-trip"></span>Dienstreise</li>
+                                        <li class="legend-item"><span class="legend-box partial-absent"></span>Teilweise Abwesend</li>
+                                        <li class="legend-item"><span class="legend-box absent"></span>Abwesend</li>
+                                        <li class="legend-item"><span class="legend-box sick"></span>Krank</li>
+                                        <li class="legend-item"><span class="legend-box vacation"></span>Genehmigter Urlaub</li>
+                                        <li class="legend-item"><span class="legend-box vacation-requested"></span>Beantragter Urlaub</li>
+                                        <li class="legend-item"><span class="legend-box holiday"></span>Feiertag</li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="months" id="months-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer class="text-center" style="background: #3b3b3b;">
             <div class="container py-4 py-lg-5">
                 <ul class="list-inline">
-                    <li class="list-inline-item me-4"><a class="link-light" href="impressum.jsp" target="_blank">Impressum</a></li>
-                    <li class="list-inline-item me-4"><a class="link-light" href="datenschutz.jsp" target="_blank">Datenschutz</a></li>
+                    <li class="list-inline-item me-4"><a class="link-light" href="impressum.html" target="_blank">Impressum</a></li>
+                    <li class="list-inline-item me-4"><a class="link-light" href="datenschutz.html" target="_blank">Datenschutz</a></li>
                 </ul>
                 <ul class="list-inline">
                     <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook text-light">
@@ -178,8 +209,9 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="js/bootstrapjs"></script>
-<script src="js/sidebar.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/js/calendar.js"></script>
+<script src="../resources/js/sidebar.js"></script>
 </body>
 
 </html>

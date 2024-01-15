@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="jakarta.servlet.http.Cookie" %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -20,6 +21,9 @@
 </head>
 
 <body id="page-top">
+<%
+    String currentTheme = (String) request.getAttribute("currentTheme");
+%>
 <div id="wrapper">
     <nav class="sidebarnew close">
         <header>
@@ -40,7 +44,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="/dashboard">
+                        <a href="${pageContext.request.contextPath}/dashboard">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -52,7 +56,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="calendar.jsp">
+                        <a href="${pageContext.request.contextPath}/calendar">
                             <i class='bx bx-calendar icon' ></i>
                             <span class="text nav-text">Kalender</span>
                         </a>
@@ -79,7 +83,7 @@
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <a href="/logout">
+                    <a href="${pageContext.request.contextPath}/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>
@@ -90,11 +94,10 @@
                         <i class='bx bx-sun icon sun'></i>
                     </div>
                     <span class="mode-text text">Dark mode</span>
-                    <div class="toggle-switch">
+                    <div class="toggle-switch" id="darkModeSwitch">
                         <span class="switch"></span>
                     </div>
                 </li>
-
             </div>
         </div>
     </nav>
@@ -395,6 +398,7 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
+
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/sidebar.js"></script>
 </body>

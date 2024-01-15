@@ -33,6 +33,7 @@ public class loginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        Boolean rememberMe = Boolean.parseBoolean(request.getParameter("rememberMe"));
         LoginData loginData = LoginDataDAO.getLoginDataByEmail(email);
         Mitarbeiter mitarbeiter = loginData.getMitarbeiter();
 
