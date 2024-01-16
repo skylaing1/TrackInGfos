@@ -38,7 +38,10 @@ public class SessionCookieCheckFilter implements Filter {
 
             httpResponse.sendRedirect("/login");
         } else {
-            // Gültige Sitzung, lassen Sie die Anfrage durch den Filter
+            if (requestURI.equals("/")) {
+                httpResponse.sendRedirect("/dashboard");
+                return;
+            }
             chain.doFilter(request, response);
 
         }
