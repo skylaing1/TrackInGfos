@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter("/*") // Filter für alle URLs
+@WebFilter(filterName="SessionCookieCheckFilter",value="/*") // Filter für alle URLs
 public class SessionCookieCheckFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

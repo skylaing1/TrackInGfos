@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter("/*")
+@WebFilter(filterName="NoCacheFilter",value = "/*")
 public class NoCacheFilter implements Filter {
 
 
