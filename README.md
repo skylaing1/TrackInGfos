@@ -63,3 +63,18 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 ALTER TABLE `trackindatabase`.`Mitarbeiter`
 ADD COLUMN `onetimepassword` VARCHAR(255) DEFAULT NULL;
+
+CREATE TABLE IF NOT EXISTS `trackindatabase`.`Token` (
+`Token_ID` INT NOT NULL AUTO_INCREMENT,
+`token_content` VARCHAR(255) NOT NULL,
+`token_timestamp` TIMESTAMP NOT NULL,
+`credentials_id` INT NOT NULL,
+PRIMARY KEY (`Token_ID`),
+INDEX `fk_Token_LoginData_idx` (`credentials_id` ASC) VISIBLE,
+CONSTRAINT `fk_Token_LoginData`
+FOREIGN KEY (`credentials_id`)
+REFERENCES `trackindatabase`.`LoginData` (`credentials_id`)
+ON DELETE CASCADE
+ON UPDATE NO ACTION
+)
+ENGINE = InnoDB;

@@ -6,11 +6,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.database.LoginDataDAO;
+import org.example.database.TokenDAO;
 import org.example.database.login_service;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
+import jakarta.servlet.http.Cookie;
 
 import java.io.IOException;
+
+import static org.example.database.login_service.generateSecureToken;
 
 @WebServlet(name = "loginServlet",value = "/login")
 public class loginServlet extends HttpServlet {
@@ -39,7 +43,16 @@ public class loginServlet extends HttpServlet {
 
         //Todo: Angemeldet bleiben hinzufügen / Cookies Implementieren / Sessions Implementieren
 
-       if (login_service.authenticateUser(email, password, loginData)) {
+       if (login_service.authenticateUser(email, password,  loginData)) {
+
+           if (rememberMe) {
+               String token_content = generateSecureToken();
+               TokenDAO.storeTokenInDatabase(email, token_content);
+               Cookie rememberMeCookie = new Cookie("rememberMe", token_content);
+               rememberMeCookie.setMaxAge(60 * 60 * 24 * 14); // 14 Tage
+               rememberMeCookie.setHttpOnly(true);
+               response.addCookie(rememberMeCookie);
+           }
 
 
            HttpSession session = request.getSession();

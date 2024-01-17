@@ -1,7 +1,6 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
-import org.example.entities.Mitarbeiter;
 
 @Entity
 @Table(name = "LoginData")
@@ -21,6 +20,9 @@ public class LoginData {
     @OneToOne
     @JoinColumn(name = "mitarbeiter_personalNummer", referencedColumnName = "personalNummer")
     private Mitarbeiter mitarbeiter;
+
+    @OneToOne(mappedBy = "loginData", cascade = CascadeType.ALL)
+    private Token token;
 
     public LoginData() {
     }

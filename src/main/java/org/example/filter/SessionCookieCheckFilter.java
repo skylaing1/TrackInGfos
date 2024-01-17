@@ -1,5 +1,6 @@
 package org.example.filter;
 
+import org.example.database.TokenDAO;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -7,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -34,8 +36,17 @@ public class SessionCookieCheckFilter implements Filter {
 
         // Überprüfen, ob eine gültige Sitzung vorhanden ist
         if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
-
-
+            Cookie[] cookies = httpRequest.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("rememberMe")) {
+                        session = httpRequest.getSession();
+                        session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
+                        chain.doFilter(request, response);
+                        return;
+                    }
+                }
+            }
             httpResponse.sendRedirect("/login");
         } else {
             if (requestURI.equals("/")) {
