@@ -77,7 +77,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="managment.jsp">
+                        <a href="/managment">
                             <i class='bx bx-group icon' ></i>
                             <span class="text nav-text">Mitarbeiter</span>
                         </a>

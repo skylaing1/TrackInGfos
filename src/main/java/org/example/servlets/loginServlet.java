@@ -48,7 +48,6 @@ public class loginServlet extends HttpServlet {
 
         Mitarbeiter mitarbeiter = loginData.getMitarbeiter();
 
-        //Todo: Angemeldet bleiben hinzufügen / Cookies Implementieren / Sessions Implementieren
 
        if (ServletUtil.authenticateUser(email, password,  loginData)) {
            HttpSession session = request.getSession();

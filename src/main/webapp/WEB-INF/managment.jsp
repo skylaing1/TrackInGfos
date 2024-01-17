@@ -6,24 +6,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Table - TrackIn</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
-    <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="css/farben.compiled.css">
-    <link rel="stylesheet" href="css/Footer-Dark-Multi-Column-icons.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../resources/css/bs-theme-overrides.css">
+    <link rel="stylesheet" href="../resources/css/calendar.css">
+    <link rel="stylesheet" href="../resources/css/farben.compiled.css">
+    <link rel="stylesheet" href="../resources/css/Footer-Dark-Multi-Column-icons.css">
+    <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <%
+        String darkMode = (String) request.getAttribute("darkMode");
+        String currentTheme = (String) request.getAttribute("currentTheme");
+    %>
+
 </head>
 
-<body id="page-top">
+<body id="page-top" data-bs-theme="<%=darkMode.equals("true") ? "dark" : "light"%>">
 <div id="wrapper">
     <nav class="sidebarnew close">
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
+               <img src="../resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -38,37 +44,37 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="dashboard.jsp">
+                        <a href="/dashboard">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="timemanag.jsp">
+                        <a href="/timemanag">
                             <i class='bx bx-time icon'></i>
                             <span class="text nav-text">Zeiterfassung</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="calendar.jsp">
+                        <a href="/calendar">
                             <i class='bx bx-calendar icon' ></i>
                             <span class="text nav-text">Kalender</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="kontakt.jsp">
+                        <a href="/Analytics">
                             <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">Analytics</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="profil.jsp">
+                        <a href="/profil">
                             <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="managment.jsp">
+                        <a href="/managment">
                             <i class='bx bx-group icon' ></i>
                             <span class="text nav-text">Mitarbeiter</span>
                         </a>
@@ -77,18 +83,18 @@
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <a href="404.jsp">
+                    <a href="/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>
                 </li>
                 <li class="mode">
-                    <div class="sun-moon">
+                    <div class="sun-moon" >
                         <i class='bx bx-moon icon moon'></i>
                         <i class='bx bx-sun icon sun'></i>
                     </div>
                     <span class="mode-text text">Dark mode</span>
-                    <div class="toggle-switch">
+                    <div class="toggle-switch" id="darkModeSwitch">
                         <span class="switch"></span>
                     </div>
                 </li>
@@ -143,7 +149,7 @@
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="img/avatars/avatar1.jpeg"></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="../resources/img/avatars/avatar1.jpeg"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
@@ -154,6 +160,148 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Verwaltung</h3>
+                <div class="card shadow">
+                    <div class="card-header py-3" style="background: var(--bs-card-bg);">
+                        <p class="text-primary m-0 fw-bold">Mitarbeiter</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-nowrap">
+                                <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
+                                    <option value="10" selected="">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>&nbsp;</label></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar1.jpeg">Airi Satou</td>
+                                    <td>Accountant</td>
+                                    <td>Tokyo</td>
+                                    <td>33</td>
+                                    <td>2008/11/28</td>
+                                    <td>$162,700</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar2.jpeg">Angelica Ramos</td>
+                                    <td>Chief Executive Officer(CEO)</td>
+                                    <td>London</td>
+                                    <td>47</td>
+                                    <td>2009/10/09<br></td>
+                                    <td>$1,200,000</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar3.jpeg">Ashton Cox</td>
+                                    <td>Junior Technical Author</td>
+                                    <td>San Francisco</td>
+                                    <td>66</td>
+                                    <td>2009/01/12<br></td>
+                                    <td>$86,000</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar4.jpeg">Bradley Greer</td>
+                                    <td>Software Engineer</td>
+                                    <td>London</td>
+                                    <td>41</td>
+                                    <td>2012/10/13<br></td>
+                                    <td>$132,000</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar5.jpeg">Brenden Wagner</td>
+                                    <td>Software Engineer</td>
+                                    <td>San Francisco</td>
+                                    <td>28</td>
+                                    <td>2011/06/07<br></td>
+                                    <td>$206,850</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar1.jpeg">Brielle Williamson</td>
+                                    <td>Integration Specialist</td>
+                                    <td>New York</td>
+                                    <td>61</td>
+                                    <td>2012/12/02<br></td>
+                                    <td>$372,000</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar2.jpeg">Bruno Nash<br></td>
+                                    <td>Software Engineer</td>
+                                    <td>London</td>
+                                    <td>38</td>
+                                    <td>2011/05/03<br></td>
+                                    <td>$163,500</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar3.jpeg">Caesar Vance</td>
+                                    <td>Pre-Sales Support</td>
+                                    <td>New York</td>
+                                    <td>21</td>
+                                    <td>2011/12/12<br></td>
+                                    <td>$106,450</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar4.jpeg">Cara Stevens</td>
+                                    <td>Sales Assistant</td>
+                                    <td>New York</td>
+                                    <td>46</td>
+                                    <td>2011/12/06<br></td>
+                                    <td>$145,600</td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar5.jpeg">Cedric Kelly</td>
+                                    <td>Senior JavaScript Developer</td>
+                                    <td>Edinburgh</td>
+                                    <td>22</td>
+                                    <td>2012/03/29<br></td>
+                                    <td>$433,060</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td><strong>Name</strong></td>
+                                    <td><strong>Position</strong></td>
+                                    <td><strong>Office</strong></td>
+                                    <td><strong>Age</strong></td>
+                                    <td><strong>Start date</strong></td>
+                                    <td><strong>Salary</strong></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 align-self-center">
+                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                            </div>
+                            <div class="col-md-6">
+                                <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <footer class="text-center" style="background: #3b3b3b;">
@@ -178,8 +326,9 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="js/bootstrap.js"></script>
-<script src="js/sidebar.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/js/calendar.js"></script>
+<script src="../resources/js/sidebar.js"></script>
 </body>
 
 </html>
