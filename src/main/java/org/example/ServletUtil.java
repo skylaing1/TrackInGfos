@@ -11,20 +11,25 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.io.IOException;
 import java.util.UUID;
 
+import static org.example.database.TokenDAO.deleteOldTokens;
+
 public class ServletUtil {
 
 
     public static boolean checkSessionAndRedirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
         Cookie[] cookies = request.getCookies();
-        if (session != null && session.getAttribute("SessionMitarbeiter") != null) {
+        if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("rememberMe")) {
-                        session = request.getSession();
-                        session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
-                        response.sendRedirect("/dashboard");
-                        return true;
+                        deleteOldTokens();
+                        if (TokenDAO.checkToken(cookie.getValue())) {
+                            session = request.getSession();
+                            session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
+                            response.sendRedirect("/dashboard");
+                            return true;
+                        }
                     }
                 }
             }
@@ -58,6 +63,7 @@ public class ServletUtil {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("rememberMe")) {
+                    deleteOldTokens();
                     if (TokenDAO.checkToken(cookie.getValue())) {
                         return true;
                     } else {

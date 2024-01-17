@@ -16,6 +16,8 @@ import org.example.entities.Token;
 
 import java.io.IOException;
 
+import static org.example.database.TokenDAO.deleteOldTokens;
+
 @WebFilter(filterName="SessionCookieCheckFilter",value="/*") // Filter für alle URLs
 public class SessionCookieCheckFilter implements Filter {
 
@@ -41,6 +43,7 @@ public class SessionCookieCheckFilter implements Filter {
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("rememberMe")) {
+                        deleteOldTokens();
                         if (TokenDAO.checkToken(cookie.getValue())) {
                             session = httpRequest.getSession();
                             session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
@@ -57,8 +60,9 @@ public class SessionCookieCheckFilter implements Filter {
             httpResponse.sendRedirect("/login");
         } else {
             if (requestURI.equals("/")) {
+                System.out.println("Session war noch da2"); //Test
                 httpResponse.sendRedirect("/dashboard");
-                System.out.println("Session war noch da"); //Test
+
                 return;
             }
             chain.doFilter(request, response);

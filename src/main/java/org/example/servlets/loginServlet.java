@@ -26,7 +26,7 @@ public class loginServlet extends HttpServlet {
            System.out.println("RememberMe cookie angemeldet"); //Test
            return;
        }
-        System.out.println("Session war noch da"); //Test
+        System.out.println("Keine Session"); //Test
         request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
     }
 

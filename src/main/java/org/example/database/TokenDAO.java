@@ -6,7 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class TokenDAO {
 
@@ -80,15 +82,17 @@ public class TokenDAO {
         }
     }
 
-    public static void deleteTokensOlderThan14Days() {
+    public static void deleteOldTokens() {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
              Session session = factory.openSession()) {
 
             session.beginTransaction();
 
+            LocalDateTime localDateTime = LocalDateTime.now().minusDays(14);
+            Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
             session.createQuery("DELETE FROM Token WHERE token_timestamp < :date")
-                    .setParameter("date", LocalDate.now().minusDays(14))
+                    .setParameter("date", date)
                     .executeUpdate();
 
             session.getTransaction().commit();
