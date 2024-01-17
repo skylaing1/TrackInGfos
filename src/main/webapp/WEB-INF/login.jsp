@@ -34,7 +34,7 @@
                                     <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Passwort" name="password"></div>
                                     <div class="mb-3">
                                         <div class="custom-control custom-checkbox small">
-                                            <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1">Angemeldet Bleiben</label></div>
+                                            <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1" name="rememberMe" value="true"><label class="form-check-label custom-control-label" for="formCheck-1">Angemeldet Bleiben</label></div>
                                         </div>
                                     </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Login</button>
                                     <hr>

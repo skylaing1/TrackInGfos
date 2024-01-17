@@ -7,26 +7,26 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.database.LoginDataDAO;
 import org.example.database.TokenDAO;
-import org.example.database.login_service;
+import org.example.ServletUtil;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import jakarta.servlet.http.Cookie;
 
+
 import java.io.IOException;
 
-import static org.example.database.login_service.generateSecureToken;
+import static org.example.ServletUtil.generateSecureToken;
 
 @WebServlet(name = "loginServlet",value = "/login")
 public class loginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("SessionMitarbeiter") != null) {
 
-            response.sendRedirect("/dashboard");
-            return;
-        }
-
+       if (ServletUtil.checkSessionAndRedirect(request, response)) {
+           System.out.println("RememberMe cookie angemeldet"); //Test
+           return;
+       }
+        System.out.println("Session war noch da"); //Test
         request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
     }
 
@@ -37,26 +37,34 @@ public class loginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Boolean rememberMe = Boolean.parseBoolean(request.getParameter("rememberMe"));
+        Boolean rememberMe = Boolean.valueOf(request.getParameter("rememberMe"));
         LoginData loginData = LoginDataDAO.getLoginDataByEmail(email);
+
+        if (loginData == null) {
+                System.out.println("kein Account gefunden");
+                response.sendRedirect("/login");
+                return;
+        }
+
         Mitarbeiter mitarbeiter = loginData.getMitarbeiter();
 
         //Todo: Angemeldet bleiben hinzufügen / Cookies Implementieren / Sessions Implementieren
 
-       if (login_service.authenticateUser(email, password,  loginData)) {
+       if (ServletUtil.authenticateUser(email, password,  loginData)) {
+           HttpSession session = request.getSession();
+           session.setAttribute("SessionMitarbeiter", mitarbeiter);
+
 
            if (rememberMe) {
+
                String token_content = generateSecureToken();
-               TokenDAO.storeTokenInDatabase(email, token_content);
+               TokenDAO.storeTokenInDatabase(token_content, loginData);
                Cookie rememberMeCookie = new Cookie("rememberMe", token_content);
                rememberMeCookie.setMaxAge(60 * 60 * 24 * 14); // 14 Tage
                rememberMeCookie.setHttpOnly(true);
                response.addCookie(rememberMeCookie);
            }
 
-
-           HttpSession session = request.getSession();
-           session.setAttribute("SessionMitarbeiter", mitarbeiter);
            response.sendRedirect("/dashboard");
 
            System.out.println("Login erfolgreich");

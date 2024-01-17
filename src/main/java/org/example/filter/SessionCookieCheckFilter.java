@@ -12,6 +12,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.entities.Token;
 
 import java.io.IOException;
 
@@ -40,9 +41,15 @@ public class SessionCookieCheckFilter implements Filter {
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("rememberMe")) {
-                        session = httpRequest.getSession();
-                        session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
-                        chain.doFilter(request, response);
+                        if (TokenDAO.checkToken(cookie.getValue())) {
+                            session = httpRequest.getSession();
+                            session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
+                            System.out.println("RememberMe cookie angemeldet"); //Test
+                            chain.doFilter(request, response);
+                        } else {
+                            cookie.setMaxAge(0);
+                            httpResponse.sendRedirect("/login");
+                        }
                         return;
                     }
                 }
@@ -51,6 +58,7 @@ public class SessionCookieCheckFilter implements Filter {
         } else {
             if (requestURI.equals("/")) {
                 httpResponse.sendRedirect("/dashboard");
+                System.out.println("Session war noch da"); //Test
                 return;
             }
             chain.doFilter(request, response);

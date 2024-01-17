@@ -1,19 +1,13 @@
 package org.example.servlets;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import org.example.database.LoginDataDAO;
-import org.example.database.MitarbeiterDAO;
-import org.example.database.login_service;
-import org.example.database.register_service;
+import jakarta.servlet.http.*;
+import org.example.ServletUtil;
+import org.example.database.*;
 import org.example.entities.Mitarbeiter;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
-import java.sql.Date;
 
 @WebServlet(name = "registerServlet",value = "/register")
 public class registerServlet extends HttpServlet {
@@ -21,13 +15,11 @@ public class registerServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("SessionMitarbeiter") != null) {
-
-            response.sendRedirect("/dashboard");
+        if (ServletUtil.checkSessionAndRedirect(request, response)) {
+            System.out.println("RememberMe cookie angemeldet"); //Test
             return;
         }
-
+        System.out.println("Session war noch da"); //Test
         request.getRequestDispatcher("WEB-INF/register.jsp").forward(request, response);
     }
 
@@ -48,7 +40,7 @@ public class registerServlet extends HttpServlet {
 
             if (mitarbeiter.getOnetimepassword().equals(oneTimePassword)) {
 
-                if (register_service.comparePassword(password, password_repeat)) {
+                if (ServletUtil.comparePassword(password, password_repeat)) {
 
                     String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 

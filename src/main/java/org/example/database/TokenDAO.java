@@ -1,5 +1,6 @@
 package org.example.database;
 
+import org.example.entities.LoginData;
 import org.example.entities.Token;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,15 +10,17 @@ import java.time.LocalDate;
 
 public class TokenDAO {
 
-    public static void storeTokenInDatabase (String email, String token_content) {
+    public static void storeTokenInDatabase ( String token_content, LoginData loginData) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
              Session session = factory.openSession()) {
+            System.out.println("TokenDAO.storeTokenInDatabase");
 
             session.beginTransaction();
 
             Token token = new Token();
             token.setToken_content(token_content);
-            token.setLoginData(LoginDataDAO.getLoginDataByEmail(email));
+            token.setLoginData(loginData);
+
             token.setToken_timestamp();
 
             session.persist(token);
@@ -83,7 +86,7 @@ public class TokenDAO {
 
             session.beginTransaction();
 
-            // Delete tokens older than 14 days
+
             session.createQuery("DELETE FROM Token WHERE token_timestamp < :date")
                     .setParameter("date", LocalDate.now().minusDays(14))
                     .executeUpdate();
@@ -93,6 +96,31 @@ public class TokenDAO {
         } catch (Exception e) {
             // Handle Exceptions
             e.printStackTrace();
+        }
+
+    }
+
+    public static boolean checkToken(String tokenContent) {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
+             Session session = factory.openSession()) {
+
+            session.beginTransaction();
+
+            Token token = (Token) session.createQuery("FROM Token WHERE token_content = :token_content")
+                    .setParameter("token_content", tokenContent)
+                    .uniqueResult();
+
+            session.getTransaction().commit();
+
+            if (token != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            // Handle Exceptions
+            e.printStackTrace();
+            return false;
         }
 
     }
