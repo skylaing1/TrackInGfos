@@ -188,6 +188,7 @@
                                     <th>Age</th>
                                     <th>Start date</th>
                                     <th>Salary</th>
+                                    <th>Actio </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -198,6 +199,11 @@
                                     <td>33</td>
                                     <td>2008/11/28</td>
                                     <td>$162,700</td>
+                                    <td>
+                                        <a href="#"><i class="bi bi-calendar"></i></a>
+                                        <a href="#"><i class="bi bi-pencil"></i></a>
+                                        <a href="#"><i class="bi bi-trash"></i></a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar2.jpeg">Angelica Ramos</td>

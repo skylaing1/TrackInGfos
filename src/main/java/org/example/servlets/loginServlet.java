@@ -23,7 +23,7 @@ public class loginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
        if (ServletUtil.checkSessionAndRedirect(request, response)) {
-           System.out.println("RememberMe cookie angemeldet"); //Test
+           System.out.println("RememberMe cookie angemeldetokkkk"); //Test
            return;
        }
         System.out.println("Keine Session"); //Test
@@ -37,7 +37,7 @@ public class loginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Boolean rememberMe = Boolean.valueOf(request.getParameter("rememberMe"));
+        boolean rememberMe = Boolean.parseBoolean(request.getParameter("rememberMe"));
         LoginData loginData = LoginDataDAO.getLoginDataByEmail(email);
 
         if (loginData == null) {
@@ -71,7 +71,7 @@ public class loginServlet extends HttpServlet {
 
        } else {
            System.out.println("Login erfolgreich nicht");
-           response.sendRedirect("login.jsp");
+           request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
            //Todo: Fehlermeldung: Login fehlgeschlagen
        }
 

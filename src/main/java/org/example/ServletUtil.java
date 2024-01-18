@@ -25,18 +25,21 @@ public class ServletUtil {
                     if (cookie.getName().equals("rememberMe")) {
                         deleteOldTokens();
                         if (TokenDAO.checkToken(cookie.getValue())) {
+
                             session = request.getSession();
                             session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
                             response.sendRedirect("/dashboard");
                             return true;
                         }
+                        return false;
                     }
                 }
             }
-            response.sendRedirect("/dashboard");
-            return true;
+
+            return false;
         }
-        return false;
+        response.sendRedirect("/dashboard");
+        return true;
     }
 
 

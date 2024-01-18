@@ -47,7 +47,7 @@ public class SessionCookieCheckFilter implements Filter {
                         if (TokenDAO.checkToken(cookie.getValue())) {
                             session = httpRequest.getSession();
                             session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
-                            System.out.println("RememberMe cookie angemeldet"); //Test
+                            System.out.println("RememberMe cookie angemeldetfilter"); //Test
                             chain.doFilter(request, response);
                         } else {
                             cookie.setMaxAge(0);
