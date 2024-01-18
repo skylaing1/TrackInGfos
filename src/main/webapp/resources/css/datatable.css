@@ -1,10 +1,49 @@
+@import url(../resources/css/bootstrap.min.css);
+
 .large-checkbox {
     transform: scale(1.5);
     margin-right: 5px;
 }
 
+.c-avatar {
+    position: relative;
+    display: inline-block;
+}
 
-.personalnummer
-{
-    width: 50px;
+.c-avatar__image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+    border-radius: 100%;
+}
+
+.c-avatar__status {
+    width: 12px;
+    height: 12px;
+    background: #99CC00;
+    border: 2px solid white;
+    position: absolute;
+    bottom: 1%;
+    right: 16%;
+    border-radius: 100%;
+}
+
+.iconedit {
+    font-size: 20px;
+    color: var(--bs-warning);
+    margin-right: 10px;
+}
+
+.icontrash {
+    font-size: 20px;
+    color: var(--bs-danger);
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.iconeye {
+    font-size: 20px;
+    color: var(--bs-primary);
+    margin-right: 10px;
 }
