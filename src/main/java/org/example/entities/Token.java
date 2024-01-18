@@ -20,7 +20,7 @@ public class Token {
     @Temporal(TemporalType.TIMESTAMP)
     private Date token_timestamp;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "credentials_id", referencedColumnName = "credentials_id")
     private LoginData loginData;
 

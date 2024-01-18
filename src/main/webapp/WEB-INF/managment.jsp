@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="../resources/css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="../resources/css/calendar.css">
     <link rel="stylesheet" href="../resources/css/farben.compiled.css">
     <link rel="stylesheet" href="../resources/css/Footer-Dark-Multi-Column-icons.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
+    <link rel="stylesheet" href="../resources/css/datatable.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
@@ -182,17 +183,21 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                 <tr>
+                                    <th><input type="checkbox" id="select-all" class="row-checkbox large-checkbox"></th>
+                                    <th class="personalnummer">Personal-Nr.</th>
                                     <th>Name</th>
                                     <th>Position</th>
                                     <th>Office</th>
                                     <th>Age</th>
                                     <th>Start date</th>
                                     <th>Salary</th>
-                                    <th>Actio </th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
+                                    <td><input type="checkbox" class="row-checkbox large-checkbox"></td>
+                                    <td>1</td>
                                     <td><img class="rounded-circle me-2" width="30" height="30" src="../resources/img/avatars/avatar1.jpeg">Airi Satou</td>
                                     <td>Accountant</td>
                                     <td>Tokyo</td>
