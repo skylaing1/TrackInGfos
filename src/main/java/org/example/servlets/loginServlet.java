@@ -21,12 +21,13 @@ import static org.example.ServletUtil.generateSecureToken;
 public class loginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("LoginServlet DoGet"); //Test
 
        if (ServletUtil.checkSessionAndRedirect(request, response)) {
            System.out.println("RememberMe cookie angemeldetokkkk"); //Test
            return;
        }
-        System.out.println("Keine Session"); //Test
+        System.out.println("Keine Sessionlogin"); //Test
         request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
     }
 

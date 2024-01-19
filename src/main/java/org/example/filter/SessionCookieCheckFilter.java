@@ -27,11 +27,13 @@ public class SessionCookieCheckFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String requestURI = httpRequest.getRequestURI();
         boolean isStaticResource = ((HttpServletRequest) request).getRequestURI().startsWith("/resources/");
+        System.out.println("CheckFilter"); //Test
 
         // Überprüfen, ob es sich um die Login- oder Registrierungsseite handelt
 
         if (requestURI.contains("login") || requestURI.contains("register") || isStaticResource ) {
             chain.doFilter(request, response);
+            System.out.println("Login oder Register"); //Test
             return;
         }
 
@@ -39,14 +41,15 @@ public class SessionCookieCheckFilter implements Filter {
 
         // Überprüfen, ob eine gültige Sitzung vorhanden ist
         if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
+            System.out.println("Filter :Keine Session"); //Test
             Cookie[] cookies = httpRequest.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("rememberMe")) {
-                        deleteOldTokens();
-                        if (TokenDAO.checkToken(cookie.getValue())) {
+                        Token token = TokenDAO.getValidToken(cookie.getValue());
+                        if (token != null) {
                             session = httpRequest.getSession();
-                            session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
+                            session.setAttribute("SessionMitarbeiter", token.getLoginData().getMitarbeiter());
                             System.out.println("RememberMe cookie angemeldetfilter"); //Test
                             chain.doFilter(request, response);
                         } else {

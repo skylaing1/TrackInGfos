@@ -6,12 +6,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.database.TokenDAO;
 import org.example.entities.LoginData;
+import org.example.entities.Mitarbeiter;
+import org.example.entities.Token;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.util.UUID;
 
-import static org.example.database.TokenDAO.deleteOldTokens;
 
 public class ServletUtil {
 
@@ -23,14 +24,15 @@ public class ServletUtil {
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("rememberMe")) {
-                        deleteOldTokens();
-                        if (TokenDAO.checkToken(cookie.getValue())) {
-
-                            session = request.getSession();
-                            session.setAttribute("SessionMitarbeiter", TokenDAO.getMitarbeiterByToken(cookie.getValue()));
+                        Token token = TokenDAO.getValidToken(cookie.getValue());
+                        if (token != null) {
+                            session = request.getSession(true);
+                            session.setAttribute("SessionMitarbeiter", token.getLoginData().getMitarbeiter());
                             response.sendRedirect("/dashboard");
+                            System.out.println("Token funktionier"); //Test
                             return true;
                         }
+                        cookie.setMaxAge(0);
                         return false;
                     }
                 }
@@ -60,27 +62,6 @@ public class ServletUtil {
     public static boolean comparePassword(String password, String password2) {
     return password.equals(password2);
 }
-
-    public static boolean hasRememberMeCookie(HttpServletRequest request) { //Testen ob der RememberMe Cookie gesetzt ist
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("rememberMe")) {
-                    deleteOldTokens();
-                    if (TokenDAO.checkToken(cookie.getValue())) {
-                        return true;
-                    } else {
-                        cookie.setMaxAge(0);
-                        return false;
-                    }
-
-                }
-            }
-        }
-        return false;
-    }
-
-
 
 
 }

@@ -35,4 +35,12 @@ public class Token {
     public void setToken_timestamp() {
         this.token_timestamp = new Date();
     }
+
+    public Date getTimestamp() {
+        return token_timestamp;
+    }
+
+    public LoginData getLoginData() {
+        return loginData;
+    }
 }

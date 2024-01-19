@@ -9,10 +9,11 @@ import org.hibernate.cfg.Configuration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 public class TokenDAO {
 
-    public static void storeTokenInDatabase ( String token_content, LoginData loginData) {
+    public static void storeTokenInDatabase(String token_content, LoginData loginData) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
              Session session = factory.openSession()) {
             System.out.println("TokenDAO.storeTokenInDatabase");
@@ -30,32 +31,12 @@ public class TokenDAO {
             session.getTransaction().commit();
 
 
-
         } catch (Exception e) {
             // Handle Exceptions
             e.printStackTrace();
         }
     }
 
-    public static Token getMitarbeiterByToken(String value) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
-
-            session.beginTransaction();
-
-            Token token = (Token) session.createQuery("FROM Token WHERE token_content = :token_content")
-                    .setParameter("token_content", value)
-                    .uniqueResult();
-
-            session.getTransaction().commit();
-
-            return token;
-        } catch (Exception e) {
-            // Handle Exceptions
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     public static void deleteTokenByContent(String tokenContent) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
@@ -104,28 +85,37 @@ public class TokenDAO {
 
     }
 
-    public static boolean checkToken(String tokenContent) {
+    public static Token getValidToken(String tokenContent) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
              Session session = factory.openSession()) {
 
             session.beginTransaction();
 
-            Token token = (Token) session.createQuery("FROM Token WHERE token_content = :token_content")
+            List<Token> tokens = session.createQuery("FROM Token WHERE token_content = :token_content", Token.class)
                     .setParameter("token_content", tokenContent)
-                    .uniqueResult();
+                    .list();
 
             session.getTransaction().commit();
 
-            if (token != null) {
-                return true;
-            } else {
-                return false;
+            if (tokens != null && !tokens.isEmpty()) {
+                LocalDateTime localDateTime = LocalDateTime.now().minusDays(14);
+                Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+                for (Token token : tokens) {
+                    if (token.getTimestamp().before(date)) {
+                        deleteTokenByContent(tokenContent);
+                        System.out.println("TokenDAO.getValidToken: Token ist abgelaufen");
+                    } else {
+                        return token;
+                    }
+                }
             }
+            return null;
         } catch (Exception e) {
             // Handle Exceptions
+            System.out.println("Exception occurred: " + e.getMessage());
             e.printStackTrace();
-            return false;
+            return null;
         }
-
     }
 }
