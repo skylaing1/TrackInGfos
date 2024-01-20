@@ -176,10 +176,10 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="btn-group col-sm-2 ms-auto" role="group"><button class="btn btn-primary pull-right" type="button" style="margin-right: 20px;background: var(--bs-primary);"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" style="font-size: 24px;">
-                                <path d="M0 0h24v24H0V0z" fill="none"></path>
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-                            </svg>  Hinzufügen</button><button class="btn btn-primary pull-right" type="button" style="margin-right: 4px;background: var(--bs-danger);"><i class="fas fa-trash-alt"></i>   Löschen</button></div>
+                            <div class="btn-group col-sm-2 ms-auto" role="group">
+                                <button class="btn btn-primary me-3" type="button" style="background: var(--bs-primary);"><i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span></button>
+                                <button class="btn btn-primary" type="button" style="background: var(--bs-danger);"><i class="fas fa-trash"></i><span style="margin-left: 10px;">Löschen</span></button>
+                          </div>
 
                         </div>
                         <div id="dataTable-1" class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">

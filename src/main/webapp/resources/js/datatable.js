@@ -50,7 +50,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const searchBar = document.querySelector('input[aria-controls="dataTable"]');
+    const tableRows = document.querySelectorAll('#dataTable tbody tr');
 
+    searchBar.addEventListener('input', function () {
+        const searchValue = this.value.toLowerCase();
+
+        tableRows.forEach(row => {
+            const rowText = row.textContent.toLowerCase();
+            row.style.display = rowText.includes(searchValue) ? '' : 'none';
+        });
+    });
+});
 
 
 window.onload = function() {
