@@ -3,6 +3,7 @@
 .large-checkbox {
     transform: scale(1.5);
     margin-right: 5px;
+
 }
 
 .c-avatar {
@@ -46,4 +47,12 @@
     font-size: 20px;
     color: var(--bs-primary);
     margin-right: 10px;
+}
+
+.col-sm-6 {
+    width: 0px;
+}
+
+.row-checkbox {
+    vertical-align: middle;
 }

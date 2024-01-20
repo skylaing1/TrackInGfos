@@ -1,6 +1,6 @@
 package org.example.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.*;
 
@@ -20,7 +20,7 @@ public class Mitarbeiter {
     private String vorname;
 
     @Column(name = "geburtsdatum")
-    private Date geburtsdatum;
+    private LocalDate geburtsdatum;
 
     @Column(name = "onetimepassword")
     private String onetimepassword;
@@ -30,9 +30,18 @@ public class Mitarbeiter {
 
     public Mitarbeiter() {
     }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public int getPersonalnummer() {
+        return personalNummer;
+    }
+
     public int getPersonalNummer() {return personalNummer;}
 
-    public Date getGeburtsdatum() {
+    public LocalDate getGeburtsdatum() {
         return this.geburtsdatum;
     }
 
@@ -40,8 +49,20 @@ public class Mitarbeiter {
         return this.name;
     }
 
+    public String getVorname(){
+        return this.vorname;
+    }
+
+
     public String getOnetimepassword() {
         return this.onetimepassword;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGeburtsdatum(LocalDate geburtsdatum) {
+        this.geburtsdatum = geburtsdatum;
+    }
 }
