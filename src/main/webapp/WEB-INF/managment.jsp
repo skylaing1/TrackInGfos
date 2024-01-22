@@ -23,6 +23,7 @@
         String currentTheme = (String) request.getAttribute("currentTheme");
     %>
 
+
 </head>
 
 <body id="page-top" data-bs-theme="<%=darkMode.equals("true") ? "dark" : "light"%>">
@@ -176,17 +177,12 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="btn-group col-sm-2 ms-auto" role="group">
-                                <button class="btn btn-primary me-3" type="button" style="background: var(--bs-primary);"><i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span></button>
-                                <button class="btn btn-primary" type="button" style="background: var(--bs-danger);"><i class="fas fa-trash"></i><span style="margin-left: 10px;">Löschen</span></button>
-                          </div>
-
+                                <button class="btn btn-primary me-3 col-sm-1 ms-auto" type="button"><i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span></button>
                         </div>
                         <div id="dataTable-1" class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
                             <table id="dataTable" class="table table-hover my-0" style="white-space: nowrap;">
                                 <thead>
                                 <tr>
-                                    <th><input id="select-all" class="row-checkbox large-checkbox" type="checkbox" /></th>
                                     <th data-bs-placement="bottom" data-bs-toggle="tooltip" title="Personalnummer">Nr.</th>
                                     <th class="col">Name</th>
                                     <th>Position</th>
@@ -200,7 +196,6 @@
                                 <tbody class="table-hover" data-total-rows="<%=request.getAttribute("totalRows")%>">
                                 <c:forEach var="mitarbeiter" items="${mitarbeiterList}">
                                 <tr>
-                                    <td style="width: 0px;"><input class="row-checkbox large-checkbox" type="checkbox" /></td>
                                     <td>${mitarbeiter.personalnummer}</td>
                                     <td>
                                         <div class="c-avatar"><img class="rounded-circle me-2" height="30" src="../resources/img/avatars/avatar1.jpeg" width="30" /><span class="c-avatar__status"></span></div>${mitarbeiter.vorname} ${mitarbeiter.name}
@@ -213,7 +208,7 @@
                                     <td>
                                         <i class="far fa-eye iconeye"></i>
                                         <i class="far fa-edit iconedit"></i>
-                                        <i class="far fa-trash-alt icontrash"></i>
+                                        <i class="far fa-trash-alt icontrash" data-id="${mitarbeiter.personalnummer}"></i>
                                     </td>
                                 </tr>
                                 </c:forEach>
@@ -259,10 +254,51 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
+<div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="bi bi-exclamation-triangle" style="color: red;"></i>  Achtung!</h4>
+            </div>
+
+            <div class="modal-body">
+                Möchten sie den Mitarbeiter wirklich löschen?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
+                <button type="button" class="btn btn-secondary" id="DeleteConfirm" data-bs-dismiss="modal">Bestätigen</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="AddMitarbeiterModal" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="bi bi-exclamation-triangle" style="color: red;"></i>  Achtung!</h4>
+            </div>
+
+            <div class="modal-body">
+                Erstellen sie einen Mitarbeiter
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Mitarbeiter Erstellen</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/calendar.js"></script>
 <script src="../resources/js/sidebar.js"></script>
 <script src="../resources/js/datatable.js"></script>
+
 
 </body>
 

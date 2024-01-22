@@ -41,7 +41,6 @@ public class MitarbeiterDAO {
             session.beginTransaction();
 
 
-
             List<Mitarbeiter> mitarbeiterList = session.createQuery("FROM Mitarbeiter").list();
 
 
@@ -77,9 +76,41 @@ public class MitarbeiterDAO {
         }
     }
 
+    public static void deleteSingleMitarbeiter(int id) {
+
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
+             Session session = factory.openSession()) {
+
+            session.beginTransaction();
+
+            Mitarbeiter mitarbeiter = new Mitarbeiter();
+            mitarbeiter.setPersonalNummer(id);
+
+            session.remove(mitarbeiter);
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void deleteMultipleMitarbeiter(List<Mitarbeiter> mitarbeiterList) {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
+             Session session = factory.openSession()) {
+
+            session.beginTransaction();
+
+            for (Mitarbeiter mitarbeiter : mitarbeiterList) {
+                session.remove(mitarbeiter);
+            }
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
-
-
-
-
-

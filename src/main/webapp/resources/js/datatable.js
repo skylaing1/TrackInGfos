@@ -13,23 +13,25 @@ function createPaginationLink(text, page, active, isFirstPage, isLastPage) {
         a.setAttribute('aria-disabled', 'true');
     }
 
+    $('#DeleteConfirm').modal('show');
+
+
     li.appendChild(a);
     return li;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the pagination links container
     const paginationContainer = document.querySelector('.pagination');
 
-    // Get the total number of rows and calculate the total number of pages
+    // Bekommen die Anzahl der Zeilen
     const totalRows = parseInt(document.querySelector('tbody').dataset.totalRows);
     const totalPages = Math.ceil(totalRows / 30); // 30 Zeilen
 
-    // Get the current page from the URL parameters
+    // Aktuelle Seite aus URL Parameter lesen
     const urlParams = new URLSearchParams(window.location.search);
     let currentPage = parseInt(urlParams.get('page')) || 1;
 
-    // Generate the pagination links
+    // Seiten Links erstellen
     paginationContainer.innerHTML = '';
     paginationContainer.appendChild(createPaginationLink('«', currentPage > 1 ? currentPage - 1 : 1, currentPage === 1, currentPage === 1));
     for (let i = Math.max(1, currentPage - 1); i <= Math.min(totalPages, currentPage + 1); i++) {
@@ -37,15 +39,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     paginationContainer.appendChild(createPaginationLink('»', currentPage < totalPages ? currentPage + 1 : totalPages, currentPage === totalPages, false, currentPage === totalPages));
 
-    // Add event listeners to the pagination links
+    // Klick auf die Links dann wird die Seite neu geladen (DoGet)
     paginationContainer.querySelectorAll('.page-link').forEach(function (link) {
         link.addEventListener('click', function (event) {
             event.preventDefault();
 
-            // Update the current page number
+            // Update die aktuelle Seite
             currentPage = parseInt(this.dataset.page);
 
-            // Refresh the page with the new page number
+            // Update die URL
             window.location.href = '?page=' + currentPage;
         });
     });
@@ -64,32 +66,39 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteIcons = document.querySelectorAll('.icontrash');
+    const myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
+    let idToDelete;
 
-window.onload = function() {
-    var headerCheckbox = document.getElementById('select-all');
-    var rowCheckboxes = document.getElementsByClassName('row-checkbox');
+    deleteIcons.forEach(icon => {
+        icon.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default action
 
-    headerCheckbox.addEventListener('change', function() {
-        for (var i = 0; i < rowCheckboxes.length; i++) {
-            rowCheckboxes[i].checked = headerCheckbox.checked;
-        }
+            // Store the id of the row to be deleted
+            idToDelete = icon.getAttribute('data-id');
+
+            // Show the modal
+            myModal.show();
+        });
     });
 
-    for (var i = 0; i < rowCheckboxes.length; i++) {
-        rowCheckboxes[i].addEventListener('change', function() {
-            if (!this.checked) {
-                headerCheckbox.checked = false;
-            } else {
-                var allChecked = true;
-                for (var j = 0; j < rowCheckboxes.length; j++) {
-                    if (!rowCheckboxes[j].checked) {
-                        allChecked = false;
-                        break;
-                    }
-                }
-                headerCheckbox.checked = allChecked;
-            }
+    document.getElementById('DeleteConfirm').addEventListener('click', function () {
+        // Send a DELETE request to the server
+        fetch(`/deleteMitarbeiter?id=${idToDelete}`, {
+            method: 'DELETE',
         });
-    }
-}
+
+        // Remove the corresponding row from the table
+        document.querySelector(`.icontrash[data-id="${idToDelete}"]`).closest('tr').remove();
+
+        // Hide the modal
+        myModal.hide();
+    });
+
+    document.querySelector('.btn.btn-secondary').addEventListener('click', function () {
+        // Hide the modal
+        myModal.hide();
+    });
+});
 

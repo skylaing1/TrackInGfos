@@ -65,4 +65,8 @@ public class Mitarbeiter {
     public void setGeburtsdatum(LocalDate geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
     }
+
+    public void setPersonalNummer(int personalNummer) {
+        this.personalNummer = personalNummer;
+    }
 }

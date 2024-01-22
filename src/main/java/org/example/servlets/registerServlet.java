@@ -45,7 +45,7 @@ public class registerServlet extends HttpServlet {
                     String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
                     LoginDataDAO.registerLoginData(email, hashedPassword, mitarbeiter);
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("/login");
 
                     // Todo: Erfolgsmeldung
                 } else {
@@ -55,7 +55,7 @@ public class registerServlet extends HttpServlet {
                 }
             } else {
 
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("/login");
                 //Todo: Fehlermeldung: One-Time-Password falsch
             }
 

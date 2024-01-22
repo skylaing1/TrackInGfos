@@ -7,16 +7,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.database.MitarbeiterDAO;
 import org.example.entities.Mitarbeiter;
-
 import java.io.IOException;
 import java.util.List;
+
 
 @WebServlet(name = "managmentServlet", value = "/managment")
 public class managmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+
         List<Mitarbeiter> mitarbeiterList = MitarbeiterDAO.fetchAllMitarbeiterForTable();
+
         int totalRows = mitarbeiterList.size();
+
 
         request.setAttribute("totalRows", totalRows);
 
@@ -30,6 +34,7 @@ public class managmentServlet extends HttpServlet {
         int end = Math.min(begin + rowsPerPage, mitarbeiterList.size());
 
         List<Mitarbeiter> sublist = mitarbeiterList.subList(begin, end);
+        System.out.println("Test");
 
 
         request.setAttribute("mitarbeiterList", sublist);
