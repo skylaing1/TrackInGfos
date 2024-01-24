@@ -125,7 +125,7 @@ public class MitarbeiterDAO {
             session.beginTransaction();
 
             // Check if the Mitarbeiter entity has a profile picture set
-            if (mitarbeiter.getProfilePicture() != null) {
+            if (!mitarbeiter.getProfilePicture().equals("default.jpeg")) {
                 // Construct the path to the old profile picture
                 String oldPicPath = appPath + File.separator + "resources" + File.separator + "img" + File.separator + "avatars" + File.separator + mitarbeiter.getProfilePicture();
 

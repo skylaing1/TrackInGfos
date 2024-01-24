@@ -22,7 +22,7 @@ public class Mitarbeiter {
     @Column(name = "geburtsdatum")
     private LocalDate geburtsdatum;
 
-    @Column(name = "profile_picture")
+    @Column(name = "profile_picture", nullable = false, columnDefinition = "varchar(255) default 'default.jpeg'")
     private String profilePicture;
 
     @Column(name = "admin", nullable = false, columnDefinition = "boolean default false")
@@ -80,12 +80,21 @@ public class Mitarbeiter {
         return admin;
     }
 
+
+
+
+
     public void setProfilePicture(String fileName) {
-        this.profilePicture = fileName;
+        if (fileName == null || fileName.isEmpty()) {
+            this.profilePicture = "default.jpeg";
+        } else {
+            this.profilePicture = fileName;
+        }
     }
 
     public String getProfilePicture() {
         return profilePicture;
+
     }
 }
 
