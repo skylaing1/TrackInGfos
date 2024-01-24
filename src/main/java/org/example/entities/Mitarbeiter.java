@@ -22,6 +22,9 @@ public class Mitarbeiter {
     @Column(name = "geburtsdatum")
     private LocalDate geburtsdatum;
 
+    @Column(name = "admin", nullable = false, columnDefinition = "boolean default false")
+    private boolean admin;
+
     @Column(name = "onetimepassword")
     private String onetimepassword;
 
@@ -69,4 +72,11 @@ public class Mitarbeiter {
     public void setPersonalNummer(int personalNummer) {
         this.personalNummer = personalNummer;
     }
+
+
+    public boolean isAdmin() {
+        return admin;
+    }
 }
+
+//TODO: If für Sidebar Managment anhand von Admin

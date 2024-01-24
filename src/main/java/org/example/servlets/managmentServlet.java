@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.example.database.MitarbeiterDAO;
 import org.example.entities.Mitarbeiter;
 import java.io.IOException;
@@ -15,7 +16,14 @@ import java.util.List;
 public class managmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        HttpSession session = request.getSession(false);
 
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+
+        if (mitarbeiter == null || !mitarbeiter.isAdmin()) {
+            response.sendRedirect("/dashboard");
+            return;
+        }
 
         List<Mitarbeiter> mitarbeiterList = MitarbeiterDAO.fetchAllMitarbeiterForTable();
 
@@ -36,9 +44,7 @@ public class managmentServlet extends HttpServlet {
         List<Mitarbeiter> sublist = mitarbeiterList.subList(begin, end);
         System.out.println("Test");
 
-
         request.setAttribute("mitarbeiterList", sublist);
-
 
         request.getRequestDispatcher("WEB-INF/managment.jsp").forward(request, response);
     }
