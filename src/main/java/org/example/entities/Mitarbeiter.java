@@ -22,6 +22,9 @@ public class Mitarbeiter {
     @Column(name = "geburtsdatum")
     private LocalDate geburtsdatum;
 
+    @Column(name = "profile_picture")
+    private String profilePicture;
+
     @Column(name = "admin", nullable = false, columnDefinition = "boolean default false")
     private boolean admin;
 
@@ -73,9 +76,16 @@ public class Mitarbeiter {
         this.personalNummer = personalNummer;
     }
 
-
     public boolean isAdmin() {
         return admin;
+    }
+
+    public void setProfilePicture(String fileName) {
+        this.profilePicture = fileName;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
     }
 }
 

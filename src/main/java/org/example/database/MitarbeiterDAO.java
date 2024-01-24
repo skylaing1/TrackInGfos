@@ -5,10 +5,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import org.example.entities.Mitarbeiter;
 
 public class MitarbeiterDAO {
 
@@ -106,6 +109,36 @@ public class MitarbeiterDAO {
             for (Mitarbeiter mitarbeiter : mitarbeiterList) {
                 session.remove(mitarbeiter);
             }
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateProfilePicture(Mitarbeiter mitarbeiter, String fileName, String appPath) {
+
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
+             Session session = factory.openSession()) {
+
+            session.beginTransaction();
+
+            // Check if the Mitarbeiter entity has a profile picture set
+            if (mitarbeiter.getProfilePicture() != null) {
+                // Construct the path to the old profile picture
+                String oldPicPath = appPath + File.separator + "resources" + File.separator + "img" + File.separator + "avatars" + File.separator + mitarbeiter.getProfilePicture();
+
+                File oldPicFile = new File(oldPicPath);
+                if (oldPicFile.exists()) {
+                    oldPicFile.delete();
+                }
+            }
+
+            // Update the profile picture
+            mitarbeiter.setProfilePicture(fileName);
+
+            session.update(mitarbeiter);
 
             session.getTransaction().commit();
 

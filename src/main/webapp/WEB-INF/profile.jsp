@@ -1,3 +1,4 @@
+<%@ page import="org.example.entities.Mitarbeiter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -18,6 +19,10 @@
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+        String profilePicture = mitarbeiter.getProfilePicture();
+        String profilePicturePath = "../resources/img/avatars/" + profilePicture;
+        System.out.println(profilePicturePath);
     %>
 </head>
 
@@ -148,7 +153,7 @@
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="img/avatars/avatar1.jpeg"></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="<%= profilePicturePath %>"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
@@ -162,7 +167,7 @@
                 <div class="row mb-3">
                     <div class="col-lg-4">
                         <div class="card mb-3">
-                            <div class="card-body text-center shadow"><img id="profile-image" class="rounded-circle mb-3 mt-4" src="../resources/img/avatars/1_avatar.jpeg" width="160" height="160">
+                            <div class="card-body text-center shadow"><img id="profile-image" class="rounded-circle mb-3 mt-4" src="<%= profilePicturePath %>" width="160" height="160">
                                 <form action="/profile" method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <input type="file" name="file" id="image-input" style="display:none;" accept="image/*">
@@ -287,8 +292,10 @@
                         e.preventDefault();
 
                         // Manually submit the form
-                        reader.abort();
+
                         form.submit();
+
+                        fileInput.value = '';
                     };
 
                     reader.readAsDataURL(file);
