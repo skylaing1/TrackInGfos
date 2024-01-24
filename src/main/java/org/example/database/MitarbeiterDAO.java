@@ -51,12 +51,16 @@ public class MitarbeiterDAO {
                 mitarbeiter.setVorname(capitalizeFirstLetter(mitarbeiter.getVorname()));
                 mitarbeiter.setName(capitalizeFirstLetter(mitarbeiter.getName()));
 
+
                 java.sql.Date geburtsdatum = Date.valueOf(mitarbeiter.getGeburtsdatum());
-                LocalDate localDate = geburtsdatum.toLocalDate();
+                LocalDate  localDate_Geburtsdatum = geburtsdatum.toLocalDate();
 
                 //Formatiert das Datum in dd.MM.yyyy (z.B. 01.01.2000)
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                String formattedDate = localDate.format(formatter);
+                String formattedDate = localDate_Geburtsdatum.format(formatter);
+                System.out.println(formattedDate);
+
+                mitarbeiter.setGeburtsdatumFormatted(formattedDate);
             }
 
 

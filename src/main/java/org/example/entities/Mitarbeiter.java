@@ -1,5 +1,6 @@
 package org.example.entities;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
@@ -30,6 +31,9 @@ public class Mitarbeiter {
 
     @Column(name = "onetimepassword")
     private String onetimepassword;
+
+    @Transient
+    private String geburtsdatumFormatted;
 
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;
@@ -94,8 +98,16 @@ public class Mitarbeiter {
 
     public String getProfilePicture() {
         return profilePicture;
-
     }
+
+    public void setGeburtsdatumFormatted(String geburtsdatumFormatted) {
+        this.geburtsdatumFormatted = geburtsdatumFormatted;
+    }
+    public String getGeburtsdatumFormatted() {
+        return geburtsdatumFormatted;
+    }
+
+
 }
 
 //TODO: If für Sidebar Managment anhand von Admin

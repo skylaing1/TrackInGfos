@@ -1,3 +1,4 @@
+<%@ page import="org.example.entities.Mitarbeiter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -21,6 +22,9 @@
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+        String profilePicture = mitarbeiter.getProfilePicture();
+        String profilePicturePath = "../resources/img/avatars/" + profilePicture;
     %>
 
 
@@ -152,7 +156,7 @@
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="../resources/img/avatars/avatar1.jpeg"></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);"><Valerie Luna></span><img class="border rounded-circle img-profile" src="<%=profilePicturePath%>"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
@@ -177,7 +181,7 @@
                                     </label>
                                 </div>
                             </div>
-                                <button class="btn btn-primary me-3 col-sm-1 ms-auto" type="button"><i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span></button>
+                                <button class="btn btn-primary me-3 col-sm-1 ms-auto" type="button" data-bs-toggle="modal" data-bs-target="#mitarbeiter"><i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span></button>
                         </div>
                         <div id="dataTable-1" class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
                             <table id="dataTable" class="table table-hover my-0" style="white-space: nowrap;">
@@ -185,30 +189,29 @@
                                 <tr>
                                     <th data-bs-placement="bottom" data-bs-toggle="tooltip" title="Personalnummer">Nr.</th>
                                     <th class="col">Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Geburtsdatum</th>
+                                    <th>Eintrittsdatum</th>
+                                    <th>Position (Admin)</th>
+                                    <th>Wochenstunden</th>
                                     <th>Aktion</th>
+                                    <!-- Todo: Wenn zeit dann Urlaubstage abgearbeitete Stunden Überstunden e.t.c -->
                                 </tr>
                                 </thead>
                                 <tbody class="table-hover" data-total-rows="<%=request.getAttribute("totalRows")%>">
-                                <c:forEach var="mitarbeiter" items="${mitarbeiterList}">
+                                <c:forEach var="mitarbeiter_inTable" items="${mitarbeiterList}">
                                 <tr>
-                                    <td>${mitarbeiter.personalnummer}</td>
+                                    <td>${mitarbeiter_inTable.personalnummer}</td>
                                     <td>
-                                        <div class="c-avatar"><img class="rounded-circle me-2" height="30" src="../resources/img/avatars/avatar1.jpeg" width="30" /><span class="c-avatar__status"></span></div>${mitarbeiter.vorname} ${mitarbeiter.name}
+                                        <div class="c-avatar"><img class="rounded-circle me-2" height="30" src="../resources/img/avatars/${mitarbeiter_inTable.profilePicture}" width="30" /><span class="c-avatar__status"></span></div>${mitarbeiter_inTable.vorname} ${mitarbeiter_inTable.name}
                                     </td>
-                                    <td>${mitarbeiter.vorname}</td>
-                                    <td>Accountant</td>
+                                    <td>${mitarbeiter_inTable.geburtsdatumFormatted}</td>
                                     <td>Tokyo</td>
-                                    <td>${mitarbeiter.geburtsdatum}</td>
+                                    <td>a</td>
                                     <td>$162,700</td>
                                     <td>
                                         <i class="far fa-eye iconeye"></i>
                                         <i class="far fa-edit iconedit"></i>
-                                        <i class="far fa-trash-alt icontrash" data-id="${mitarbeiter.personalnummer}"></i>
+                                        <i class="far fa-trash-alt icontrash" data-id="${mitarbeiter_inTable.personalnummer}"></i>
                                     </td>
                                 </tr>
                                 </c:forEach>
@@ -273,22 +276,67 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="AddMitarbeiterModal" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade"  id="mitarbeiter">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="bi bi-exclamation-triangle" style="color: red;"></i>  Achtung!</h4>
+                <h4 class="modal-title"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" style="font-size: 34px;">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                </svg>&nbsp; Mitarbeiter Hinzufügen</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
             </div>
-
             <div class="modal-body">
-                Erstellen sie einen Mitarbeiter
+                <div class="container-fluid">
+                    <form action="/managment" method="post">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input class="form-control form-control" type="text" id="service_name" name="Input_nachname" placeholder="Mustermann" required=""></div>
+                                <div class="mb-3"><label class="form-label form-label mb-2" for="service_name"><strong>Personalnummer *</strong></label><input class="form-control" type="number" name="input_personalnummer" max="9999" placeholder="1234" required=""></div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Vorname *</strong></label><input class="form-control form-control" type="text" id="service_name-1" name="input_vorname" placeholder="Max" required=""></div>
+                                <div class="mb-2"><label class="form-label form-label" for="admin"><strong>Administrator *</strong></label>
+                                    <div class="form-group mb-3" id="admin">
+                                        <div class="form-check"><input type="radio" class="form-check-input" id="service_client_payment_validated-1" name="RadioOption" required="" value="true"><label class="form-label form-check-label" for="service_client_payment_validated-1">Ja</label></div>
+                                        <div class="form-check"><input type="radio" class="form-check-input" id="service_client_payment_validated-2" name="RadioOption" required="" value="false"><label class="form-label form-check-label" for="service_client_payment_validated-2">Nein</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="input_geburtsdatum"><strong>Geburtsdatum *</strong></label><input class="form-control form-control" id="input_geburtsdatum" type="date" name="input_geburtsdatum" required=""></div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="input_einstellungsdatum"><strong>Einstellungsdatum *</strong><br></label><input class="form-control form-controlinput_einstellungsdatum" id="input_einstellungsdatum" type="date" name="input_einstellungsdatum" required=""></div>
+                            </div>
+                        </div>
+                        <div class="text-end mb-3"></div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="position"><strong>Position *</strong></label>
+                                    <div class="form-group mb-3"><select class="form-select" id="position" name="input_position" required="">
+                                        <option value="praktikant" selected="">Praktikant</option>
+                                    </select></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for=wochenstunden><strong>Wochenstunden *</strong></label>
+                                    <div class="form-group mb-3" id="wochenstunden"><select class="form-select" name="input_position" required="">
+                                        <option value="40" selected="">Vollzeit (40h)</option>
+                                        <option value="20">Teilzeit (20h)</option>
+                                    </select></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3"><label class="form-label form-label" for="input_einstellungsdatum"><strong>Einmalpasswort *</strong><br></label><input class="form-control" type="password" placeholder="Max1234Mustermann" required=""></div>
+                    </form>
+                </div>
             </div>
-
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
-                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Mitarbeiter Erstellen</button>
+                <button class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
+                <button class="btn btn-primary" type="submit">Mitarbeiter Erstellen</button>
             </div>
-
         </div>
     </div>
 </div>
