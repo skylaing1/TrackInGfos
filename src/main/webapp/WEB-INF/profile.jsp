@@ -6,24 +6,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Profile - TrackIn</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
-    <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="css/farben.compiled.css">
-    <link rel="stylesheet" href="css/Footer-Dark-Multi-Column-icons.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../resources/css/bs-theme-overrides.css">
+    <link rel="stylesheet" href="../resources/css/farben.compiled.css">
+    <link rel="stylesheet" href="../resources/css/Footer-Dark-Multi-Column-icons.css">
+    <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <%
+        String darkMode = (String) request.getAttribute("darkMode");
+        String currentTheme = (String) request.getAttribute("currentTheme");
+    %>
 </head>
 
-<body id="page-top">
+<body id="page-top" data-bs-theme="<%=darkMode.equals("true") ? "dark" : "light"%>">
+
 <div id="wrapper">
     <nav class="sidebarnew close">
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
+               <img src="../resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -62,7 +67,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="profil.jsp">
+                        <a href="profile.jsp">
                             <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Profil</span>
                         </a>
@@ -157,8 +162,13 @@
                 <div class="row mb-3">
                     <div class="col-lg-4">
                         <div class="card mb-3">
-                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="img/dogs/image2.jpeg" width="160" height="160">
-                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Speichern</button></div>
+                            <div class="card-body text-center shadow"><img id="profile-image" class="rounded-circle mb-3 mt-4" src="../resources/img/avatars/1_avatar.jpeg" width="160" height="160">
+                                <form action="/profile" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <input type="file" name="file" id="image-input" style="display:none;" accept="image/*">
+                                        <button class="btn btn-primary btn-sm" type="button" onclick="changeImage()">Ändern</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -249,8 +259,47 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="js/bootstrap.js"></script>
-<script src="js/sidebar.js"></script>
+<script>
+        function changeImage() {
+            // Get the file input and form elements
+            var fileInput = document.getElementById('image-input');
+            var form = fileInput.form;
+
+            // Open the file selection dialog
+            fileInput.click();
+
+            // Listen for changes in the file input
+            fileInput.addEventListener('change', function (e) {
+                // Read the selected file
+                var file = e.target.files[0];
+
+                // Check if a file was selected
+                if (file) {
+                    // Create a FileReader to read the image
+                    var reader = new FileReader();
+
+                    // Listen for the image load event
+                    reader.onload = function (e) {
+                        // Change the source of the image to the selected image
+                        document.getElementById('profile-image').src = e.target.result;
+
+                        // Prevent the default form submission
+                        e.preventDefault();
+
+                        // Manually submit the form
+                        reader.abort();
+                        form.submit();
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+
+
+            });
+        }
+</script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/js/sidebar.js"></script>
 </body>
 
 </html>

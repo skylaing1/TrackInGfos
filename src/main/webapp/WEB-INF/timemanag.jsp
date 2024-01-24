@@ -62,7 +62,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="profil.jsp">
+                        <a href="profile.jsp">
                             <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Profil</span>
                         </a>

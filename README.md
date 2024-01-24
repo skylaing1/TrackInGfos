@@ -81,3 +81,6 @@ ENGINE = InnoDB;
 
 
 ALTER TABLE Mitarbeiter MODIFY Geburtsdatum DATE;
+
+ALTER TABLE `trackindatabase`.`Mitarbeiter`
+ADD COLUMN `admin` BOOLEAN DEFAULT FALSE;
