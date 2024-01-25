@@ -155,6 +155,22 @@ public class Mitarbeiter {
     public void setPosition(String position) {
         this.position = position;
     }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public void setWochenstunden(int wochenstunden) {
+        this.wochenstunden = wochenstunden;
+    }
+
+    public void setOnetimepassword(String onetimepassword) {
+        this.onetimepassword = onetimepassword;
+    }
+
+    public void setEintrittsdatum(LocalDate parse) {
+        this.eintrittsdatum = parse;
+    }
 }
 
 //TODO: If für Sidebar Managment anhand von Admin

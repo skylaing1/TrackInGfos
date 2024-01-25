@@ -101,4 +101,3 @@ document.addEventListener('DOMContentLoaded', function () {
         myModal.hide();
     });
 });
-

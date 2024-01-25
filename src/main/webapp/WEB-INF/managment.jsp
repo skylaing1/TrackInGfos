@@ -205,9 +205,9 @@
                                         <div class="c-avatar"><img class="rounded-circle me-2" height="30" src="../resources/img/avatars/${mitarbeiter_inTable.profilePicture}" width="30" /><span class="c-avatar__status"></span></div>${mitarbeiter_inTable.vorname} ${mitarbeiter_inTable.name}
                                     </td>
                                     <td>${mitarbeiter_inTable.geburtsdatumFormatted}</td>
-                                    <td>Tokyo</td>
-                                    <td>a</td>
-                                    <td>$162,700</td>
+                                    <td>${mitarbeiter_inTable.einstellungsdatumFormatted}</td>
+                                    <td>${mitarbeiter_inTable.position}</td>
+                                    <td>${mitarbeiter_inTable.formattedWochenstunden}</td>
                                     <td>
                                         <i class="far fa-eye iconeye"></i>
                                         <i class="far fa-edit iconedit"></i>
@@ -287,10 +287,10 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form action="/managment" method="post">
+                    <form action="${pageContext.request.contextPath}/addMitarbeiter" method="post">
                         <div class="row">
                             <div class="col">
-                                <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input class="form-control form-control" type="text" id="service_name" name="Input_nachname" placeholder="Mustermann" required=""></div>
+                                <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input class="form-control form-control" type="text" id="service_name" name="input_nachname" placeholder="Mustermann" required=""></div>
                                 <div class="mb-3"><label class="form-label form-label mb-2" for="service_name"><strong>Personalnummer *</strong></label><input class="form-control" type="number" name="input_personalnummer" max="9999" placeholder="1234" required=""></div>
                             </div>
                             <div class="col">
@@ -322,20 +322,20 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3"><label class="form-label form-label" for=wochenstunden><strong>Wochenstunden *</strong></label>
-                                    <div class="form-group mb-3" id="wochenstunden"><select class="form-select" name="input_position" required="">
+                                    <div class="form-group mb-3" id="wochenstunden"><select class="form-select" name="input_wochenstunden" required="">
                                         <option value="40" selected="">Vollzeit (40h)</option>
                                         <option value="20">Teilzeit (20h)</option>
                                     </select></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3"><label class="form-label form-label" for="input_einstellungsdatum"><strong>Einmalpasswort *</strong><br></label><input class="form-control" type="password" placeholder="Max1234Mustermann" required=""></div>
+                        <div class="mb-4"><label class="form-label form-label" for="input_einstellungsdatum"><strong>Einmalpasswort *</strong><br></label><input class="form-control" type="password" placeholder="Max1234Mustermann" name="input_password" required=""></div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
+                            <button class="btn btn-primary" type="submit">Mitarbeiter Erstellen</button>
+                        </div>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
-                <button class="btn btn-primary" type="submit">Mitarbeiter Erstellen</button>
             </div>
         </div>
     </div>

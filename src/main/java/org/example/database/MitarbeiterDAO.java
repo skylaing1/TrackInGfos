@@ -154,4 +154,34 @@ public class MitarbeiterDAO {
             e.printStackTrace();
         }
     }
+
+    public static void addMitarbeiter(String vorname, int personalNummer, String nachname, String geburtsdatum, String eintrittsdatum, String position, String onetimepassword, int wochenstunden, boolean admin) {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
+             Session session = factory.openSession()) {
+
+            session.beginTransaction();
+
+            Mitarbeiter mitarbeiter = new Mitarbeiter();
+            mitarbeiter.setVorname(vorname);
+            mitarbeiter.setPersonalNummer(personalNummer);
+            mitarbeiter.setName(nachname);
+            mitarbeiter.setGeburtsdatum(LocalDate.parse(geburtsdatum));
+            mitarbeiter.setEintrittsdatum(LocalDate.parse(eintrittsdatum));
+            mitarbeiter.setPosition(position);
+            mitarbeiter.setOnetimepassword(onetimepassword);
+            mitarbeiter.setWochenstunden(wochenstunden);
+            mitarbeiter.setAdmin(admin);
+            mitarbeiter.setProfilePicture("default.jpeg");
+
+            session.save(mitarbeiter);
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+
+    }
 }
