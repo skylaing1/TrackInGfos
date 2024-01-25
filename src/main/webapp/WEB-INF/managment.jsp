@@ -348,6 +348,148 @@
         </div>
     </div>
 </div>
+    <div id="modal-1" class="modal fade show" role="dialog" tabindex="-1" style="display: block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><svg class="icon icon-tabler icon-tabler-user-edit" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 34px;">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>
+                        <path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>
+                    </svg>  Mitarbeiter Bearbeiten</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input id="service_name" class="form-control form-control" type="text" name="Input_nachname" placeholder="Mustermann" required /></div>
+                                    <div class="mb-3"><label class="form-label form-label form-label mb-2" for="service_name"><strong>Personalnummer *</strong></label><select class="form-select form-select" name="input_personalnummer" required>
+                                        <optgroup label="This is a group">
+                                            <option value="12" selected>This is item 1</option>
+                                            <option value="13">This is item 2</option>
+                                            <option value="14">This is item 3</option>
+                                        </optgroup>
+                                    </select></div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Vorname *</strong></label><input id="service_name-1" class="form-control form-control" type="text" name="input_vorname" placeholder="Max" required /></div>
+                                    <div class="mb-2"><label class="form-label form-label" for="service_client_payment_validated"><strong>Administrator *</strong></label>
+                                        <div class="form-group mb-3">
+                                            <div class="form-check"><input id="service_client_payment_validated-1" class="form-check-input" type="radio" name="RadioOption" required value="true" /><label class="form-label form-check-label" for="service_client_payment_validated-1">Ja</label></div>
+                                            <div class="form-check"><input id="service_client_payment_validated-2" class="form-check-input" type="radio" name="RadioOption" required value="false" /><label class="form-label form-check-label" for="service_client_payment_validated-2">Nein</label></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="input_geburtsdatum"><strong>Geburtsdatum *</strong></label><input id="input_geburtsdatum" class="form-control form-control" type="date" name="input_geburtsdatum" required /></div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="input_einstellungsdatum"><strong>Einstellungsdatum *</strong><br /></label><input id="service_client_end_date" class="form-control form-controlinput_einstellungsdatum" type="date" name="input_einstellungsdatum" required /></div>
+                                </div>
+                            </div>
+                            <div class="text-end mb-3"></div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="service_client_payment_validated"><strong>Position *</strong></label>
+                                        <div class="form-group mb-3"><select class="form-select" name="input_position" required>
+                                            <option value="praktikant" selected>Praktikant</option>
+                                        </select></div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="service_client_payment_validated"><strong>Wochenstunden *</strong></label>
+                                        <div class="form-group mb-3"><select class="form-select" name="input_position" required>
+                                            <option value="40" selected>Vollzeit (40h)</option>
+                                            <option value="20">Teilzeit (20h)</option>
+                                        </select></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="input_password"><strong>Anmeldeinformationen zurücksetzen</strong></label><input class="form-control" type="password" name="input_password" placeholder="Neues Einmal Passwort" /></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer"><a class="btn btn-danger" role="button" href="services.html">Verwerfen</a><button class="btn btn-primary" type="submit">Speichern</button></div>
+            </div>
+        </div>
+    </div>
+    <div id="editModal" class="modal fade show" role="dialog" tabindex="-1" style="display: block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><svg class="icon icon-tabler icon-tabler-user-edit" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 34px;">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>
+                        <path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>
+                    </svg>  Mitarbeiter Bearbeiten</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input id="service_name" class="form-control form-control" type="text" name="Input_nachname" placeholder="Mustermann" required /></div>
+                                    <div class="mb-3"><label class="form-label form-label form-label mb-2" for="service_name"><strong>Personalnummer *</strong></label><select class="form-select form-select" name="input_personalnummer" required>
+                                        <optgroup label="This is a group">
+                                            <option value="12" selected>This is item 1</option>
+                                            <option value="13">This is item 2</option>
+                                            <option value="14">This is item 3</option>
+                                        </optgroup>
+                                    </select></div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Vorname *</strong></label><input id="service_name-1" class="form-control form-control" type="text" name="input_vorname" placeholder="Max" required /></div>
+                                    <div class="mb-2"><label class="form-label form-label" for="service_client_payment_validated"><strong>Administrator *</strong></label>
+                                        <div class="form-group mb-3">
+                                            <div class="form-check"><input id="service_client_payment_validated-1" class="form-check-input" type="radio" name="RadioOption" required value="true" /><label class="form-label form-check-label" for="service_client_payment_validated-1">Ja</label></div>
+                                            <div class="form-check"><input id="service_client_payment_validated-2" class="form-check-input" type="radio" name="RadioOption" required value="false" /><label class="form-label form-check-label" for="service_client_payment_validated-2">Nein</label></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="input_geburtsdatum"><strong>Geburtsdatum *</strong></label><input id="input_geburtsdatum" class="form-control form-control" type="date" name="input_geburtsdatum" required /></div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="input_einstellungsdatum"><strong>Einstellungsdatum *</strong><br /></label><input id="service_client_end_date" class="form-control form-controlinput_einstellungsdatum" type="date" name="input_einstellungsdatum" required /></div>
+                                </div>
+                            </div>
+                            <div class="text-end mb-3"></div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="service_client_payment_validated"><strong>Position *</strong></label>
+                                        <div class="form-group mb-3"><select class="form-select" name="input_position" required>
+                                            <option value="praktikant" selected>Praktikant</option>
+                                        </select></div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3"><label class="form-label form-label" for="service_client_payment_validated"><strong>Wochenstunden *</strong></label>
+                                        <div class="form-group mb-3"><select class="form-select" name="input_position" required>
+                                            <option value="40" selected>Vollzeit (40h)</option>
+                                            <option value="20">Teilzeit (20h)</option>
+                                        </select></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="input_password"><strong>Anmeldeinformationen zurücksetzen</strong></label><input class="form-control" type="password" name="input_password" placeholder="Neues Einmal Passwort" /></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer"><a class="btn btn-danger" role="button" href="services.html">Verwerfen</a><button class="btn btn-primary" type="submit">Speichern</button></div>
+            </div>
+        </div>
+    </div>
 
 
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
