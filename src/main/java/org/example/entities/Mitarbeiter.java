@@ -23,19 +23,19 @@ public class Mitarbeiter {
     @Column(name = "geburtsdatum")
     private LocalDate geburtsdatum;
 
-    @Column(name = "Eintrittsdatum", nullable = false)
-    private LocalDate eintrittsdatum;
+    @Column(name = "einstellungsdatum",columnDefinition = "DATE default '1900-01-01'")
+    private LocalDate einstellungsdatum;
 
-    @Column(name = "Position", nullable = false, columnDefinition = "varchar(255) default 'Keine Position'")
+    @Column(name = "Position", columnDefinition = "varchar(255) default 'keine position'")
     private String position;
 
-    @Column(name = "Wochenstunden", nullable = false, columnDefinition = "int default 1")
+    @Column(name = "Wochenstunden",columnDefinition = "int default 1")
     private int wochenstunden;
 
-    @Column(name = "profile_picture", nullable = false, columnDefinition = "varchar(255) default 'default.jpeg'")
+    @Column(name = "profile_picture", columnDefinition = "varchar(255) default 'default.jpeg'")
     private String profilePicture;
 
-    @Column(name = "admin", nullable = false, columnDefinition = "boolean default false")
+    @Column(name = "admin",columnDefinition = "boolean default false")
     private boolean admin;
 
     @Column(name = "onetimepassword")
@@ -48,7 +48,7 @@ public class Mitarbeiter {
     private String einstellungsdatumFormatted;
 
     @Transient
-    private String formattedWochenstunden;
+    private String wochenstundenFormatted;
 
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;
@@ -124,24 +124,15 @@ public class Mitarbeiter {
 
 
 
-    public LocalDate getEintrittsdatum() {
-        return eintrittsdatum;
+
+
+    public void setWochenstundenFormatted(String wochenstundenFormatted) {
+        this.wochenstundenFormatted = wochenstundenFormatted;
     }
 
-    public void setEinstellungsdatumFormatted(String formattedDateEinstellDatum) {
-        this.einstellungsdatumFormatted = formattedDateEinstellDatum;
-    }
 
-    public void setFormattedWochenstunden(String formattedWochenstunden) {
-        this.formattedWochenstunden = formattedWochenstunden;
-    }
-
-    public String getEinstellungsdatumFormatted() {
-        return einstellungsdatumFormatted;
-    }
-
-    public String getFormattedWochenstunden() {
-        return formattedWochenstunden;
+    public String getWochenstundenFormatted() {
+        return wochenstundenFormatted;
     }
 
     public int getWochenstunden() {
@@ -168,8 +159,20 @@ public class Mitarbeiter {
         this.onetimepassword = onetimepassword;
     }
 
-    public void setEintrittsdatum(LocalDate parse) {
-        this.eintrittsdatum = parse;
+
+    public LocalDate getEinstellungsdatum() {
+        return einstellungsdatum;
+    }
+
+    public String getEinstellungsdatumFormatted() {
+        return einstellungsdatumFormatted;
+    }
+    public void setEinstellungsdatumFormatted(String formattedDateEinstellungsDatum) {
+        this.einstellungsdatumFormatted = formattedDateEinstellungsDatum;
+    }
+
+    public void setEinstellungsdatum(LocalDate parse) {
+        this.einstellungsdatum = parse;
     }
 }
 

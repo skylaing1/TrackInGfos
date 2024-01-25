@@ -10,6 +10,8 @@ import org.example.database.MitarbeiterDAO;
 import org.example.entities.Mitarbeiter;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 @WebServlet(name = "managmentServlet", value = "/managment")
@@ -26,6 +28,18 @@ public class managmentServlet extends HttpServlet {
         }
 
         List<Mitarbeiter> mitarbeiterList = MitarbeiterDAO.fetchAllMitarbeiterForTable();
+
+        List<Integer> usedPersonalNummer = mitarbeiterList.stream()
+                .map(Mitarbeiter::getPersonalNummer)
+                .collect(Collectors.toList());
+
+        List<Integer> allPersonalNummer = IntStream.rangeClosed(1, 9999)
+                .boxed()
+                .collect(Collectors.toList());
+
+
+        allPersonalNummer.removeAll(usedPersonalNummer);
+
 
         int totalRows = mitarbeiterList.size();
 
@@ -44,6 +58,7 @@ public class managmentServlet extends HttpServlet {
         List<Mitarbeiter> sublist = mitarbeiterList.subList(begin, end);
         System.out.println("Test");
 
+        request.setAttribute("allAvailablePersonalNummer", allPersonalNummer);
         request.setAttribute("mitarbeiterList", sublist);
 
         request.getRequestDispatcher("WEB-INF/managment.jsp").forward(request, response);

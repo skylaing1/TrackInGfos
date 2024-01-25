@@ -93,3 +93,7 @@ ALTER TABLE `trackindatabase`.`Mitarbeiter`
 ADD COLUMN `Eintrittsdatum` DATE NOT NULL DEFAULT '1900-01-01',
 ADD COLUMN `Position` VARCHAR(30) NOT NULL DEFAULT 'Keine Position',
 ADD COLUMN `Wochenstunden` INT NOT NULL DEFAULT 1
+
+ALTER TABLE `trackindatabase`.`Mitarbeiter`
+CHANGE COLUMN `einstellungsdatum` `einstellungsdatum` DATE NOT NULL DEFAULT '1900-01-01',
+CHANGE COLUMN `Position` `Position` VARCHAR(30) NOT NULL DEFAULT 'keine position';

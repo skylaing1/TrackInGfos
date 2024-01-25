@@ -174,15 +174,17 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="d-flex justify-content-start dataTables_filter" id="dataTable_filter">
-                                    <label class="form-label">
-                                        <input type="search" class="form-control form-control-m" aria-controls="dataTable" placeholder="Suche">
-                                    </label>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex justify-content-start dataTables_filter" id="dataTable_filter">
+                                        <label class="form-label">
+                                            <input type="search" class="form-control form-control-m" aria-controls="dataTable" placeholder="Suche">
+                                        </label>
+                                    </div>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#mitarbeiter">
+                                        <i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span>
+                                    </button>
                                 </div>
-                            </div>
-                                <button class="btn btn-primary me-3 col-sm-1 ms-auto" type="button" data-bs-toggle="modal" data-bs-target="#mitarbeiter"><i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span></button>
-                        </div>
+                            <!-- TODO: Button für Handy -->
                         <div id="dataTable-1" class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
                             <table id="dataTable" class="table table-hover my-0" style="white-space: nowrap;">
                                 <thead>
@@ -207,7 +209,7 @@
                                     <td>${mitarbeiter_inTable.geburtsdatumFormatted}</td>
                                     <td>${mitarbeiter_inTable.einstellungsdatumFormatted}</td>
                                     <td>${mitarbeiter_inTable.position}</td>
-                                    <td>${mitarbeiter_inTable.formattedWochenstunden}</td>
+                                    <td>${mitarbeiter_inTable.wochenstundenFormatted}</td>
                                     <td>
                                         <i class="far fa-eye iconeye"></i>
                                         <i class="far fa-edit iconedit"></i>
@@ -290,11 +292,16 @@
                     <form action="${pageContext.request.contextPath}/addMitarbeiter" method="post">
                         <div class="row">
                             <div class="col">
-                                <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input class="form-control form-control" type="text" id="service_name" name="input_nachname" placeholder="Mustermann" required=""></div>
-                                <div class="mb-3"><label class="form-label form-label mb-2" for="service_name"><strong>Personalnummer *</strong></label><input class="form-control" type="number" name="input_personalnummer" max="9999" placeholder="1234" required=""></div>
+                                <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Vorname *</strong></label><input class="form-control form-control" type="text" id="service_name-1" name="input_vorname" placeholder="Max" required=""></div>
+                                <div class="mb-3"><label class="form-label form-label" for="Datalist"><strong>Personalnummer *</strong></label><input id ="Datalist"class="form-control" name="input_personalnummer" list="datalistOptions" placeholder="Personalnummer eingeben..." required>
+                                    <datalist id="datalistOptions">
+                                    <c:forEach var="personalNummer" items="${allAvailablePersonalNummer}">
+                                        <option value="${personalNummer}">${personalNummer}</option>
+                                    </c:forEach>
+                                    </datalist></div>
                             </div>
                             <div class="col">
-                                <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Vorname *</strong></label><input class="form-control form-control" type="text" id="service_name-1" name="input_vorname" placeholder="Max" required=""></div>
+                                <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input class="form-control form-control" type="text" id="service_name" name="input_nachname" placeholder="Mustermann" required=""></div>
                                 <div class="mb-2"><label class="form-label form-label" for="admin"><strong>Administrator *</strong></label>
                                     <div class="form-group mb-3" id="admin">
                                         <div class="form-check"><input type="radio" class="form-check-input" id="service_client_payment_validated-1" name="RadioOption" required="" value="true"><label class="form-label form-check-label" for="service_client_payment_validated-1">Ja</label></div>
@@ -317,6 +324,7 @@
                                 <div class="mb-3"><label class="form-label form-label" for="position"><strong>Position *</strong></label>
                                     <div class="form-group mb-3"><select class="form-select" id="position" name="input_position" required="">
                                         <option value="praktikant" selected="">Praktikant</option>
+                                        <option value="geschäftsführer">Geschäftsführung</option>
                                     </select></div>
                                 </div>
                             </div>

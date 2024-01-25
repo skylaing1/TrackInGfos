@@ -48,23 +48,26 @@ public class MitarbeiterDAO {
 
 
             for (Mitarbeiter mitarbeiter : mitarbeiterList) {
+                mitarbeiter.setVorname(capitalizeFirstLetter(mitarbeiter.getVorname()));
+                mitarbeiter.setName(capitalizeFirstLetter(mitarbeiter.getName()));
 
                 String formattedWochenstunden = mitarbeiter.getWochenstunden() + " h";
 
+                mitarbeiter.setWochenstundenFormatted(formattedWochenstunden);
+
                 java.sql.Date geburtsdatum = Date.valueOf(mitarbeiter.getGeburtsdatum());
                 LocalDate  localDate_Geburtsdatum = geburtsdatum.toLocalDate();
-                LocalDate  localDate_Einstellungsdatum = mitarbeiter.getEintrittsdatum();
+                LocalDate  localDate_Einstellungsdatum = mitarbeiter.getEinstellungsdatum();
 
                 //Formatiert das Datum in dd.MM.yyyy (z.B. 01.01.2000)
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                String formattedDate_EinstellDatum = localDate_Einstellungsdatum.format(formatter);
-                String formattedDate_GebDatum = localDate_Geburtsdatum.format(formatter);
+                String formattedDate_EinstellungsDatum = localDate_Einstellungsdatum.format(formatter);
+                String formattedDate_GeburtsDatum = localDate_Geburtsdatum.format(formatter);
 
-                mitarbeiter.setFormattedWochenstunden(formattedWochenstunden);
-                mitarbeiter.setGeburtsdatumFormatted(formattedDate_GebDatum);
-                mitarbeiter.setEinstellungsdatumFormatted(formattedDate_EinstellDatum);
-                mitarbeiter.setVorname(capitalizeFirstLetter(mitarbeiter.getVorname()));
-                mitarbeiter.setName(capitalizeFirstLetter(mitarbeiter.getName()));
+
+                mitarbeiter.setGeburtsdatumFormatted(formattedDate_GeburtsDatum);
+                mitarbeiter.setEinstellungsdatumFormatted(formattedDate_EinstellungsDatum);
+
             }
 
 
@@ -166,7 +169,7 @@ public class MitarbeiterDAO {
             mitarbeiter.setPersonalNummer(personalNummer);
             mitarbeiter.setName(nachname);
             mitarbeiter.setGeburtsdatum(LocalDate.parse(geburtsdatum));
-            mitarbeiter.setEintrittsdatum(LocalDate.parse(eintrittsdatum));
+            mitarbeiter.setEinstellungsdatum(LocalDate.parse(eintrittsdatum));
             mitarbeiter.setPosition(position);
             mitarbeiter.setOnetimepassword(onetimepassword);
             mitarbeiter.setWochenstunden(wochenstunden);
