@@ -23,6 +23,15 @@ public class Mitarbeiter {
     @Column(name = "geburtsdatum")
     private LocalDate geburtsdatum;
 
+    @Column(name = "Eintrittsdatum", nullable = false)
+    private LocalDate eintrittsdatum;
+
+    @Column(name = "Position", nullable = false, columnDefinition = "varchar(255) default 'Keine Position'")
+    private String position;
+
+    @Column(name = "Wochenstunden", nullable = false, columnDefinition = "int default 1")
+    private int wochenstunden;
+
     @Column(name = "profile_picture", nullable = false, columnDefinition = "varchar(255) default 'default.jpeg'")
     private String profilePicture;
 
@@ -34,6 +43,12 @@ public class Mitarbeiter {
 
     @Transient
     private String geburtsdatumFormatted;
+
+    @Transient
+    private String einstellungsdatumFormatted;
+
+    @Transient
+    private String formattedWochenstunden;
 
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;
@@ -108,6 +123,38 @@ public class Mitarbeiter {
     }
 
 
+
+    public LocalDate getEintrittsdatum() {
+        return eintrittsdatum;
+    }
+
+    public void setEinstellungsdatumFormatted(String formattedDateEinstellDatum) {
+        this.einstellungsdatumFormatted = formattedDateEinstellDatum;
+    }
+
+    public void setFormattedWochenstunden(String formattedWochenstunden) {
+        this.formattedWochenstunden = formattedWochenstunden;
+    }
+
+    public String getEinstellungsdatumFormatted() {
+        return einstellungsdatumFormatted;
+    }
+
+    public String getFormattedWochenstunden() {
+        return formattedWochenstunden;
+    }
+
+    public int getWochenstunden() {
+        return wochenstunden;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
 }
 
 //TODO: If für Sidebar Managment anhand von Admin

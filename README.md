@@ -87,3 +87,9 @@ ADD COLUMN `admin` BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE `trackindatabase`.`Mitarbeiter`
 ADD COLUMN `profile_picture` VARCHAR(255) NOT NULL DEFAULT 'default.jpeg';
+
+
+ALTER TABLE `trackindatabase`.`Mitarbeiter`
+ADD COLUMN `Eintrittsdatum` DATE NOT NULL DEFAULT '1900-01-01',
+ADD COLUMN `Position` VARCHAR(30) NOT NULL DEFAULT 'Keine Position',
+ADD COLUMN `Wochenstunden` INT NOT NULL DEFAULT 1

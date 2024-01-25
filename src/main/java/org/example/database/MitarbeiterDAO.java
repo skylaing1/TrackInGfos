@@ -48,19 +48,23 @@ public class MitarbeiterDAO {
 
 
             for (Mitarbeiter mitarbeiter : mitarbeiterList) {
-                mitarbeiter.setVorname(capitalizeFirstLetter(mitarbeiter.getVorname()));
-                mitarbeiter.setName(capitalizeFirstLetter(mitarbeiter.getName()));
 
+                String formattedWochenstunden = mitarbeiter.getWochenstunden() + " h";
 
                 java.sql.Date geburtsdatum = Date.valueOf(mitarbeiter.getGeburtsdatum());
                 LocalDate  localDate_Geburtsdatum = geburtsdatum.toLocalDate();
+                LocalDate  localDate_Einstellungsdatum = mitarbeiter.getEintrittsdatum();
 
                 //Formatiert das Datum in dd.MM.yyyy (z.B. 01.01.2000)
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                String formattedDate = localDate_Geburtsdatum.format(formatter);
-                System.out.println(formattedDate);
+                String formattedDate_EinstellDatum = localDate_Einstellungsdatum.format(formatter);
+                String formattedDate_GebDatum = localDate_Geburtsdatum.format(formatter);
 
-                mitarbeiter.setGeburtsdatumFormatted(formattedDate);
+                mitarbeiter.setFormattedWochenstunden(formattedWochenstunden);
+                mitarbeiter.setGeburtsdatumFormatted(formattedDate_GebDatum);
+                mitarbeiter.setEinstellungsdatumFormatted(formattedDate_EinstellDatum);
+                mitarbeiter.setVorname(capitalizeFirstLetter(mitarbeiter.getVorname()));
+                mitarbeiter.setName(capitalizeFirstLetter(mitarbeiter.getName()));
             }
 
 
