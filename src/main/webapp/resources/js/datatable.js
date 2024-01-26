@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             document.querySelector('#modaledit input[name="input_nachname"]').value = nameToEdit;
             document.querySelector('#modaledit input[name="input_vorname"]').value = vornameToEdit;
-
-
-
+            let optionElement = document.querySelector('#modaledit select option');
+            optionElement.value = idToEdit;
+            optionElement.innerText = idToEdit;
 
             const myModal = new bootstrap.Modal(document.getElementById("modaledit"), {});
             myModal.show();

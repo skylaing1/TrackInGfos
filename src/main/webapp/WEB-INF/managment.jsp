@@ -366,13 +366,13 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3"><label class="form-label form-label" for="service_namea"><strong>Vorname *</strong></label><input id="service_namea" class="form-control form-control" type="text" name="input_vorname" placeholder="Max" required /></div>
-                                    <div class="mb-3"><label class="form-label form-label form-label mb-2" for="service_name"><strong>Personalnummer *</strong></label><select class="form-select form-select" name="input_personalnummer" required>
-                                        <optgroup label="This is a group">
-                                            <option value="12" selected>This is item 1</option>
-                                            <option value="13">This is item 2</option>
-                                            <option value="14">This is item 3</option>
-                                        </optgroup>
-                                    </select></div>
+                                    <div class="mb-3"><label class="form-label form-label form-label mb-2" for="Datalistb"><strong>Personalnummer *</strong></label><input id ="Datalistb"class="form-control" name="input_personalnummer" list="datalistOptionsa" required>
+                                        <datalist id="datalistOptionsa">
+                                            <option id="idcurrent" value="" selected></option>
+                                            <c:forEach var="personalNummer" items="${allAvailablePersonalNummer}">
+                                                <option value="${personalNummer}">${personalNummer}</option>
+                                            </c:forEach>
+                                        </datalist></div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3"><label class="form-label form-label" for="service_nameb"><strong>Name *</strong></label><input id="service_nameb" class="form-control form-control" type="text" name="input_nachname" placeholder="Mustermann" required /></div>
