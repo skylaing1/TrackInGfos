@@ -1,6 +1,7 @@
 <%@ page import="org.example.entities.Mitarbeiter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -156,7 +157,7 @@
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);"><Valerie Luna></span><img class="border rounded-circle img-profile" src="<%=profilePicturePath%>"></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="<%=profilePicturePath%>"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
@@ -212,8 +213,8 @@
                                     <td>${mitarbeiter_inTable.wochenstundenFormatted}</td>
                                     <td>
                                         <i class="far fa-eye iconeye"></i>
-                                        <i class="far fa-edit iconedit"></i>
-                                        <i class="far fa-trash-alt icontrash" data-id="${mitarbeiter_inTable.personalnummer}"></i>
+                                        <i class='far fa-edit iconedit' data-id='${mitarbeiter_inTable.personalnummer}' data-name='${mitarbeiter_inTable.name}' data-vorname='${mitarbeiter_inTable.vorname}' data-geburtsdatum='${mitarbeiter_inTable.geburtsdatumFormatted}' data-einstellungsdatum='${mitarbeiter_inTable.einstellungsdatumFormatted}' data-position='${mitarbeiter_inTable.position}' data-wochenstunden='${mitarbeiter_inTable.wochenstunden}' data-admin='${mitarbeiter_inTable.admin}'></i>
+                                        <i class="far fa-trash-alt icontrash" data-id='${mitarbeiter_inTable.personalnummer}'></i>
                                     </td>
                                 </tr>
                                 </c:forEach>
@@ -348,7 +349,7 @@
         </div>
     </div>
 </div>
-    <div id="modal-1" class="modal fade show" role="dialog" tabindex="-1" style="display: block;">
+    <div  class="modal fade" role="dialog" id="modaledit" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -364,7 +365,7 @@
                         <form>
                             <div class="row">
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input id="service_name" class="form-control form-control" type="text" name="Input_nachname" placeholder="Mustermann" required /></div>
+                                    <div class="mb-3"><label class="form-label form-label" for="service_namea"><strong>Vorname *</strong></label><input id="service_namea" class="form-control form-control" type="text" name="input_vorname" placeholder="Max" required /></div>
                                     <div class="mb-3"><label class="form-label form-label form-label mb-2" for="service_name"><strong>Personalnummer *</strong></label><select class="form-select form-select" name="input_personalnummer" required>
                                         <optgroup label="This is a group">
                                             <option value="12" selected>This is item 1</option>
@@ -374,18 +375,19 @@
                                     </select></div>
                                 </div>
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Vorname *</strong></label><input id="service_name-1" class="form-control form-control" type="text" name="input_vorname" placeholder="Max" required /></div>
-                                    <div class="mb-2"><label class="form-label form-label" for="service_client_payment_validated"><strong>Administrator *</strong></label>
+                                    <div class="mb-3"><label class="form-label form-label" for="service_nameb"><strong>Name *</strong></label><input id="service_nameb" class="form-control form-control" type="text" name="input_nachname" placeholder="Mustermann" required /></div>
+
+                                    <div class="mb-2"><label class="form-label form-label" for="admin"><strong>Administrator *</strong></label>
                                         <div class="form-group mb-3">
-                                            <div class="form-check"><input id="service_client_payment_validated-1" class="form-check-input" type="radio" name="RadioOption" required value="true" /><label class="form-label form-check-label" for="service_client_payment_validated-1">Ja</label></div>
-                                            <div class="form-check"><input id="service_client_payment_validated-2" class="form-check-input" type="radio" name="RadioOption" required value="false" /><label class="form-label form-check-label" for="service_client_payment_validated-2">Nein</label></div>
+                                            <div class="form-check"><input id="admin-1" class="form-check-input" type="radio" name="RadioOption" required value="true" /><label class="form-label form-check-label" for="service_client_payment_validated-1">Ja</label></div>
+                                            <div class="form-check"><input id="admin-2" class="form-check-input" type="radio" name="RadioOption" required value="false" /><label class="form-label form-check-label" for="service_client_payment_validated-2">Nein</label></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for="input_geburtsdatum"><strong>Geburtsdatum *</strong></label><input id="input_geburtsdatum" class="form-control form-control" type="date" name="input_geburtsdatum" required /></div>
+                                    <div class="mb-3"><label class="form-label form-label" for="input_geburtsdatuma"><strong>Geburtsdatum *</strong></label><input id="input_geburtsdatuma" class="form-control form-control" type="date" name="input_geburtsdatum" required /></div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3"><label class="form-label form-label" for="input_einstellungsdatum"><strong>Einstellungsdatum *</strong><br /></label><input id="service_client_end_date" class="form-control form-controlinput_einstellungsdatum" type="date" name="input_einstellungsdatum" required /></div>
@@ -394,15 +396,15 @@
                             <div class="text-end mb-3"></div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for="service_client_payment_validated"><strong>Position *</strong></label>
-                                        <div class="form-group mb-3"><select class="form-select" name="input_position" required>
+                                    <div class="mb-3"><label class="form-label form-label" for="positionselect"><strong>Position *</strong></label>
+                                        <div class="form-group mb-3"><select id="positionselect" class="form-select" name="input_position" required>
                                             <option value="praktikant" selected>Praktikant</option>
                                         </select></div>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for="service_client_payment_validated"><strong>Wochenstunden *</strong></label>
-                                        <div class="form-group mb-3"><select class="form-select" name="input_position" required>
+                                    <div class="mb-3"><label class="form-label form-label" for="wochenstunden1"><strong>Wochenstunden *</strong></label>
+                                        <div class="form-group mb-3"><select id="wochenstunden1" class="form-select" name="input_wochenstunden" required>
                                             <option value="40" selected>Vollzeit (40h)</option>
                                             <option value="20">Teilzeit (20h)</option>
                                         </select></div>
@@ -410,19 +412,19 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="mb-3"><label class="form-label form-label" for="input_password"><strong>Anmeldeinformationen zurücksetzen</strong></label><input class="form-control" type="password" name="input_password" placeholder="Neues Einmal Passwort" /></div>
+                                <div class="mb-3"><label class="form-label form-label" for="input_password1"><strong>Anmeldeinformationen zurücksetzen</strong></label><input id="input_password1" class="form-control" type="password" name="input_password" placeholder="Neues Einmal Passwort" /></div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="modal-footer"><a class="btn btn-danger" role="button" href="services.html">Verwerfen</a><button class="btn btn-primary" type="submit">Speichern</button></div>
+                <div class="modal-footer"><button class="btn btn-danger" type="button" data-bs-dismiss="modal">Verwerfen</button><button class="btn btn-primary" type="submit">Speichern</button></div>
             </div>
         </div>
     </div>
+</div>
 
 
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/js/calendar.js"></script>
 <script src="../resources/js/sidebar.js"></script>
 <script src="../resources/js/datatable.js"></script>
 

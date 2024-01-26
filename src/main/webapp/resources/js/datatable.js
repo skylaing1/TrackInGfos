@@ -101,3 +101,32 @@ document.addEventListener('DOMContentLoaded', function () {
         myModal.hide();
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const editIcons = document.querySelectorAll('.iconedit');
+
+    editIcons.forEach(icon => {
+        icon.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const idToEdit = icon.getAttribute('data-id');
+            const nameToEdit = icon.getAttribute('data-name');
+            const vornameToEdit = icon.getAttribute('data-vorname');
+            const positionToEdit = icon.getAttribute('data-position');
+            const adminToEdit = icon.getAttribute('data-admin');
+            const einstellungsdatumToEdit = icon.getAttribute('data-einstellungsdatum');
+            const geburtsdatumToEdit = icon.getAttribute('data-geburtsdatum');
+            const wochenstundenToEdit = icon.getAttribute('data-wochenstunden');
+
+
+            document.querySelector('#modaledit input[name="input_nachname"]').value = nameToEdit;
+            document.querySelector('#modaledit input[name="input_vorname"]').value = vornameToEdit;
+
+
+
+
+            const myModal = new bootstrap.Modal(document.getElementById("modaledit"), {});
+            myModal.show();
+        });
+    });
+});
