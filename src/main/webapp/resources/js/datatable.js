@@ -118,15 +118,37 @@ document.addEventListener('DOMContentLoaded', function () {
             const geburtsdatumToEdit = icon.getAttribute('data-geburtsdatum');
             const wochenstundenToEdit = icon.getAttribute('data-wochenstunden');
 
-
             document.querySelector('#modaledit input[name="input_nachname"]').value = nameToEdit;
             document.querySelector('#modaledit input[name="input_vorname"]').value = vornameToEdit;
-            let optionElement = document.querySelector('#modaledit select option');
+            const optionElement = document.querySelector('#modaledit input[name="input_personalnummer"]');
             optionElement.value = idToEdit;
             optionElement.innerText = idToEdit;
+            const selectElement = document.querySelector('#modaledit select[name="input_position"]');
+            selectElement.value = positionToEdit
+
+            const workhoursElement = document.querySelector('#modaledit select[name="input_wochenstunden"]');
+            if (wochenstundenToEdit === "20 h") {
+                workhoursElement.value = "Teilzeit (20h)";
+            }
+            if (wochenstundenToEdit === "40 h") {
+                workhoursElement.value = "Vollzeit (40h)";
+            }
+
+
 
             const myModal = new bootstrap.Modal(document.getElementById("modaledit"), {});
             myModal.show();
         });
     });
 });
+
+function resetIfInvalid(el){
+    if (el.value === "")
+        return;
+    var options = el.list.options;
+    for (var i = 0; i< options.length; i++) {
+        if (el.value === options[i].value)
+            return;
+    }
+    el.value = "";
+}

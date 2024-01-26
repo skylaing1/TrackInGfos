@@ -294,8 +294,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Vorname *</strong></label><input class="form-control form-control" type="text" id="service_name-1" name="input_vorname" placeholder="Max" required=""></div>
-                                <div class="mb-3"><label class="form-label form-label" for="Datalist"><strong>Personalnummer *</strong></label><input id ="Datalist"class="form-control" name="input_personalnummer" list="datalistOptions" placeholder="Personalnummer eingeben..." required>
-                                    <datalist id="datalistOptions">
+                                <div class="mb-3"><label class="form-label form-label" for="Datalist"><strong>Personalnummer *</strong></label><input onchange="resetIfInvalid(this);" id ="Datalist"class="form-control" name="input_personalnummer" list="datalistOptions" placeholder="1234" required>
+                                    <datalist name="datalistOptions">
                                     <c:forEach var="personalNummer" items="${allAvailablePersonalNummer}">
                                         <option value="${personalNummer}">${personalNummer}</option>
                                     </c:forEach>
@@ -324,8 +324,8 @@
                             <div class="col">
                                 <div class="mb-3"><label class="form-label form-label" for="position"><strong>Position *</strong></label>
                                     <div class="form-group mb-3"><select class="form-select" id="position" name="input_position" required="">
-                                        <option value="praktikant" selected="">Praktikant</option>
-                                        <option value="geschäftsführer">Geschäftsführung</option>
+                                        <option value="Praktikant" selected="">Praktikant</option>
+                                        <option value="Geschäftsführer">Geschäftsführung</option>
                                     </select></div>
                                 </div>
                             </div>
@@ -366,9 +366,9 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3"><label class="form-label form-label" for="service_namea"><strong>Vorname *</strong></label><input id="service_namea" class="form-control form-control" type="text" name="input_vorname" placeholder="Max" required /></div>
-                                    <div class="mb-3"><label class="form-label form-label form-label mb-2" for="Datalistb"><strong>Personalnummer *</strong></label><input id ="Datalistb"class="form-control" name="input_personalnummer" list="datalistOptionsa" required>
+                                    <div class="mb-3"><label class="form-label form-label form-label mb-2" for="Datalistb"><strong>Personalnummer *</strong></label><input onchange="resetIfInvalid(this);" id="Datalistb"class="form-control" name="input_personalnummer" list="datalistOptionsa" required>
                                         <datalist id="datalistOptionsa">
-                                            <option id="idcurrent" value="" selected></option>
+                                            <option value="" selected></option>
                                             <c:forEach var="personalNummer" items="${allAvailablePersonalNummer}">
                                                 <option value="${personalNummer}">${personalNummer}</option>
                                             </c:forEach>
@@ -398,7 +398,8 @@
                                 <div class="col">
                                     <div class="mb-3"><label class="form-label form-label" for="positionselect"><strong>Position *</strong></label>
                                         <div class="form-group mb-3"><select id="positionselect" class="form-select" name="input_position" required>
-                                            <option value="praktikant" selected>Praktikant</option>
+                                            <option value="Praktikant" selected>Praktikant</option>
+                                            <option value="Geschäftsführer">Geschäftsführung</option>
                                         </select></div>
                                     </div>
                                 </div>
