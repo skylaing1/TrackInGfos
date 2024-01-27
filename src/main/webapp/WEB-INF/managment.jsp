@@ -494,12 +494,9 @@
                                                              for="input_edit_personalnummer_label"><strong>Personalnummer
                                         *</strong></label><input onchange="resetIfInvalid(this);" id="input_edit_personalnummer_label"
                                                                  class="form-control" name="input_edit_personalnummer"
-                                                                 list="datalistOptions_edit" required>
-                                        <datalist id="datalistOptions_edit">
+                                                                 list="datalistOptions_edit" required disabled>
+                                        <datalist id="datalistOptions_edit" >
                                             <option value="" selected></option>
-                                            <c:forEach var="personalNummer" items="${allAvailablePersonalNummer}">
-                                                <option value="${personalNummer}">${personalNummer}</option>
-                                            </c:forEach>
                                         </datalist>
                                     </div>
                                 </div>
@@ -580,6 +577,7 @@
                         <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Verwerfen</button>
                         <button class="btn btn-primary" type="submit">Speichern</button>
                     </div>
+                            <input type="hidden" name="input_edit_personalnummer_hidden" id="input_edit_personalnummer_hidden">
                     </form>
                 </div>
             </div>

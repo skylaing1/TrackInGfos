@@ -174,6 +174,14 @@ public class Mitarbeiter {
     public void setEinstellungsdatum(LocalDate parse) {
         this.einstellungsdatum = parse;
     }
+
+    public LoginData getLoginData() {
+        return loginData;
+    }
+
+    public void setLoginData(LoginData loginData) {
+        this.loginData = loginData;
+    }
 }
 
 //TODO: If für Sidebar Managment anhand von Admin

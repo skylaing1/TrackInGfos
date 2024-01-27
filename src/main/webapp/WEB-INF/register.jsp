@@ -27,7 +27,7 @@
                         <div class="text-center">
                             <h4 class="text-dark mb-4">Benutzer Registrieren!</h4>
                         </div>
-                        <form class="user" action="/register" method="POST">
+                        <form class="user" action="${pageContext.request.contextPath}/register" method="POST">
                             <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Adresse" name="email" required=""></div>
                             <div class="row mb-3">
                                 <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="number" id="exampleFirstName" placeholder="Personalnummer" inputmode="numeric" name="personalnummer" required=""></div>
@@ -41,7 +41,7 @@
                             <hr>
                         </form>
                         <div class="text-center"></div>
-                        <div class="text-center"><a class="small" href="login.jsp">Du hast bereits einen Benutzer? Login!</a></div>
+                        <div class="text-center"><a class="small" href="${pageContext.request.contextPath}/login">Du hast bereits einen Benutzer? Login!</a></div>
                     </div>
                 </div>
             </div>

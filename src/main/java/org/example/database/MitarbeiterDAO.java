@@ -1,6 +1,8 @@
 package org.example.database;
 
+import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
+import org.example.entities.Token;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -10,8 +12,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import org.example.entities.Mitarbeiter;
 
 public class MitarbeiterDAO {
 
@@ -135,9 +135,9 @@ public class MitarbeiterDAO {
 
             session.beginTransaction();
 
-            // Check if the Mitarbeiter entity has a profile picture set
+
             if (!mitarbeiter.getProfilePicture().equals("default.jpeg")) {
-                // Construct the path to the old profile picture
+
                 String oldPicPath = appPath + File.separator + "resources" + File.separator + "img" + File.separator + "avatars" + File.separator + mitarbeiter.getProfilePicture();
 
                 File oldPicFile = new File(oldPicPath);
@@ -146,7 +146,7 @@ public class MitarbeiterDAO {
                 }
             }
 
-            // Update the profile picture
+
             mitarbeiter.setProfilePicture(fileName);
 
             session.update(mitarbeiter);
@@ -186,5 +186,73 @@ public class MitarbeiterDAO {
         }
 
 
+    }
+
+    public static void updateMitarbeiter(String vorname, int personalNummer, String nachname, String geburtsdatum, String eintrittsdatum, String position, String hashedPassword, int wochenstunden, boolean admin) {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
+                Session session = factory.openSession()) {
+
+                session.beginTransaction();
+
+                Mitarbeiter mitarbeiter = session.get(Mitarbeiter.class, personalNummer);
+
+
+
+                mitarbeiter.setVorname(vorname);
+                mitarbeiter.setPersonalNummer(personalNummer);
+                mitarbeiter.setName(nachname);
+                mitarbeiter.setGeburtsdatum(LocalDate.parse(geburtsdatum));
+                mitarbeiter.setEinstellungsdatum(LocalDate.parse(eintrittsdatum));
+                mitarbeiter.setPosition(position);
+                mitarbeiter.setOnetimepassword(hashedPassword);
+                mitarbeiter.setWochenstunden(wochenstunden);
+                mitarbeiter.setAdmin(admin);
+
+                session.update(mitarbeiter);
+
+                session.getTransaction().commit();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+
+    }
+
+    public static void deleteLoginDataAndTokens(int personalNummer) {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
+             Session session = factory.openSession()) {
+
+            session.beginTransaction();
+
+            // Fetch the Mitarbeiter object from the database using the personalNummer
+            Mitarbeiter mitarbeiter = (Mitarbeiter) session.createQuery("FROM Mitarbeiter WHERE personalNummer = :personalNummer")
+                    .setParameter("personalNummer", personalNummer)
+                    .uniqueResult();
+
+            if (mitarbeiter != null) {
+                // Get the LoginData object associated with the Mitarbeiter object
+                LoginData loginData = mitarbeiter.getLoginData();
+
+                if (loginData != null) {
+                    // Remove the association between the Mitarbeiter and LoginData entities
+                    mitarbeiter.setLoginData(null);
+
+                    // Delete the Token objects associated with the LoginData object
+                    for (Token token : loginData.getTokens()) {
+                        session.delete(token);
+                    }
+
+                    // Delete the LoginData object
+                    session.delete(loginData);
+                }
+            }
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

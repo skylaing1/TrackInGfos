@@ -54,4 +54,8 @@ public class LoginData {
     public Mitarbeiter getMitarbeiter() {
         return mitarbeiter;
     }
+
+    public Token[] getTokens() {
+        return tokens.toArray(new Token[0]);
+    }
 }

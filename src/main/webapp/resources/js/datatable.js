@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+            document.querySelector('#modaledit input[name="input_edit_personalnummer_hidden"]').value = idToEdit;
 
             const myModal = new bootstrap.Modal(document.getElementById("modaledit"), {});
             myModal.show();

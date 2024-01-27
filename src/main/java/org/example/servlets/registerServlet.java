@@ -1,17 +1,20 @@
 package org.example.servlets;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.example.ServletUtil;
-import org.example.database.*;
+import org.example.database.LoginDataDAO;
+import org.example.database.MitarbeiterDAO;
 import org.example.entities.Mitarbeiter;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 
-@WebServlet(name = "registerServlet",value = "/register")
+@WebServlet(name = "registerServlet", value = "/register")
 public class registerServlet extends HttpServlet {
-
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,40 +36,44 @@ public class registerServlet extends HttpServlet {
 
         Mitarbeiter mitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(Integer.parseInt(personalNummer));
 
+
         // Todo: Email ungültig prüfen: Prefix .com z.b./ Email bereits vergeben prüfen
-        // Todo: Passwort ungültig prüfen: mindestens 8 Zeichen, mindestens 1 Großbuchstabe, mindestens 1 Zahl, mindestens 1 Sonderzeichen
-        // Todo: Eingabe in die Datenbank in Kleinbuchstaben umwandeln / Außer Passwort
+
         if (mitarbeiter != null) {
+            if (mitarbeiter.getLoginData() != null) {
+                if (BCrypt.checkpw(oneTimePassword, mitarbeiter.getOnetimepassword())) {
 
-            if (mitarbeiter.getOnetimepassword().equals(oneTimePassword)) {
+                    if (ServletUtil.comparePassword(password, password_repeat)) {
 
-                if (ServletUtil.comparePassword(password, password_repeat)) {
+                        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
-                    String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+                        LoginDataDAO.registerLoginData(email, hashedPassword, mitarbeiter);
+                        response.sendRedirect("/login");
 
-                    LoginDataDAO.registerLoginData(email, hashedPassword, mitarbeiter);
-                    response.sendRedirect("/login");
+                        // Todo: Erfolgsmeldung
+                    } else {
 
-                    // Todo: Erfolgsmeldung
+                        response.sendRedirect("register.jsp");
+                        // Todo: Fehlermeldung: Passwörter stimmen nicht überein
+                    }
                 } else {
 
-                    response.sendRedirect("register.jsp");
-                    // Todo: Fehlermeldung: Passwörter stimmen nicht überein
+                    response.sendRedirect("/login");
+                    //Todo: Fehlermeldung: One-Time-Password falsch
                 }
             } else {
-
-                response.sendRedirect("/login");
-                //Todo: Fehlermeldung: One-Time-Password falsch
+                    //TODO: Fehlermeldung: Mitarbeiter hat bereits einen Account
+                    response.sendRedirect("/login");
             }
 
-        } else {
-            response.sendRedirect("404.jsp");
-            // Todo: Fehlermeldung: Mitarbeiter nicht gefunden / Personalnummer falsch
+            } else {
+                response.sendRedirect("404.jsp");
+                // Todo: Fehlermeldung: Mitarbeiter nicht gefunden / Personalnummer falsch
+            }
+
+
         }
 
+        //Todo: Nur ein Account pro Mitarbeiter
 
     }
-
-    //Todo: Nur ein Account pro Mitarbeiter
-
-}

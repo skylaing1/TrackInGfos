@@ -58,8 +58,13 @@ public class TokenDAO {
             session.getTransaction().commit();
 
         } catch (Exception e) {
-            // Handle Exceptions
-            e.printStackTrace();
+            if (e instanceof jakarta.persistence.OptimisticLockException) {
+
+                System.out.println("The token was updated or deleted by another transaction. Please try again.");
+            } else {
+
+                e.printStackTrace();
+            }
         }
     }
 
