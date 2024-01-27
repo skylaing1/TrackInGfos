@@ -118,29 +118,37 @@ document.addEventListener('DOMContentLoaded', function () {
             const geburtsdatumToEdit = icon.getAttribute('data-geburtsdatum');
             const wochenstundenToEdit = icon.getAttribute('data-wochenstunden');
 
-            document.querySelector('#modaledit input[name="input_nachname"]').value = nameToEdit;
-            document.querySelector('#modaledit input[name="input_vorname"]').value = vornameToEdit;
-            const optionElement = document.querySelector('#modaledit input[name="input_personalnummer"]');
+            document.querySelector('#modaledit input[name="input_edit_nachname"]').value = nameToEdit;
+            document.querySelector('#modaledit input[name="input_edit_vorname"]').value = vornameToEdit;
+            document.querySelector('#modaledit input[name="input_edit_einstellungsdatum"]').value = einstellungsdatumToEdit;
+            document.querySelector('#modaledit input[name="input_edit_geburtsdatum"]').value = geburtsdatumToEdit;
+            const optionElement = document.querySelector('#modaledit input[name="input_edit_personalnummer"]');
             optionElement.value = idToEdit;
             optionElement.innerText = idToEdit;
-            const selectElement = document.querySelector('#modaledit select[name="input_position"]');
+
+            const selectElement = document.querySelector('#modaledit select[name="input_edit_position"]');
             selectElement.value = positionToEdit
 
-            const workhoursElement = document.querySelector('#modaledit select[name="input_wochenstunden"]');
-            if (wochenstundenToEdit === "20") {
-                workhoursElement.options[2].selected = true;
-            }
+            const workhoursElement = document.querySelector('#modaledit select[name="input_edit_wochenstunden"]');
+
             if (wochenstundenToEdit === "40") {
-                workhoursElement.options[1].selected = true;
+                workhoursElement.selectedIndex = 0;
+            }
+            if (wochenstundenToEdit === "20") {
+                workhoursElement.selectedIndex = 1;
             }
 
-            const adminElement = document.querySelector('#modaledit input[name="input_admin_edit"]');
+            const adminElement = document.querySelector('#modaledit input[name="input_edit_admin"]');
             if (adminToEdit === "true") {
                 adminElement.checked = true;
             } else {
-                const otherAdminElement = document.querySelector('input[id="flexRadioDefault22"]');
+                const otherAdminElement = document.querySelector('input[id="input_edit_admin_label2"]');
                 otherAdminElement.checked = true;
             }
+
+
+
+
 
             const myModal = new bootstrap.Modal(document.getElementById("modaledit"), {});
             myModal.show();
