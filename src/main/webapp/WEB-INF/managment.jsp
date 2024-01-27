@@ -303,10 +303,18 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name *</strong></label><input class="form-control form-control" type="text" id="service_name" name="input_nachname" placeholder="Mustermann" required=""></div>
-                                <div class="mb-2"><label class="form-label form-label" for="admin"><strong>Administrator *</strong></label>
-                                    <div class="form-group mb-3" id="admin">
-                                        <div class="form-check"><input type="radio" class="form-check-input" id="service_client_payment_validated-1" name="RadioOption" required="" value="true"><label class="form-label form-check-label" for="service_client_payment_validated-1">Ja</label></div>
-                                        <div class="form-check"><input type="radio" class="form-check-input" id="service_client_payment_validated-2" name="RadioOption" required="" value="false"><label class="form-label form-check-label" for="service_client_payment_validated-2">Nein</label></div>
+                                <div class="mb-2"><label class="form-label form-label"><strong>Administrator *</strong></label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="input_admin" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Ja
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio"name="input_admin"  id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Nein
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -376,12 +384,18 @@
                                 </div>
                                 <div class="col">
                                     <div class="mb-3"><label class="form-label form-label" for="service_nameb"><strong>Name *</strong></label><input id="service_nameb" class="form-control form-control" type="text" name="input_nachname" placeholder="Mustermann" required /></div>
-
-                                    <div class="mb-2"><label class="form-label form-label" for="admin"><strong>Administrator *</strong></label>
-                                        <div class="form-group mb-3">
-                                            <div class="form-check"><input id="admin-1" class="form-check-input" type="radio" name="RadioOption" required value="true" /><label class="form-label form-check-label" for="service_client_payment_validated-1">Ja</label></div>
-                                            <div class="form-check"><input id="admin-2" class="form-check-input" type="radio" name="RadioOption" required value="false" /><label class="form-label form-check-label" for="service_client_payment_validated-2">Nein</label></div>
-                                        </div>
+                                    <div class="mb-2"><label class="form-label form-label"><strong>Administrator *</strong></label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="input_admin_edit" value="true" id="flexRadioDefault11">
+                                        <label class="form-check-label" for="flexRadioDefault11">
+                                            Ja
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="input_admin_edit" value="false" id="flexRadioDefault22" checked>
+                                        <label class="form-check-label" for="flexRadioDefault22">
+                                            Nein
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -406,7 +420,7 @@
                                 <div class="col">
                                     <div class="mb-3"><label class="form-label form-label" for="wochenstunden1"><strong>Wochenstunden *</strong></label>
                                         <div class="form-group mb-3"><select id="wochenstunden1" class="form-select" name="input_wochenstunden" required>
-                                            <option value="40" selected>Vollzeit (40h)</option>
+                                            <option value="40">Vollzeit (40h)</option>
                                             <option value="20">Teilzeit (20h)</option>
                                         </select></div>
                                     </div>

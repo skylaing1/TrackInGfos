@@ -127,14 +127,20 @@ document.addEventListener('DOMContentLoaded', function () {
             selectElement.value = positionToEdit
 
             const workhoursElement = document.querySelector('#modaledit select[name="input_wochenstunden"]');
-            if (wochenstundenToEdit === "20 h") {
-                workhoursElement.value = "Teilzeit (20h)";
+            if (wochenstundenToEdit === "20") {
+                workhoursElement.options[2].selected = true;
             }
-            if (wochenstundenToEdit === "40 h") {
-                workhoursElement.value = "Vollzeit (40h)";
+            if (wochenstundenToEdit === "40") {
+                workhoursElement.options[1].selected = true;
             }
 
-
+            const adminElement = document.querySelector('#modaledit input[name="input_admin_edit"]');
+            if (adminToEdit === "true") {
+                adminElement.checked = true;
+            } else {
+                const otherAdminElement = document.querySelector('input[id="flexRadioDefault22"]');
+                otherAdminElement.checked = true;
+            }
 
             const myModal = new bootstrap.Modal(document.getElementById("modaledit"), {});
             myModal.show();
