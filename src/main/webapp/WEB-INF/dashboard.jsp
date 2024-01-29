@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../resources/css/Footer-Dark-Multi-Column-icons.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");

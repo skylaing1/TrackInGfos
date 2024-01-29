@@ -97,3 +97,16 @@ ADD COLUMN `Wochenstunden` INT NOT NULL DEFAULT 1
 ALTER TABLE `trackindatabase`.`Mitarbeiter`
 CHANGE COLUMN `einstellungsdatum` `einstellungsdatum` DATE NOT NULL DEFAULT '1900-01-01',
 CHANGE COLUMN `Position` `Position` VARCHAR(30) NOT NULL DEFAULT 'keine position';
+
+CREATE TABLE IF NOT EXISTS `trackindatabase`.`entry` (
+`entry_id` INT NOT NULL AUTO_INCREMENT,
+`status` VARCHAR(40) NOT NULL,
+`startDate` DATE NOT NULL,
+`endDate` DATE NOT NULL,
+`startTime` TIME NOT NULL,
+`endTime` TIME NOT NULL,
+`description` VARCHAR(255),
+`Mitarbeiter_personalNummer` INT NOT NULL,
+PRIMARY KEY (`entry_id`),
+FOREIGN KEY (`Mitarbeiter_personalNummer`) REFERENCES `trackindatabase`.`Mitarbeiter`(`personalNummer`) ON DELETE CASCADE
+) ENGINE = InnoDB;

@@ -20,10 +20,14 @@
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script>
     <script src="https://unpkg.com/js-year-calendar@latest/locales/js-year-calendar.de.js"></script>
+
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
     %>
+    <script>
+        var entries = <%= request.getAttribute("entries") %>;
+    </script>
 
 </head>
 
@@ -242,6 +246,60 @@
         </footer>
     </div>
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<div id="event-modal" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><svg class="icon icon-tabler icon-tabler-calendar-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 34px;">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                    <path d="M16 3v4"></path>
+                    <path d="M8 3v4"></path>
+                    <path d="M4 11h16"></path>
+                    <path d="M16 19h6"></path>
+                    <path d="M19 16v6"></path>
+                </svg>  Neuer Eintrag</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label" for="status"><strong>Status</strong></label><select name="input_status" id="status" class="form-select" required>
+                                    <option value="1" selected>Anwesend</option>
+                                    <option value="2">Krank</option>
+                                    <option value="3">Urlaub</option>
+                                    <option value="4">Dienstreise</option>
+                                    <option value="5">Abwesend</option>
+                                </select></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label" for="datum"><strong>Datum</strong></label>
+                                    <div class="input-group" id="datum"><span class="input-group-text">von:</span><input name="input_datum_von" class="form-control" type="date" required /><span class="input-group-text">bis:</span><input name="input_datum_bis" class="form-control" type="date" required /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label" for="uhrzeit"><strong>Uhrzeit</strong></label>
+                                    <div class="input-group" id="uhrzeit"><span class="input-group-text">von:</span><input name="input_uhrzeit_von" class="form-control" type="time" /><span class="input-group-text">bis:</span><input name="input_uhrzeit_bis"  class="form-control" type="time" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="notizen"><strong>Notizen</strong></label><textarea name="input_notizen" id="notizen" class="form-control form-control-sm" maxlength="255"></textarea></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><button class="btn btn-primary" id="save-event" type="button">Speichern</button></div>
+        </div>
+    </div>
 </div>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/calendar.js"></script>
