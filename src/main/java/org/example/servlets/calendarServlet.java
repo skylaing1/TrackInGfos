@@ -51,6 +51,30 @@ public class calendarServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String entryIdStr = request.getParameter("entry-id");
+        String status = request.getParameter("input_status");
+        String startDate = request.getParameter("input_datum_von");
+        String endDate = request.getParameter("input_datum_bis");
+        String startTime = request.getParameter("input_uhrzeit_von");
+        String endTime = request.getParameter("input_uhrzeit_bis");
+        String description = request.getParameter("input_notizen");
+
+
+        System.out.println("id: " + entryIdStr);
+        System.out.println("status: " + status);
+        System.out.println("startDate: " + startDate);
+        System.out.println("endDate: " + endDate);
+        System.out.println("startTime: " + startTime);
+        System.out.println("endTime: " + endTime);
+        System.out.println("description: " + description);
+
+
+
+
+
+
+
+
     }
 
 

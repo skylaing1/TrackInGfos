@@ -4,6 +4,8 @@ var myModal = new bootstrap.Modal(document.getElementById('event-modal'));
 function editEvent(entry) {
     console.log(entry);
 
+
+
     document.querySelector('#event-modal input[name="entry-id"]').value = (entry ? entry.id : '');
     document.querySelector('#event-modal input[name="input_datum_von"]').value = (entry ? entry.startDate : '');
     document.querySelector('#event-modal input[name="input_datum_bis"]').value = (entry ? entry.endDate : '');
@@ -30,7 +32,10 @@ function saveEvent() {
 
     console.log(entry);
 
-    myModal.hide()
+    form.action = "/calendar";
+    form.method = "POST";
+    form.submit();
+
 }
 
 
