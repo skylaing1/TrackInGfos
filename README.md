@@ -110,3 +110,6 @@ CREATE TABLE IF NOT EXISTS `trackindatabase`.`entry` (
 PRIMARY KEY (`entry_id`),
 FOREIGN KEY (`Mitarbeiter_personalNummer`) REFERENCES `trackindatabase`.`Mitarbeiter`(`personalNummer`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
+
+ALTER TABLE entry MODIFY endTime VARCHAR(5);
+ALTER TABLE entry MODIFY startTime VARCHAR(5);

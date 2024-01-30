@@ -37,8 +37,7 @@
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="../resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png"
-                    alt="">
+               <img src="../resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -53,38 +52,38 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="/dashboard">
+                        <a href="${pageContext.request.contextPath}/dashboard">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="timemanag.html">
+                        <a href="timemanag.jsp">
                             <i class='bx bx-time icon'></i>
                             <span class="text nav-text">Zeiterfassung</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="calendar.html">
-                            <i class='bx bx-calendar icon'></i>
+                        <a href="${pageContext.request.contextPath}/calendar">
+                            <i class='bx bx-calendar icon' ></i>
                             <span class="text nav-text">Kalender</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="kontakt.html">
-                            <i class='bx bx-pie-chart-alt icon'></i>
+                        <a href="">
+                            <i class='bx bx-pie-chart-alt icon' ></i>
                             <span class="text nav-text">Analytics</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="profil.html">
-                            <i class='bx bx-user icon'></i>
+                        <a href="profile.jsp">
+                            <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="managment.html">
-                            <i class='bx bx-group icon'></i>
+                        <a href="/managment">
+                            <i class='bx bx-group icon' ></i>
                             <span class="text nav-text">Mitarbeiter</span>
                         </a>
                     </li>
@@ -92,8 +91,8 @@
             </div>
             <div class="bottom-content">
                 <li class="">
-                    <a href="404.html">
-                        <i class='bx bx-log-out icon'></i>
+                    <a href="${pageContext.request.contextPath}/logout">
+                        <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>
                 </li>
@@ -103,11 +102,10 @@
                         <i class='bx bx-sun icon sun'></i>
                     </div>
                     <span class="mode-text text">Dark mode</span>
-                    <div class="toggle-switch">
+                    <div class="toggle-switch" id="darkModeSwitch">
                         <span class="switch"></span>
                     </div>
                 </li>
-
             </div>
         </div>
     </nav>
@@ -263,15 +261,16 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form>
+                    <form id="form">
+                        <input name="entry-id" type="hidden">
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3"><label class="form-label" for="status"><strong>Status</strong></label><select name="input_status" id="status" class="form-select" required>
-                                    <option value="1" selected>Anwesend</option>
-                                    <option value="2">Krank</option>
-                                    <option value="3">Urlaub</option>
-                                    <option value="4">Dienstreise</option>
-                                    <option value="5">Abwesend</option>
+                                    <option value="Anwesend" selected>Anwesend</option>
+                                    <option value="Krank">Krank</option>
+                                    <option value="Urlaub">Urlaub</option>
+                                    <option value="Dienstreise">Dienstreise</option>
+                                    <option value="Abwesend">Abwesend</option>
                                 </select></div>
                             </div>
                         </div>
@@ -294,10 +293,11 @@
                                 <div class="mb-3"><label class="form-label form-label" for="notizen"><strong>Notizen</strong></label><textarea name="input_notizen" id="notizen" class="form-control form-control-sm" maxlength="255"></textarea></div>
                             </div>
                         </div>
-                    </form>
-                </div>
+
+            <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input class="btn btn-primary" type="submit" value="Speichern" id="save-event"></div>
+                </form>
             </div>
-            <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><button class="btn btn-primary" id="save-event" type="button">Speichern</button></div>
+            </div>
         </div>
     </div>
 </div>

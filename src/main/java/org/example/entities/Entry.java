@@ -30,11 +30,11 @@ public class Entry {
 
     @Expose
     @Column(name = "startTime")
-    private Time startTime;
+    private String startTime;
 
     @Expose
     @Column(name = "endTime")
-    private Time endTime;
+    private String endTime;
 
     @Expose
     @Column(name = "description")
@@ -43,6 +43,7 @@ public class Entry {
     @ManyToOne
     @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
     private Mitarbeiter mitarbeiter;
+
 
     // getters and setters
 }

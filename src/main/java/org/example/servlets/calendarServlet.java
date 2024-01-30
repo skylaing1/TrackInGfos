@@ -35,6 +35,7 @@ public class calendarServlet extends HttpServlet {
 
         session.close();
 
+
         // Convert entries to JSON
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
@@ -47,4 +48,12 @@ public class calendarServlet extends HttpServlet {
 
         request.getRequestDispatcher("WEB-INF/calendar.jsp").forward(request, response);
     }
+
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+
+
+
+
 }
