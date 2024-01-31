@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.LocalDateSerializer;
+import org.example.database.EntryDAO;
 import org.example.entities.Entry;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
@@ -26,24 +27,18 @@ public class calendarServlet extends HttpServlet {
         HttpSession session1 = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
         int personalNummer = mitarbeiter.getPersonalNummer();
-        // Fetch entries from the database
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        List<Entry> entries = session.createQuery("from Entry where mitarbeiter.personalNummer = :nummer", Entry.class )
-                .setParameter("nummer", personalNummer)
-                .list();
-
-        session.close();
 
 
-        // Convert entries to JSON
+       List<Entry> entries = EntryDAO.fetchEntryByMitarbeiter(personalNummer);
+
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
                 .registerTypeAdapter(LocalDate.class, new LocalDateSerializer())
                 .create();
         String entriesJson = gson.toJson(entries);
 
-        // Add JSON to request
+
+
         request.setAttribute("entries", entriesJson);
 
         request.getRequestDispatcher("WEB-INF/calendar.jsp").forward(request, response);
@@ -59,8 +54,18 @@ public class calendarServlet extends HttpServlet {
         String endTime = request.getParameter("input_uhrzeit_bis");
         String description = request.getParameter("input_notizen");
 
+        HttpSession session1 = request.getSession(false);
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
 
-        System.out.println("id: " + entryIdStr);
+        int entryId;
+
+        if (entryIdStr == null || entryIdStr.isEmpty()) {
+            entryId = 0;
+        } else {
+            entryId = Integer.parseInt(entryIdStr);
+        }
+
+        System.out.println("id: " + entryId);
         System.out.println("status: " + status);
         System.out.println("startDate: " + startDate);
         System.out.println("endDate: " + endDate);
@@ -68,12 +73,12 @@ public class calendarServlet extends HttpServlet {
         System.out.println("endTime: " + endTime);
         System.out.println("description: " + description);
 
+        EntryDAO.saveOrUpdateEntry(entryId, status, startDate, endDate, startTime, endTime, description, mitarbeiter);
 
 
 
 
-
-
+        response.sendRedirect("/calendar");
 
     }
 

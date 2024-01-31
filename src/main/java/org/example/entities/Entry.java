@@ -44,6 +44,34 @@ public class Entry {
     @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
     private Mitarbeiter mitarbeiter;
 
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setStartDate(Date date) {
+        this.startDate = date;
+    }
+
+    public void setEndDate(Date date) {
+        this.endDate = date;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setMitarbeiter(Mitarbeiter mitarbeiter) {
+        this.mitarbeiter = mitarbeiter;
+    }
+
 
     // getters and setters
 }
