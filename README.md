@@ -98,18 +98,24 @@ ALTER TABLE `trackindatabase`.`Mitarbeiter`
 CHANGE COLUMN `einstellungsdatum` `einstellungsdatum` DATE NOT NULL DEFAULT '1900-01-01',
 CHANGE COLUMN `Position` `Position` VARCHAR(30) NOT NULL DEFAULT 'keine position';
 
-CREATE TABLE IF NOT EXISTS `trackindatabase`.`entry` (
-`entry_id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Days` (
+`days_id` INT NOT NULL AUTO_INCREMENT,
 `status` VARCHAR(40) NOT NULL,
 `startDate` DATE NOT NULL,
 `endDate` DATE NOT NULL,
-`startTime` TIME NOT NULL,
-`endTime` TIME NOT NULL,
-`description` VARCHAR(255),
 `Mitarbeiter_personalNummer` INT NOT NULL,
-PRIMARY KEY (`entry_id`),
-FOREIGN KEY (`Mitarbeiter_personalNummer`) REFERENCES `trackindatabase`.`Mitarbeiter`(`personalNummer`) ON DELETE CASCADE
+FOREIGN KEY (`Mitarbeiter_personalNummer`) REFERENCES `trackindatabase`.`Mitarbeiter`(`personalNummer`) ON DELETE CASCADE,
+PRIMARY KEY (`days_id`)
 ) ENGINE = InnoDB;
 
-ALTER TABLE entry MODIFY endTime VARCHAR(5);
-ALTER TABLE entry MODIFY startTime VARCHAR(5);
+CREATE TABLE IF NOT EXISTS `Entries` (
+`entry_id` INT NOT NULL AUTO_INCREMENT,
+`startTime` VARCHAR(5) NOT NULL,
+`endTime` VARCHAR(5) NOT NULL,
+`description` VARCHAR(255),
+`state` VARCHAR(255),
+`days_id` INT NOT NULL,
+PRIMARY KEY (`entry_id`),
+FOREIGN KEY (`days_id`) REFERENCES `Days`(`days_id`) ON DELETE CASCADE
+) ENGINE = InnoDB;
+

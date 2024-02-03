@@ -7,14 +7,14 @@ import java.sql.Date;
 import java.sql.Time;
 
 @Entity
-@Table(name = "entry")
-public class Entry {
+@Table(name = "Days")
+public class Days {
 
     @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "entry_id")
-    private int entryId;
+    @Column(name = "days_id")
+    private int daysId;
 
     @Expose
     @Column(name = "status")
@@ -29,32 +29,12 @@ public class Entry {
     private Date endDate;
 
     @Expose
-    @Column(name = "startTime")
-    private String startTime;
-
-    @Expose
-    @Column(name = "endTime")
-    private String endTime;
-
-    @Expose
-    @Column(name = "description")
-    private String description;
+    @Transient
+    private String color;
 
     @ManyToOne
     @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
     private Mitarbeiter mitarbeiter;
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
 
     public void setStartDate(Date date) {
         this.startDate = date;

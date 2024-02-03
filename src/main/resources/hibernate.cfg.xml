@@ -28,7 +28,8 @@
         <mapping class="org.example.entities.LoginData"/>
         <mapping class="org.example.entities.Token"/>
         <mapping class="org.example.entities.Mitarbeiter"/>
-        <mapping class="org.example.entities.Entry"/>
+        <mapping class="org.example.entities.Days"/>
+        <mapping class="org.example.entities.Entries"/>
     </session-factory>
 
 </hibernate-configuration>

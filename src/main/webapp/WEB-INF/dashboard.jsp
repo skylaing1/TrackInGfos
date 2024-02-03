@@ -166,6 +166,33 @@
                     <h3 class="text-dark mb-0">Dashboard</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" style="background: var(--bs-primary);"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
                 </div>
                 <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
+                                <h6 class="fw-bold text-primary m-0">Tagesablauf Heute</h6><button class="btn btn-primary" type="button">Eintrag</button>
+                            </div>
+                            <div class="card-body d-flex flex-row align-items-stretch" style="overflow-x: auto;background: var(--bs-card-bg);color: var(--sidebarnew-color);">
+                                <div class="activity-box mx-2 my-2 position-relative" style="flex-grow: 4;padding: 10px;border-radius: 10px;background: var(--bs-success);border: 3px solid var(--bs-success-text-emphasis);">
+                                    <h6 class="fw-bold mb-2" style="color: #fff;">Anwesend</h6>
+                                    <p class="m-0" style="color: #fff;">8:00-12:00</p><small class="text-muted">Max 255 characters description</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
+                                </div>
+                                <div class="activity-box mx-2 my-2 position-relative" style="flex-grow: 1;padding: 10px;border-radius: 10px;background: var(--bs-warning);border: 3px solid #ffee00;color: var(--sidebarnew-color);">
+                                    <h6 class="fw-bold mb-2">Pause</h6>
+                                    <p class="m-0">12:00-12:30</p><small class="text-muted">Max 255 characters description</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
+                                </div>
+                                <div class="activity-box mx-2 my-2 position-relative" style="flex-grow: 5;padding: 10px;border-radius: 10px;color: rgb(255, 255, 255);background: var(--bs-success);border: 3px solid var(--bs-success-text-emphasis);">
+                                    <h6 class="fw-bold mb-2">Anwesend</h6>
+                                    <p class="m-0">13:00-18:00</p><small class="text-muted">Max 255 characters description</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
+                                </div>
+                                <div class="activity-box mx-2 my-2 abwesend-box position-relative" style="flex-grow: 3;padding: 10px;border-radius: 10px;background: var(--bs-danger);border-color: #ff0000;">
+                                    <h6 class="fw-bold mb-2">Abwesend</h6>
+                                    <p class="m-0"></p><small class="text-muted">Max 255 characters description</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-start-primary py-2">
                             <div class="card-body">
