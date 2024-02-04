@@ -32,7 +32,7 @@ function editEvent(days) {
     endDateInput.min = startDateInput.value;
     startDateInput.max = endDateInput.value;
 
-
+    //ToDo: Datepicker beim Updaten deaktivieren
     //TODO: Modal datepicker limitieren auf benutzte tage
 
     myModal.show();

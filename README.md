@@ -119,3 +119,6 @@ PRIMARY KEY (`entry_id`),
 FOREIGN KEY (`days_id`) REFERENCES `Days`(`days_id`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
+ALTER TABLE Days
+CHANGE COLUMN startDate date DATE NOT NULL,
+DROP COLUMN endDate;

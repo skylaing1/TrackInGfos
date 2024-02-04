@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import org.example.LocalDateSerializer;
 import org.example.database.DaysDAO;
 import org.example.entities.Days;
+import org.example.entities.Entries;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -56,15 +57,14 @@ public class calendarServlet extends HttpServlet {
         HttpSession session1 = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
 
-        int daysId;
-
-        if (daysIdStr == null || daysIdStr.isEmpty()) {
-            daysId = 0;
-        } else {
-            daysId = Integer.parseInt(daysIdStr);
+        if (daysIdStr != null) {
+            int daysId = Integer.parseInt(daysIdStr);
+            DaysDAO.updateDay(daysId, status, startDateStr, mitarbeiter);
+            response.sendRedirect("/calendar");
+            return;
         }
 
-        System.out.println("id: " + daysId);
+        System.out.println("id: " + daysIdStr);
         System.out.println("status: " + status);
         System.out.println("startDate: " + startDateStr);
         System.out.println("endDate: " + endDateStr);
@@ -75,6 +75,7 @@ public class calendarServlet extends HttpServlet {
 
         // Liste für die Tage
         List<Days> daysList = new ArrayList<>();
+        List<Entries> entriesList = new ArrayList<>();
 
         // Erstellen der Tage für den Zeitraum
         startDate.datesUntil(endDate.plusDays(1)).forEach(date -> {
@@ -86,7 +87,7 @@ public class calendarServlet extends HttpServlet {
         });
 
         // Speichern der Tage in der Datenbank
-        DaysDAO.saveOrUpdateDaysList(daysList);
+        DaysDAO.saveDaysList(daysList);
 
         response.sendRedirect("/calendar");
     }

@@ -35,14 +35,30 @@ public class DaysDAO {
         return days;
     }
 
-    public static void saveOrUpdateDaysList(List<Days> daysList) {
+    public static void saveDaysList(List<Days> daysList) {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
         for (Days day : daysList) {
-            session.saveOrUpdate(day);
+            session.save(day);
         }
+
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public static void updateDay(int daysId, String status, String startDateStr, Mitarbeiter mitarbeiter) {
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        Days day = session.get(Days.class, daysId);
+        day.setStatus(status);
+        day.setDate(Date.valueOf(startDateStr));
+        day.setMitarbeiter(mitarbeiter);
+
+        session.update(day);
 
         session.getTransaction().commit();
         session.close();
