@@ -33,6 +33,8 @@ function editEvent(days) {
     startDateInput.max = endDateInput.value;
 
 
+    //TODO: Modal datepicker limitieren auf benutzte tage
+
     myModal.show();
 }
 
@@ -47,6 +49,7 @@ function saveEvent() {
         startDate: new Date(document.querySelector('#event-modal input[name="input_datum_von"]').value),
         endDate: new Date(document.querySelector('#event-modal input[name="input_datum_bis"]').value),
 
+
     };
 
     console.log(days);
@@ -54,7 +57,6 @@ function saveEvent() {
     form.action = "/calendar";
     form.method = "POST";
     form.submit();
-
 }
 
 
@@ -62,18 +64,18 @@ new Calendar('#calendar', {
     language: 'de',
     style: 'background',
     maxDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000),
-    allowOverlap: true,
+    allowOverlap: false,
     disabledWeekDays: [0],
     enableContextMenu: true,
     displayWeekNumber: true,
     enableRangeSelection: true,
     dataSource: days.map(function (days) {
         return {
-
             id: days.daysId,
-            startDate: new Date(days.startDate),
-            endDate: new Date(days.endDate),
+            startDate: new Date(days.date),
+            endDate: new Date(days.date),
             status: days.status,
+            color: days.color,
 
         };
     }),

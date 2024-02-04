@@ -17,7 +17,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "calendarServlet", value = "/calendar")
@@ -48,8 +50,8 @@ public class calendarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String daysIdStr = request.getParameter("entry-id");
         String status = request.getParameter("input_status");
-        String startDate = request.getParameter("input_datum_von");
-        String endDate = request.getParameter("input_datum_bis");
+        String startDateStr = request.getParameter("input_datum_von");
+        String endDateStr = request.getParameter("input_datum_bis");
 
         HttpSession session1 = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
@@ -64,18 +66,30 @@ public class calendarServlet extends HttpServlet {
 
         System.out.println("id: " + daysId);
         System.out.println("status: " + status);
-        System.out.println("startDate: " + startDate);
-        System.out.println("endDate: " + endDate);
+        System.out.println("startDate: " + startDateStr);
+        System.out.println("endDate: " + endDateStr);
 
-        DaysDAO.saveOrUpdateDays(daysId, status, startDate, endDate, mitarbeiter);
+        // Konvertieren der Strings in LocalDate
+        LocalDate startDate = LocalDate.parse(startDateStr);
+        LocalDate endDate = LocalDate.parse(endDateStr);
 
+        // Liste für die Tage
+        List<Days> daysList = new ArrayList<>();
 
+        // Erstellen der Tage für den Zeitraum
+        startDate.datesUntil(endDate.plusDays(1)).forEach(date -> {
+            Days day = new Days();
+            day.setStatus(status);
+            day.setDate(Date.valueOf(date.toString()));
+            day.setMitarbeiter(mitarbeiter);
+            daysList.add(day);
+        });
 
+        // Speichern der Tage in der Datenbank
+        DaysDAO.saveOrUpdateDaysList(daysList);
 
         response.sendRedirect("/calendar");
-
     }
-
 
 
 

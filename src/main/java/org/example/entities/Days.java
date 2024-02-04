@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.sql.Time;
 
 @Entity
 @Table(name = "Days")
@@ -21,12 +20,8 @@ public class Days {
     private String status;
 
     @Expose
-    @Column(name = "startDate")
-    private Date startDate;
-
-    @Expose
-    @Column(name = "endDate")
-    private Date endDate;
+    @Column(name = "date")
+    private Date date;
 
     @Expose
     @Transient
@@ -36,12 +31,8 @@ public class Days {
     @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
     private Mitarbeiter mitarbeiter;
 
-    public void setStartDate(Date date) {
-        this.startDate = date;
-    }
-
-    public void setEndDate(Date date) {
-        this.endDate = date;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public void setStatus(String status) {
@@ -52,6 +43,13 @@ public class Days {
         this.mitarbeiter = mitarbeiter;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     // getters and setters
 }

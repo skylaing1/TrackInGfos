@@ -13,38 +13,39 @@ public class DaysDAO {
     public static List<Days> fetchDaysByMitarbeiter(int personalNummer) {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
-        List<Days> days = session.createQuery("from Days where mitarbeiter.personalNummer = :nummer", Days.class )
+        List<Days> days = session.createQuery("from Days where mitarbeiter.personalNummer = :nummer", Days.class)
                 .setParameter("nummer", personalNummer)
                 .list();
+        for (Days day : days) {
+            if (day.getStatus().equals("Urlaub")) {
+                day.setColor("blue");
+            } else if (day.getStatus().equals("Krank")) {
+                day.setColor("orange");
+            } else if (day.getStatus().equals("Anwesend")) {
+                day.setColor("green");
+            } else if (day.getStatus().equals("Abwesend")) {
+                day.setColor("red");
+            } else if (day.getStatus().equals("Dienstreise")) {
+                day.setColor("lightgreen");
+            }
+
+        }
 
         session.close();
         return days;
     }
 
-    public static void saveOrUpdateDays(int dayId, String status, String startDate, String endDate, Mitarbeiter mitarbeiter) {
+    public static void saveOrUpdateDaysList(List<Days> daysList) {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Days day = null;
-
-        if (dayId != 0) {
-             day = session.get(Days.class, dayId);
+        for (Days day : daysList) {
+            session.saveOrUpdate(day);
         }
 
-        if (dayId == 0) {
-            day = new Days();
-        }
-
-
-        day.setStatus(status);
-        day.setStartDate(Date.valueOf(startDate));
-        day.setEndDate(Date.valueOf(endDate));
-        day.setMitarbeiter(mitarbeiter);
-
-        session.saveOrUpdate(day);
         session.getTransaction().commit();
         session.close();
-
     }
 }
+
