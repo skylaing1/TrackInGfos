@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="jakarta.servlet.http.Cookie" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.example.entities.Entries" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -22,6 +25,7 @@
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
+        List<Entries> entries = (List<Entries>) request.getAttribute("entries");
     %>
 
 </head>
@@ -172,10 +176,12 @@
                                 <h6 class="fw-bold text-primary m-0">Tagesablauf Heute</h6><button class="btn btn-primary" type="button">Eintrag</button>
                             </div>
                             <div class="card-body d-flex flex-row align-items-stretch" style="overflow-x: auto;background: var(--bs-card-bg);color: #000000;">
+                                <c:forEach items="${entries}" var="entry">
                                 <div class="activity-box mx-2 my-2 position-relative" style="flex-grow: 4;padding: 10px;border-radius: 10px;background: var(--bs-success);border: 3px solid var(--bs-success-text-emphasis);">
-                                    <h6 class="fw-bold mb-2" >Anwesend</h6>
-                                    <p class="m-0">8:00-12:00</p><small style="color: #1b1b1e;">Max 255 characters description</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
+                                    <h6 class="fw-bold mb-2" >${entry.state}</h6>
+                                    <p class="m-0">${entry.startTime}-${entry.endTime}</p><small style="color: #1b1b1e;">Max 255 characters description</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
                                 </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -212,7 +218,7 @@
                             <div class="card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col me-2">
-                                        <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>StundEn fortschritt</span></div>
+                                        <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Stunden fortschritt</span></div>
                                         <div class="row g-0 align-items-center">
                                             <div class="col-auto">
                                                 <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>

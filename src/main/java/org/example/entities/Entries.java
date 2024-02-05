@@ -60,6 +60,14 @@ public class Entries {
         return state;
     }
 
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
     public void setCardColor(String s) {
         this.cardColor = s;
     }
