@@ -48,7 +48,7 @@ public class DaysDAO {
         session.close();
     }
 
-    public static void updateDay(int daysId, String status, String startDateStr, Mitarbeiter mitarbeiter) {
+    public static Days updateDayAndReturn(int daysId, String status, String startDateStr, Mitarbeiter mitarbeiter) {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -62,6 +62,7 @@ public class DaysDAO {
 
         session.getTransaction().commit();
         session.close();
+        return day;
     }
 }
 

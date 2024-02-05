@@ -51,5 +51,9 @@ public class Days {
         this.color = color;
     }
 
+    public Object getDayId() {
+        return daysId;
+    }
+
     // getters and setters
 }

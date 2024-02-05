@@ -9,20 +9,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.LocalDateSerializer;
+import org.example.ServletUtil;
 import org.example.database.DaysDAO;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 import org.example.entities.Mitarbeiter;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.example.database.EntriesDAO;
 @WebServlet(name = "calendarServlet", value = "/calendar")
 public class calendarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,7 +46,12 @@ public class calendarServlet extends HttpServlet {
     }
 
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        // Liste für die Einträge
+        List<Entries> entriesList = new ArrayList<>();
+
+        String description = request.getParameter("input_description");
         String daysIdStr = request.getParameter("entry-id");
         String status = request.getParameter("input_status");
         String startDateStr = request.getParameter("input_datum_von");
@@ -57,9 +60,16 @@ public class calendarServlet extends HttpServlet {
         HttpSession session1 = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
 
-        if (daysIdStr != null) {
+        if (description == null || description.isEmpty()) {
+            description = "Automatisch generierte Einträge";
+        }
+
+
+        if (daysIdStr != null &&  !daysIdStr.isEmpty()) {
             int daysId = Integer.parseInt(daysIdStr);
-            DaysDAO.updateDay(daysId, status, startDateStr, mitarbeiter);
+            Days day = DaysDAO.updateDayAndReturn(daysId, status, startDateStr, mitarbeiter);
+            entriesList = ServletUtil.createEntriesForDay(day, status, description, entriesList);
+            EntriesDAO.replaceEntriesForDay(day, entriesList);
             response.sendRedirect("/calendar");
             return;
         }
@@ -73,9 +83,9 @@ public class calendarServlet extends HttpServlet {
         LocalDate startDate = LocalDate.parse(startDateStr);
         LocalDate endDate = LocalDate.parse(endDateStr);
 
-        // Liste für die Tage
         List<Days> daysList = new ArrayList<>();
-        List<Entries> entriesList = new ArrayList<>();
+
+
 
         // Erstellen der Tage für den Zeitraum
         startDate.datesUntil(endDate.plusDays(1)).forEach(date -> {

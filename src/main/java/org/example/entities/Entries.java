@@ -33,5 +33,25 @@ public class Entries {
     @JoinColumn(name = "days_id", nullable = false)
     private Days day;
 
+    public void setDay(Days day) {
+        this.day = day;
+    }
+
+    public void setStatus(String state) {
+        this.state = state;
+    }
+
+    public void setStartTime(String time) {
+        this.startTime = time;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setEndTime(String time) {
+        this.endTime = time;
+    }
+
     // getters and setters
 }

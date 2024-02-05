@@ -5,16 +5,52 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.database.TokenDAO;
-import org.example.entities.LoginData;
-import org.example.entities.Mitarbeiter;
-import org.example.entities.Token;
+import org.example.entities.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 
 public class ServletUtil {
+
+    public static List<Entries> createEntriesForDay(Days day, String state, String description, List<Entries> entriesList) {
+        Entries entry = new Entries();
+
+        switch (state) {
+            case "Anwesend":
+                entry.setStatus(state);
+                entry.setDay(day);
+                entry.setStartTime("08:00");
+                entry.setEndTime("12:00");
+                entry.setDescription(description);
+                entriesList.add(entry);
+                entriesList.add(createDefaultPauseEntry(day, description));
+                entry = new Entries();
+                entry.setStatus(state);
+                entry.setDay(day);
+                entry.setStartTime("13:00");
+                entry.setEndTime("17:00");
+                entry.setDescription(description);
+                entriesList.add(entry);
+                break;
+            case "Krank", "Abwesend", "Urlaub":
+                entriesList.add(createDefaultEntry(day, description, state));
+                break;
+            case "Dienstreise":
+                entry.setStatus(state);
+                entry.setDay(day);
+                entry.setStartTime("08:00");
+                entry.setEndTime("18:00");
+                entry.setDescription(description);
+                entriesList.add(entry);
+                break;
+        }
+
+
+        return entriesList;
+    }
 
 
     public static boolean checkSessionAndRedirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -62,6 +98,26 @@ public class ServletUtil {
     public static boolean comparePassword(String password, String password2) {
     return password.equals(password2);
 }
+
+    public static Entries createDefaultPauseEntry(Days day, String description) {
+        Entries entry = new Entries();
+        entry.setStatus("Pause");
+        entry.setDay(day);
+        entry.setStartTime("12:00");
+        entry.setEndTime("13:00");
+        entry.setDescription(description);
+        return entry;
+    }
+
+    public static Entries createDefaultEntry(Days day, String description, String status) {
+        Entries entry = new Entries();
+        entry.setStatus(status);
+        entry.setDay(day);
+        entry.setStartTime("08:00");
+        entry.setEndTime("16:00");
+        entry.setDescription(description);
+        return entry;
+    }
 
 
 }
