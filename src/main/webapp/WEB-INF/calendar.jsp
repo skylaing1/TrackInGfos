@@ -281,6 +281,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label" for="notizen"><strong>Notizen</strong></label><textarea name="input_notizen" id="notizen" class="form-control form-control-sm" maxlength="255"></textarea></div>
+                            </div>
+                        </div>
             <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input class="btn btn-primary" type="submit" value="Speichern" id="save-event"></div>
                 </form>
             </div>

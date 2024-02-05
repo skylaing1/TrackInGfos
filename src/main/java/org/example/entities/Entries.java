@@ -29,6 +29,9 @@ public class Entries {
     @Column(name = "state")
     private String state;
 
+    @Transient
+    private String cardColor;
+
     @ManyToOne
     @JoinColumn(name = "days_id", nullable = false)
     private Days day;
@@ -51,6 +54,14 @@ public class Entries {
 
     public void setEndTime(String time) {
         this.endTime = time;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setCardColor(String s) {
+        this.cardColor = s;
     }
 
     // getters and setters

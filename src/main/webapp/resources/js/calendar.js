@@ -3,6 +3,7 @@ const startDateInput = document.querySelector('#event-modal input[name="input_da
 const endDateInput = document.querySelector('#event-modal input[name="input_datum_bis"]');
 const daysIdInput = document.querySelector('#event-modal input[name="entry-id"]');
 const statusInput = document.querySelector('#event-modal select[name="input_status"]');
+const descriptionInput = document.querySelector('#event-modal textarea[name="input_notizen"]');
 
 
 // Event Listener damit das Datum nicht kleiner als das Startdatum sein kann
@@ -26,6 +27,7 @@ function editEvent(days) {
     startDateInput.value = (days ? days.startDate : '');
     endDateInput.value = (days ? days.endDate : '');
     statusInput.value = (days ? days.status : '');
+    descriptionInput.value = (days ? days.description : '') ?? null;
 
 
     // setzen der Min und Max Werte für das Datum
@@ -48,6 +50,7 @@ function saveEvent() {
         status: document.querySelector('#event-modal select[name="input_status"]').value,
         startDate: new Date(document.querySelector('#event-modal input[name="input_datum_von"]').value),
         endDate: new Date(document.querySelector('#event-modal input[name="input_datum_bis"]').value),
+        description: document.querySelector('#event-modal textarea[name="input_notizen"]').value,
 
 
     };
@@ -76,6 +79,7 @@ new Calendar('#calendar', {
             endDate: new Date(days.date),
             status: days.status,
             color: days.color,
+            description: days.description,
 
         };
     }),
@@ -85,7 +89,7 @@ new Calendar('#calendar', {
             click: function(e) {
                 var startDate = new Date(e.startDate.getTime() - e.startDate.getTimezoneOffset() * 60000).toISOString().split('T')[0];
                 var endDate = new Date(e.endDate.getTime() - e.endDate.getTimezoneOffset() * 60000).toISOString().split('T')[0];
-                editEvent({ id: e.id, startDate: startDate, endDate: endDate, status: e.status });
+                editEvent({ id: e.id, startDate: startDate, endDate: endDate, status: e.status, description: e.description});
             }
         }
     ],

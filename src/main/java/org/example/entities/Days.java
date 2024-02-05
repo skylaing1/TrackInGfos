@@ -27,6 +27,11 @@ public class Days {
     @Transient
     private String color;
 
+    @Expose
+    @Column(name = "description")
+    private String description;
+
+
     @ManyToOne
     @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
     private Mitarbeiter mitarbeiter;
@@ -53,6 +58,10 @@ public class Days {
 
     public Object getDayId() {
         return daysId;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     // getters and setters

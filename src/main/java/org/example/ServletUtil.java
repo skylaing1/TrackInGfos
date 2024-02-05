@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.database.TokenDAO;
 import org.example.entities.*;
+import org.example.database.EntriesDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -120,4 +122,32 @@ public class ServletUtil {
     }
 
 
+    public static List<Entries> getCurrentEntriesForDashboard(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+        LocalDate date = LocalDate.now();
+
+        List<Entries> entriesList = EntriesDAO.getTodayEntriesForMitarbeiter(mitarbeiter, date);
+        for (Entries entry : entriesList) {
+            switch (entry.getState()) {
+                case "Anwesend":
+                    entry.setCardColor("");
+                    break;
+                case "Krank":
+                    entry.setCardColor("");
+                    break;
+                case "Abwesend":
+                    entry.setCardColor("");
+                    break;
+                case "Urlaub":
+                    entry.setCardColor("");
+                    break;
+                case "Dienstreise":
+                    entry.setCardColor("");
+                    break;
+            }
+        }
+
+        return entriesList;
+    }
 }
