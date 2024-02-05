@@ -423,6 +423,53 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
+<div id="event-modal" class="modal fade show" role="dialog" tabindex="-1" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><svg class="icon icon-tabler icon-tabler-calendar-plus" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 34px;" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                    <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                    <path d="M16 3v4"></path>
+                    <path d="M8 3v4"></path>
+                    <path d="M4 11h16"></path>
+                    <path d="M16 19h6"></path>
+                    <path d="M19 16v6"></path>
+                </svg>  Neuer Eintrag</h4><button class="btn-close" aria-label="Close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form id="form"><input type="hidden" name="entry-id" />
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label form-label" for="status"><strong>Status</strong></label><select id="status" class="form-select form-select form-select" name="input_status" required>
+                                    <option value="Anwesend" selected>Anwesend</option>
+                                    <option value="Krank">Krank</option>
+                                    <option value="Urlaub">Urlaub</option>
+                                    <option value="Dienstreise">Dienstreise</option>
+                                    <option value="Abwesend">Abwesend</option>
+                                </select></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label form-label" for="datum"><strong>Datum</strong></label>
+                                    <div id="datum" class="input-group"><span class="input-group-text input-group-text input-group-text">von:</span><input class="form-control form-control form-control" name="input_datum_von" required type="time" /><span class="input-group-text input-group-text input-group-text">bis:</span><input class="form-control form-control form-control" name="input_datum_bis" required type="time" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3"><label class="form-label form-label form-label form-label" for="notizen"><strong>Notizen</strong></label><textarea id="notizen" class="form-control form-control-sm form-control form-control" maxlength="255" name="input_notizen"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input id="save-event" class="btn btn-primary" type="submit" value="Speichern" /></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/sidebar.js"></script>
