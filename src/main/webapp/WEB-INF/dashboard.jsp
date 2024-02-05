@@ -177,9 +177,9 @@
                             </div>
                             <div class="card-body d-flex flex-row align-items-stretch" style="overflow-x: auto;background: var(--bs-card-bg);color: #000000;">
                                 <c:forEach items="${entries}" var="entry">
-                                <div class="activity-box mx-2 my-2 position-relative" style="flex-grow: 4;padding: 10px;border-radius: 10px;background: var(--bs-success);border: 3px solid var(--bs-success-text-emphasis);">
+                                <div class="activity-box mx-2 my-2 position-relative" style="width: ${entry.entryWidth}%;padding: 10px;border-radius: 10px;background: ${entry.cardColor};border: 3px solid #1b1b1e;">
                                     <h6 class="fw-bold mb-2" >${entry.state}</h6>
-                                    <p class="m-0">${entry.startTime}-${entry.endTime}</p><small style="color: #1b1b1e;">Max 255 characters description</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
+                                    <p class="m-0">${entry.startTime}-${entry.endTime}</p><small style="color: #1b1b1e;">${entry.description}</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
                                 </div>
                                 </c:forEach>
                             </div>

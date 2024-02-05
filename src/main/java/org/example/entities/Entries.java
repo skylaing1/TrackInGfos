@@ -32,6 +32,12 @@ public class Entries {
     @Transient
     private String cardColor;
 
+    @Transient
+    private int entryDuration;
+
+    @Transient
+    private int entryWidth;
+
     @ManyToOne
     @JoinColumn(name = "days_id", nullable = false)
     private Days day;
@@ -70,6 +76,30 @@ public class Entries {
 
     public void setCardColor(String s) {
         this.cardColor = s;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCardColor() {
+        return cardColor;
+    }
+
+    public int getEntryDuration() {
+        return entryDuration;
+    }
+
+    public void setEntryDuration(int i) {
+        this.entryDuration = i;
+    }
+
+    public void setEntryWidth(int v) {
+        this.entryWidth = v;
+    }
+
+    public int getEntryWidth() {
+        return entryWidth;
     }
 
     // getters and setters

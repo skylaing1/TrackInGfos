@@ -17,7 +17,11 @@ public class dashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Entries> entriesList = ServletUtil.getCurrentEntriesForDashboard(request);
 
+
+
         request.setAttribute("entries", entriesList);
+
+
 
         request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
     }

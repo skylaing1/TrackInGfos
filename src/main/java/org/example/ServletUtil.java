@@ -10,6 +10,7 @@ import org.example.database.EntriesDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -126,12 +127,20 @@ public class ServletUtil {
         HttpSession session = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
         LocalDate date = LocalDate.now();
+        int totalDuration = 0;
 
         List<Entries> entriesList = EntriesDAO.getTodayEntriesForMitarbeiter(mitarbeiter, date);
         for (Entries entry : entriesList) {
+            String startTime = entry.getStartTime();
+            String endTime = entry.getEndTime();
+            int totalStartTime = Integer.parseInt(startTime.substring(0, 2)) * 60 + Integer.parseInt(startTime.substring(3));
+            int totalEndTime = Integer.parseInt(endTime.substring(0, 2)) * 60 + Integer.parseInt(endTime.substring(3));
+            entry.setEntryDuration(totalEndTime - totalStartTime);
+
+
             switch (entry.getState()) {
                 case "Anwesend":
-                    entry.setCardColor("");
+                    entry.setCardColor("var(--bs-success)");
                     break;
                 case "Krank":
                     entry.setCardColor("");
@@ -145,8 +154,19 @@ public class ServletUtil {
                 case "Dienstreise":
                     entry.setCardColor("");
                     break;
+                case "Pause":
+                    entry.setCardColor("var(--bs-warning)");
+                    break;
             }
+            totalDuration += entry.getEntryDuration();
         }
+
+        for (Entries entry : entriesList) {
+            float percentage = (float) entry.getEntryDuration() / totalDuration;
+            entry.setEntryWidth((int) (percentage * 100));
+        }
+
+        session.setAttribute("totalDuration", totalDuration);
 
         return entriesList;
     }
