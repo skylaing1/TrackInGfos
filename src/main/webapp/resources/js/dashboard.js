@@ -3,14 +3,3 @@ const startTimeInput = document.querySelector('#entry-modal input[name="input_ze
 const endTimeInput = document.querySelector('#entry-modal input[name="input_zeit_bis"]');
 const statusInput = document.querySelector('#entry-modal select[name="input_status"]');
 const descriptionInput = document.querySelector('#entry-modal textarea[name="input_notizen"]');
-
-function newEntry() {
-
-    startTimeInput.value = '';
-    endTimeInput.value = '';
-    statusInput.value = '';
-    descriptionInput.value = '';
-
-
-    myModal.show();
-}

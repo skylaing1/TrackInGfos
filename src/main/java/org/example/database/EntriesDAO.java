@@ -1,5 +1,7 @@
 package org.example.database;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 import org.example.entities.Mitarbeiter;
@@ -62,5 +64,37 @@ public class EntriesDAO {
 
 
         return entries;
+    }
+
+    public static void createEntry(String state, String startTime, String endTime, String description, LocalDate date, HttpServletRequest request) {
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        HttpSession session1 = request.getSession(false);
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
+
+        Days day = DaysDAO.fetchDayByDateAndMitarbeiter(date, mitarbeiter.getPersonalNummer());
+
+        if (day == null) {
+            day = new Days();
+            day.setDate(java.sql.Date.valueOf(date));
+            day.setMitarbeiter(mitarbeiter);
+            day.setStatus(state);
+            session.save(day);
+        }
+
+
+        Entries entry = new Entries();
+        entry.setStatus(state);
+        entry.setDay(day);
+        entry.setStartTime(startTime);
+        entry.setEndTime(endTime);
+        entry.setDescription(description);
+
+        session.save(entry);
+
+        session.getTransaction().commit();
+        session.close();
     }
 }

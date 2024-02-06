@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class DaysDAO {
@@ -62,6 +63,23 @@ public class DaysDAO {
 
         session.getTransaction().commit();
         session.close();
+        return day;
+    }
+
+    public static Days fetchDayByDateAndMitarbeiter(LocalDate date, int personalNummer) {
+
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        Days day = session.createQuery("from Days where date = :date and mitarbeiter.personalNummer = :nummer", Days.class)
+                .setParameter("date", Date.valueOf(date))
+                .setParameter("nummer", personalNummer)
+                .uniqueResult();
+
+        session.getTransaction().commit();
+        session.close();
+
         return day;
     }
 }

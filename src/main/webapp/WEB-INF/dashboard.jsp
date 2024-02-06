@@ -440,7 +440,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form id="form"><input type="hidden" name="entry-id" />
+                    <form id="form" action="${pageContext.request.contextPath}/dashboard" method="post"><input type="hidden" name="entry-id" />
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3"><label class="form-label" for="status"><strong>Status</strong></label><select id="status" class="form-select" name="input_status" required>
@@ -455,7 +455,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3"><label class="form-label" for="datum"><strong>Datum</strong></label>
-                                    <div id="datum" class="input-group"><span class="input-group-text">von:</span><input class="form-control" name="input_zeit_von" required type="time"/><span class="input-group-text">bis:</span><input class="form-control" name="input_zeit_bis" required type="time"/></div>
+                                    <div id="datum" class="input-group"><span class="input-group-text">von:</span><input class="form-control" name="input_zeit_von" required type="time" step="300"/><span class="input-group-text">bis:</span><input class="form-control" name="input_zeit_bis" required type="time" step="300"/></div>
                                 </div>
                             </div>
                         </div>
