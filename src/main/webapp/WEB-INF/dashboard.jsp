@@ -26,6 +26,7 @@
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
         List<Entries> entries = (List<Entries>) request.getAttribute("entries");
+
     %>
 
 </head>
@@ -156,7 +157,7 @@
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src="img/avatars/avatar1.jpeg"></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);">Valerie Luna</span><img class="border rounded-circle img-profile" src=""></a>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
@@ -173,7 +174,7 @@
                     <div class="col">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
-                                <h6 class="fw-bold text-primary m-0">Tagesablauf Heute</h6><button class="btn btn-primary" type="button">Eintrag</button>
+                                <h6 class="fw-bold text-primary m-0">Tagesablauf Heute</h6><button class="btn btn-primary" onclick="newEntry()" type="button">Eintrag</button>
                             </div>
                             <div class="card-body d-flex flex-row align-items-stretch" style="overflow-x: auto;background: var(--bs-card-bg);color: #000000;">
                                 <c:forEach items="${entries}" var="entry">
@@ -423,7 +424,7 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<div id="event-modal" class="modal fade show" role="dialog" tabindex="-1" style="display: block;">
+<div id="entry-modal" class="modal fade" role="dialog" tabindex="-1" style="display: block;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -442,7 +443,7 @@
                     <form id="form"><input type="hidden" name="entry-id" />
                         <div class="row">
                             <div class="col">
-                                <div class="mb-3"><label class="form-label form-label form-label" for="status"><strong>Status</strong></label><select id="status" class="form-select form-select form-select" name="input_status" required>
+                                <div class="mb-3"><label class="form-label" for="status"><strong>Status</strong></label><select id="status" class="form-select" name="input_status" required>
                                     <option value="Anwesend" selected>Anwesend</option>
                                     <option value="Krank">Krank</option>
                                     <option value="Urlaub">Urlaub</option>
@@ -453,14 +454,14 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="mb-3"><label class="form-label form-label form-label" for="datum"><strong>Datum</strong></label>
-                                    <div id="datum" class="input-group"><span class="input-group-text input-group-text input-group-text">von:</span><input class="form-control form-control form-control" name="input_datum_von" required type="time" /><span class="input-group-text input-group-text input-group-text">bis:</span><input class="form-control form-control form-control" name="input_datum_bis" required type="time" /></div>
+                                <div class="mb-3"><label class="form-label" for="datum"><strong>Datum</strong></label>
+                                    <div id="datum" class="input-group"><span class="input-group-text">von:</span><input class="form-control" name="input_zeit_von" required type="time"/><span class="input-group-text">bis:</span><input class="form-control" name="input_zeit_bis" required type="time"/></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="mb-3"><label class="form-label form-label form-label form-label" for="notizen"><strong>Notizen</strong></label><textarea id="notizen" class="form-control form-control-sm form-control form-control" maxlength="255" name="input_notizen"></textarea></div>
+                                <div class="mb-3"><label class="form-label" for="notizen"><strong>Notizen</strong></label><textarea id="notizen" class="form-control-sm" maxlength="255" name="input_notizen"></textarea></div>
                             </div>
                         </div>
                         <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input id="save-event" class="btn btn-primary" type="submit" value="Speichern" /></div>
