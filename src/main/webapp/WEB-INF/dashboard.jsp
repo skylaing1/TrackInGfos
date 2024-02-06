@@ -174,7 +174,7 @@
                     <div class="col">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
-                                <h6 class="fw-bold text-primary m-0">Tagesablauf Heute</h6><button class="btn btn-primary" onclick="newEntry()" type="button">Eintrag</button>
+                                <h6 class="fw-bold text-primary m-0">Tagesablauf Heute</h6><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#entry-modal" type="button">Eintrag</button>
                             </div>
                             <div class="card-body d-flex flex-row align-items-stretch" style="overflow-x: auto;background: var(--bs-card-bg);color: #000000;">
                                 <c:forEach items="${entries}" var="entry">
@@ -424,7 +424,7 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<div id="entry-modal" class="modal fade" role="dialog" tabindex="-1" style="display: block;">
+<div id="entry-modal" class="modal fade" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -461,7 +461,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="mb-3"><label class="form-label" for="notizen"><strong>Notizen</strong></label><textarea id="notizen" class="form-control-sm" maxlength="255" name="input_notizen"></textarea></div>
+                                <div class="mb-3"><label class="form-label" for="notizen"><strong>Notizen</strong></label><textarea id="notizen" class="form-control" maxlength="255" name="input_notizen"></textarea></div>
                             </div>
                         </div>
                         <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input id="save-event" class="btn btn-primary" type="submit" value="Speichern" /></div>
@@ -472,6 +472,7 @@
     </div>
 </div>
 
+<script src="../resources/js/dashboard.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/sidebar.js"></script>
 </body>
