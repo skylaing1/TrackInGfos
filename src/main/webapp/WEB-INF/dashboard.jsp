@@ -440,7 +440,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form id="form" action="${pageContext.request.contextPath}/dashboard" method="post"><input type="hidden" name="entry-id" />
+                    <form id="form" action="${pageContext.request.contextPath}/dashboard" method="post"><input type="hidden" name="entrieList" value="${entries}" />
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3"><label class="form-label" for="status"><strong>Status</strong></label><select id="status" class="form-select" name="input_status" required>

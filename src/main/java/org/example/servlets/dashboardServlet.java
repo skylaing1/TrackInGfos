@@ -36,14 +36,13 @@ public class dashboardServlet extends HttpServlet {
       String startTime = request.getParameter("input_zeit_von");
       String endTime = request.getParameter("input_zeit_bis");
       String description = request.getParameter("input_notizen");
-      List<Entries> entriesList = (List<Entries>) request.getAttribute("entries");
+      String entriesListStr = request.getParameter("entriesList");
+      List<Entries> entriesList = ServletUtil.getEntriesListFromString(entriesListStr);
       LocalDate date = LocalDate.now();
-
-        EntriesDAO.createEntry(state, startTime, endTime, description, date, request);
-
+      ServletUtil.createEntryAndUpdateDay (entriesList,state, startTime, endTime, description, date, request);
 
 
-
+      response.sendRedirect("dashboard");
     }
 }
 

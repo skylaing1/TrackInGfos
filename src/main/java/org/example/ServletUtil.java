@@ -12,7 +12,9 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -130,6 +132,7 @@ public class ServletUtil {
         int totalDuration = 0;
 
         List<Entries> entriesList = EntriesDAO.getTodayEntriesForMitarbeiter(mitarbeiter, date);
+
         for (Entries entry : entriesList) {
             String startTime = entry.getStartTime();
             String endTime = entry.getEndTime();
@@ -170,4 +173,45 @@ public class ServletUtil {
 
         return entriesList;
     }
+
+    public static void createEntryAndUpdateDay(List<Entries> entriesList,String state, String startTime, String endTime, String description, LocalDate date, HttpServletRequest request) {
+        int totalAnwesend = 0;
+        int totalKrank = 0;
+        int totalAbwesend = 0;
+        int totalUrlaub = 0;
+        int totalDienstreise = 0;
+
+        for (Entries entry : entriesList) {
+            switch (entry.getState()) {
+                case "Anwesend":
+                    totalAnwesend += entry.getEntryDuration();
+                    break;
+                case "Krank":
+                    totalKrank += entry.getEntryDuration();
+                    break;
+                case "Abwesend":
+                    totalAbwesend += entry.getEntryDuration();
+                    break;
+                case "Urlaub":
+                    totalUrlaub += entry.getEntryDuration();
+                    break;
+                case "Dienstreise":
+                    totalDienstreise += entry.getEntryDuration();
+                    break;
+            }
+        }
+        List<Integer> totalTimes = new ArrayList<>();
+        totalTimes.add(totalAnwesend);
+        totalTimes.add(totalKrank);
+        totalTimes.add(totalAbwesend);
+        totalTimes.add(totalUrlaub);
+        totalTimes.add(totalDienstreise);
+
+        int highestTimeIndex = totalTimes.indexOf(totalTimes.stream().max(Integer::compare).get());
+
+
+
+        EntriesDAO.createEntry(state, startTime, endTime, description, date, (HttpServletRequest) request.getSession().getAttribute("SessionMitarbeiter"));
+    }
+
 }
