@@ -12,6 +12,6 @@ import java.io.IOException;
 public class datenschutzServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/datenschutz.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/datenschutz.jsp").forward(request, response);
     }
 }
