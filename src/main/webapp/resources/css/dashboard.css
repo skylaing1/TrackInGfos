@@ -1,0 +1,13 @@
+@import url('/resources/bootstrap/css/bootstrap.min.css');
+.activity-box {
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    border: 3px solid #1b1b1e;
+}
+
+.entry-card {
+    overflow-x: auto;
+    background: var(--bs-card-bg);
+    color: #000000;
+}

@@ -76,4 +76,16 @@ public class EntriesDAO {
 
         return duration = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
     }
+
+    public static void deleteSingleEntry(int id) {
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        Entries entry = session.get(Entries.class, id);
+        session.delete(entry);
+
+        session.getTransaction().commit();
+        session.close();
+    }
 }

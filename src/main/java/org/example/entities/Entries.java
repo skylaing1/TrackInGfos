@@ -99,6 +99,10 @@ public class Entries {
         this.entryWidth = v;
     }
 
+    public int getEntryId() {
+        return entryId;
+    }
+
     public int getEntryWidth() {
         return entryWidth;
     }
