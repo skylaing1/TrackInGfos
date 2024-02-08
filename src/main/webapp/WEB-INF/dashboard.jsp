@@ -10,11 +10,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - TrackIn</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="../resources/img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../resources/img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="../resources/img/favicon_io/site.webmanifest">
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
@@ -28,7 +25,6 @@
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
         List<Entries> entries = (List<Entries>) request.getAttribute("entries");
-
     %>
 
 </head>
@@ -166,9 +162,9 @@
                             <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
                                 <h6 class="fw-bold text-primary m-0">Tagesablauf Heute</h6><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#entry-modal" type="button">Eintrag</button>
                             </div>
-                            <div class="card-body d-flex flex-row align-items-stretch" style="overflow-x: auto;background: var(--bs-card-bg);color: #000000;">
+                            <div class="card-body d-flex flex-row align-items-stretch entry-card" style="color: #000000;">
                                 <c:forEach items="${entries}" var="entry">
-                                <div class="activity-box mx-2 my-2 position-relative" style="width: ${entry.entryWidth}%;padding: 10px;border-radius: 10px;background: ${entry.cardColor};border: 3px solid #1b1b1e;">
+                                <div class="activity-box mx-2 my-2" style="min-width: 230px; width: ${entry.entryWidth}%;background: ${entry.cardColor}; min-height: 100px">
                                     <h6 class="fw-bold mb-2" >${entry.state}</h6>
                                     <p class="m-0">${entry.startTime}-${entry.endTime}</p><small style="color: #1b1b1e;">${entry.description}</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;"><i class="fas fa-times-circle"></i></span>
                                 </div>
@@ -430,14 +426,12 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form id="form" action="${pageContext.request.contextPath}/dashboard" method="post"><input type="hidden" name="entriesList" value="${entries}" />
+                    <form id="form" action="${pageContext.request.contextPath}/dashboard" method="post">
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3"><label class="form-label" for="status"><strong>Status</strong></label><select id="status" class="form-select" name="input_status" required>
                                     <option value="Anwesend" selected>Anwesend</option>
                                     <option value="Krank">Krank</option>
-                                    <option value="Urlaub">Urlaub</option>
-                                    <option value="Dienstreise">Dienstreise</option>
                                     <option value="Abwesend">Abwesend</option>
                                     <option value="Pause">Pause</option>
                                 </select></div>
@@ -462,7 +456,6 @@
         </div>
     </div>
 </div>
-
 <script src="../resources/js/dashboard.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/sidebar.js"></script>

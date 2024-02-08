@@ -30,6 +30,7 @@ public class ServletUtil {
                 entry.setStartTime("08:00");
                 entry.setEndTime("12:00");
                 entry.setDescription(description);
+                entry.setEntryDuration(240);
                 entriesList.add(entry);
                 entriesList.add(createDefaultPauseEntry(day, description));
                 entry = new Entries();
@@ -38,6 +39,7 @@ public class ServletUtil {
                 entry.setStartTime("13:00");
                 entry.setEndTime("17:00");
                 entry.setDescription(description);
+                entry.setEntryDuration(240);
                 entriesList.add(entry);
                 break;
             case "Krank", "Abwesend", "Urlaub":
@@ -49,6 +51,7 @@ public class ServletUtil {
                 entry.setStartTime("08:00");
                 entry.setEndTime("18:00");
                 entry.setDescription(description);
+                entry.setEntryDuration(600);
                 entriesList.add(entry);
                 break;
         }
@@ -110,6 +113,7 @@ public class ServletUtil {
         entry.setDay(day);
         entry.setStartTime("12:00");
         entry.setEndTime("13:00");
+        entry.setEntryDuration(60);
         entry.setDescription(description);
         return entry;
     }
@@ -120,6 +124,7 @@ public class ServletUtil {
         entry.setDay(day);
         entry.setStartTime("08:00");
         entry.setEndTime("16:00");
+        entry.setEntryDuration(480);
         entry.setDescription(description);
         return entry;
     }
@@ -136,9 +141,6 @@ public class ServletUtil {
         for (Entries entry : entriesList) {
             String startTime = entry.getStartTime();
             String endTime = entry.getEndTime();
-            int totalStartTime = Integer.parseInt(startTime.substring(0, 2)) * 60 + Integer.parseInt(startTime.substring(3));
-            int totalEndTime = Integer.parseInt(endTime.substring(0, 2)) * 60 + Integer.parseInt(endTime.substring(3));
-            entry.setEntryDuration(totalEndTime - totalStartTime);
 
 
             switch (entry.getState()) {
@@ -166,7 +168,12 @@ public class ServletUtil {
 
         for (Entries entry : entriesList) {
             float percentage = (float) entry.getEntryDuration() / totalDuration;
-            entry.setEntryWidth((int) (percentage * 100));
+            int width = (int) (percentage * 100);
+            //Mindestbreite für die Anzeige
+            if (width < 13) {
+                width = 13;
+            }
+            entry.setEntryWidth(width);
         }
 
         session.setAttribute("totalDuration", totalDuration);
@@ -174,44 +181,5 @@ public class ServletUtil {
         return entriesList;
     }
 
-    public static void createEntryAndUpdateDay(List<Entries> entriesList,String state, String startTime, String endTime, String description, LocalDate date, HttpServletRequest request) {
-        int totalAnwesend = 0;
-        int totalKrank = 0;
-        int totalAbwesend = 0;
-        int totalUrlaub = 0;
-        int totalDienstreise = 0;
-
-        for (Entries entry : entriesList) {
-            switch (entry.getState()) {
-                case "Anwesend":
-                    totalAnwesend += entry.getEntryDuration();
-                    break;
-                case "Krank":
-                    totalKrank += entry.getEntryDuration();
-                    break;
-                case "Abwesend":
-                    totalAbwesend += entry.getEntryDuration();
-                    break;
-                case "Urlaub":
-                    totalUrlaub += entry.getEntryDuration();
-                    break;
-                case "Dienstreise":
-                    totalDienstreise += entry.getEntryDuration();
-                    break;
-            }
-        }
-        List<Integer> totalTimes = new ArrayList<>();
-        totalTimes.add(totalAnwesend);
-        totalTimes.add(totalKrank);
-        totalTimes.add(totalAbwesend);
-        totalTimes.add(totalUrlaub);
-        totalTimes.add(totalDienstreise);
-
-        int highestTimeIndex = totalTimes.indexOf(totalTimes.stream().max(Integer::compare).get());
-
-
-
-        EntriesDAO.createEntry(state, startTime, endTime, description, date, (HttpServletRequest) request.getSession().getAttribute("SessionMitarbeiter"));
-    }
 
 }

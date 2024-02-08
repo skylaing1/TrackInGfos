@@ -1,0 +1,14 @@
+@import url(/resources/bootstrap/css/bootstrap.min.css);
+
+.card-calendar {
+    max-width: 1240px;
+}
+.calendar .months-container .month-container {
+    margin-bottom: 25px;
+}
+
+.calendar table.month th.month-title {
+    background-color: var(--bs-secondary);
+    padding: 12px;
+    font-weight: 400;
+}

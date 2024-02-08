@@ -340,7 +340,9 @@
     --bs-btn-disabled-border-color: #ffffff;
 }
 
-.card-calendar {
-    max-width: 1200px;
+@media (max-width: 800px) {
+    .activity-box {
+        display: block;
+        width: 100%;
+    }
 }
-

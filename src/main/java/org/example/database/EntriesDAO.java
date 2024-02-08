@@ -66,35 +66,14 @@ public class EntriesDAO {
         return entries;
     }
 
-    public static void createEntry(String state, String startTime, String endTime, String description, LocalDate date, HttpServletRequest request) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+    public static int calculateDuration(String startTime, String endTime) {
+        int startHour = Integer.parseInt(startTime.substring(0, 2));
+        int startMinute = Integer.parseInt(startTime.substring(3, 5));
+        int endHour = Integer.parseInt(endTime.substring(0, 2));
+        int endMinute = Integer.parseInt(endTime.substring(3, 5));
 
-        HttpSession session1 = request.getSession(false);
-        Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
+        int duration;
 
-        Days day = DaysDAO.fetchDayByDateAndMitarbeiter(date, mitarbeiter.getPersonalNummer());
-
-        if (day == null) {
-            day = new Days();
-            day.setDate(java.sql.Date.valueOf(date));
-            day.setMitarbeiter(mitarbeiter);
-            day.setStatus(state);
-            session.save(day);
-        }
-
-
-        Entries entry = new Entries();
-        entry.setStatus(state);
-        entry.setDay(day);
-        entry.setStartTime(startTime);
-        entry.setEndTime(endTime);
-        entry.setDescription(description);
-
-        session.save(entry);
-
-        session.getTransaction().commit();
-        session.close();
+        return duration = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
     }
 }

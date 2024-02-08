@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.ServletUtil;
 import org.example.database.EntriesDAO;
+import org.example.database.UtilDAO;
 import org.example.entities.Entries;
 
 import java.io.IOException;
@@ -23,8 +24,6 @@ public class dashboardServlet extends HttpServlet {
 
         request.setAttribute("entries", entriesList);
 
-
-
         request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
     }
 
@@ -36,11 +35,10 @@ public class dashboardServlet extends HttpServlet {
       String startTime = request.getParameter("input_zeit_von");
       String endTime = request.getParameter("input_zeit_bis");
       String description = request.getParameter("input_notizen");
-      List<Entries> entriesList = (List<Entries>) request.getAttribute("entriesList");
-
 
       LocalDate date = LocalDate.now();
-      ServletUtil.createEntryAndUpdateDay (entriesList,state, startTime, endTime, description, date, request);
+
+      UtilDAO.createEntryAndUpdateDay(state, startTime, endTime, description, date, request);
 
 
       response.sendRedirect("dashboard");

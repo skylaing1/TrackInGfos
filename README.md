@@ -125,3 +125,6 @@ DROP COLUMN endDate;
 
 ALTER TABLE Days
 ADD COLUMN description VARCHAR(255);
+
+ALTER TABLE `Entries`
+ADD COLUMN `entryDuration` INT;

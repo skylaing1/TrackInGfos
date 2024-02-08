@@ -29,11 +29,12 @@ public class Entries {
     @Column(name = "state")
     private String state;
 
+    @Column(name = "entryDuration")
+    private int entryDuration;
+
     @Transient
     private String cardColor;
 
-    @Transient
-    private int entryDuration;
 
     @Transient
     private int entryWidth;
