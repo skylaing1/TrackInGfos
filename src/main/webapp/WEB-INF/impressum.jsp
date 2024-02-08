@@ -5,7 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Blank Page - TrackIn</title>
+    <title>Impressum - TrackIn</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../resources/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../resources/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="../resources/img/favicon_io/site.webmanifest">
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
@@ -156,14 +160,14 @@
                 <h5 style="font-weight: bold;">Haftungshinweis:</h5>
                 <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
                 <h5 style="font-weight: bold;">Datenschutz:</h5>
-                <p>Informationen zum Datenschutz findest du in unserer <a href="datenschutz.jsp">Datenschutzrichtlinie</a>.</p>
+                <p>Informationen zum Datenschutz findest du in unserer <a href="/datenschutz">Datenschutzrichtlinie</a>.</p>
             </div>
         </div>
         <footer class="text-center" style="background: #3b3b3b;">
             <div class="container py-4 py-lg-5">
                 <ul class="list-inline">
-                    <li class="list-inline-item me-4"><a class="link-light" href="impressum.jsp" target="_blank">Impressum</a></li>
-                    <li class="list-inline-item me-4"><a class="link-light" href="datenschutz.jsp" target="_blank">Datenschutz</a></li>
+                    <li class="list-inline-item me-4"><a class="link-light" href="/impressum" target="_blank">Impressum</a></li>
+                    <li class="list-inline-item me-4"><a class="link-light" href="/datenschutz" target="_blank">Datenschutz</a></li>
                 </ul>
                 <ul class="list-inline">
                     <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook text-light">

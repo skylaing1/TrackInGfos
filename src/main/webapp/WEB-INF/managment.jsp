@@ -8,7 +8,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - TrackIn</title>
+    <title>Mitarbeiter - TrackIn</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../resources/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../resources/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="../resources/img/favicon_io/site.webmanifest">
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -83,7 +87,7 @@
                         <span class="text nav-text">Ausloggen</span>
                     </a>
                 </li>
-                <li>
+                <li class="mode">
                     <div class="sun-moon">
                         <i class='bx bx-moon icon moon'></i>
                         <i class='bx bx-sun icon sun'></i>
@@ -284,9 +288,9 @@
             <footer class="text-center" style="background: #3b3b3b;">
                 <div class="container py-4 py-lg-5">
                     <ul class="list-inline">
-                        <li class="list-inline-item me-4"><a class="link-light" href="impressum.jsp" target="_blank">Impressum</a>
+                        <li class="list-inline-item me-4"><a class="link-light" href="/impressum" target="_blank">Impressum</a>
                         </li>
-                        <li class="list-inline-item me-4"><a class="link-light" href="datenschutz.jsp" target="_blank">Datenschutz</a>
+                        <li class="list-inline-item me-4"><a class="link-light" href="/datenschutz" target="_blank">Datenschutz</a>
                         </li>
                     </ul>
                     <ul class="list-inline">
