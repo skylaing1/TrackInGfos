@@ -50,6 +50,10 @@ public class Mitarbeiter {
     @Transient
     private String wochenstundenFormatted;
 
+    @Transient
+    private String picturePath;
+    //TODO: PricturePath soll über Session übergeben und gesetzt werden
+
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;
 

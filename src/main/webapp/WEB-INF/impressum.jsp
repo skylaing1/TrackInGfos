@@ -72,7 +72,7 @@
                         <span class="text nav-text">Ausloggen</span>
                     </a>
                 </li>
-                <li>
+                <li class="mode">
                     <div class="sun-moon">
                         <i class='bx bx-moon icon moon'></i>
                         <i class='bx bx-sun icon sun'></i>
@@ -160,14 +160,14 @@
                 <h5 style="font-weight: bold;">Haftungshinweis:</h5>
                 <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
                 <h5 style="font-weight: bold;">Datenschutz:</h5>
-                <p>Informationen zum Datenschutz findest du in unserer <a href="/datenschutz">Datenschutzrichtlinie</a>.</p>
+                <p>Informationen zum Datenschutz findest du in unserer <a href="${pageContext.request.contextPath}/datenschutz">Datenschutzrichtlinie</a>.</p>
             </div>
         </div>
         <footer class="text-center" style="background: #3b3b3b;">
             <div class="container py-4 py-lg-5">
                 <ul class="list-inline">
-                    <li class="list-inline-item me-4"><a class="link-light" href="/impressum" target="_blank">Impressum</a></li>
-                    <li class="list-inline-item me-4"><a class="link-light" href="/datenschutz" target="_blank">Datenschutz</a></li>
+                    <li class="list-inline-item me-4"><a class="link-light" href="${pageContext.request.contextPath}/impressum" target="_blank">Impressum</a></li>
+                    <li class="list-inline-item me-4"><a class="link-light" href="${pageContext.request.contextPath}/datenschutz" target="_blank">Datenschutz</a></li>
                 </ul>
                 <ul class="list-inline">
                     <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook text-light">
@@ -185,8 +185,8 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="js/bootstrap.js"></script>
-<script src="js/sidebar.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/js/sidebar.js"></script>
 </body>
 
 </html>

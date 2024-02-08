@@ -230,7 +230,7 @@
 }
 
 [data-bs-theme=dark] {
-    --bs-primary: #BB86FC;
+    --bs-primary: #7d1cf1;
     --bs-primary-rgb: 187,134,252;
     --bs-primary-text-emphasis: #D6B6FD;
     --bs-primary-bg-subtle: #251B32;
@@ -343,3 +343,4 @@
 .card-calendar {
     max-width: 1200px;
 }
+
