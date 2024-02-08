@@ -21,7 +21,7 @@
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="../resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
+               <img src="../resources/img/sidebar_logo.png" alt="">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -29,44 +29,32 @@
                 </span>
                 </div>
             </div>
-            <i class='bx bx-chevron-right toggle togglenew'></i>
+            <i class='bx bx-chevron-right toggle'></i>
         </header>
         <div class="menu-bar">
             <div class="menu">
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="dashboard.jsp">
+                        <a href="${pageContext.request.contextPath}/dashboard">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="timemanag.jsp">
-                            <i class='bx bx-time icon'></i>
-                            <span class="text nav-text">Zeiterfassung</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="calendar.jsp">
+                        <a href="${pageContext.request.contextPath}/calendar">
                             <i class='bx bx-calendar icon' ></i>
                             <span class="text nav-text">Kalender</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="kontakt.jsp">
-                            <i class='bx bx-pie-chart-alt icon' ></i>
-                            <span class="text nav-text">Analytics</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="profile.jsp">
+                        <a href="${pageContext.request.contextPath}/profile">
                             <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="managment.jsp">
+                        <a href="${pageContext.request.contextPath}/managment">
                             <i class='bx bx-group icon' ></i>
                             <span class="text nav-text">Mitarbeiter</span>
                         </a>
@@ -74,30 +62,29 @@
                 </ul>
             </div>
             <div class="bottom-content">
-                <li class="">
-                    <a href="404.jsp">
+                <li>
+                    <a href="${pageContext.request.contextPath}/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>
                 </li>
-                <li class="mode">
+                <li>
                     <div class="sun-moon">
                         <i class='bx bx-moon icon moon'></i>
                         <i class='bx bx-sun icon sun'></i>
                     </div>
                     <span class="mode-text text">Dark mode</span>
-                    <div class="toggle-switch">
+                    <div class="toggle-switch" id="darkModeSwitch">
                         <span class="switch"></span>
                     </div>
                 </li>
-
             </div>
         </div>
     </nav>
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content" style="background: var(--bs-lvl1);">
             <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light" style="backdrop-filter: opacity(1);opacity: 0.86;background: var(--bs-lvl2);">
-                <div class="container-fluid"><button class="btn d-md-none rounded-circle me-3 togglenew" id="sidebarToggleTop" type="button" onclick="mobileToggle"><i class="fas fa-bars"></i></button>
+                <div class="container-fluid"><button class="btn d-md-none rounded-circle me-3 " id="sidebarToggleTop" type="button" onclick="mobileToggle"><i class="fas fa-bars"></i></button>
                     <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group" style="border-width: 1px;"><input class="form-control border-0 small" type="text" placeholder="Suche  ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                     </form>
