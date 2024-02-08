@@ -36,8 +36,9 @@ public class dashboardServlet extends HttpServlet {
       String startTime = request.getParameter("input_zeit_von");
       String endTime = request.getParameter("input_zeit_bis");
       String description = request.getParameter("input_notizen");
-      String entriesListStr = request.getParameter("entriesList");
-      List<Entries> entriesList = ServletUtil.getEntriesListFromString(entriesListStr);
+      List<Entries> entriesList = (List<Entries>) request.getAttribute("entriesList");
+
+
       LocalDate date = LocalDate.now();
       ServletUtil.createEntryAndUpdateDay (entriesList,state, startTime, endTime, description, date, request);
 

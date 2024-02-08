@@ -10,10 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../resources/css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="../resources/css/calendar.css">
-    <link rel="stylesheet" href="../resources/css/farben.compiled.css">
-    <link rel="stylesheet" href="../resources/css/Footer-Dark-Multi-Column-icons.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>

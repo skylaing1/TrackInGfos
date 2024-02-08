@@ -16,9 +16,7 @@
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="../resources/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="../resources/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="../resources/css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="../resources/css/farben.compiled.css">
-    <link rel="stylesheet" href="../resources/css/Footer-Dark-Multi-Column-icons.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
@@ -52,16 +50,10 @@
             <div class="menu">
 
                 <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="${pageContext.request.contextPath}/dashboard">
+                    <li class="nav-link ">
+                        <a class="selected" href="${pageContext.request.contextPath}/dashboard">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="timemanag.jsp">
-                            <i class='bx bx-time icon'></i>
-                            <span class="text nav-text">Zeiterfassung</span>
                         </a>
                     </li>
                     <li class="nav-link">
@@ -71,19 +63,13 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="">
-                            <i class='bx bx-pie-chart-alt icon' ></i>
-                            <span class="text nav-text">Analytics</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="profile.jsp">
+                        <a href="${pageContext.request.contextPath}/profile">
                             <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="/managment">
+                        <a href="${pageContext.request.contextPath}/managment">
                             <i class='bx bx-group icon' ></i>
                             <span class="text nav-text">Mitarbeiter</span>
                         </a>
@@ -440,7 +426,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form id="form" action="${pageContext.request.contextPath}/dashboard" method="post"><input type="hidden" name="entrieList" value="${entries}" />
+                    <form id="form" action="${pageContext.request.contextPath}/dashboard" method="post"><input type="hidden" name="entriesList" value="${entries}" />
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3"><label class="form-label" for="status"><strong>Status</strong></label><select id="status" class="form-select" name="input_status" required>
@@ -449,6 +435,7 @@
                                     <option value="Urlaub">Urlaub</option>
                                     <option value="Dienstreise">Dienstreise</option>
                                     <option value="Abwesend">Abwesend</option>
+                                    <option value="Pause">Pause</option>
                                 </select></div>
                             </div>
                         </div>

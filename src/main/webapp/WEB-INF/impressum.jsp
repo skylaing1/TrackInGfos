@@ -6,14 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Blank Page - TrackIn</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
-    <link rel="stylesheet" href="fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="css/farben.compiled.css">
-    <link rel="stylesheet" href="css/Footer-Dark-Multi-Column-icons.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
+    <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -23,7 +21,7 @@
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
+               <img src="../resources/img/kisspng-logo-blue-blue-triangle-irregular-graphics-5a8b9aec00b6d2.5269856415190986040029.png" alt="">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
