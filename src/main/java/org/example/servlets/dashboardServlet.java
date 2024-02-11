@@ -14,15 +14,18 @@ import org.example.entities.Entries;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-
+import org.example.Alert;
 @WebServlet(name = "dashboardServlet", value = "/dashboard")
 public class dashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+
+        Alert alert = (Alert) session.getAttribute("alert");
         List<Entries> entriesList = ServletUtil.getCurrentEntriesForDashboard(request);
 
-
-
+        request.setAttribute("alert", alert);
         request.setAttribute("entries", entriesList);
+        session.removeAttribute("alert");
 
         request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
     }
@@ -31,6 +34,8 @@ public class dashboardServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+      HttpSession session = request.getSession(false);
+
       String state = request.getParameter("input_status");
       String startTime = request.getParameter("input_zeit_von");
       String endTime = request.getParameter("input_zeit_bis");
@@ -38,8 +43,10 @@ public class dashboardServlet extends HttpServlet {
 
       LocalDate date = LocalDate.now();
 
-      UtilDAO.createEntryAndUpdateDay(state, startTime, endTime, description, date, request);
 
+      Alert alert = UtilDAO.createEntryAndUpdateDay(state, startTime, endTime, description, date, request);
+
+      session.setAttribute("alert", alert);
 
       response.sendRedirect("dashboard");
     }

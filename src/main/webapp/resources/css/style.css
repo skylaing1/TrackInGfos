@@ -340,9 +340,11 @@
     --bs-btn-disabled-border-color: #ffffff;
 }
 
-@media (max-width: 800px) {
-    .activity-box {
-        display: block;
-        width: 100%;
+.alertnew {
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    .fa {
+        margin-right:.5em;
     }
 }

@@ -6,12 +6,12 @@ const statusInput = document.querySelector('#event-modal select[name="input_stat
 const descriptionInput = document.querySelector('#event-modal textarea[name="input_notizen"]');
 
 
-// Event Listener damit das Datum nicht kleiner als das Startdatum sein kann
+// Event Listener damit das Zeit nicht kleiner als das Startdatum sein kann
 startDateInput.addEventListener('change', function() {
     endDateInput.min = startDateInput.value;
 });
 
-// Event Listener damit das Datum nicht größer als das Enddatum sein kann
+// Event Listener damit das ZEit nicht größer als das Enddatum sein kann
 endDateInput.addEventListener('change', function() {
     startDateInput.max = endDateInput.value;
 });

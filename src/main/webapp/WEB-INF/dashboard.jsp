@@ -2,6 +2,7 @@
 <%@ page import="jakarta.servlet.http.Cookie" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.entities.Entries" %>
+<%@ page import="org.example.Alert" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -25,12 +26,20 @@
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
         List<Entries> entries = (List<Entries>) request.getAttribute("entries");
+        Alert alert = (Alert) request.getAttribute("alert");
     %>
 
 </head>
 
 <body id="page-top" data-bs-theme="<%=darkMode.equals("true") ? "dark" : "light"%>">
 
+<c:if test="${alert != null}">
+    <div class="alert alertnew alert-${alert.alertType} alert-dismissible fade show" role="alert" style="position: fixed;">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <h4><i class="fa fa-${alert.alertIcon}"></i>${alert.alertTitle}</h4>
+        <p class="mb-0">${alert.alertMessage}</p>
+    </div>
+</c:if>
 <div id="wrapper">
     <nav class="sidebarnew close">
         <header>
@@ -166,7 +175,7 @@
                                 <c:forEach items="${entries}" var="entry">
                                 <div class="activity-box mx-2 my-2" style="min-width: 230px; width: ${entry.entryWidth}%;background: ${entry.cardColor}; min-height: 100px">
                                     <h6 class="fw-bold mb-2" >${entry.state}</h6>
-                                    <p class="m-0">${entry.startTime}-${entry.endTime}</p><small style="color: #1b1b1e;">${entry.description}</small><span class="position-absolute top-0 end-0 p-2" style="cursor: pointer;" id="delete-icon" data-id="${entry.entryId}"><i class="fas fa-times-circle"></i></span>
+                                    <p class="m-0">${entry.startTime}-${entry.endTime}</p><small style="color: #1b1b1e;">${entry.description}</small><span class="position-absolute top-0 end-0 p-2 delete-icon" style="cursor: pointer;" data-id="${entry.entryId}"><i class="fas fa-times-circle"></i></span>
                                 </div>
                                 </c:forEach>
                             </div>
@@ -456,9 +465,12 @@
         </div>
     </div>
 </div>
-<script src="../resources/js/dashboard.js"></script>
+
+
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/sidebar.js"></script>
+<script src="../resources/js/alerts.js"></script>
+<script src="../resources/js/dashboard.js"></script>
 </body>
 
 </html>
