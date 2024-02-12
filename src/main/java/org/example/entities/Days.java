@@ -23,6 +23,9 @@ public class Days {
     @Column(name = "date")
     private Date date;
 
+    @Column(name = "presentDuration")
+    private int presentDuaration;
+
     @Expose
     @Transient
     private String color;
@@ -30,6 +33,9 @@ public class Days {
     @Expose
     @Column(name = "description")
     private String description;
+
+    @Column(name = "sickDuration")
+    private int sickDuration;
 
 
     @ManyToOne
@@ -63,6 +69,23 @@ public class Days {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public int getPresentDuration() {
+        return presentDuaration;
+    }
+
+    public void setPresentDuration(int i) {
+        this.presentDuaration = i;
+    }
+
+    public void setSickDuration(int i) {
+        this.sickDuration = i;
+    }
+
+    public int getSickDuration() {
+        return sickDuration;
+    }
+
 
     // getters and setters
 }

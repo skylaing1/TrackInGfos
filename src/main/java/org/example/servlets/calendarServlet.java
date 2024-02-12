@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.Alert;
 import org.example.LocalDateSerializer;
 import org.example.ServletUtil;
 import org.example.database.DaysDAO;
@@ -25,8 +26,16 @@ import org.example.database.EntriesDAO;
 public class calendarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session1 = request.getSession(false);
-        Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
+        HttpSession session = request.getSession(false);
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+
+        Alert alert = (Alert) session.getAttribute("alert");
+
+        request.setAttribute("alert", alert);
+        session.removeAttribute("alert");
+
+
+
         int personalNummer = mitarbeiter.getPersonalNummer();
 
 
@@ -67,17 +76,11 @@ public class calendarServlet extends HttpServlet {
         // Wenn Update eines Tages
         if (daysIdStr != null &&  !daysIdStr.isEmpty()) {
             int daysId = Integer.parseInt(daysIdStr);
-            Days day = DaysDAO.updateDayAndReturn(daysId, status, startDateStr, mitarbeiter);
-            entriesList.addAll(ServletUtil.createEntriesForDay(day, status, entrieDescription, entriesList));
-            EntriesDAO.replaceEntriesForDay(day, entriesList);
+            Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr,entrieDescription, mitarbeiter);
+            session1.setAttribute("alert", alert);
             response.sendRedirect("/calendar");
             return;
         }
-
-        System.out.println("id: " + daysIdStr);
-        System.out.println("status: " + status);
-        System.out.println("startDate: " + startDateStr);
-        System.out.println("endDate: " + endDateStr);
 
         // Konvertieren der Strings in LocalDate
         LocalDate startDate = LocalDate.parse(startDateStr);

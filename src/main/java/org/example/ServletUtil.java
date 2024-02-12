@@ -139,9 +139,6 @@ public class ServletUtil {
         List<Entries> entriesList = EntriesDAO.getTodayEntriesForMitarbeiter(mitarbeiter, date);
 
         for (Entries entry : entriesList) {
-            String startTime = entry.getStartTime();
-            String endTime = entry.getEndTime();
-
 
             switch (entry.getState()) {
                 case "Anwesend":

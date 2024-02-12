@@ -43,7 +43,18 @@ public class UtilDAO {
             entry.setStartTime(startTime);
             entry.setEndTime(endTime);
             entry.setDescription(description);
-            entry.setEntryDuration(EntriesDAO.calculateDuration(startTime, endTime));
+            int duration = EntriesDAO.calculateDuration(startTime, endTime);
+            entry.setEntryDuration(duration);
+
+            if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
+                int currentDuration = day.getPresentDuration();
+                day.setPresentDuration(currentDuration + duration);
+            }
+            if (entry.getState().equals("Krank")) {
+                int currentDuration = day.getSickDuration();
+                day.setSickDuration(currentDuration + duration);
+            }
+
 
             session.save(entry);
 
@@ -59,17 +70,17 @@ public class UtilDAO {
 
             if (!day.getStatus().equals(result)) {
                 day.setStatus(result);
-                session.update(day);
             }
+            session.update(day);
 
             session.getTransaction().commit();
 
-            return new Alert("success", "Erfolgreich", "Eintrag erfolgreich erstellt", "check-circle");
+            return Alert.successAlert("Erfolgreich", "Eintrag erfolgreich gespeichert");
         } catch (Exception e) {
             // Rollback in case of an error occurred.
             session.getTransaction().rollback();
             e.printStackTrace();
-            return new Alert("danger", "Fehler", "Ein Fehler ist aufgetreten", "exclamation-triangle");
+            return Alert.dangerAlert("Datenbankfehler", "Es ist ein Fehler beim Speichern der Daten aufgetreten");
         } finally {
             session.close();
         }

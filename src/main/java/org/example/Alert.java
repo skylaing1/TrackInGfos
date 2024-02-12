@@ -14,6 +14,14 @@ public class Alert {
         this.alertIcon = alertIcon;
     }
 
+    public static Alert dangerAlert(String alertTitle, String alertMessage) {
+        return new Alert("danger", alertTitle, alertMessage, "exclamation-triangle");
+    }
+
+    public static Alert successAlert(String alertTitle, String alertMessage) {
+        return new Alert("success", alertTitle, alertMessage, "check-circle");
+    }
+
     public String getAlertType() {
         return alertType;
     }

@@ -107,5 +107,9 @@ public class Entries {
         return entryWidth;
     }
 
+    public Days getDay() {
+        return day;
+    }
+
     // getters and setters
 }

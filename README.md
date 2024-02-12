@@ -128,3 +128,9 @@ ADD COLUMN description VARCHAR(255);
 
 ALTER TABLE `Entries`
 ADD COLUMN `entryDuration` INT;
+
+ALTER TABLE Days
+ADD COLUMN presentDuration INT;
+
+ALTER TABLE Days
+ADD COLUMN sickDuration INT;

@@ -20,12 +20,14 @@ public class dashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
 
-        Alert alert = (Alert) session.getAttribute("alert");
         List<Entries> entriesList = ServletUtil.getCurrentEntriesForDashboard(request);
 
+        Alert alert = (Alert) session.getAttribute("alert");
+
         request.setAttribute("alert", alert);
-        request.setAttribute("entries", entriesList);
         session.removeAttribute("alert");
+
+        request.setAttribute("entries", entriesList);
 
         request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
     }

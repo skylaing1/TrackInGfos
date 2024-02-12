@@ -13,26 +13,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class EntriesDAO {
-    public static void replaceEntriesForDay(Days day, List<Entries> entriesList) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        List<Entries> entries = session.createQuery("from Entries where day.daysId = :dayId", Entries.class)
-                .setParameter("dayId", day.getDayId())
-                .list();
-
-        for (Entries entry : entries) {
-            session.delete(entry);
-        }
-
-        for (Entries entry : entriesList) {
-            session.save(entry);
-        }
-
-        session.getTransaction().commit();
-        session.close();
-    }
 
     public static void createEntriesFromList(List<Entries> entriesList) {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -83,6 +63,18 @@ public class EntriesDAO {
         session.beginTransaction();
 
         Entries entry = session.get(Entries.class, id);
+        if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
+            Days day = entry.getDay();
+            int currentDuration = day.getPresentDuration();
+            day.setPresentDuration(currentDuration - entry.getEntryDuration());
+            session.update(day);
+        }
+        if (entry.getState().equals("Krank")) {
+            Days day = entry.getDay();
+            int currentDuration = day.getSickDuration();
+            day.setSickDuration(currentDuration - entry.getEntryDuration());
+            session.update(day);
+        }
         session.delete(entry);
 
         session.getTransaction().commit();
