@@ -66,7 +66,7 @@ function saveEvent() {
 new Calendar('#calendar', {
     language: 'de',
     style: 'background',
-    maxDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000),
+    maxDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000 * 10),
     allowOverlap: false,
     disabledWeekDays: [0],
     enableContextMenu: true,
@@ -80,7 +80,8 @@ new Calendar('#calendar', {
             status: days.status,
             color: days.color,
             description: days.description,
-
+            sickHours: days.sickHours,
+            presentHours: days.presentHours,
         };
     }),
     contextMenuItems:[
@@ -103,6 +104,39 @@ new Calendar('#calendar', {
         console.log(startDate);
 
         editEvent({ startDate: startDate, endDate: endDate });
+    },
+    mouseOnDay: function(e) {
+        if(e.events.length > 0) {
+            var content = '';
+            for(var i in e.events) {
+                content += '<div class="event-tooltip-content">'
+                    + '<div class="event-status" style="color:' + e.events[i].color + '">' + e.events[i].status + '</div>'
+                    + '<div class="event-presentHours" style="color: green"> Anwesend: ' + e.events[i].presentHours + 'h </div>'
+                    + '<div class="event-sickHours" style="color: yellow"> Krank: ' + e.events[i].sickHours + 'h </div>'
+                    + '<div class="event-description">' + e.events[i].description
+                    + '</div>';
+            }
+
+            var popover = new bootstrap.Popover(e.element, {
+                content: content,
+                html: true,
+                trigger: 'manual',
+                placement: 'right'
+            });
+
+            popover.show();
+            e.element.popoverInstance = popover;
+        }
+    },
+    mouseOutDay: function(e) {
+        if(e.events.length > 0 && e.element && e.element.popoverInstance) {
+            e.element.popoverInstance.dispose();
+        }
+    },
+    dayContextMenu: function(e) {
+        if(e.element && e.element.popoverInstance) {
+            e.element.popoverInstance.dispose();
+        }
     },
 })
 document.getElementById('form').addEventListener('submit', function (e) {

@@ -37,6 +37,14 @@ public class Days {
     @Column(name = "sickDuration")
     private int sickDuration;
 
+    @Expose
+    @Transient
+    private int sickHours;
+
+    @Expose
+    @Transient
+    private int presentHours;
+
 
     @ManyToOne
     @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
@@ -84,6 +92,26 @@ public class Days {
 
     public int getSickDuration() {
         return sickDuration;
+    }
+
+    public void setSickHours(int i) {
+        this.sickHours = i;
+    }
+
+    public void setPresentHours(int i) {
+        this.presentHours = i;
+    }
+
+    public int getPresentHours() {
+        return presentHours;
+    }
+
+    public int getSickHours() {
+        return sickHours;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
 

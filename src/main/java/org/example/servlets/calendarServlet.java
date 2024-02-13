@@ -76,7 +76,7 @@ public class calendarServlet extends HttpServlet {
         // Wenn Update eines Tages
         if (daysIdStr != null &&  !daysIdStr.isEmpty()) {
             int daysId = Integer.parseInt(daysIdStr);
-            Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr,entrieDescription, mitarbeiter);
+            Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr,entrieDescription, mitarbeiter, description);
             session1.setAttribute("alert", alert);
             response.sendRedirect("/calendar");
             return;

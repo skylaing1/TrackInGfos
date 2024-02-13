@@ -178,5 +178,18 @@ public class ServletUtil {
         return entriesList;
     }
 
+    public static List<Days> getDaysofCurrentMonth(HttpServletRequest request, List<Days> daysList) {
 
+        LocalDate date = LocalDate.now();
+        List<Days> daysListCurrentMonth = new ArrayList<>();
+
+        for (Days day : daysList) {
+            if (day.getDate().toLocalDate().getMonthValue() == date.getMonthValue()) {
+                daysListCurrentMonth.add(day);
+            }
+        }
+
+
+        return daysListCurrentMonth;
+    }
 }

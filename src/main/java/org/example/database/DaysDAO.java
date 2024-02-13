@@ -1,5 +1,7 @@
 package org.example.database;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
 import org.example.ServletUtil;
 import org.example.entities.Days;
@@ -34,7 +36,8 @@ public class DaysDAO {
             } else if (day.getStatus().equals("Dienstreise")) {
                 day.setColor("lightgreen");
             }
-
+            day.setSickHours(day.getSickDuration() / 60);
+            day.setPresentHours(day.getPresentDuration() / 60);
         }
 
         session.close();
@@ -65,7 +68,7 @@ public class DaysDAO {
         session.close();
     }
 
-    public static Alert updateDayAndReplaceEntries(int daysId, String status, String startDateStr, String entrieDesc, Mitarbeiter mitarbeiter) {
+    public static Alert updateDayAndReplaceEntries(int daysId, String status, String startDateStr, String entrieDesc, Mitarbeiter mitarbeiter, String description) {
         try {
             SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
             Session session = sessionFactory.openSession();
@@ -76,6 +79,7 @@ public class DaysDAO {
             day.setStatus(status);
             day.setDate(Date.valueOf(startDateStr));
             day.setMitarbeiter(mitarbeiter);
+            day.setDescription(description);
 
             List<Entries> entriesList = ServletUtil.createEntriesForDay(day, status, entrieDesc, new ArrayList<>());
 
@@ -125,6 +129,34 @@ public class DaysDAO {
         session.close();
 
         return day;
+    }
+
+    public static List<Days> getDaysofCurrentYear(HttpServletRequest request) {
+        try {
+            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+
+            LocalDate date = LocalDate.now();
+            HttpSession session1 = request.getSession(false);
+            Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
+            int personalNummer = mitarbeiter.getPersonalNummer();
+
+            List<Days> days = session.createQuery("from Days where year(date) = :year and mitarbeiter.personalNummer = :nummer", Days.class)
+                    .setParameter("year", date.getYear())
+                    .setParameter("nummer", personalNummer)
+                    .list();
+
+            session.getTransaction().commit();
+            session.close();
+
+            return days;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
     }
 }
 

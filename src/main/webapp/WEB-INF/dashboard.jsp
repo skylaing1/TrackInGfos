@@ -27,6 +27,7 @@
         String currentTheme = (String) request.getAttribute("currentTheme");
         List<Entries> entries = (List<Entries>) request.getAttribute("entries");
         Alert alert = (Alert) request.getAttribute("alert");
+
     %>
 
 </head>
@@ -184,12 +185,34 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-start-info py-2">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Wochenstunden fortschritt</span></div>
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-auto">
+                                                <div class="text-dark fw-bold h5 mb-0 me-3"><span>${geleisteteStundenInProzent}%</span></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm">
+                                                    <div class="progress-bar bg-info"  style="width: ${geleisteteStundenInProzent}%;"><span class="visually-hidden">50%</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-start-primary py-2">
                             <div class="card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col me-2">
                                         <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Urlaubstage (Verbleibend)</span></div>
-                                        <div class="text-dark fw-bold h5 mb-0"><span>28</span></div>
+                                        <div class="text-dark fw-bold h5 mb-0"><span>${VerbleibenderUrlaubAnspruch} von 28</span></div>
                                     </div>
                                     <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                 </div>
@@ -209,28 +232,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-start-info py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col me-2">
-                                        <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Stunden fortschritt</span></div>
-                                        <div class="row g-0 align-items-center">
-                                            <div class="col-auto">
-                                                <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="progress progress-sm">
-                                                    <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-start-warning py-2">
                             <div class="card-body">

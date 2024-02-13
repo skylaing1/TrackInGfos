@@ -12,3 +12,20 @@
     padding: 12px;
     font-weight: 400;
 }
+
+.event-tooltip-content {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.event-status {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.event-presentHours, .event-sickHours, .event-description {
+    font-size: 0.9em;
+    margin-bottom: 2px;
+}
