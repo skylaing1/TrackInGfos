@@ -232,7 +232,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-start-warning py-2">
                             <div class="card-body">
@@ -251,7 +250,7 @@
                     <div class="col-lg-7 col-xl-8">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
-                                <h6 class="text-primary fw-bold m-0">Balken Diagramm</h6>
+                                <h6 class="text-primary fw-bold m-0">Earnings Overview</h6>
                                 <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
                                         <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
@@ -259,13 +258,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body"></div>
+                            <div class="card-body" style="overflow: visible;background: var(--bs-body-bg);">
+                                <div class="chart-area" style="position: relative;height: 365px;"><canvas data-bss-chart="{&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Montag&quot;,&quot;Dienstag&quot;,&quot;Mittwoch&quot;,&quot;Donnerstag&quot;,&quot;Freitag&quot;,&quot;Samstag&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Anwesend&quot;,&quot;backgroundColor&quot;:&quot;#1ccb62&quot;,&quot;borderColor&quot;:&quot;#1ccb62&quot;,&quot;data&quot;:[&quot;0&quot;,&quot;10000&quot;,&quot;5000&quot;,&quot;15000&quot;,&quot;10000&quot;,&quot;20000&quot;,&quot;15000&quot;,&quot;25000&quot;],&quot;stack&quot;:&quot;1&quot;},{&quot;label&quot;:&quot;Pause&quot;,&quot;backgroundColor&quot;:&quot;#ffee00&quot;,&quot;borderColor&quot;:&quot;rgb(255,238,0)&quot;,&quot;data&quot;:[&quot;200&quot;,&quot;5000&quot;],&quot;stack&quot;:&quot;1&quot;},{&quot;label&quot;:&quot;Abwesend&quot;,&quot;backgroundColor&quot;:&quot;rgb(255,0,0)&quot;,&quot;borderColor&quot;:&quot;rgb(255,0,0)&quot;,&quot;data&quot;:[&quot;3000&quot;,&quot;5000&quot;],&quot;stack&quot;:&quot;1&quot;},{&quot;label&quot;:&quot;Krank&quot;,&quot;backgroundColor&quot;:&quot;rgb(255,138,0)&quot;,&quot;borderColor&quot;:&quot;rgb(255,138,0)&quot;,&quot;data&quot;:[&quot;7000&quot;],&quot;stack&quot;:&quot;1&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:true,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;bold&quot;},&quot;position&quot;:&quot;top&quot;,&quot;reverse&quot;:false},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;stacked&quot;:true,&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:true,&quot;drawTicks&quot;:true,&quot;borderDash&quot;:[&quot;4&quot;],&quot;zeroLineBorderDash&quot;:[&quot;4&quot;],&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;fontStyle&quot;:&quot;bold&quot;,&quot;beginAtZero&quot;:true,&quot;padding&quot;:7}}],&quot;yAxes&quot;:[{&quot;stacked&quot;:true,&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:true,&quot;drawTicks&quot;:true,&quot;borderDash&quot;:[&quot;4&quot;],&quot;zeroLineBorderDash&quot;:[&quot;4&quot;],&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;fontStyle&quot;:&quot;bold&quot;,&quot;beginAtZero&quot;:true,&quot;padding&quot;:7}}]}}}"></canvas></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-xl-4">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
-                                <h6 class="text-primary fw-bold m-0">Kreis Diagramm</h6>
+                                <h6 class="text-primary fw-bold m-0">Revenue Sources</h6>
                                 <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
                                         <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
@@ -273,7 +274,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body"></div>
+                            <div class="card-body" style="background: var(--bs-card-bg);">
+                                <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot; Anwesend&quot;,&quot; Pause&quot;,&quot; Abwesend&quot;,&quot; Krank&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;#4e73df&quot;,&quot;#1cc88a&quot;,&quot;#36b9cc&quot;,&quot;rgb(255,238,0)&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;50&quot;,&quot;30&quot;,&quot;15&quot;,&quot;94&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}}}"></canvas></div>
+                                <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-success);"></i>&nbsp;Anwesend</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-warning);"></i>&nbsp;Pause</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-danger);"></i>&nbsp;Abwesend</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-warning);"></i>&nbsp;Krank</span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -467,9 +471,9 @@
         </div>
     </div>
 </div>
-
-
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/js/chart.min.js"></script>
+<script src="../resources/js/bs-init.js"></script>
 <script src="../resources/js/sidebar.js"></script>
 <script src="../resources/js/alerts.js"></script>
 <script src="../resources/js/dashboard.js"></script>
