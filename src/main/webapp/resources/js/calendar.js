@@ -16,7 +16,27 @@ endDateInput.addEventListener('change', function() {
     startDateInput.max = endDateInput.value;
 });
 
+// Mapping of German month names to their numerical equivalents
+var monthMapping = {
+    "Jan.": "01",
+    "Feb.": "02",
+    "März": "03",
+    "Apr.": "04",
+    "Mai": "05",
+    "Juni": "06",
+    "Juli": "07",
+    "Aug.": "08",
+    "Sept.": "09",
+    "Okt.": "10",
+    "Nov.": "11",
+    "Dez.": "12"
+};
 
+function formatDateStr(dateStr) {
+    var dateParts = dateStr.split(" ");
+    dateParts[0] = monthMapping[dateParts[0]];
+    return dateParts.join(" ");
+}
 
 function editEvent(days) {
     console.log(days);
@@ -69,14 +89,15 @@ new Calendar('#calendar', {
     maxDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000 * 10),
     allowOverlap: false,
     disabledWeekDays: [0],
+    setNumberMonthsDisplayed: 12,
     enableContextMenu: true,
     displayWeekNumber: true,
     enableRangeSelection: true,
     dataSource: days.map(function (days) {
         return {
             id: days.daysId,
-            startDate: new Date(days.date),
-            endDate: new Date(days.date),
+            startDate: new Date(formatDateStr(days.date)),
+            endDate: new Date(formatDateStr(days.date)),
             status: days.status,
             color: days.color,
             description: days.description,
@@ -143,3 +164,5 @@ document.getElementById('form').addEventListener('submit', function (e) {
     e.preventDefault();
     saveEvent();
 });
+
+console.log(days);
