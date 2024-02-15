@@ -272,29 +272,33 @@
                     "label":"Anwesend",
                     "backgroundColor":"#00CB62",
                     "borderColor":"rgb(255,255,255)",
-                    "data":["0","10000","5000","15000","10000","20000","15000","25000"],
-                    "stack":"1"
+                    "stacked":"true",
+                    "data": ${presentHoursArray}
+
                 },
                 {
                     "label":"Pause",
                     "backgroundColor":"#ffee00",
                     "borderColor":"rgb(255,255,255)",
-                    "data":["200","5000"],
-                    "stack":"1"
+                    "stacked":"true",
+                    "data": ${breakHoursArray}
+
                 },
                 {
                     "label":"Abwesend",
                     "backgroundColor":"#e74a3b",
                     "borderColor":"rgb(255,255,255)",
-                    "data":["3000","5000"],
-                    "stack":"1"
+                    "stacked":"true",
+                    "data": ${absentHoursArray}
+
                 },
                 {
                     "label":"Krank",
                     "backgroundColor":"#f28224",
                     "borderColor":"rgb(255,255,255)",
-                    "data":["7000"],
-                    "stack":"1"
+                    "stacked":"true",
+                    "data": ${sickHoursArray}
+
                 }
             ]
         },
@@ -320,11 +324,13 @@
                             "zeroLineBorderDash":["4"],
                             "drawOnChartArea":true
                         },
+
                         "ticks":{"fontStyle":"bold","beginAtZero":true,"padding":7}
                     }
                 ],
                 "yAxes":[
                     {
+                        "scaleLabel":{"display":true,"labelString":"Stunden"},
                         "stacked":true,
                         "gridLines":{
                             "color":"rgb(234, 236, 244)",
@@ -335,6 +341,7 @@
                             "zeroLineBorderDash":["4"],
                             "drawOnChartArea":true
                         },
+
                         "ticks":{"fontStyle":"bold","beginAtZero":true,"padding":7}
                     }
                 ]

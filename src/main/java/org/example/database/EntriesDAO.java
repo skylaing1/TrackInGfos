@@ -63,17 +63,20 @@ public class EntriesDAO {
         session.beginTransaction();
 
         Entries entry = session.get(Entries.class, id);
+        Days day = entry.getDay();
+
         if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
-            Days day = entry.getDay();
             int currentDuration = day.getPresentDuration();
             day.setPresentDuration(currentDuration - entry.getEntryDuration());
+            day.getEntries().remove(entry);
             session.update(day);
-        }
-        if (entry.getState().equals("Krank")) {
-            Days day = entry.getDay();
+        } else if (entry.getState().equals("Krank")) {
             int currentDuration = day.getSickDuration();
             day.setSickDuration(currentDuration - entry.getEntryDuration());
+            day.getEntries().remove(entry);
             session.update(day);
+        } else {
+            day.getEntries().remove(entry);
         }
         session.delete(entry);
 

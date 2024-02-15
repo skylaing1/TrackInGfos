@@ -192,4 +192,18 @@ public class ServletUtil {
 
         return daysListCurrentMonth;
     }
+
+
+    public static List<DailyStats> getDailyStatsList(List<Days> MondayList, List<Days> TuesdayList, List<Days> WednesdayList, List<Days> ThursdayList, List<Days> FridayList, List<Days> SaturdayList) {
+        List<DailyStats> dailyStatsList = new ArrayList<>();
+
+        dailyStatsList.add(DailyStats.createDailyStats("Monday", MondayList));
+        dailyStatsList.add(DailyStats.createDailyStats("Tuesday", TuesdayList));
+        dailyStatsList.add(DailyStats.createDailyStats("Wednesday", WednesdayList));
+        dailyStatsList.add(DailyStats.createDailyStats("Thursday", ThursdayList));
+        dailyStatsList.add(DailyStats.createDailyStats("Friday", FridayList));
+        dailyStatsList.add(DailyStats.createDailyStats("Saturday", SaturdayList));
+
+        return dailyStatsList;
+    }
 }

@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Days")
@@ -44,6 +45,11 @@ public class Days {
     @Expose
     @Transient
     private int presentHours;
+
+
+
+    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Entries> entries;
 
 
     @ManyToOne
@@ -113,6 +119,11 @@ public class Days {
     public Date getDate() {
         return date;
     }
+
+    public List<Entries> getEntries() {
+        return entries;
+    }
+
 
 
     // getters and setters
