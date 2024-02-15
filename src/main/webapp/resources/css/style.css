@@ -17,7 +17,7 @@
     --bs-secondary-text-emphasis: #20274D;
     --bs-secondary-bg-subtle: #DCDFF2;
     --bs-secondary-border-subtle: #B9C0E6;
-    --bs-success: #1ccb62;
+    --bs-success: #00CB62;
     --bs-success-rgb: 28,203,98;
     --bs-success-text-emphasis: #0B5127;
     --bs-success-bg-subtle: #D2F5E0;
@@ -29,7 +29,6 @@
     --bs-info-border-subtle: #9AF0E8;
     --bs-border-style: none;
 }
-
 
 
 .bs-icon {

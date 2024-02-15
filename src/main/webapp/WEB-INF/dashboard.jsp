@@ -11,6 +11,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - TrackIn</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../resources/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../resources/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
@@ -259,7 +262,87 @@
                                 </div>
                             </div>
                             <div class="card-body" style="overflow: visible;background: var(--bs-body-bg);">
-                                <div class="chart-area" style="position: relative;height: 365px;"><canvas data-bss-chart="{&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Montag&quot;,&quot;Dienstag&quot;,&quot;Mittwoch&quot;,&quot;Donnerstag&quot;,&quot;Freitag&quot;,&quot;Samstag&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Anwesend&quot;,&quot;backgroundColor&quot;:&quot;#1ccb62&quot;,&quot;borderColor&quot;:&quot;#1ccb62&quot;,&quot;data&quot;:[&quot;0&quot;,&quot;10000&quot;,&quot;5000&quot;,&quot;15000&quot;,&quot;10000&quot;,&quot;20000&quot;,&quot;15000&quot;,&quot;25000&quot;],&quot;stack&quot;:&quot;1&quot;},{&quot;label&quot;:&quot;Pause&quot;,&quot;backgroundColor&quot;:&quot;#ffee00&quot;,&quot;borderColor&quot;:&quot;rgb(255,238,0)&quot;,&quot;data&quot;:[&quot;200&quot;,&quot;5000&quot;],&quot;stack&quot;:&quot;1&quot;},{&quot;label&quot;:&quot;Abwesend&quot;,&quot;backgroundColor&quot;:&quot;rgb(255,0,0)&quot;,&quot;borderColor&quot;:&quot;rgb(255,0,0)&quot;,&quot;data&quot;:[&quot;3000&quot;,&quot;5000&quot;],&quot;stack&quot;:&quot;1&quot;},{&quot;label&quot;:&quot;Krank&quot;,&quot;backgroundColor&quot;:&quot;rgb(255,138,0)&quot;,&quot;borderColor&quot;:&quot;rgb(255,138,0)&quot;,&quot;data&quot;:[&quot;7000&quot;],&quot;stack&quot;:&quot;1&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:true,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;bold&quot;},&quot;position&quot;:&quot;top&quot;,&quot;reverse&quot;:false},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;stacked&quot;:true,&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:true,&quot;drawTicks&quot;:true,&quot;borderDash&quot;:[&quot;4&quot;],&quot;zeroLineBorderDash&quot;:[&quot;4&quot;],&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;fontStyle&quot;:&quot;bold&quot;,&quot;beginAtZero&quot;:true,&quot;padding&quot;:7}}],&quot;yAxes&quot;:[{&quot;stacked&quot;:true,&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:true,&quot;drawTicks&quot;:true,&quot;borderDash&quot;:[&quot;4&quot;],&quot;zeroLineBorderDash&quot;:[&quot;4&quot;],&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;fontStyle&quot;:&quot;bold&quot;,&quot;beginAtZero&quot;:true,&quot;padding&quot;:7}}]}}}"></canvas></div>
+                                <div class="chart-area" style="position: relative;height: 365px;">
+                                    <canvas data-bss-chart='{
+        "type":"bar",
+        "data":{
+            "labels":["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],
+            "datasets":[
+                {
+                    "label":"Anwesend",
+                    "backgroundColor":"#00CB62",
+                    "borderColor":"rgb(255,255,255)",
+                    "data":["0","10000","5000","15000","10000","20000","15000","25000"],
+                    "stack":"1"
+                },
+                {
+                    "label":"Pause",
+                    "backgroundColor":"#ffee00",
+                    "borderColor":"rgb(255,255,255)",
+                    "data":["200","5000"],
+                    "stack":"1"
+                },
+                {
+                    "label":"Abwesend",
+                    "backgroundColor":"#e74a3b",
+                    "borderColor":"rgb(255,255,255)",
+                    "data":["3000","5000"],
+                    "stack":"1"
+                },
+                {
+                    "label":"Krank",
+                    "backgroundColor":"#f28224",
+                    "borderColor":"rgb(255,255,255)",
+                    "data":["7000"],
+                    "stack":"1"
+                }
+            ]
+        },
+        "options":{
+            "maintainAspectRatio":false,
+            "legend":{
+                "display":true,
+                "labels":{"fontStyle":"bold"},
+                "position":"top",
+                "reverse":false
+            },
+            "title":{"fontStyle":"normal"},
+            "scales":{
+                "xAxes":[
+                    {
+                        "stacked":true,
+                        "gridLines":{
+                            "color":"rgb(234, 236, 244)",
+                            "zeroLineColor":"rgb(234, 236, 244)",
+                            "drawBorder":true,
+                            "drawTicks":true,
+                            "borderDash":["4"],
+                            "zeroLineBorderDash":["4"],
+                            "drawOnChartArea":true
+                        },
+                        "ticks":{"fontStyle":"bold","beginAtZero":true,"padding":7}
+                    }
+                ],
+                "yAxes":[
+                    {
+                        "stacked":true,
+                        "gridLines":{
+                            "color":"rgb(234, 236, 244)",
+                            "zeroLineColor":"rgb(234, 236, 244)",
+                            "drawBorder":true,
+                            "drawTicks":true,
+                            "borderDash":["4"],
+                            "zeroLineBorderDash":["4"],
+                            "drawOnChartArea":true
+                        },
+                        "ticks":{"fontStyle":"bold","beginAtZero":true,"padding":7}
+                    }
+                ]
+            }
+        }
+    }'>
+                                    </canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -275,8 +358,11 @@
                                 </div>
                             </div>
                             <div class="card-body" style="background: var(--bs-card-bg);">
-                                <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot; Anwesend&quot;,&quot; Pause&quot;,&quot; Abwesend&quot;,&quot; Krank&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;#4e73df&quot;,&quot;#1cc88a&quot;,&quot;#36b9cc&quot;,&quot;rgb(255,238,0)&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;50&quot;,&quot;30&quot;,&quot;15&quot;,&quot;94&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}}}"></canvas></div>
-                                <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-success);"></i>&nbsp;Anwesend</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-warning);"></i>&nbsp;Pause</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-danger);"></i>&nbsp;Abwesend</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-warning);"></i>&nbsp;Krank</span></div>
+                                <div class="chart-area">
+                                    <canvas data-bss-chart='{"type":"doughnut","data":{"labels":[" Anwesend"," Pause"," Abwesend"," Krank"],"datasets":[{"label":"","backgroundColor":["#00CB62","#ffee00","#e74a3b","#f28224"],"borderColor":["#ffffff","#ffffff","#ffffff","#ffffff"],"data":["50","30","15","94"]}]},  "options":{"maintainAspectRatio":false,"legend":{"display":false,"labels":{"fontStyle":"normal"}},"title":{"fontStyle":"normal"}}}'>
+                                    </canvas>
+                                </div>
+                                <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-success);"></i>&nbsp;Anwesend</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-yellow);"></i>&nbsp;Pause</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-danger);"></i>&nbsp;Abwesend</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-orange);"></i>&nbsp;Krank</span></div>
                             </div>
                         </div>
                     </div>
@@ -362,7 +448,7 @@
                                 <div class="card text-white bg-success shadow">
                                     <div class="card-body">
                                         <p class="m-0">Success</p>
-                                        <p class="text-white-50 small m-0">#1cc88a</p>
+                                        <p class="text-white-50 small m-0">#00CB62</p>
                                     </div>
                                 </div>
                             </div>
@@ -378,7 +464,7 @@
                                 <div class="card text-white bg-warning shadow">
                                     <div class="card-body">
                                         <p class="m-0">Warning</p>
-                                        <p class="text-white-50 small m-0">#f6c23e</p>
+                                        <p class="text-white-50 small m-0">#f28224</p>
                                     </div>
                                 </div>
                             </div>

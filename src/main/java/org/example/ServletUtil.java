@@ -145,10 +145,10 @@ public class ServletUtil {
                     entry.setCardColor("var(--bs-success)");
                     break;
                 case "Krank":
-                    entry.setCardColor("");
+                    entry.setCardColor("var(--bs-warning)");
                     break;
                 case "Abwesend":
-                    entry.setCardColor("");
+                    entry.setCardColor("var(--bs-danger)");
                     break;
                 case "Urlaub":
                     entry.setCardColor("");
@@ -157,7 +157,7 @@ public class ServletUtil {
                     entry.setCardColor("");
                     break;
                 case "Pause":
-                    entry.setCardColor("var(--bs-warning)");
+                    entry.setCardColor("var(--bs-yellow)");
                     break;
             }
             totalDuration += entry.getEntryDuration();

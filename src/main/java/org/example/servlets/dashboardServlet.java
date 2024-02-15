@@ -36,8 +36,6 @@ public class dashboardServlet extends HttpServlet {
         List<Days> daysListCurrentMonth = ServletUtil.getDaysofCurrentMonth(request, daysList);
 
         for (Days day : daysList) {
-
-
             if (day.getStatus().equals("Urlaub")) {
                 urlaubAnspruch--;
             }

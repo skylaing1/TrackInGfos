@@ -28,11 +28,11 @@ public class DaysDAO {
             if (day.getStatus().equals("Urlaub")) {
                 day.setColor("blue");
             } else if (day.getStatus().equals("Krank")) {
-                day.setColor("orange");
+                day.setColor("var(--bs-warning)");
             } else if (day.getStatus().equals("Anwesend")) {
-                day.setColor("green");
+                day.setColor("var(--bs-success)");
             } else if (day.getStatus().equals("Abwesend")) {
-                day.setColor("red");
+                day.setColor("var(--bs-danger)");
             } else if (day.getStatus().equals("Dienstreise")) {
                 day.setColor("lightgreen");
             }
