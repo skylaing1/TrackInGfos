@@ -253,7 +253,7 @@
                     <div class="col-lg-7 col-xl-8">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
-                                <h6 class="text-primary fw-bold m-0">Earnings Overview</h6>
+                                <h6 class="text-primary fw-bold m-0">Stundenverteilung nach Wochentagen (Jährlich)A</h6>
                                 <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
                                         <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
@@ -261,7 +261,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body" style="overflow: visible;background: var(--bs-body-bg);">
+                            <div class="card-body" style="background: var(--bs-body-bg);">
                                 <div class="chart-area" style="position: relative;height: 365px;">
                                     <canvas data-bss-chart='{
         "type":"bar",
@@ -303,10 +303,12 @@
             ]
         },
         "options":{
+            "responsive":true,
             "maintainAspectRatio":false,
             "legend":{
+
                 "display":true,
-                "labels":{"fontStyle":"bold"},
+                "labels":{"fontStyle":"bold","fontColor":"rgb(79,97,192)"},
                 "position":"top",
                 "reverse":false
             },
@@ -316,25 +318,29 @@
                     {
                         "stacked":true,
                         "gridLines":{
-                            "color":"rgb(234, 236, 244)",
-                            "zeroLineColor":"rgb(234, 236, 244)",
+                            "color":"rgb(125, 28, 241)",
+                            "zeroLineColor":"rgb(125, 28, 241)",
                             "drawBorder":true,
                             "drawTicks":true,
                             "borderDash":["4"],
                             "zeroLineBorderDash":["4"],
                             "drawOnChartArea":true
                         },
-
-                        "ticks":{"fontStyle":"bold","beginAtZero":true,"padding":7}
-                    }
-                ],
+                         "ticks":{
+                                        "fontStyle":"bold",
+                                        "beginAtZero":true,
+                                        "padding":7,
+                                        "fontColor":"rgb(79,97,192)"
+                                    }
+                                }
+                            ],
                 "yAxes":[
                     {
-                        "scaleLabel":{"display":true,"labelString":"Stunden"},
+                        "scaleLabel":{"display":true,"labelString":"Stunden","fontStyle":"bold","fontColor":"rgb(79,97,192)" },
                         "stacked":true,
                         "gridLines":{
-                            "color":"rgb(234, 236, 244)",
-                            "zeroLineColor":"rgb(234, 236, 244)",
+                            "color":"rgb(125, 28, 241)",
+                            "zeroLineColor":"rgb(125, 28, 241)",
                             "drawBorder":true,
                             "drawTicks":true,
                             "borderDash":["4"],
@@ -342,7 +348,13 @@
                             "drawOnChartArea":true
                         },
 
-                        "ticks":{"fontStyle":"bold","beginAtZero":true,"padding":7}
+                        "ticks":{
+
+                          "fontStyle":"bold",
+                          "beginAtZero":true,
+                          "padding":7,
+                          "fontColor":"rgb(79,97,192)"
+                          }
                     }
                 ]
             }
@@ -366,7 +378,7 @@
                             </div>
                             <div class="card-body" style="background: var(--bs-card-bg);">
                                 <div class="chart-area">
-                                    <canvas data-bss-chart='{"type":"doughnut","data":{"labels":[" Anwesend"," Pause"," Abwesend"," Krank"],"datasets":[{"label":"","backgroundColor":["#00CB62","#ffee00","#e74a3b","#f28224"],"borderColor":["#ffffff","#ffffff","#ffffff","#ffffff"],"data":["50","30","15","94"]}]},  "options":{"maintainAspectRatio":false,"legend":{"display":false,"labels":{"fontStyle":"normal"}},"title":{"fontStyle":"normal"}}}'>
+                                    <canvas data-bss-chart='{"type":"doughnut","data":{"labels":[" Anwesend"," Pause"," Abwesend"," Krank"],"datasets":[{"label":"","backgroundColor":["#00CB62","#ffee00","#e74a3b","#f28224"],"borderColor":["#ffffff","#ffffff","#ffffff","#ffffff"],"data":${pieChartArray}}]},  "options":{"maintainAspectRatio":false,"legend":{"display":false,"labels":{"fontStyle":"normal"}},"title":{"fontStyle":"normal"}}}'>
                                     </canvas>
                                 </div>
                                 <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-success);"></i>&nbsp;Anwesend</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-yellow);"></i>&nbsp;Pause</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-danger);"></i>&nbsp;Abwesend</span><span class="me-2"><i class="fas fa-circle" style="color: var(--bs-orange);"></i>&nbsp;Krank</span></div>

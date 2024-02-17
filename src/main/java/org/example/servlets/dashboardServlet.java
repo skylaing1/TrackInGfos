@@ -37,7 +37,7 @@ public class dashboardServlet extends HttpServlet {
 
         int urlaubAnspruch = 28;
 
-        // Listen zum Sortieren der Tage
+        // Listen zum Sortieren der Tage (Bar Chart)
         List<Days> MondayList = new ArrayList<>();
         List<Days> TuesdayList = new ArrayList<>();
         List<Days> WednesdayList = new ArrayList<>();
@@ -45,10 +45,16 @@ public class dashboardServlet extends HttpServlet {
         List<Days> FridayList = new ArrayList<>();
         List<Days> SaturdayList = new ArrayList<>();
 
+        // Arrays für die Statisken der Wochentage (Bar Chart)
         String presentHoursArray = "[";
         String sickHoursArray = "[";
         String absentHoursArray = "[";
         String breakHoursArray = "[";
+
+        int totalPresentHours = 0;
+        int totalSickHours = 0;
+        int totalAbsentHours = 0;
+        int totalBreakHours = 0;
 
 
         List<Entries> entriesList = ServletUtil.getCurrentEntriesForDashboard(request);
@@ -61,7 +67,7 @@ public class dashboardServlet extends HttpServlet {
 
         // Schliefe für die Tage im ganzen Jahr
         for (Days day : daysList) {
-            // Wochentag aus Datum extrahieren
+            // Wochentag aus Datum extrahieren und in String umwandeln
             LocalDate date = day.getDate().toLocalDate();
             DayOfWeek dayOfWeek = date.getDayOfWeek();
             String dayOfWeekString = dayOfWeek.toString();
@@ -92,11 +98,18 @@ public class dashboardServlet extends HttpServlet {
             }
         }
 
-        // Liste für die Statisken der Wochentage
+        // Liste für die Statisken der Wochentage (Bar Chart)
         List<DailyStats> dailyStatsList = ServletUtil.getDailyStatsList(MondayList, TuesdayList, WednesdayList, ThursdayList, FridayList, SaturdayList);
 
-        // Schleife für die Statisken der Wochentage
+        // Schleife für die Statisken der Wochentage (Formatierung) (Bar Chart, Doughnut Chart)
         for (int i = 0; i < dailyStatsList.size(); i++) {
+            // Summe der Stunden für die Doughnut Chart
+            totalPresentHours += dailyStatsList.get(i).getPresentDuration();
+            totalSickHours += dailyStatsList.get(i).getSickDuration();
+            totalAbsentHours += dailyStatsList.get(i).getAbsentDuration();
+            totalBreakHours += dailyStatsList.get(i).getBreakDuration();
+
+            // Formatierung der Arrays für die Bar Chart
             presentHoursArray += dailyStatsList.get(i).getPresentDuration();
             sickHoursArray += dailyStatsList.get(i).getSickDuration();
             absentHoursArray += dailyStatsList.get(i).getAbsentDuration();
@@ -113,6 +126,10 @@ public class dashboardServlet extends HttpServlet {
         absentHoursArray += "]";
         breakHoursArray += "]";
 
+        String pieChartArray = "[" + totalPresentHours + "," +  totalBreakHours+ "," + totalAbsentHours + "," + totalSickHours + "]";
+
+
+
 
         // Schleife für die Tage im aktuellen Monat
         for (Days day : daysListCurrentMonth) {
@@ -128,6 +145,7 @@ public class dashboardServlet extends HttpServlet {
 
 
 
+
         Alert alert = (Alert) session.getAttribute("alert");
 
         request.setAttribute("alert", alert);
@@ -139,6 +157,8 @@ public class dashboardServlet extends HttpServlet {
         request.setAttribute("sickHoursArray", sickHoursArray);
         request.setAttribute("absentHoursArray", absentHoursArray);
         request.setAttribute("breakHoursArray", breakHoursArray);
+
+        request.setAttribute("pieChartArray", pieChartArray);
 
         request.setAttribute("geleisteteStundenInProzent", geleisteteMinutenInProzent);
         request.setAttribute("VerbleibenderUrlaubAnspruch", urlaubAnspruch);
