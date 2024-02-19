@@ -1,9 +1,10 @@
 :root, [data-bs-theme=dark] {
     --bs-lvl1: #121212;
     --bs-lvl2: #1f1f1f;
-    --bs-lvl3: #383838;
+    --bs-lvl3: #2f2f2f;
     --bs-sidebar: #242526;
     --headername-colour: #ffffff;
+    --bs-textcs: #fdfdfd;
 }
 
 :root, [data-bs-theme=light] {
@@ -88,14 +89,13 @@
     border-radius: 50%;
 }
 
-
-
 [data-bs-theme=light] {
-    --bs-lvl1: #dddfeb;
-    --bs-lvl2: #f8f9fc;
-    --bs-lvl3: ;
-    --bs-sidebar: #fff;
+    --bs-lvl1: #e0e0e0;
+    --bs-lvl2: #e7e7e7;
+    --bs-lvl3: #f2f2f2;
+    --bs-sidebar: #fcfcfc;
     --headername-colour: #000000;
+    --bs-textcs: #1e1b1b;
 }
 
 .text-gray-600 {

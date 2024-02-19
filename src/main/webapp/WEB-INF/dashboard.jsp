@@ -112,7 +112,7 @@
     </nav>
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content" style="background: var(--bs-lvl1);">
-            <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light" style="backdrop-filter: opacity(1);opacity: 0.86;background: var(--bs-lvl2);">
+            <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light" style="background: var(--bs-lvl3);">
                 <div class="container-fluid"><button class="btn d-md-none rounded-circle me-3 " id="sidebarToggleTop" type="button" onclick="mobileToggle"><i class="fas fa-bars"></i></button>
                     <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group" style="border-width: 1px;"><input class="form-control border-0 small" type="text" placeholder="Suche  ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>

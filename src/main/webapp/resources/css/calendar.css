@@ -6,6 +6,9 @@
 .calendar .months-container .month-container {
     margin-bottom: 25px;
 }
+.calendar table.month td.week-number {
+    border-right: 1px solid var(--bs-textcs);
+}
 
 .calendar table.month th.month-title {
     background-color: var(--bs-secondary);
@@ -48,4 +51,9 @@
 
 .calendar-context-menu .item .content .arrow {
     color: #1b1b1e;
+}
+.calendar table.month {
+    background-color: var(--bs-lvl3);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+    height: 100%;
 }

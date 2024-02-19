@@ -87,7 +87,7 @@ function deleteEvent(e) {
         method: 'DELETE',
     })
         var dataSource = calendar.getDataSource();
-    
+
         calendar.setDataSource(dataSource.filter(event => event.id !== e.id));
 }
 
@@ -166,8 +166,9 @@ const calendar = new Calendar('#calendar', {
         }
     },
     mouseOutDay: function(e) {
-        if(e.events.length > 0 && e.element && e.element.popoverInstance) {
-            e.element.popoverInstance.dispose();
+        if(e.element.popoverInstance) {
+                e.element.popoverInstance.dispose();
+                e.element.popoverInstance = null; // Set to null after disposing
         }
     },
     dayContextMenu: function(e) {

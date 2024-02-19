@@ -14,15 +14,18 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="../resources/img/favicon_io/site.webmanifest">
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link rel="stylesheet" href="../resources/css/datatable.css">
+    <link rel="stylesheet" href="../resources/css/calendar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../resources/js-year-calendar/css/js-year-calendar.css">
+    <script src="../resources/js-year-calendar/js/js-year-calendar.min.js"></script>
+    <script src="../resources/js-year-calendar/js/js-year-calendar.de.js"></script>
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
@@ -101,7 +104,7 @@
     <div class="d-flex flex-column" id="content-wrapper" style="background: var(--bs-lvl1); height: 100vh;">
         <div id="content">
             <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light"
-                 style="backdrop-filter: opacity(1);opacity: 0.86;background: var(--bs-lvl2);">
+                 style=" ;background: var(--bs-lvl3);">
                 <div class="container-fluid">
                     <button class="btn d-md-none rounded-circle me-3 " id="sidebarToggleTop" type="button"
                             onclick="mobileToggle"><i class="fas fa-bars"></i></button>
@@ -207,7 +210,7 @@
                                     </label>
                                 </div>
                                 <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#mitarbeiter">
+                                        data-bs-target="#modalcalendar">
                                     <i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span>
                                 </button>
                             </div>
@@ -542,6 +545,22 @@
         </div>
         </div>
     </div>
+<div class="modal fade modal-xl" role="dialog" id="modalcalendar">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Test</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div id="calendar"></div>
+                    <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input class="btn btn-primary" type="submit" value="Speichern" id="save-event"></div>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
 <footer class="text-center" style="background: #3b3b3b;">
     <div class="container py-4 py-lg-5">
         <ul class="list-inline">
