@@ -166,3 +166,14 @@ function resetIfInvalid(el){
     }
     el.value = "";
 }
+
+new Calendar('#calendar', {
+    language: 'de',
+    style: 'background',
+    maxDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000 * 10),
+    allowOverlap: false,
+    disabledWeekDays: [0],
+    enableContextMenu: true,
+    displayWeekNumber: true,
+    enableRangeSelection: true,
+})

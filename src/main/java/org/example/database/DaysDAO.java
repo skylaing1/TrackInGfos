@@ -158,5 +158,26 @@ public class DaysDAO {
 
 
     }
+
+    public static Alert deleteDayAndEntries(int daysId) {
+        try {
+            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+
+
+            session.createQuery("delete from Days where daysId = :id")
+                    .setParameter("id", daysId)
+                    .executeUpdate();
+
+            session.getTransaction().commit();
+            session.close();
+
+            return Alert.successAlert("Erfolgreich", "Der Tag wurde erfolgreich gelöscht");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Alert.dangerAlert("Datenbankfehler", "Es ist ein Fehler beim Löschen der Daten aufgetreten");
+        }
+    }
 }
 

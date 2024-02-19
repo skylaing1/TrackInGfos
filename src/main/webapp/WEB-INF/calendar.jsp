@@ -17,12 +17,11 @@
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
-    <link rel="stylesheet" href="../resources/css/calendar.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css" />
+    <link rel="stylesheet" href="../resources/js-year-calendar/css/js-year-calendar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script>
-    <script src="https://unpkg.com/js-year-calendar@latest/locales/js-year-calendar.de.js"></script>
-
+    <script src="../resources/js-year-calendar/js/js-year-calendar.min.js"></script>
+    <script src="../resources/js-year-calendar/js/js-year-calendar.de.js"></script>
+    <link rel="stylesheet" href="../resources/css/calendar.css">
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");

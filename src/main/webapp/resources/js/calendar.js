@@ -82,14 +82,21 @@ function saveEvent() {
     form.submit();
 }
 
+function deleteEvent(e) {
+    fetch(`/deleteDay?id=${e.id}`, {
+        method: 'DELETE',
+    })
+        var dataSource = calendar.getDataSource();
+    
+        calendar.setDataSource(dataSource.filter(event => event.id !== e.id));
+}
 
-new Calendar('#calendar', {
+const calendar = new Calendar('#calendar', {
     language: 'de',
     style: 'background',
     maxDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000 * 10),
     allowOverlap: false,
     disabledWeekDays: [0],
-    setNumberMonthsDisplayed: 12,
     enableContextMenu: true,
     displayWeekNumber: true,
     enableRangeSelection: true,
@@ -113,8 +120,17 @@ new Calendar('#calendar', {
                 var endDate = new Date(e.endDate.getTime() - e.endDate.getTimezoneOffset() * 60000).toISOString().split('T')[0];
                 editEvent({ id: e.id, startDate: startDate, endDate: endDate, status: e.status, description: e.description});
             }
+        },
+        {
+            text: 'Delete',
+            click: deleteEvent
         }
     ],
+    contextMenuShow: function(e) {
+        if (e.contextMenuElement) {
+            e.contextMenuElement.classList.add('text-dark');
+        }
+    },
     selectRange: function (e) {
         console.log(e.startDate);
 
@@ -164,5 +180,6 @@ document.getElementById('form').addEventListener('submit', function (e) {
     e.preventDefault();
     saveEvent();
 });
-
-console.log(days);
+document.querySelectorAll('.calendar table.month td.day .day-content, .calendar table.month th.day-header, .event-presentHours, .event-sickHours, .event-description, .event-status').forEach(function(element) {
+    element.classList.add('text-dark');
+});
