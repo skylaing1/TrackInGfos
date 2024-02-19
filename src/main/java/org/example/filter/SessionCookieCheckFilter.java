@@ -50,6 +50,7 @@ public class SessionCookieCheckFilter implements Filter {
                         if (token != null) {
                             session = httpRequest.getSession();
                             session.setAttribute("SessionMitarbeiter", token.getLoginData().getMitarbeiter());
+                            System.out.println("Mitarbeiter:" + token.getLoginData().getMitarbeiter().getProfilePicture()); //Test
                             System.out.println("RememberMe cookie angemeldetfilter"); //Test
                             chain.doFilter(request, response);
                         } else {

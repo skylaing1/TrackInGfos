@@ -86,7 +86,7 @@ ALTER TABLE `trackindatabase`.`Mitarbeiter`
 ADD COLUMN `admin` BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE `trackindatabase`.`Mitarbeiter`
-ADD COLUMN `profile_picture` VARCHAR(255) NOT NULL DEFAULT 'default.jpeg';
+ADD COLUMN `profile_picture` VARCHAR(255) NOT NULL DEFAULT '../resources/img/avatars/default.jpeg';
 
 
 ALTER TABLE `trackindatabase`.`Mitarbeiter`

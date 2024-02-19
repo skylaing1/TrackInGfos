@@ -32,7 +32,7 @@ public class Mitarbeiter {
     @Column(name = "Wochenstunden",columnDefinition = "int default 1")
     private int wochenstunden;
 
-    @Column(name = "profile_picture", columnDefinition = "varchar(255) default 'default.jpeg'")
+    @Column(name = "profile_picture", columnDefinition = "varchar(255) default '../resources/img/avatars/default.jpeg'")
     private String profilePicture;
 
     @Column(name = "admin",columnDefinition = "boolean default false")
@@ -109,9 +109,9 @@ public class Mitarbeiter {
 
     public void setProfilePicture(String fileName) {
         if (fileName == null || fileName.isEmpty()) {
-            this.profilePicture = "default.jpeg";
+            this.profilePicture = "../resources/img/avatars/default.jpeg";
         } else {
-            this.profilePicture = fileName;
+            this.profilePicture = "../resources/img/avatars/" + fileName;
         }
     }
 

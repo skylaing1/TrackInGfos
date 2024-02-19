@@ -28,6 +28,8 @@ public class MitarbeiterDAO {
             // Committe die Transaktion
             session.getTransaction().commit();
 
+            session.close();
+
             return mitarbeiter;
         } catch (Exception e) {
             // Handle Exceptions
@@ -73,6 +75,8 @@ public class MitarbeiterDAO {
 
             session.getTransaction().commit();
 
+            session.close();
+
             return mitarbeiterList;
 
         } catch (Exception e) {
@@ -104,6 +108,8 @@ public class MitarbeiterDAO {
 
             session.getTransaction().commit();
 
+            session.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,6 +129,8 @@ public class MitarbeiterDAO {
 
             session.getTransaction().commit();
 
+            session.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,7 +144,7 @@ public class MitarbeiterDAO {
             session.beginTransaction();
 
 
-            if (!mitarbeiter.getProfilePicture().equals("default.jpeg")) {
+            if (!mitarbeiter.getProfilePicture().equals("../resources/img/avatars/default.jpeg")) {
 
                 String oldPicPath = appPath + File.separator + "resources" + File.separator + "img" + File.separator + "avatars" + File.separator + mitarbeiter.getProfilePicture();
 
@@ -152,6 +160,8 @@ public class MitarbeiterDAO {
             session.update(mitarbeiter);
 
             session.getTransaction().commit();
+
+            session.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,11 +184,13 @@ public class MitarbeiterDAO {
             mitarbeiter.setOnetimepassword(onetimepassword);
             mitarbeiter.setWochenstunden(wochenstunden);
             mitarbeiter.setAdmin(admin);
-            mitarbeiter.setProfilePicture("default.jpeg");
+            mitarbeiter.setProfilePicture("../resources/img/avatars/default.jpeg");
 
             session.save(mitarbeiter);
 
             session.getTransaction().commit();
+
+              session.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -211,6 +223,8 @@ public class MitarbeiterDAO {
                 session.update(mitarbeiter);
 
                 session.getTransaction().commit();
+
+                session.close();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -250,6 +264,8 @@ public class MitarbeiterDAO {
             }
 
             session.getTransaction().commit();
+
+            session.close();
 
         } catch (Exception e) {
             e.printStackTrace();

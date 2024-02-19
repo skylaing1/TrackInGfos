@@ -40,7 +40,7 @@ public class registerServlet extends HttpServlet {
         // Todo: Email ungültig prüfen: Prefix .com z.b./ Email bereits vergeben prüfen
 
         if (mitarbeiter != null) {
-            if (mitarbeiter.getLoginData() != null) {
+            if (mitarbeiter.getLoginData() == null) {
                 if (BCrypt.checkpw(oneTimePassword, mitarbeiter.getOnetimepassword())) {
 
                     if (ServletUtil.comparePassword(password, password_repeat)) {
@@ -53,7 +53,7 @@ public class registerServlet extends HttpServlet {
                         // Todo: Erfolgsmeldung
                     } else {
 
-                        response.sendRedirect("register.jsp");
+                        response.sendRedirect("/register");
                         // Todo: Fehlermeldung: Passwörter stimmen nicht überein
                     }
                 } else {

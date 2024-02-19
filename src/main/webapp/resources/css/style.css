@@ -7,8 +7,8 @@
 }
 
 :root, [data-bs-theme=light] {
-    --bs-primary: #6200EE;
-    --bs-primary-rgb: 98,0,238;
+    --bs-primary: #BB86FC;
+    --bs-primary-rgb: 187, 134, 252;
     --bs-primary-text-emphasis: #27005F;
     --bs-primary-bg-subtle: #E0CCFC;
     --bs-primary-border-subtle: #C099F8;
@@ -229,7 +229,7 @@
 }
 
 [data-bs-theme=dark] {
-    --bs-primary: #7d1cf1;
+    --bs-primary: #BB86FC;
     --bs-primary-rgb: 187,134,252;
     --bs-primary-text-emphasis: #D6B6FD;
     --bs-primary-bg-subtle: #251B32;
@@ -343,7 +343,9 @@
     top: 80px;
     right: 20px;
     z-index: 9999;
+
     .fa {
-        margin-right:.5em;
+        margin-right: .5em;
     }
 }
+   

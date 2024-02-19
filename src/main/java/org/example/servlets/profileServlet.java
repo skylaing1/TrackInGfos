@@ -21,6 +21,8 @@ public class profileServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
 
+
+
         request.setAttribute("mitarbeiter", mitarbeiter);
 
         request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
@@ -51,7 +53,9 @@ public class profileServlet extends HttpServlet {
 
         MitarbeiterDAO.updateProfilePicture(mitarbeiter, fileName, appPath);
 
-        mitarbeiter.setProfilePicture(fileName);
+        String filePath = "../resources/img/avatars/" + fileName;
+
+        mitarbeiter.setProfilePicture(filePath);
 
         session.setAttribute("SessionMitarbeiter", mitarbeiter);
 
