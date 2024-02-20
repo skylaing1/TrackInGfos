@@ -129,6 +129,7 @@ const calendar = new Calendar('#calendar', {
     contextMenuShow: function(e) {
         if (e.contextMenuElement) {
             e.contextMenuElement.classList.add('text-dark');
+
         }
     },
     selectRange: function (e) {

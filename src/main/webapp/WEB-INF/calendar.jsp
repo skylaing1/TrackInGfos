@@ -1,5 +1,6 @@
 <%@ page import="org.example.entities.Mitarbeiter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -26,6 +27,7 @@
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+
     %>
     <script>
         var days = <%= request.getAttribute("days") %>;
@@ -34,6 +36,14 @@
 </head>
 
 <body id="page-top" data-bs-theme="<%=darkMode.equals("true") ? "dark" : "light"%>">
+
+<c:if test="${alert != null}">
+    <div class="alert alertnew alert-${alert.alertType} alert-dismissible fade show" role="alert" style="position: fixed;">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <h4><i class="fa fa-${alert.alertIcon}"></i>${alert.alertTitle}</h4>
+        <p class="mb-0">${alert.alertMessage}</p>
+    </div>
+</c:if>
 
 <div id="wrapper">
     <nav class="sidebarnew close">
@@ -254,6 +264,7 @@
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/calendar.js"></script>
 <script src="../resources/js/sidebar.js"></script>
+<script src="../resources/js/alerts.js"></script>
 </body>
 
 </html>

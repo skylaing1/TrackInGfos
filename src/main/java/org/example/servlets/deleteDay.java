@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
 import org.example.database.DaysDAO;
 
+
 import java.io.IOException;
 
 @WebServlet(name = "deleteDay", value = "/deleteDay")

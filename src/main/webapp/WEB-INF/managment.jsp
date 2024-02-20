@@ -20,12 +20,12 @@
     <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link rel="stylesheet" href="../resources/css/datatable.css">
-    <link rel="stylesheet" href="../resources/css/calendar.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../resources/js-year-calendar/css/js-year-calendar.css">
     <script src="../resources/js-year-calendar/js/js-year-calendar.min.js"></script>
     <script src="../resources/js-year-calendar/js/js-year-calendar.de.js"></script>
+    <link rel="stylesheet" href="../resources/css/calendar.css">
     <%
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
@@ -210,7 +210,7 @@
                                     </label>
                                 </div>
                                 <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#modalcalendar">
+                                        data-bs-target="#mitarbeiter">
                                     <i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span>
                                 </button>
                             </div>
@@ -248,7 +248,7 @@
                                             <td>${mitarbeiter_inTable.position}</td>
                                             <td>${mitarbeiter_inTable.wochenstundenFormatted}</td>
                                             <td>
-                                                <i class="far fa-eye iconeye"></i>
+                                                <i class="far fa-eye iconeye" data-id='${mitarbeiter_inTable.personalnummer}'></i>
                                                 <i class='far fa-edit iconedit'
                                                    data-id='${mitarbeiter_inTable.personalnummer}'
                                                    data-name='${mitarbeiter_inTable.name}'
@@ -554,7 +554,6 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div id="calendar"></div>
-                    <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input class="btn btn-primary" type="submit" value="Speichern" id="save-event"></div>
                 </div>
             </div>
         </div>
@@ -597,6 +596,7 @@
     <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
     <script src="../resources/js/sidebar.js"></script>
     <script src="../resources/js/datatable.js"></script>
+    <script src="../resources/js/managmentcalendar.js"></script>
 
 
 </body>

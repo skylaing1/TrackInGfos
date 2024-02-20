@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import jakarta.servlet.ServletException;
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "addMitarbeiterServlet", value = "/addMitarbeiter")
 public class addMitarbeiterServlet extends HttpServlet {
@@ -45,11 +46,13 @@ public class addMitarbeiterServlet extends HttpServlet {
         System.out.println("Onetimepassword: " + onetimepassword);
         System.out.println("Wochenstunden: " + wochenstunden);
         System.out.println("Admin: " + admin);
-        //TODO: mach Personalnummer ein Select und keine zahl eingabe in HTML
+
         //TODO: Einmal Passwort verschlüsseln vllt auch Generieren in der Erfolgsmeldung
         //TODO: Erfolgreich hinzugefügt Meldung
 
-        MitarbeiterDAO.addMitarbeiter(vorname, personalNummer, nachname, geburtsdatum, eintrittsdatum, position, onetimepassword, wochenstunden, admin);
+         String hashedPassword = BCrypt.hashpw(onetimepassword, BCrypt.gensalt(12));
+
+        MitarbeiterDAO.addMitarbeiter(vorname, personalNummer, nachname, geburtsdatum, eintrittsdatum, position, hashedPassword, wochenstunden, admin);
 
         response.sendRedirect("/managment");
     }

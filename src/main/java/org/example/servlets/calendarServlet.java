@@ -72,24 +72,24 @@ public class calendarServlet extends HttpServlet {
         HttpSession session1 = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
 
+        // Konvertieren der Strings in LocalDate
         LocalDate startDate = LocalDate.parse(startDateStr);
         LocalDate endDate = LocalDate.parse(endDateStr);
 
-
         // Wenn Update eines Tages
-        if (daysIdStr != null &&  !daysIdStr.isEmpty()) {
+        if (daysIdStr != null && !daysIdStr.isEmpty()) {
             if (startDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
                 int daysId = Integer.parseInt(daysIdStr);
-                Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDate,entrieDescription, mitarbeiter, description);
+                Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr ,entrieDescription, mitarbeiter, description);
                 session1.setAttribute("alert", alert);
                 response.sendRedirect("/calendar");
                 return;
             }
-            Alert alert = new Alert("Fehler", "Der Starttag darf nicht auf einen Sonntag fallen", "danger");
-
+            Alert alert = Alert.dangerAlert("Fehler", "Der Tag darf nicht auf einen Sonntag fallen");
+            response.sendRedirect("/calendar");
+            return;
         }
 
-        // Konvertieren der Strings in LocalDate
 
 
         List<Days> daysList = new ArrayList<>();
