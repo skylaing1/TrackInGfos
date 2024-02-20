@@ -11,11 +11,9 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 
 public class ServletUtil {
@@ -206,4 +204,12 @@ public class ServletUtil {
 
         return dailyStatsList;
     }
+
+
+
+    public static boolean isInCurrentWeek(LocalDate date, LocalDate aktuellesDatum) {
+        // Überprüfe, ob das Datum in der gleichen Woche liegt
+        return (!date.isBefore(aktuellesDatum.with(DayOfWeek.MONDAY)) && !date.isAfter(aktuellesDatum.with(DayOfWeek.SUNDAY)));
+    }
+
 }

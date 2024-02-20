@@ -65,12 +65,26 @@ public class dashboardServlet extends HttpServlet {
         // Liste für die Tage im aktuellen Monat
         List<Days> daysListCurrentMonth = ServletUtil.getDaysofCurrentMonth(request, daysList);
 
+        LocalDate today = LocalDate.now();
+
         // Schliefe für die Tage im ganzen Jahr
         for (Days day : daysList) {
             // Wochentag aus Datum extrahieren und in String umwandeln
             LocalDate date = day.getDate().toLocalDate();
             DayOfWeek dayOfWeek = date.getDayOfWeek();
             String dayOfWeekString = dayOfWeek.toString();
+
+            if (ServletUtil.isInCurrentWeek(date, today) && day.getStatus().equals("Anwesend") || day.getStatus().equals("Krank") ||  day.getStatus().equals("Urlaub") || day.getStatus().equals("Dienstreise")) {
+                if (day.getStatus().equals("Anwesend") ||  day.getStatus().equals("Dienstreise")) {
+                    geleisteteMinuten += day.getPresentDuration();
+                }
+                if (day.getStatus().equals("Urlaub")) {
+                    stundenKontingentInMinuten -= 480;
+                }
+                if (day.getStatus().equals("Krank")) {
+                    stundenKontingentInMinuten -= day.getSickDuration();
+                }
+            }
 
             switch (dayOfWeekString) {
                 case "MONDAY":
@@ -129,14 +143,6 @@ public class dashboardServlet extends HttpServlet {
         String pieChartArray = "[" + totalPresentHours + "," +  totalBreakHours+ "," + totalAbsentHours + "," + totalSickHours + "]";
 
 
-
-
-        // Schleife für die Tage im aktuellen Monat
-        for (Days day : daysListCurrentMonth) {
-            if (day.getStatus().equals("Anwesend") || day.getStatus().equals("Dienstreise")) {
-                geleisteteMinuten += day.getPresentDuration();
-            }
-        }
 
         if (geleisteteMinuten > 0) {
             geleisteteMinutenInProzent = (geleisteteMinuten * 100) / stundenKontingentInMinuten;
