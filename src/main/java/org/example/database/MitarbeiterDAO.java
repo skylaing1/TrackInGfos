@@ -1,11 +1,13 @@
 package org.example.database;
 
+import jakarta.persistence.Tuple;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import org.example.entities.Token;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 
 import java.io.File;
 import java.sql.Date;
@@ -71,7 +73,6 @@ public class MitarbeiterDAO {
                 mitarbeiter.setEinstellungsdatumFormatted(formattedDate_EinstellungsDatum);
 
             }
-
 
             session.getTransaction().commit();
 
@@ -262,6 +263,26 @@ public class MitarbeiterDAO {
                     session.delete(loginData);
                 }
             }
+
+            session.getTransaction().commit();
+
+            session.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateWeekHoursProgressAndVacationDays(int geleisteteMinutenInProzent, int leftVacation, Mitarbeiter mitarbeiter) {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
+             Session session = factory.openSession()) {
+
+            session.beginTransaction();
+
+            mitarbeiter.setWeekHoursProgress(geleisteteMinutenInProzent);
+            mitarbeiter.setVerbleibendeUrlaubstage(leftVacation);
+
+            session.update(mitarbeiter);
 
             session.getTransaction().commit();
 

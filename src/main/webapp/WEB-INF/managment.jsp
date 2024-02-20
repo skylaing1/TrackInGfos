@@ -220,34 +220,47 @@
                                 <table id="dataTable" class="table table-hover my-0" style="white-space: nowrap;">
                                     <thead>
                                     <tr>
-                                        <th data-bs-placement="bottom" data-bs-toggle="tooltip" title="Personalnummer">
+                                        <th style="width: 20px;" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Personalnummer">
                                             Nr.
                                         </th>
-                                        <th class="col">Name</th>
-                                        <th>Geburtsdatum</th>
+                                        <th class="col-auto" >Name</th>
+                                        <th >Geburtsdatum</th>
                                         <th>Eintrittsdatum</th>
-                                        <th>Position (Admin)</th>
+                                        <th>Position</th>
                                         <th>Wochenstunden</th>
-                                        <th>Aktion</th>
-                                        <!-- Todo: Wenn zeit dann Urlaubstage abgearbeitete Stunden Überstunden e.t.c -->
+                                        <th>Verbleibende Urlaubstage</th>
+                                        <th>Stundenfortschritt (wöchentlich)</th>
+                                        <th class="text-center" style="width: 100px;">Aktion</th>
                                     </tr>
                                     </thead>
                                     <tbody class="table-hover" data-total-rows="<%=request.getAttribute("totalRows")%>">
                                     <c:forEach var="mitarbeiter_inTable" items="${mitarbeiterList}">
                                         <tr>
-                                            <td>${mitarbeiter_inTable.personalnummer}</td>
-                                            <td>
+                                            <td class="col-auto">${mitarbeiter_inTable.personalnummer}</td>
+                                            <td class="col-auto">
                                                 <div class="c-avatar"><img class="rounded-circle me-2" height="30"
                                                                            src="${mitarbeiter_inTable.profilePicture}"
                                                                            width="30"/><span
                                                         class="c-avatar__status"></span></div>
                                                     ${mitarbeiter_inTable.vorname} ${mitarbeiter_inTable.name}
                                             </td>
-                                            <td>${mitarbeiter_inTable.geburtsdatumFormatted}</td>
-                                            <td>${mitarbeiter_inTable.einstellungsdatumFormatted}</td>
-                                            <td>${mitarbeiter_inTable.position}</td>
-                                            <td>${mitarbeiter_inTable.wochenstundenFormatted}</td>
-                                            <td>
+                                            <td class="col-auto">${mitarbeiter_inTable.geburtsdatumFormatted}</td>
+                                            <td class="col-auto">${mitarbeiter_inTable.einstellungsdatumFormatted}</td>
+                                            <td class="col-auto">${mitarbeiter_inTable.position}</td>
+                                            <td class="col-auto">${mitarbeiter_inTable.wochenstundenFormatted}</td>
+                                            <td class="col-auto">${mitarbeiter_inTable.verbleibendeUrlaubstage} von 28 Tagen</td>
+                                            <td> <div class="row g-0 align-items-center">
+                                                <div class="col-3">
+                                                    <div class="text-dark fw-bold h8 me-1"><span>${mitarbeiter_inTable.weekHoursProgress}%</span></div>
+                                                </div>
+                                                <div class="col me-10">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-success"  style="width: ${mitarbeiter_inTable.weekHoursProgress}%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div></td>
+                                            <td class="col-auto">
+                                                <div class="text-end">
                                                 <i class="far fa-eye iconeye" data-id='${mitarbeiter_inTable.personalnummer}'></i>
                                                 <i class='far fa-edit iconedit'
                                                    data-id='${mitarbeiter_inTable.personalnummer}'
@@ -260,6 +273,7 @@
                                                    data-admin='${mitarbeiter_inTable.admin}'></i>
                                                 <i class="far fa-trash-alt icontrash"
                                                    data-id='${mitarbeiter_inTable.personalnummer}'></i>
+                                                </div>
                                             </td>
                                         </tr>
                                     </c:forEach>

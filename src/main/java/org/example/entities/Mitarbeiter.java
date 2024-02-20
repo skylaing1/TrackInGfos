@@ -35,6 +35,12 @@ public class Mitarbeiter {
     @Column(name = "profile_picture", columnDefinition = "varchar(255) default '../resources/img/avatars/default.jpeg'")
     private String profilePicture;
 
+    @Column(name = "WochenStundenFortschritt", columnDefinition = "int default 0")
+    private int weekHoursProgress;
+
+    @Column(name = "verbleibendeUrlaubstage", columnDefinition = "int default 28")
+    private int verbleibendeUrlaubstage;
+
     @Column(name = "admin",columnDefinition = "boolean default false")
     private boolean admin;
 
@@ -53,6 +59,9 @@ public class Mitarbeiter {
     @Transient
     private String picturePath;
     //TODO: PricturePath soll über Session übergeben und gesetzt werden
+
+
+
 
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;
@@ -185,6 +194,22 @@ public class Mitarbeiter {
 
     public void setLoginData(LoginData loginData) {
         this.loginData = loginData;
+    }
+
+    public void setWeekHoursProgress(int i) {
+        this.weekHoursProgress = i;
+    }
+
+    public int getWeekHoursProgress() {
+        return weekHoursProgress;
+    }
+
+    public void setVerbleibendeUrlaubstage(int leftVacation) {
+        this.verbleibendeUrlaubstage = leftVacation;
+    }
+
+    public int getVerbleibendeUrlaubstage() {
+        return verbleibendeUrlaubstage;
     }
 }
 

@@ -200,7 +200,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm">
-                                                    <div class="progress-bar bg-info"  style="width: ${geleisteteStundenInProzent}%;"><span class="visually-hidden">50%</span></div>
+                                                    <div class="progress-bar bg-info"  style="width: ${geleisteteStundenInProzent}%;"></div>
                                                 </div>
                                             </div>
                                         </div>

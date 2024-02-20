@@ -10,6 +10,7 @@ import org.example.DailyStats;
 import org.example.ServletUtil;
 import org.example.database.DaysDAO;
 import org.example.database.EntriesDAO;
+import org.example.database.MitarbeiterDAO;
 import org.example.database.UtilDAO;
 import org.example.entities.Days;
 import org.example.entities.Entries;
@@ -36,6 +37,7 @@ public class dashboardServlet extends HttpServlet {
         int geleisteteMinuten = 0;
 
         int urlaubAnspruch = 28;
+
 
         // Listen zum Sortieren der Tage (Bar Chart)
         List<Days> MondayList = new ArrayList<>();
@@ -148,6 +150,7 @@ public class dashboardServlet extends HttpServlet {
             geleisteteMinutenInProzent = (geleisteteMinuten * 100) / stundenKontingentInMinuten;
         }
 
+        MitarbeiterDAO.updateWeekHoursProgressAndVacationDays(geleisteteMinutenInProzent, urlaubAnspruch , mitarbeiter);
 
 
 

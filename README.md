@@ -134,3 +134,9 @@ ADD COLUMN presentDuration INT;
 
 ALTER TABLE Days
 ADD COLUMN sickDuration INT;
+
+ALTER TABLE Mitarbeiter
+ADD COLUMN WochenStundenFortschritt INT DEFAULT 0;
+
+ALTER TABLE Mitarbeiter
+ADD COLUMN verbleibendeUrlaubstage INT DEFAULT 28;
