@@ -18,6 +18,7 @@ import org.example.entities.Mitarbeiter;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,20 +72,25 @@ public class calendarServlet extends HttpServlet {
         HttpSession session1 = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
 
+        LocalDate startDate = LocalDate.parse(startDateStr);
+        LocalDate endDate = LocalDate.parse(endDateStr);
 
 
         // Wenn Update eines Tages
         if (daysIdStr != null &&  !daysIdStr.isEmpty()) {
-            int daysId = Integer.parseInt(daysIdStr);
-            Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr,entrieDescription, mitarbeiter, description);
-            session1.setAttribute("alert", alert);
-            response.sendRedirect("/calendar");
-            return;
+            if (startDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
+                int daysId = Integer.parseInt(daysIdStr);
+                Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDate,entrieDescription, mitarbeiter, description);
+                session1.setAttribute("alert", alert);
+                response.sendRedirect("/calendar");
+                return;
+            }
+            Alert alert = new Alert("Fehler", "Der Starttag darf nicht auf einen Sonntag fallen", "danger");
+
         }
 
         // Konvertieren der Strings in LocalDate
-        LocalDate startDate = LocalDate.parse(startDateStr);
-        LocalDate endDate = LocalDate.parse(endDateStr);
+
 
         List<Days> daysList = new ArrayList<>();
 
@@ -92,6 +98,7 @@ public class calendarServlet extends HttpServlet {
 
         // Erstellen der Tage für den Zeitraum
         startDate.datesUntil(endDate.plusDays(1)).forEach(date -> {
+            if (date.getDayOfWeek() != DayOfWeek.SUNDAY) {
             Days day = new Days();
             day.setStatus(status);
             day.setDate(Date.valueOf(date.toString()));
@@ -99,6 +106,7 @@ public class calendarServlet extends HttpServlet {
             day.setDescription(description);
             entriesList.addAll(ServletUtil.createEntriesForDay(day, status, entrieDescription, entriesList));
             daysList.add(day);
+            }
         });
 
         // Speichern der Tage in der Datenbank

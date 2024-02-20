@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.DayOfWeek;
 import java.util.List;
 
 @Entity
@@ -118,6 +119,10 @@ public class Days {
 
     public Date getDate() {
         return date;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return date.toLocalDate().getDayOfWeek();
     }
 
     public List<Entries> getEntries() {
