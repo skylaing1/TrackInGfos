@@ -11,3 +11,14 @@ alertsToClose.forEach((alert, index) => {
         alert.close();
     }, 5000);
 });
+
+document.getElementById('messageDropdown').addEventListener('click', function() {
+    // Set the message count to null
+    document.getElementById('messageCount').textContent = '';
+
+    // Ajax um die Nachrichten zu markieren
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', '/messages', true);
+    xhr.send();
+
+});

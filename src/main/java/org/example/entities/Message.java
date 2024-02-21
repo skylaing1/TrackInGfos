@@ -23,6 +23,9 @@ public class Message {
     @Column(name = "Message")
     private String message;
 
+    @Column(name = "seen", nullable = false, columnDefinition = "boolean default false")
+    private boolean seen;
+
     @Transient
     private String messageDateFormatted;
 
@@ -71,6 +74,14 @@ public class Message {
 
     public void setMitarbeiter(Mitarbeiter mitarbeiter) {
         this.mitarbeiter = mitarbeiter;
+    }
+
+    public boolean getSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
     }
 
     public String getMessageDateFormatted() {

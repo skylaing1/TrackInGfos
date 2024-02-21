@@ -34,7 +34,7 @@ public class DaysDAO {
             } else if (day.getStatus().equals("Abwesend")) {
                 day.setColor("var(--bs-danger)");
             } else if (day.getStatus().equals("Dienstreise")) {
-                day.setColor("lightgreen");
+                day.setColor("darkgreen");
             }
             day.setSickHours(day.getSickDuration() / 60);
             day.setPresentHours(day.getPresentDuration() / 60);

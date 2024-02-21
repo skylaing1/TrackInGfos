@@ -136,7 +136,7 @@ public class MessageDAO {
 
             session.beginTransaction();
 
-            List<Message> messages = session.createQuery("from Message where mitarbeiter.personalNummer = :personalNummer", Message.class)
+            List<Message> messages = session.createQuery("from Message where mitarbeiter.personalNummer = :personalNummer order by datum asc", Message.class)
                     .setParameter("personalNummer", user.getPersonalNummer())
                     .list();
 
@@ -148,6 +148,26 @@ public class MessageDAO {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static void makeMassagesSeen(Mitarbeiter user) {
+        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
+            Session session = factory.getCurrentSession();
+
+            session.beginTransaction();
+
+            String sql = "UPDATE Message SET seen = true WHERE Mitarbeiter_personalNummer = :personalNummer";
+
+            session.createNativeQuery(sql)
+                    .setParameter("personalNummer", user.getPersonalNummer())
+                    .executeUpdate();
+
+            session.getTransaction().commit();
+            session.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -231,7 +231,7 @@
 <script src="../resources/js/chart.min.js"></script>
 <script src="../resources/js/bs-init.js"></script>
 <script src="../resources/js/sidebar.js"></script>
-<script src="../resources/js/alerts.js"></script>
+<script src="../resources/js/alertsAndMessages.js"></script>
 <script src="../resources/js/dashboard.js"></script>
 </body>
 

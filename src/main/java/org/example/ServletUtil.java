@@ -149,10 +149,10 @@ public class ServletUtil {
                     entry.setCardColor("var(--bs-danger)");
                     break;
                 case "Urlaub":
-                    entry.setCardColor("");
+                    entry.setCardColor("var(--bs-info)");
                     break;
                 case "Dienstreise":
-                    entry.setCardColor("");
+                    entry.setCardColor("#014421");
                     break;
                 case "Pause":
                     entry.setCardColor("var(--bs-yellow)");

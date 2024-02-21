@@ -76,7 +76,7 @@ public class dashboardServlet extends HttpServlet {
             DayOfWeek dayOfWeek = date.getDayOfWeek();
             String dayOfWeekString = dayOfWeek.toString();
 
-            if (ServletUtil.isInCurrentWeek(date, today) && day.getStatus().equals("Anwesend") || day.getStatus().equals("Krank") ||  day.getStatus().equals("Urlaub") || day.getStatus().equals("Dienstreise")) {
+            if (ServletUtil.isInCurrentWeek(date, today) && (day.getStatus().equals("Anwesend") || day.getStatus().equals("Krank") ||  day.getStatus().equals("Urlaub") || day.getStatus().equals("Dienstreise"))) {
                 if (day.getStatus().equals("Anwesend") ||  day.getStatus().equals("Dienstreise")) {
                     geleisteteMinuten += day.getPresentDuration();
                 }
@@ -146,7 +146,7 @@ public class dashboardServlet extends HttpServlet {
 
 
 
-        if (geleisteteMinuten > 0) {
+        if (geleisteteMinuten > 0 && stundenKontingentInMinuten > 0){
             geleisteteMinutenInProzent = (geleisteteMinuten * 100) / stundenKontingentInMinuten;
         }
 

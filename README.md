@@ -152,3 +152,8 @@ FOREIGN KEY (`Mitarbeiter_personalNummer`) REFERENCES `Mitarbeiter`(`personalNum
 ) ENGINE = InnoDB;
 
 ALTER TABLE Message MODIFY Status VARCHAR(50);
+
+ALTER TABLE Message
+ADD COLUMN `Read` BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE Message CHANGE `Read` seen BOOLEAN;

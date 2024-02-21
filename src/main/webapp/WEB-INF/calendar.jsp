@@ -27,7 +27,6 @@
         String darkMode = (String) request.getAttribute("darkMode");
         String currentTheme = (String) request.getAttribute("currentTheme");
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
-
     %>
     <script>
         var days = <%= request.getAttribute("days") %>;
@@ -271,7 +270,7 @@
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="../resources/js/calendar.js"></script>
 <script src="../resources/js/sidebar.js"></script>
-<script src="../resources/js/alerts.js"></script>
+<script src="../resources/js/alertsAndMessages.js"></script>
 </body>
 
 </html>

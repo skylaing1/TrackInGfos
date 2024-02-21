@@ -22,7 +22,6 @@ public class profileServlet extends HttpServlet {
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
 
 
-
         request.setAttribute("mitarbeiter", mitarbeiter);
 
         request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);

@@ -14,7 +14,8 @@ public class UpdateMessage {
         // Erhalte alle aktiven Sessions
         List<HttpSession> activeSessions = SessionListener.getActiveSessions();
 
-        String messageCount = "1";
+        String messageCountStr = "";
+        int messageCount = 0;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
 
@@ -36,15 +37,21 @@ public class UpdateMessage {
                                 break;
                         }
 
+                        if (!message.getSeen()) {
+                           messageCount++;
+                        }
                         message.setMessageDateFormatted(message.getDatum().format(formatter));
                     }
 
-                    if (messages.size() > 3) {
-                        messageCount = String.valueOf(messages.size()) + "+";
+                    if (messageCount > 3) {
+                        messageCountStr = messageCount + "+";
+                    } else if (messageCount > 0){
+                        messageCountStr = String.valueOf(messageCount);
                     } else {
-                        messageCount = String.valueOf(messages.size());
+                        messageCountStr = "";
                     }
-                    session.setAttribute("messageCount" , messageCount);
+
+                    session.setAttribute("messageCount" , messageCountStr);
                     session.setAttribute("messages", messages);
                 }
             }
