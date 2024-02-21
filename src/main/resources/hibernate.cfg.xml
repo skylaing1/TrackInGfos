@@ -30,6 +30,7 @@
         <mapping class="org.example.entities.Mitarbeiter"/>
         <mapping class="org.example.entities.Days"/>
         <mapping class="org.example.entities.Entries"/>
+        <mapping class="org.example.entities.Message"/>
     </session-factory>
 
 </hibernate-configuration>

@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.UpdateMessage;
 import org.example.database.LoginDataDAO;
 import org.example.database.TokenDAO;
 import org.example.ServletUtil;
@@ -53,6 +54,7 @@ public class loginServlet extends HttpServlet {
        if (ServletUtil.authenticateUser(email, password,  loginData)) {
            HttpSession session = request.getSession();
            session.setAttribute("SessionMitarbeiter", mitarbeiter);
+           UpdateMessage.RefreshMessage();
 
 
            if (rememberMe) {

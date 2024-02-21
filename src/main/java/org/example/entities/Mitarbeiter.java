@@ -2,6 +2,7 @@ package org.example.entities;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -60,8 +61,11 @@ public class Mitarbeiter {
     private String picturePath;
     //TODO: PricturePath soll über Session übergeben und gesetzt werden
 
+    @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
+    private List<Days> days;
 
-
+    @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
+    private List<Message> messages;
 
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;

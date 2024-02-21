@@ -1,5 +1,6 @@
 package org.example.filter;
 
+import org.example.UpdateMessage;
 import org.example.database.TokenDAO;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -52,6 +53,7 @@ public class SessionCookieCheckFilter implements Filter {
                             session.setAttribute("SessionMitarbeiter", token.getLoginData().getMitarbeiter());
                             System.out.println("Mitarbeiter:" + token.getLoginData().getMitarbeiter().getProfilePicture()); //Test
                             System.out.println("RememberMe cookie angemeldetfilter"); //Test
+                            UpdateMessage.RefreshMessage();
                             chain.doFilter(request, response);
                         } else {
                             cookie.setMaxAge(0);

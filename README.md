@@ -140,3 +140,13 @@ ADD COLUMN WochenStundenFortschritt INT DEFAULT 0;
 
 ALTER TABLE Mitarbeiter
 ADD COLUMN verbleibendeUrlaubstage INT DEFAULT 28;
+
+CREATE TABLE IF NOT EXISTS `Message` (
+`Message_ID` INT NOT NULL AUTO_INCREMENT,
+`Status` VARCHAR(255) NOT NULL,
+`Datum` DATE NOT NULL,
+`Message` TEXT NOT NULL,
+`Mitarbeiter_personalNummer` INT NOT NULL,
+PRIMARY KEY (`Message_ID`),
+FOREIGN KEY (`Mitarbeiter_personalNummer`) REFERENCES `Mitarbeiter`(`personalNummer`) ON DELETE CASCADE
+) ENGINE = InnoDB;
