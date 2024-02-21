@@ -4,6 +4,7 @@
 <%@ page import="org.example.entities.Entries" %>
 <%@ page import="org.example.Alert" %>
 <%@ page import="org.example.entities.Mitarbeiter" %>
+<%@ page import="org.example.entities.Message" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -32,6 +33,8 @@
         List<Entries> entries = (List<Entries>) request.getAttribute("entries");
         Alert alert = (Alert) request.getAttribute("alert");
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+        List<Message> messages = (List<Message>) request.getAttribute("messages");
+        String messageCount = (String) request.getAttribute("messageCount");
     %>
 
 </head>
@@ -50,7 +53,7 @@
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="../resources/img/sidebar_logo.png" alt="">
+               <img src="../resources/img/sidebar_logo.png">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -62,7 +65,6 @@
         </header>
         <div class="menu-bar">
             <div class="menu">
-
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a class="selected" href="${pageContext.request.contextPath}/dashboard">
@@ -72,8 +74,14 @@
                     </li>
                     <li class="nav-link">
                         <a href="${pageContext.request.contextPath}/calendar">
-                            <i class='bx bx-calendar icon' ></i>
+                            <i class='bx bx-calendar icon'></i>
                             <span class="text nav-text">Kalender</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="${pageContext.request.contextPath}/messages">
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">Nachrichten</span>
                         </a>
                     </li>
                     <li class="nav-link">
@@ -82,12 +90,14 @@
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="${pageContext.request.contextPath}/managment">
-                            <i class='bx bx-group icon' ></i>
-                            <span class="text nav-text">Mitarbeiter</span>
-                        </a>
-                    </li>
+                    <c:if test="${mitarbeiter.getAdmin() == true}">
+                        <li class="nav-link">
+                            <a href="${pageContext.request.contextPath}/managment">
+                                <i class='bx bx-group icon' ></i>
+                                <span class="text nav-text">Mitarbeiter</span>
+                            </a>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
             <div class="bottom-content">
@@ -128,30 +138,20 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw" style="color: #a7a7a7;"></i></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">${messageCount}</span><i class="fas fa-bell fa-fw" style="color: #a7a7a7;"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                    <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
+                                    <h6 class="dropdown-header">Benachrichtigungen</h6>
+                                    <c:forEach items="${messages}" var="message">
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="me-3">
-                                        <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
+                                        <div class="bg-${message.status} icon-circle"><i class="fas ${message.icon} text-white"></i></div>
                                     </div>
-                                    <div><span class="small text-gray-500">December 12, 2019</span>
-                                        <p>A new monthly report is ready to download!</p>
+                                    <div><span class="small text-gray-500">${message.messageDateFormatted}</span>
+                                        <p>${message.message}</p>
                                     </div>
-                                </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="me-3">
-                                        <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>
-                                    </div>
-                                    <div><span class="small text-gray-500">December 7, 2019</span>
-                                        <p>$290.29 has been deposited into your account!</p>
-                                    </div>
-                                </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="me-3">
-                                        <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
-                                    </div>
-                                    <div><span class="small text-gray-500">December 2, 2019</span>
-                                        <p>Spending Alert: We've noticed unusually high spending for your account.</p>
-                                    </div>
-                                </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                </a>
+                                    </c:forEach>
+                                </a><a class="dropdown-item text-center small text-gray-500" href="${pageContext.request.contextPath}/messages">Zeige Alle Benachrichtigungen</a>
                                 </div>
                             </div>
                         </li>
@@ -168,7 +168,7 @@
             </nav>
             <div class="container-fluid">
                 <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                    <h3 class="text-dark mb-0">Dashboard</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" style="background: var(--bs-primary);"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
+                    <h3 class="text-dark mb-0">Dashboard</h3>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -254,13 +254,7 @@
                     <div class="col-lg-7 col-xl-8">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
-                                <h6 class="text-primary fw-bold m-0">Stundenverteilung nach Wochentagen (Jährlich)</h6>
-                                <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                        <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
-                                    </div>
-                                </div>
+                                <h6 class="text-primary fw-bold m-0">Stundenverteilung nach Wochentagen</h6>
                             </div>
                             <div class="card-body" style="background: var(--bs-body-bg);">
                                 <div class="chart-area" style="position: relative;height: 365px;">
@@ -369,13 +363,7 @@
                     <div class="col-lg-5 col-xl-4">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center" style="background: var(--bs-card-bg);">
-                                <h6 class="text-primary fw-bold m-0">Revenue Sources</h6>
-                                <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                        <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
-                                    </div>
-                                </div>
+                                <h6 class="text-primary fw-bold mb-0">Stundenverteilung</h6>
                             </div>
                             <div class="card-body" style="background: var(--bs-card-bg);">
                                 <div class="chart-area">

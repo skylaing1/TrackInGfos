@@ -23,6 +23,12 @@ public class Message {
     @Column(name = "Message")
     private String message;
 
+    @Transient
+    private String messageDateFormatted;
+
+    @Transient
+    private String icon;
+
     @ManyToOne
     @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
     private Mitarbeiter mitarbeiter;
@@ -65,5 +71,21 @@ public class Message {
 
     public void setMitarbeiter(Mitarbeiter mitarbeiter) {
         this.mitarbeiter = mitarbeiter;
+    }
+
+    public String getMessageDateFormatted() {
+        return messageDateFormatted;
+    }
+
+    public void setMessageDateFormatted(String messageDateFormatted) {
+        this.messageDateFormatted = messageDateFormatted;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

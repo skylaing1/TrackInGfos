@@ -38,26 +38,26 @@ public class MessageCreater implements Runnable {
 
                     // Erstelle eine neue Nachricht für den Mitarbeiter
                     Message messageForMitarbeiter = new Message();
-                    messageForMitarbeiter.setStatus("Warnung: Es wird knapp – Du hast bisher nur 50% deiner Wochenstunden erreicht");
+                    messageForMitarbeiter.setStatus("warning");
                     messageForMitarbeiter.setDatum(today);
-                    messageForMitarbeiter.setMessage("Dies ist eine Warnung – es wird knapp. Du hast bisher nur die Hälfte deiner Wochenstunden erreicht. Bitte überprüfe und optimiere deine Arbeitszeiten, um dein Wochenziel zu erreichen.");
+                    messageForMitarbeiter.setMessage("<strong>Warnung: Es wird knapp – Du hast bisher nur 50% deiner Wochenstunden erreicht: </strong><br /> Dies ist eine Warnung – es wird knapp. Du hast bisher nur die Hälfte deiner Wochenstunden erreicht. Bitte überprüfe und optimiere deine Arbeitszeiten, um dein Wochenziel zu erreichen.");
                     messageForMitarbeiter.setMitarbeiter(mitarbeiter);
                     MitarbeiterMessages.add(messageForMitarbeiter);
 
                     // Erstelle eine neue Nachricht für den Administrator
                     Message messageForAdmin = new Message();
-                    messageForAdmin.setStatus("Unvollständige Arbeitsstundenwarnung");
+                    messageForAdmin.setStatus("warning");
                     messageForAdmin.setDatum(today);
-                    messageForAdmin.setMessage("Mitarbeiter " + mitarbeiter.getName() + " " + mitarbeiter.getVorname() + " (Personalnummer: " + mitarbeiter.getPersonalNummer() + ") hat weniger als 50% Wochenarbeitsstunden erreicht.");
+                    messageForAdmin.setMessage("<strong>Unvollständige Arbeitsstundenwarnung </strong><br /> Mitarbeiter " + mitarbeiter.getName() + " " + mitarbeiter.getVorname() + " (Personalnummer: " + mitarbeiter.getPersonalNummer() + ") hat weniger als 50% Wochenarbeitsstunden erreicht.");
                     messageForAdmin.setMitarbeiter(mitarbeiter);
                     AdminMessages.add(messageForAdmin);
                 }
                 if (true) {
 
                     Message messageForMitarbeiter = new Message();
-                    messageForMitarbeiter.setStatus("Nicht erreichtes Wochenstundenziel");
+                    messageForMitarbeiter.setStatus("danger");
                     messageForMitarbeiter.setDatum(today);
-                    messageForMitarbeiter.setMessage("Hallo " + mitarbeiter.getVorname() + ", Sie haben Ihr Wochenstundenziel nicht erreicht. Wir erwarten eine Erklärung dafür.");
+                    messageForMitarbeiter.setMessage("<strong>Nicht erreichtes Wochenstundenziel: </strong><br /> Hallo " + mitarbeiter.getVorname() + ", Sie haben Ihr Wochenstundenziel nicht erreicht. Wir erwarten eine Erklärung dafür.");
 
                     messageForMitarbeiter.setMitarbeiter(mitarbeiter);
                     MitarbeiterMessages.add(messageForMitarbeiter);
@@ -65,18 +65,18 @@ public class MessageCreater implements Runnable {
 
 
                     Message messageForAdmin = new Message();
-                    messageForAdmin.setStatus("Wochenstundenziel nicht erreicht - Handlungsbedarf");
+                    messageForAdmin.setStatus("danger");
                     messageForAdmin.setDatum(today);
-                    messageForAdmin.setMessage("Mitarbeiter " + mitarbeiter.getVorname() + " " + mitarbeiter.getName() + " (Personalnummer: " + mitarbeiter.getPersonalNummer() + ") hat sein Wochenstundenziel nicht erreicht. Es wird erwartet, dass entsprechende Maßnahmen ergriffen werden, um dieses Problem anzugehen.");
+                    messageForAdmin.setMessage("<strong>Wochenstundenziel nicht erreicht - Handlungsbedarf</strong><br /> Mitarbeiter " + mitarbeiter.getVorname() + " " + mitarbeiter.getName() + " (Personalnummer: " + mitarbeiter.getPersonalNummer() + ") hat sein Wochenstundenziel nicht erreicht. Es wird erwartet, dass entsprechende Maßnahmen ergriffen werden.");
                     messageForAdmin.setMitarbeiter(mitarbeiter);
                     AdminMessages.add(messageForAdmin);
                 }
 
                 if (mitarbeiter.getWeekHoursProgress() >= 100) {
                     Message messageForMitarbeiter = new Message();
-                    messageForMitarbeiter.setStatus("Ziel erreicht");
+                    messageForMitarbeiter.setStatus("success");
                     messageForMitarbeiter.setDatum(today);
-                    messageForMitarbeiter.setMessage("Herzlichen Glückwunsch! Sie haben Ihr Wochenstundenziel erreicht.");
+                    messageForMitarbeiter.setMessage("<strong>Ziel erreicht:</strong><br /> Herzlichen Glückwunsch! Sie haben Ihr Wochenstundenziel erreicht.");
                     messageForMitarbeiter.setMitarbeiter(mitarbeiter);
                     MitarbeiterMessages.add(messageForMitarbeiter);
                 }

@@ -25,7 +25,7 @@
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="../resources/img/sidebar_logo.png" alt="">
+               <img src="../resources/img/sidebar_logo.png">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -37,7 +37,6 @@
         </header>
         <div class="menu-bar">
             <div class="menu">
-
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="${pageContext.request.contextPath}/dashboard">
@@ -47,8 +46,14 @@
                     </li>
                     <li class="nav-link">
                         <a href="${pageContext.request.contextPath}/calendar">
-                            <i class='bx bx-calendar icon' ></i>
+                            <i class='bx bx-calendar icon'></i>
                             <span class="text nav-text">Kalender</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="${pageContext.request.contextPath}/messages">
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">Nachrichten</span>
                         </a>
                     </li>
                     <li class="nav-link">
@@ -57,22 +62,24 @@
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="${pageContext.request.contextPath}/managment">
-                            <i class='bx bx-group icon' ></i>
-                            <span class="text nav-text">Mitarbeiter</span>
-                        </a>
-                    </li>
+                    <c:if test="${mitarbeiter.getAdmin() == true}">
+                        <li class="nav-link">
+                            <a href="${pageContext.request.contextPath}/managment">
+                                <i class='bx bx-group icon' ></i>
+                                <span class="text nav-text">Mitarbeiter</span>
+                            </a>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
             <div class="bottom-content">
-                <li class="">
+                <li>
                     <a href="${pageContext.request.contextPath}/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Ausloggen</span>
                     </a>
                 </li>
-                <li>
+                <li class="mode">
                     <div class="sun-moon">
                         <i class='bx bx-moon icon moon'></i>
                         <i class='bx bx-sun icon sun'></i>

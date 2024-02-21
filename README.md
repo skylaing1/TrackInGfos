@@ -150,3 +150,5 @@ CREATE TABLE IF NOT EXISTS `Message` (
 PRIMARY KEY (`Message_ID`),
 FOREIGN KEY (`Mitarbeiter_personalNummer`) REFERENCES `Mitarbeiter`(`personalNummer`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
+
+ALTER TABLE Message MODIFY Status VARCHAR(50);
