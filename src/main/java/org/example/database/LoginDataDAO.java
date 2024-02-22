@@ -1,34 +1,28 @@
 package org.example.database;
 
+import org.example.ServerService;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.example.entities.LoginData;
+import org.hibernate.query.Query;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginDataDAO {
 
     public static LoginData getLoginDataByEmail(String email) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
-
-            session.beginTransaction();
-
+        try (Session session = ServerService.getSessionFactory().openSession()) {
             // LoginData mit der gegebenen E-Mail-Adresse aus der Datenbank abrufen
-            LoginData loginData = (LoginData) session.createQuery("FROM LoginData WHERE email = :email")
-                    .setParameter("email", email.toLowerCase())
-                    .uniqueResult();
-
-            session.getTransaction().commit();
-
-            return loginData;
+            Query<LoginData> query = session.createQuery("FROM LoginData WHERE email = :email", LoginData.class);
+            return query.setParameter("email", email.toLowerCase()).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null; // Fehler beim Abrufen von LoginData
         }
     }
+
 
     public static void registerLoginData(String email, String hashedPassword, Mitarbeiter mitarbeiter) {
         try (SessionFactory factory = new Configuration().configure().buildSessionFactory();

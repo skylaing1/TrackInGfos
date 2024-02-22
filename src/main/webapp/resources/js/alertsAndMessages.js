@@ -4,12 +4,11 @@ const alertElements = document.querySelectorAll('.alertnew');
 // Konvertieren der Alerts zu Bootstrap Alerts
 const alertsToClose = Array.from(alertElements).map(element => new bootstrap.Alert(element));
 
-// Loop durch alle alerts und schließt diese nach 5 Sekunden
+// Loop durch alle alerts und schließt diese nach 15 Sekunden
 alertsToClose.forEach((alert, index) => {
-    // Schließt den Alert nach 5 Sekunden
     setTimeout(() => {
         alert.close();
-    }, 5000);
+    }, 15000);
 });
 
 document.getElementById('messageDropdown').addEventListener('click', function() {
@@ -20,5 +19,4 @@ document.getElementById('messageDropdown').addEventListener('click', function() 
     var xhr = new XMLHttpRequest();
     xhr.open('PUT', '/messages', true);
     xhr.send();
-
 });

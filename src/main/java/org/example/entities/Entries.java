@@ -7,24 +7,19 @@ import jakarta.persistence.*;
 @Table(name = "Entries")
 public class Entries {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "entry_id")
     private int entryId;
 
-
     @Column(name = "startTime")
     private String startTime;
-
 
     @Column(name = "endTime")
     private String endTime;
 
-
     @Column(name = "description")
     private String description;
-
 
     @Column(name = "state")
     private String state;
@@ -32,84 +27,43 @@ public class Entries {
     @Column(name = "entryDuration")
     private int entryDuration;
 
-    @Transient
-    private String cardColor;
-
-
-    @Transient
-    private int entryWidth;
-
     @ManyToOne
     @JoinColumn(name = "days_id", nullable = false)
     private Days day;
 
-    public void setDay(Days day) {
-        this.day = day;
-    }
 
-    public void setStatus(String state) {
-        this.state = state;
-    }
+    @Transient
+    private String cardColor;
 
-    public void setStartTime(String time) {
-        this.startTime = time;
-    }
+    @Transient
+    private int entryWidth;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
-    public void setEndTime(String time) {
-        this.endTime = time;
-    }
+    //Getters und Setters
+    public int getEntryId() {return entryId;}
+    public void setEntryId(int entryId) {this.entryId = entryId;}
 
-    public String getState() {
-        return state;
-    }
+    public String getStartTime() {return startTime;}
+    public void setStartTime(String time) {this.startTime = time;}
 
-    public String getStartTime() {
-        return startTime;
-    }
+    public String getEndTime() {return endTime;}
+    public void setEndTime(String time) {this.endTime = time;}
 
-    public String getEndTime() {
-        return endTime;
-    }
+    public String getDescription() {return description;}
+    public void setDescription(String description) {this.description = description;}
 
-    public void setCardColor(String s) {
-        this.cardColor = s;
-    }
+    public String getState() {return state;}
+    public void setStatus(String state) {this.state = state;}
 
-    public String getDescription() {
-        return description;
-    }
+    public int getEntryDuration() {return entryDuration;}
+    public void setEntryDuration(int entryDuration) {this.entryDuration = entryDuration;}
 
-    public String getCardColor() {
-        return cardColor;
-    }
+    public Days getDay() {return day;}
+    public void setDay(Days day) {this.day = day;}
 
-    public int getEntryDuration() {
-        return entryDuration;
-    }
+    public String getCardColor() {return cardColor;}
+    public void setCardColor(String cardColor) {this.cardColor = cardColor;}
 
-    public void setEntryDuration(int i) {
-        this.entryDuration = i;
-    }
-
-    public void setEntryWidth(int v) {
-        this.entryWidth = v;
-    }
-
-    public int getEntryId() {
-        return entryId;
-    }
-
-    public int getEntryWidth() {
-        return entryWidth;
-    }
-
-    public Days getDay() {
-        return day;
-    }
-
-    // getters and setters
+    public int getEntryWidth() {return entryWidth;}
+    public void setEntryWidth(int entryWidth) {this.entryWidth = entryWidth;}
 }

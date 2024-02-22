@@ -26,11 +26,7 @@ public class Days {
     private Date date;
 
     @Column(name = "presentDuration")
-    private int presentDuaration;
-
-    @Expose
-    @Transient
-    private String color;
+    private int presentDuration;
 
     @Expose
     @Column(name = "description")
@@ -38,6 +34,18 @@ public class Days {
 
     @Column(name = "sickDuration")
     private int sickDuration;
+
+    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Entries> entries;
+
+    @ManyToOne
+    @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
+    private Mitarbeiter mitarbeiter;
+
+
+    @Expose
+    @Transient
+    private String color;
 
     @Expose
     @Transient
@@ -48,88 +56,75 @@ public class Days {
     private int presentHours;
 
 
+    //Methoden
+    public DayOfWeek getDayOfWeek() {
+        return date.toLocalDate().getDayOfWeek();
+    }
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Entries> entries;
 
+    //Getters und Setters
+    public int getDayId() {
+        return daysId;
+    }
+    public void setDayId(int dayId) {this.daysId = dayId;}
 
-    @ManyToOne
-    @JoinColumn(name = "Mitarbeiter_personalNummer", nullable = false)
-    private Mitarbeiter mitarbeiter;
-
+    public Date getDate() {
+        return date;
+    }
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setMitarbeiter(Mitarbeiter mitarbeiter) {
-        this.mitarbeiter = mitarbeiter;
     }
 
     public String getStatus() {
         return status;
     }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public Object getDayId() {
-        return daysId;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getPresentDuration() {
-        return presentDuaration;
+        return presentDuration;
+    }
+    public void setPresentDuration(int presentDuration) {
+        this.presentDuration = presentDuration;
     }
 
-    public void setPresentDuration(int i) {
-        this.presentDuaration = i;
-    }
-
-    public void setSickDuration(int i) {
-        this.sickDuration = i;
+    public String getDescription() {return description;}
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getSickDuration() {
         return sickDuration;
     }
-
-    public void setSickHours(int i) {
-        this.sickHours = i;
+    public void setSickDuration(int i) {
+        this.sickDuration = i;
     }
 
-    public void setPresentHours(int i) {
-        this.presentHours = i;
+    public List<Entries> getEntries() {return entries; }
+    public void setEntries(List<Entries> entries) {this.entries = entries;}
+
+    public Mitarbeiter getMitarbeiter() {return mitarbeiter; }
+    public void setMitarbeiter(Mitarbeiter mitarbeiter) {
+        this.mitarbeiter = mitarbeiter;
     }
 
-    public int getPresentHours() {
-        return presentHours;
+    public String getColor() {return color;}
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public int getSickHours() {
         return sickHours;
     }
-
-    public Date getDate() {
-        return date;
+    public void setSickHours(int sickHours) {
+        this.sickHours = sickHours;
     }
 
-    public DayOfWeek getDayOfWeek() {
-        return date.toLocalDate().getDayOfWeek();
+    public int getPresentHours() {
+        return presentHours;
     }
-
-    public List<Entries> getEntries() {
-        return entries;
+    public void setPresentHours(int i) {
+        this.presentHours = i;
     }
-
-
-
-    // getters and setters
 }

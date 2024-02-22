@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../resources/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="../resources/img/favicon_io/site.webmanifest">
-    <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
@@ -22,9 +22,9 @@
     <link rel="stylesheet" href="../resources/css/datatable.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="../resources/js-year-calendar/css/js-year-calendar.css">
-    <script src="../resources/js-year-calendar/js/js-year-calendar.min.js"></script>
-    <script src="../resources/js-year-calendar/js/js-year-calendar.de.js"></script>
+    <link rel="stylesheet" href="../resources/js-year-calendar/js-year-calendar.css">
+    <script src="../resources/js-year-calendar/js-year-calendar.min.js"></script>
+    <script src="../resources/js-year-calendar/js-year-calendar.de.js"></script>
     <link rel="stylesheet" href="../resources/css/calendar.css">
     <%
         String darkMode = (String) request.getAttribute("darkMode");
@@ -41,7 +41,7 @@
         <header>
             <div class="image-text">
             <span class="image">
-               <img src="../resources/img/sidebar_logo.png">
+               <img src="../resources/img/staticpictures/sidebar_logo.png">
             </span>
                 <div class="text logo-text">
                     <span class="name">TrackIn</span>
@@ -614,7 +614,7 @@
 </footer>
 
 
-    <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../resources/bootstrap/bootstrap.min.js"></script>
     <script src="../resources/js/sidebar.js"></script>
     <script src="../resources/js/datatable.js"></script>
     <script src="../resources/js/managmentcalendar.js"></script>

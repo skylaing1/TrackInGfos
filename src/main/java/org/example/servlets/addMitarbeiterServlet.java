@@ -22,7 +22,7 @@ public class addMitarbeiterServlet extends HttpServlet {
 
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
 
-        if (mitarbeiter == null || !mitarbeiter.isAdmin()) {
+        if (mitarbeiter == null || !mitarbeiter.getAdmin()) {
             response.sendRedirect("/dashboard");
             return;
         }

@@ -24,23 +24,27 @@ public class Token {
     @JoinColumn(name = "credentials_id", referencedColumnName = "credentials_id")
     private LoginData loginData;
 
+    //Getters und Setters
+
+    public int getTokenId() {return tokenId;}
+    public void setTokenId(int tokenId) {this.tokenId = tokenId;}
+
+    public String getToken_content() {return token_content;}
     public void setToken_content(String tokenContent) {
         this.token_content = tokenContent;
-    }
-
-    public void setLoginData(LoginData loginDataByEmail) {
-        this.loginData = loginDataByEmail;
-    }
-
-    public void setToken_timestamp() {
-        this.token_timestamp = new Date();
     }
 
     public Date getTimestamp() {
         return token_timestamp;
     }
+    public void setToken_timestamp() {
+        this.token_timestamp = new Date();
+    }
 
     public LoginData getLoginData() {
         return loginData;
+    }
+    public void setLoginData(LoginData loginDataByEmail) {
+        this.loginData = loginDataByEmail;
     }
 }

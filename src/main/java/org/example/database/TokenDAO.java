@@ -1,9 +1,11 @@
 package org.example.database;
 
+import org.example.ServerService;
 import org.example.entities.LoginData;
 import org.example.entities.Token;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.time.LocalDateTime;
@@ -14,28 +16,31 @@ import java.util.List;
 public class TokenDAO {
 
     public static void storeTokenInDatabase(String token_content, LoginData loginData) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
-            System.out.println("TokenDAO.storeTokenInDatabase");
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
 
-            session.beginTransaction();
+            try {
+                transaction = session.beginTransaction();
 
-            Token token = new Token();
-            token.setToken_content(token_content);
-            token.setLoginData(loginData);
+                Token token = new Token();
+                token.setToken_content(token_content);
+                token.setLoginData(loginData);
+                token.setToken_timestamp();
 
-            token.setToken_timestamp();
+                session.persist(token);
 
-            session.persist(token);
-
-            session.getTransaction().commit();
-
-
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
         } catch (Exception e) {
-            // Handle Exceptions
             e.printStackTrace();
         }
     }
+
 
 
     public static void deleteTokenByContent(String tokenContent) {

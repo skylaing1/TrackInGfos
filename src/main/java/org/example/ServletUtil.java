@@ -10,7 +10,6 @@ import org.example.database.EntriesDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
@@ -95,11 +94,6 @@ public class ServletUtil {
                 return false; // Benutzer mit der gegebenen E-Mail-Adresse nicht gefunden
             }
     }
-
-    public static String generateSecureToken() {
-        return UUID.randomUUID().toString();
-    }
-
 
     public static boolean comparePassword(String password, String password2) {
     return password.equals(password2);

@@ -10,7 +10,6 @@ import jakarta.persistence.*;
 @Table(name = "Mitarbeiter")
 public class Mitarbeiter {
 
-
     @Id
     @Column(name = "personalNummer")
     private int personalNummer;
@@ -35,6 +34,7 @@ public class Mitarbeiter {
 
     @Column(name = "profile_picture", columnDefinition = "varchar(255) default '../resources/img/avatars/default.jpeg'")
     private String profilePicture;
+    //TODO: PricturePath wird doppelt irgendwo gesetzt
 
     @Column(name = "WochenStundenFortschritt", columnDefinition = "int default 0")
     private int weekHoursProgress;
@@ -48,19 +48,6 @@ public class Mitarbeiter {
     @Column(name = "onetimepassword")
     private String onetimepassword;
 
-    @Transient
-    private String geburtsdatumFormatted;
-
-    @Transient
-    private String einstellungsdatumFormatted;
-
-    @Transient
-    private String wochenstundenFormatted;
-
-    @Transient
-    private String picturePath;
-    //TODO: PricturePath soll über Session übergeben und gesetzt werden
-
     @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private List<Days> days;
 
@@ -70,151 +57,118 @@ public class Mitarbeiter {
     @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private LoginData loginData;
 
-    public Mitarbeiter() {
-    }
 
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
+    @Transient
+    private String geburtsdatumFormatted;
 
-    public int getPersonalnummer() {
-        return personalNummer;
-    }
+    @Transient
+    private String einstellungsdatumFormatted;
 
+    @Transient
+    private String wochenstundenFormatted;
+
+
+    //Getters und Setters
     public int getPersonalNummer() {return personalNummer;}
-
-    public LocalDate getGeburtsdatum() {
-        return this.geburtsdatum;
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public String getVorname(){
-        return this.vorname;
-    }
-
-
-    public String getOnetimepassword() {
-        return this.onetimepassword;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setGeburtsdatum(LocalDate geburtsdatum) {
-        this.geburtsdatum = geburtsdatum;
-    }
-
     public void setPersonalNummer(int personalNummer) {
         this.personalNummer = personalNummer;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public String getName(){
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public String getVorname(){
+        return vorname;
+    }
+    public void setVorname(String vorname) {this.vorname = vorname;}
 
-
-
-
-    public void setProfilePicture(String fileName) {
-        if (fileName == null || fileName.isEmpty()) {
-            this.profilePicture = "../resources/img/avatars/default.jpeg";
-        } else {
-            this.profilePicture = "../resources/img/avatars/" + fileName;
-        }
+    public LocalDate getGeburtsdatum() {
+        return geburtsdatum;
+    }
+    public void setGeburtsdatum(LocalDate geburtsdatum) {
+        this.geburtsdatum = geburtsdatum;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public LocalDate getEinstellungsdatum() {
+        return einstellungsdatum;
     }
-
-    public void setGeburtsdatumFormatted(String geburtsdatumFormatted) {
-        this.geburtsdatumFormatted = geburtsdatumFormatted;
-    }
-    public String getGeburtsdatumFormatted() {
-        return geburtsdatumFormatted;
-    }
-
-
-
-
-
-    public void setWochenstundenFormatted(String wochenstundenFormatted) {
-        this.wochenstundenFormatted = wochenstundenFormatted;
-    }
-
-
-    public String getWochenstundenFormatted() {
-        return wochenstundenFormatted;
-    }
-
-    public int getWochenstunden() {
-        return wochenstunden;
+    public void setEinstellungsdatum(LocalDate einstellungsdatum) {
+        this.einstellungsdatum = einstellungsdatum;
     }
 
     public String getPosition() {
         return position;
     }
-
     public void setPosition(String position) {
         this.position = position;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public int getWochenstunden() {
+        return wochenstunden;
     }
-
     public void setWochenstunden(int wochenstunden) {
         this.wochenstunden = wochenstunden;
     }
 
-    public void setOnetimepassword(String onetimepassword) {
-        this.onetimepassword = onetimepassword;
+    public String getProfilePicture() {
+        return profilePicture;
     }
-
-
-    public LocalDate getEinstellungsdatum() {
-        return einstellungsdatum;
-    }
-
-    public String getEinstellungsdatumFormatted() {
-        return einstellungsdatumFormatted;
-    }
-    public void setEinstellungsdatumFormatted(String formattedDateEinstellungsDatum) {
-        this.einstellungsdatumFormatted = formattedDateEinstellungsDatum;
-    }
-
-    public void setEinstellungsdatum(LocalDate parse) {
-        this.einstellungsdatum = parse;
-    }
-
-    public LoginData getLoginData() {
-        return loginData;
-    }
-
-    public void setLoginData(LoginData loginData) {
-        this.loginData = loginData;
-    }
-
-    public void setWeekHoursProgress(int i) {
-        this.weekHoursProgress = i;
+    public void setProfilePicture(String fileName) {
+        if (fileName == null || fileName.isEmpty()) {
+            this.profilePicture = "../resources/img/avatars/default.jpeg";
+        } else {
+            this.profilePicture = "../resources/img/avatars/" + fileName;}
     }
 
     public int getWeekHoursProgress() {
         return weekHoursProgress;
     }
-
-    public void setVerbleibendeUrlaubstage(int leftVacation) {
-        this.verbleibendeUrlaubstage = leftVacation;
+    public void setWeekHoursProgress(int weekHoursProgress) {
+        this.weekHoursProgress = weekHoursProgress;
     }
 
     public int getVerbleibendeUrlaubstage() {
         return verbleibendeUrlaubstage;
     }
-}
+    public void setVerbleibendeUrlaubstage(int verbleibendeUrlaubstage) {this.verbleibendeUrlaubstage = verbleibendeUrlaubstage;}
 
-//TODO: If für Sidebar Managment anhand von Admin
+    public boolean getAdmin() {
+        return admin;
+    }
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public String getOnetimepassword() {
+        return onetimepassword;
+    }
+    public void setOnetimepassword(String onetimepassword) {
+        this.onetimepassword = onetimepassword;
+    }
+
+    public List<Days> getDays() {return days;}
+    public void setDays(List<Days> days) {this.days = days;}
+
+    public List<Message> getMessages() {return messages;}
+    public void setMessages(List<Message> messages) {this.messages = messages;}
+
+    public LoginData getLoginData() {return loginData;}
+    public void setLoginData(LoginData loginData) {this.loginData = loginData;}
+
+    public String getGeburtsdatumFormatted() {
+        return geburtsdatumFormatted;
+    }
+    public void setGeburtsdatumFormatted(String geburtsdatumFormatted) {this.geburtsdatumFormatted = geburtsdatumFormatted;}
+
+    public String getEinstellungsdatumFormatted() {
+        return einstellungsdatumFormatted;
+    }
+    public void setEinstellungsdatumFormatted(String formattedDateEinstellungsDatum) {this.einstellungsdatumFormatted = formattedDateEinstellungsDatum;}
+
+    public String getWochenstundenFormatted() {return wochenstundenFormatted;}
+    public void setWochenstundenFormatted(String wochenstundenFormatted) {this.wochenstundenFormatted = wochenstundenFormatted;}
+}
