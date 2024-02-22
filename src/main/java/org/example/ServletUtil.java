@@ -194,4 +194,16 @@ public class ServletUtil {
         return (!date.isBefore(aktuellesDatum.with(DayOfWeek.MONDAY)) && !date.isAfter(aktuellesDatum.with(DayOfWeek.SUNDAY)));
     }
 
+    public static int calculateDuration(String startTime, String endTime) {
+        int startHour = Integer.parseInt(startTime.substring(0, 2));
+        int startMinute = Integer.parseInt(startTime.substring(3, 5));
+        int endHour = Integer.parseInt(endTime.substring(0, 2));
+        int endMinute = Integer.parseInt(endTime.substring(3, 5));
+
+        int duration;
+
+        return duration = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
+    }
+
+
 }

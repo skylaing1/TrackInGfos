@@ -11,15 +11,16 @@ import org.example.ServletUtil;
 import org.example.database.DaysDAO;
 import org.example.database.EntriesDAO;
 import org.example.database.MitarbeiterDAO;
-import org.example.database.UtilDAO;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 
 
 import java.io.IOException;
+import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.TextStyle;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.example.Alert;
@@ -31,6 +32,7 @@ public class dashboardServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
 
+        LocalDate today = LocalDate.now();
 
         int stundenKontingentInMinuten = mitarbeiter.getWochenstunden() * 60;
         int stundenKontingentInStunden = 0;
@@ -74,8 +76,9 @@ public class dashboardServlet extends HttpServlet {
         }
 
         List<Entries> entriesList = ServletUtil.getCurrentEntriesForDashboard(mitarbeiter,daysList, session);
+        session.setAttribute("entriesSession", entriesList);
 
-        LocalDate today = LocalDate.now();
+
 
         // Schliefe für die Tage im ganzen Jahr
         for (Days day : daysList) {
@@ -96,6 +99,7 @@ public class dashboardServlet extends HttpServlet {
                 }
             }
 
+            // Tage in die Listen ordnen
             switch (dayOfWeekString) {
                 case "MONDAY":
                     MondayList.add(day);
@@ -117,6 +121,7 @@ public class dashboardServlet extends HttpServlet {
                     break;
             }
 
+            // Urlaubstage und Krankheitstage zählen
             if (day.getStatus().equals("Urlaub")) {
                 urlaubAnspruch--;
             }
@@ -125,10 +130,10 @@ public class dashboardServlet extends HttpServlet {
             }
         }
 
-        // Liste für die Statisken der Wochentage (Bar Chart)
+        // Statistiken aus den Listen berechnen und in eine Liste neue Liste packen für die Bar Chart
         List<DailyStats> dailyStatsList = ServletUtil.getDailyStatsList(MondayList, TuesdayList, WednesdayList, ThursdayList, FridayList, SaturdayList);
 
-        // Schleife für die Statisken der Wochentage (Formatierung) (Bar Chart, Doughnut Chart)
+        // Schleife für die Formatierung der Arrays für die Bar Chart und die Summe der Stunden für die Doughnut Chart
         for (int i = 0; i < dailyStatsList.size(); i++) {
             // Summe der Stunden für die Doughnut Chart
             totalPresentHours += dailyStatsList.get(i).getPresentDuration();
@@ -157,24 +162,26 @@ public class dashboardServlet extends HttpServlet {
 
 
 
+        // Berechnung der geleisteten Stunden für die Progress Bar
         if (geleisteteMinuten > 0 && stundenKontingentInMinuten > 0){
             geleisteteMinutenInProzent = (geleisteteMinuten * 100) / stundenKontingentInMinuten;
             geleisteteStunden = geleisteteMinuten / 60;
             stundenKontingentInStunden = stundenKontingentInMinuten / 60;
         }
 
+        //krank tage berechnen
         if (krankMinuten > 0){
             krankTage = krankMinuten / 480;
         }
 
 
+        // Update der geleisteten Stunden und des Urlaubsanspruchs in der Datenbank
         MitarbeiterDAO.updateWeekHoursProgressAndVacationDays(geleisteteMinutenInProzent, urlaubAnspruch , mitarbeiter);
 
 
 
 
         Alert alert = (Alert) session.getAttribute("alert");
-
         request.setAttribute("alert", alert);
         session.removeAttribute("alert");
 
@@ -198,22 +205,90 @@ public class dashboardServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        LocalDate date = LocalDate.now();
       HttpSession session = request.getSession(false);
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+        Boolean newDay = false;
 
       String state = request.getParameter("input_status");
       String startTime = request.getParameter("input_zeit_von");
       String endTime = request.getParameter("input_zeit_bis");
       String description = request.getParameter("input_notizen");
+      List<Entries> entriesList = (List<Entries>) session.getAttribute("entriesSession");
+      session.removeAttribute("entriesSession");
 
-      LocalDate date = LocalDate.now();
+
+        LocalTime newEntryStart = LocalTime.parse(startTime, formatter);
+        LocalTime newEntryEnd = LocalTime.parse(endTime, formatter);
+
+        // Wenn der neue Eintrag sich mit einem bestehenden Eintrag überschneidet, wird ein Alert generiert und der Nutzer wird zurück zum Dashboard geleitet
+      if (entriesList != null && !entriesList.isEmpty()) {
+          for (Entries entry : entriesList) {
+              LocalTime entryStart = LocalTime.parse(entry.getStartTime(), formatter);
+              LocalTime entryEnd = LocalTime.parse(entry.getEndTime(), formatter);
+              if (newEntryStart.isAfter(entryStart) && newEntryStart.isBefore(entryEnd) || newEntryEnd.isAfter(entryStart) && newEntryEnd.isBefore(entryEnd)) {
+                  Alert alert = Alert.dangerAlert( "Ungültiger Eintrag","Der neue Eintrag überschneidet sich mit einem bestehenden Eintrag, bitte überprüfen Sie die Zeiten und versuchen Sie es erneut.");
+                  session.setAttribute("alert", alert);
+                  response.sendRedirect("/dashboard");
+                  return;
+              }
+          }
+      } else {
+          entriesList = new ArrayList<>();
+        }
+
+        Entries entry = new Entries();
+        entry.setStatus(state);
+        entry.setStartTime(startTime);
+        entry.setEndTime(endTime);
+        entry.setDescription(description);
+        entry.setEntryDuration(ServletUtil.calculateDuration(startTime, endTime));
+
+        Days day = DaysDAO.fetchDayByDateAndMitarbeiter(date, mitarbeiter.getPersonalNummer());
+
+        if (day == null) {
+            day = new Days();
+            day.setDate(Date.valueOf(date));
+            day.setMitarbeiter(mitarbeiter);
+            day.setStatus(state);
+            day.setDescription("Automatisch generiert");
+            newDay = true;
+        }
 
 
-      Alert alert = UtilDAO.createEntryAndUpdateDay(state, startTime, endTime, description, date, request);
+
+
+        if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
+            int currentDuration = day.getPresentDuration();
+            day.setPresentDuration(currentDuration + entry.getEntryDuration());
+        }
+        if (entry.getState().equals("Krank")) {
+            int currentDuration = day.getSickDuration();
+            day.setSickDuration(currentDuration + entry.getEntryDuration());
+        }
+
+
+
+
+        if (!newDay) {
+            day.setStatus(EntriesDAO.findStatusWithLargestSum(mitarbeiter.getPersonalNummer(), date));
+            entry.setDay(day);
+            entriesList.add(entry);
+            day.setEntries(entriesList);
+            DaysDAO.updateDay(day);
+
+        } else {
+            Days savedDay = DaysDAO.saveDay(day);
+            entry.setDay(day);
+            entriesList.add(entry);
+            savedDay.setEntries(entriesList);
+            DaysDAO.updateDay(savedDay);
+        }
+
+        Alert alert = Alert.successAlert("Erfolgreich", "Der Eintrag wurde erfolgreich hinzugefügt");
 
       session.setAttribute("alert", alert);
-
-      response.sendRedirect("dashboard");
+      response.sendRedirect("/dashboard");
     }
 }
-

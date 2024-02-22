@@ -7,6 +7,7 @@ import org.example.entities.Mitarbeiter;
 import org.example.entities.Token;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 
@@ -261,20 +262,22 @@ public class MitarbeiterDAO {
     }
 
     public static void updateWeekHoursProgressAndVacationDays(int geleisteteMinutenInProzent, int leftVacation, Mitarbeiter mitarbeiter) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
 
-            session.beginTransaction();
+                mitarbeiter.setWeekHoursProgress(geleisteteMinutenInProzent);
+                mitarbeiter.setVerbleibendeUrlaubstage(leftVacation);
+                session.merge(mitarbeiter);
 
-            mitarbeiter.setWeekHoursProgress(geleisteteMinutenInProzent);
-            mitarbeiter.setVerbleibendeUrlaubstage(leftVacation);
-
-            session.update(mitarbeiter);
-
-            session.getTransaction().commit();
-
-            session.close();
-
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

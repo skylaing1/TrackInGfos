@@ -35,7 +35,7 @@ public class Days {
     @Column(name = "sickDuration")
     private int sickDuration;
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Entries> entries;
 
     @ManyToOne
@@ -97,9 +97,7 @@ public class Days {
     public int getSickDuration() {
         return sickDuration;
     }
-    public void setSickDuration(int i) {
-        this.sickDuration = i;
-    }
+    public void setSickDuration(int sickDuration) {this.sickDuration = sickDuration;}
 
     public List<Entries> getEntries() {return entries; }
     public void setEntries(List<Entries> entries) {this.entries = entries;}

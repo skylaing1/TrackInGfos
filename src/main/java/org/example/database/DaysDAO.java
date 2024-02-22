@@ -1,7 +1,5 @@
 package org.example.database;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
 import org.example.ServerService;
 import org.example.ServletUtil;
@@ -117,20 +115,15 @@ public class DaysDAO {
     }
 
     public static Days fetchDayByDateAndMitarbeiter(LocalDate date, int personalNummer) {
-
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        Days day = session.createQuery("from Days where date = :date and mitarbeiter.personalNummer = :nummer", Days.class)
-                .setParameter("date", Date.valueOf(date))
-                .setParameter("nummer", personalNummer)
-                .uniqueResult();
-
-        session.getTransaction().commit();
-        session.close();
-
-        return day;
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            return session.createQuery("from Days where date = :date and mitarbeiter.personalNummer = :nummer", Days.class)
+                    .setParameter("date", Date.valueOf(date))
+                    .setParameter("nummer", personalNummer)
+                    .uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static List<Days> getDaysofCurrentYear(int personalNummer) {
@@ -169,4 +162,49 @@ public class DaysDAO {
     }
 
 
+    public static Days saveDay(Days day) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+
+            try {
+                transaction = session.beginTransaction();
+
+                session.persist(day);
+
+                transaction.commit();
+
+                return day;
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void updateDay(Days day) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+
+            try {
+                transaction = session.beginTransaction();
+
+                session.merge(day);
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

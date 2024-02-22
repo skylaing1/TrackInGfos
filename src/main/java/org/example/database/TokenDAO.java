@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -42,70 +43,37 @@ public class TokenDAO {
     }
 
 
-
     public static void deleteTokenByContent(String tokenContent) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
 
-            session.beginTransaction();
+            try {
+                transaction = session.beginTransaction();
 
+                Query<Token> query = session.createQuery("FROM Token WHERE token_content = :tokenContent", Token.class);
 
-            Token token = (Token) session.createQuery("FROM Token WHERE token_content = :token_content")
-                    .setParameter("token_content", tokenContent)
-                    .uniqueResult();
-
-            if (token != null) {
-
-                session.remove(token);
-            }
-
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-            if (e instanceof jakarta.persistence.OptimisticLockException) {
-
-                System.out.println("The token was updated or deleted by another transaction. Please try again.");
-            } else {
-
+                if (query != null) {
+                    session.remove(query);
+                }
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
                 e.printStackTrace();
             }
-        }
-    }
-
-    public static void deleteOldTokens() {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
-
-            session.beginTransaction();
-
-            LocalDateTime localDateTime = LocalDateTime.now().minusDays(14);
-            Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-
-            session.createQuery("DELETE FROM Token WHERE token_timestamp < :date")
-                    .setParameter("date", date)
-                    .executeUpdate();
-
-            session.getTransaction().commit();
-
         } catch (Exception e) {
-            // Handle Exceptions
             e.printStackTrace();
         }
-
     }
 
     public static Token getValidToken(String tokenContent) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
-
-            session.beginTransaction();
+        try (Session session = ServerService.getSessionFactory().openSession()) {
 
             List<Token> tokens = session.createQuery("FROM Token WHERE token_content = :token_content", Token.class)
                     .setParameter("token_content", tokenContent)
                     .list();
 
-            session.getTransaction().commit();
 
             if (tokens != null && !tokens.isEmpty()) {
                 LocalDateTime localDateTime = LocalDateTime.now().minusDays(14);
@@ -114,7 +82,6 @@ public class TokenDAO {
                 for (Token token : tokens) {
                     if (token.getTimestamp().before(date)) {
                         deleteTokenByContent(tokenContent);
-                        System.out.println("TokenDAO.getValidToken: Token ist abgelaufen");
                     } else {
                         return token;
                     }
@@ -122,10 +89,9 @@ public class TokenDAO {
             }
             return null;
         } catch (Exception e) {
-            // Handle Exceptions
-            System.out.println("Exception occurred: " + e.getMessage());
             e.printStackTrace();
             return null;
         }
+
     }
 }

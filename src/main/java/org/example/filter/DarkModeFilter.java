@@ -26,12 +26,8 @@ public class DarkModeFilter implements Filter {
             createDarkModeCookie(httpResponse, darkMode);
         }
 
-
         request.setAttribute("darkMode", darkMode);
-
-
         chain.doFilter(request, response);
-
 
     }
 
@@ -47,7 +43,6 @@ public class DarkModeFilter implements Filter {
         return null;
     }
 
-    // Helper method to create the darkMode cookie
     private void createDarkModeCookie(HttpServletResponse response, String darkModeValue) {
         Cookie darkModeCookie = new Cookie("darkMode", darkModeValue);
         darkModeCookie.setMaxAge(Integer.MAX_VALUE);

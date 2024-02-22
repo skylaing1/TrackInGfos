@@ -90,7 +90,7 @@
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
-                    <c:if test="${mitarbeiter.getAdmin() == true}">
+                   <c:if test="<%=mitarbeiter.getAdmin()%>">
                         <li class="nav-link">
                             <a href="${pageContext.request.contextPath}/managment">
                                 <i class='bx bx-group icon' ></i>

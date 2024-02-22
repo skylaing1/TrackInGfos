@@ -17,7 +17,6 @@ import org.example.entities.Token;
 
 import java.io.IOException;
 
-import static org.example.database.TokenDAO.deleteOldTokens;
 
 @WebFilter(filterName="SessionCookieCheckFilter",value="/*") // Filter für alle URLs
 public class SessionCookieCheckFilter implements Filter {
@@ -28,13 +27,11 @@ public class SessionCookieCheckFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String requestURI = httpRequest.getRequestURI();
         boolean isStaticResource = ((HttpServletRequest) request).getRequestURI().startsWith("/resources/");
-        System.out.println("CheckFilter"); //Test
 
         // Überprüfen, ob es sich um die Login- oder Registrierungsseite handelt
 
         if (requestURI.contains("login") || requestURI.contains("register") || isStaticResource ) {
             chain.doFilter(request, response);
-            System.out.println("Login oder Register"); //Test
             return;
         }
 
@@ -42,7 +39,6 @@ public class SessionCookieCheckFilter implements Filter {
 
         // Überprüfen, ob eine gültige Sitzung vorhanden ist
         if (session == null || session.getAttribute("SessionMitarbeiter") == null) {
-            System.out.println("Filter :Keine Session"); //Test
             Cookie[] cookies = httpRequest.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
@@ -51,8 +47,6 @@ public class SessionCookieCheckFilter implements Filter {
                         if (token != null) {
                             session = httpRequest.getSession();
                             session.setAttribute("SessionMitarbeiter", token.getLoginData().getMitarbeiter());
-                            System.out.println("Mitarbeiter:" + token.getLoginData().getMitarbeiter().getProfilePicture()); //Test
-                            System.out.println("RememberMe cookie angemeldetfilter"); //Test
                             UpdateMessage.RefreshMessage();
                             chain.doFilter(request, response);
                         } else {
@@ -66,7 +60,6 @@ public class SessionCookieCheckFilter implements Filter {
             httpResponse.sendRedirect("/login");
         } else {
             if (requestURI.equals("/")) {
-                System.out.println("Session war noch da2"); //Test
                 httpResponse.sendRedirect("/dashboard");
 
                 return;

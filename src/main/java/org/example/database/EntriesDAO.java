@@ -9,6 +9,7 @@ import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -41,15 +42,18 @@ public class EntriesDAO {
         }
     }
 
-    public static int calculateDuration(String startTime, String endTime) {
-        int startHour = Integer.parseInt(startTime.substring(0, 2));
-        int startMinute = Integer.parseInt(startTime.substring(3, 5));
-        int endHour = Integer.parseInt(endTime.substring(0, 2));
-        int endMinute = Integer.parseInt(endTime.substring(3, 5));
+    public static String findStatusWithLargestSum(int personalNummer, LocalDate date) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Query<Entries> query = session.createQuery("from Entries where day.mitarbeiter.personalNummer = :personalNummer and day.date = :date ORDER BY startTime ASC", Entries.class);
+            query.setParameter("personalNummer", personalNummer);
+            query.setParameter("date", date);
+            query.setMaxResults(1);
 
-        int duration;
-
-        return duration = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
+            return query.uniqueResult().getState();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static void deleteSingleEntry(int id) {
