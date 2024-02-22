@@ -1,6 +1,7 @@
 package org.example.database;
 
 import jakarta.persistence.Tuple;
+import org.example.ServerService;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import org.example.entities.Token;
@@ -19,26 +20,12 @@ public class MitarbeiterDAO {
 
 
     public static Mitarbeiter getMitarbeiterByPersonalNummer(int personalNummer) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
-
-            session.beginTransaction();
-
-            // Finde den Mitarbeiter anhand der Personalnummer
-            Mitarbeiter mitarbeiter = session.get(Mitarbeiter.class, personalNummer);
-
-            // Committe die Transaktion
-            session.getTransaction().commit();
-
-            session.close();
-
-            return mitarbeiter;
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            return session.get(Mitarbeiter.class, personalNummer);
         } catch (Exception e) {
-            // Handle Exceptions
             e.printStackTrace();
+            return null;
         }
-
-        return null; // Rückgabe, wenn etwas schief geht
     }
 
     public static List<Mitarbeiter> fetchAllMitarbeiterForTable() {

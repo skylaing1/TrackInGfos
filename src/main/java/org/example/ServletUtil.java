@@ -95,10 +95,6 @@ public class ServletUtil {
             }
     }
 
-    public static boolean comparePassword(String password, String password2) {
-    return password.equals(password2);
-}
-
     public static Entries createDefaultPauseEntry(Days day, String description) {
         Entries entry = new Entries();
         entry.setStatus("Pause");
@@ -122,16 +118,26 @@ public class ServletUtil {
     }
 
 
-    public static List<Entries> getCurrentEntriesForDashboard(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+    public static List<Entries> getCurrentEntriesForDashboard(Mitarbeiter mitarbeiter , List<Days> daysList, HttpSession session) {
         LocalDate date = LocalDate.now();
+
         int totalDuration = 0;
 
-        List<Entries> entriesList = EntriesDAO.getTodayEntriesForMitarbeiter(mitarbeiter, date);
+        List<Entries> entriesList = new ArrayList<>();
 
+        for (Days day : daysList) {
+            if (day.getDate().toLocalDate().equals(date)) {
+                entriesList = day.getEntries();
+                break;
+            }
+        }
+
+        if (entriesList == null) {
+            return null;
+        }
         for (Entries entry : entriesList) {
 
+            // Farbe der Karte festlegen
             switch (entry.getState()) {
                 case "Anwesend":
                     entry.setCardColor("var(--bs-success)");
@@ -164,25 +170,7 @@ public class ServletUtil {
             }
             entry.setEntryWidth(width);
         }
-
-        session.setAttribute("totalDuration", totalDuration);
-
         return entriesList;
-    }
-
-    public static List<Days> getDaysofCurrentMonth(HttpServletRequest request, List<Days> daysList) {
-
-        LocalDate date = LocalDate.now();
-        List<Days> daysListCurrentMonth = new ArrayList<>();
-
-        for (Days day : daysList) {
-            if (day.getDate().toLocalDate().getMonthValue() == date.getMonthValue()) {
-                daysListCurrentMonth.add(day);
-            }
-        }
-
-
-        return daysListCurrentMonth;
     }
 
 

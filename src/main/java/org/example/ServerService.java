@@ -19,7 +19,7 @@ public class ServerService implements ServletContextListener {
 
         //  MessageCreater alle 30 Sekunden ausführen
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new MessageCreater(), 0, 30, TimeUnit.SECONDS);
+//        scheduler.scheduleAtFixedRate(new MessageCreater(), 0, 30, TimeUnit.SECONDS);
 
         //  SessionFactory nur einmal erstellen
         sessionFactory = new Configuration().configure().buildSessionFactory();

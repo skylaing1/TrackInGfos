@@ -243,7 +243,7 @@
                                     <tbody class="table-hover" data-total-rows="<%=request.getAttribute("totalRows")%>">
                                     <c:forEach var="mitarbeiter_inTable" items="${mitarbeiterList}">
                                         <tr>
-                                            <td class="col-auto">${mitarbeiter_inTable.personalnummer}</td>
+                                            <td class="col-auto">${mitarbeiter_inTable.personalNummer}</td>
                                             <td class="col-auto">
                                                 <div class="c-avatar"><img class="rounded-circle me-2" height="30"
                                                                            src="${mitarbeiter_inTable.profilePicture}"
@@ -268,9 +268,9 @@
                                             </div></td>
                                             <td class="col-auto">
                                                 <div class="text-end">
-                                                <i class="far fa-eye iconeye" data-id='${mitarbeiter_inTable.personalnummer}'></i>
+                                                <i class="far fa-eye iconeye" data-id='${mitarbeiter_inTable.personalNummer}'></i>
                                                 <i class='far fa-edit iconedit'
-                                                   data-id='${mitarbeiter_inTable.personalnummer}'
+                                                   data-id='${mitarbeiter_inTable.personalNummer}'
                                                    data-name='${mitarbeiter_inTable.name}'
                                                    data-vorname='${mitarbeiter_inTable.vorname}'
                                                    data-geburtsdatum='${mitarbeiter_inTable.geburtsdatum}'
@@ -279,7 +279,7 @@
                                                    data-wochenstunden='${mitarbeiter_inTable.wochenstunden}'
                                                    data-admin='${mitarbeiter_inTable.admin}'></i>
                                                 <i class="far fa-trash-alt icontrash"
-                                                   data-id='${mitarbeiter_inTable.personalnummer}'></i>
+                                                   data-id='${mitarbeiter_inTable.personalNummer}'></i>
                                                 </div>
                                             </td>
                                         </tr>

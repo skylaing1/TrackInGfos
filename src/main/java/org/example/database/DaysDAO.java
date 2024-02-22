@@ -3,12 +3,14 @@ package org.example.database;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
+import org.example.ServerService;
 import org.example.ServletUtil;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.sql.Date;
@@ -131,32 +133,18 @@ public class DaysDAO {
         return day;
     }
 
-    public static List<Days> getDaysofCurrentYear(HttpServletRequest request) {
-        try {
-            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
-
+    public static List<Days> getDaysofCurrentYear(int personalNummer) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
             LocalDate date = LocalDate.now();
-            HttpSession session1 = request.getSession(false);
-            Mitarbeiter mitarbeiter = (Mitarbeiter) session1.getAttribute("SessionMitarbeiter");
-            int personalNummer = mitarbeiter.getPersonalNummer();
 
-            List<Days> days = session.createQuery("from Days where year(date) = :year and mitarbeiter.personalNummer = :nummer", Days.class)
+            return session.createQuery("from Days where year(date) = :year and mitarbeiter.personalNummer = :nummer", Days.class)
                     .setParameter("year", date.getYear())
                     .setParameter("nummer", personalNummer)
                     .list();
-
-            session.getTransaction().commit();
-            session.close();
-
-            return days;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
-
     }
 
     public static Alert deleteDayAndEntries(int daysId) {
@@ -179,5 +167,6 @@ public class DaysDAO {
             return Alert.dangerAlert("Datenbankfehler", "Es ist ein Fehler beim Löschen der Daten aufgetreten");
         }
     }
-}
 
+
+}

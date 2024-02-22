@@ -54,7 +54,7 @@ public class Mitarbeiter {
     @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private List<Message> messages;
 
-    @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "mitarbeiter", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private LoginData loginData;
 
 

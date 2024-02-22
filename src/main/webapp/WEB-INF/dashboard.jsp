@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="jakarta.servlet.http.Cookie" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.entities.Entries" %>
 <%@ page import="org.example.Alert" %>
 <%@ page import="org.example.entities.Mitarbeiter" %>
 <%@ page import="org.example.entities.Message" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -29,23 +30,17 @@
 
     <%
         String darkMode = (String) request.getAttribute("darkMode");
-        String currentTheme = (String) request.getAttribute("currentTheme");
-        List<Entries> entries = (List<Entries>) request.getAttribute("entries");
-        Alert alert = (Alert) request.getAttribute("alert");
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
-        List<Message> messages = (List<Message>) request.getAttribute("messages");
-        String messageCount = (String) request.getAttribute("messageCount");
     %>
-
 </head>
 
 <body id="page-top" data-bs-theme="<%=darkMode.equals("true") ? "dark" : "light"%>">
 
 <c:if test="${alert != null}">
-    <div class="alert alertnew alert-${alert.alertType} alert-dismissible fade show" role="alert" style="position: fixed;">
+    <div class="alert alertnew alert-${alert.alertType} alert-dismissible fade show" role="alert" style="position: fixed;max-width: 450px;">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        <h4><i class="fa fa-${alert.alertIcon}"></i>${alert.alertTitle}</h4>
-        <p class="mb-0">${alert.alertMessage}</p>
+        <h4 class="alert-heading"><strong><i class="fa fa-${alert.alertIcon}"></i>${alert.alertTitle}</strong></h4>
+        <hr><p class="mb-0">${alert.alertMessage}</p>
     </div>
 </c:if>
 <div id="wrapper">
@@ -90,7 +85,7 @@
                             <span class="text nav-text">Profil</span>
                         </a>
                     </li>
-                    <c:if test="${mitarbeiter.getAdmin() == true}">
+                    <c:if test="<%=mitarbeiter.getAdmin()%>">
                         <li class="nav-link">
                             <a href="${pageContext.request.contextPath}/managment">
                                 <i class='bx bx-group icon' ></i>
@@ -181,14 +176,14 @@
                             <div class="card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col me-2">
-                                        <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Wochenstunden fortschritt</span></div>
+                                        <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Aktueller Wochenstundenfortschritt</span></div>
                                         <div class="row g-0 align-items-center">
                                             <div class="col-auto">
                                                 <div class="text-dark fw-bold h5 mb-0 me-3"><span>${geleisteteStundenInProzent}%</span></div>
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm">
-                                                    <div class="progress-bar bg-info" style="width: ${geleisteteStundenInProzent}%;"></div>
+                                                    <div class="progress-bar bg-success" style="width: ${geleisteteStundenInProzent}%;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,10 +211,10 @@
                             <div class="card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col me-2">
-                                        <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Gehalt</span></div>
-                                        <div class="text-dark fw-bold h5 mb-0"><span>215,000€</span></div>
+                                        <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Offene Wochenstunden</span></div>
+                                        <div class="text-dark fw-bold h5 mb-0"><span>${stundenKontingentInStunden - geleisteteStunden}</span></div>
                                     </div>
-                                    <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                                    <div class="col-auto"><i class="fas fa-clock fa-2x text-gray-300"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -229,8 +224,8 @@
                             <div class="card-body">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col me-2">
-                                        <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Abwesendheit&nbsp;</span></div>
-                                        <div class="text-dark fw-bold h5 mb-0"><span>18h</span></div>
+                                        <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Krankheitsbedingte Abwesenheit (in Tagen)</span></div>
+                                        <div class="text-dark fw-bold h5 mb-0"><span>${krankTage} </span></div>
                                     </div>
                                     <div class="col-auto"><i class="fa fa-times-circle fa-2x text-gray-300"></i></div>
                                 </div>

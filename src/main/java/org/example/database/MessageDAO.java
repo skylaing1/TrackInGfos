@@ -138,7 +138,9 @@ public class MessageDAO {
 
             List<Message> messages = session.createQuery("from Message where mitarbeiter.personalNummer = :personalNummer order by datum asc", Message.class)
                     .setParameter("personalNummer", user.getPersonalNummer())
+                    .setMaxResults(3)
                     .list();
+
 
 
             session.getTransaction().commit();

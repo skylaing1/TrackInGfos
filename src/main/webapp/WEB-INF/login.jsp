@@ -1,4 +1,6 @@
+<%@ page import="org.example.Alert" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html data-bs-theme="dark" lang="en" data-bss-forced-theme="dark">
 
@@ -22,11 +24,10 @@
 <c:if test="${alert != null}">
     <div class="alert alertnew alert-${alert.alertType} alert-dismissible fade show" role="alert" style="position: fixed;max-width: 450px; top: 20px; right: 20px;">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        <h4 class="alert-heading"><strong><i class="fa fa-${alert.alertIcon}"></i>${alert.alertTitle}</strong></h4><hr>
-        <p class="mb-0">${alert.alertMessage}</p>
+        <h4 class="alert-heading"><strong><i class="fa fa-${alert.alertIcon}"></i>${alert.alertTitle}</strong></h4>
+        <hr><p class="mb-0">${alert.alertMessage}</p>
     </div>
 </c:if>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9 col-lg-12 col-xl-10">
@@ -42,11 +43,11 @@
                                     <h4 class="text-dark mb-4">Willkommen Zurück!</h4>
                                 </div>
                                 <form class="user" action="${pageContext.request.contextPath}/login" method="post">
-                                    <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail" placeholder="Email Adresse" name="email"></div>
-                                    <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Passwort" name="password"></div>
+                                    <div class="mb-3"><input class="form-control form-control-user" type="email" placeholder="Email Adresse" name="email"></div>
+                                    <div class="mb-3"><input class="form-control form-control-user" type="password"  placeholder="Passwort" name="password"></div>
                                     <div class="mb-3">
                                         <div class="custom-control custom-checkbox small">
-                                            <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1" name="rememberMe" value="true"><label class="form-check-label custom-control-label" for="formCheck-1">Angemeldet Bleiben</label></div>
+                                            <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck" name="rememberMe" value="true"><label class="form-check-label custom-control-label" for="formCheck">Angemeldet Bleiben</label></div>
                                         </div>
                                     </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Login</button>
                                     <hr>

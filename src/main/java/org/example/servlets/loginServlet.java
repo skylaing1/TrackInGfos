@@ -63,6 +63,7 @@ public class loginServlet extends HttpServlet {
        } else {
            Alert alert = Alert.dangerAlert("Login Fehlgeschlagen", "Die Anmeldung konnte nicht abgeschlossen werden. Bitte überprüfen Sie Ihre Anmeldeinformationen und versuchen Sie es erneut.");
            request.setAttribute("alert", alert);
+           request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
        }
     }
 }

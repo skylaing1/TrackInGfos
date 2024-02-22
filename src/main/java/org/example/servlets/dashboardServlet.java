@@ -33,10 +33,14 @@ public class dashboardServlet extends HttpServlet {
 
 
         int stundenKontingentInMinuten = mitarbeiter.getWochenstunden() * 60;
+        int stundenKontingentInStunden = 0;
         int geleisteteMinutenInProzent = 0;
         int geleisteteMinuten = 0;
+        int geleisteteStunden = 0;
+        int krankMinuten = 0;
 
         int urlaubAnspruch = 28;
+        int krankTage = 0;
 
 
         // Listen zum Sortieren der Tage (Bar Chart)
@@ -59,13 +63,17 @@ public class dashboardServlet extends HttpServlet {
         int totalBreakHours = 0;
 
 
-        List<Entries> entriesList = ServletUtil.getCurrentEntriesForDashboard(request);
+
 
         // Liste für die Tage im ganzen Jahr
-        List<Days> daysList = DaysDAO.getDaysofCurrentYear(request);
+        List<Days> daysList = DaysDAO.getDaysofCurrentYear(mitarbeiter.getPersonalNummer());
 
-        // Liste für die Tage im aktuellen Monat
-        List<Days> daysListCurrentMonth = ServletUtil.getDaysofCurrentMonth(request, daysList);
+        if (daysList == null) {
+            request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
+            return;
+        }
+
+        List<Entries> entriesList = ServletUtil.getCurrentEntriesForDashboard(mitarbeiter,daysList, session);
 
         LocalDate today = LocalDate.now();
 
@@ -112,6 +120,9 @@ public class dashboardServlet extends HttpServlet {
             if (day.getStatus().equals("Urlaub")) {
                 urlaubAnspruch--;
             }
+            if (day.getStatus().equals("Krank")) {
+                krankMinuten += day.getSickDuration();
+            }
         }
 
         // Liste für die Statisken der Wochentage (Bar Chart)
@@ -148,7 +159,14 @@ public class dashboardServlet extends HttpServlet {
 
         if (geleisteteMinuten > 0 && stundenKontingentInMinuten > 0){
             geleisteteMinutenInProzent = (geleisteteMinuten * 100) / stundenKontingentInMinuten;
+            geleisteteStunden = geleisteteMinuten / 60;
+            stundenKontingentInStunden = stundenKontingentInMinuten / 60;
         }
+
+        if (krankMinuten > 0){
+            krankTage = krankMinuten / 480;
+        }
+
 
         MitarbeiterDAO.updateWeekHoursProgressAndVacationDays(geleisteteMinutenInProzent, urlaubAnspruch , mitarbeiter);
 
@@ -169,6 +187,9 @@ public class dashboardServlet extends HttpServlet {
 
         request.setAttribute("pieChartArray", pieChartArray);
 
+        request.setAttribute("krankTage", krankTage);
+        request.setAttribute("geleisteteStunden", geleisteteStunden);
+        request.setAttribute("stundenKontingentInStunden", stundenKontingentInStunden);
         request.setAttribute("geleisteteStundenInProzent", geleisteteMinutenInProzent);
         request.setAttribute("VerbleibenderUrlaubAnspruch", urlaubAnspruch);
         request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);

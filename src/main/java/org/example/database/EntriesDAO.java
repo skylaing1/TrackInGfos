@@ -2,6 +2,7 @@ package org.example.database;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.example.ServerService;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 import org.example.entities.Mitarbeiter;
@@ -28,22 +29,16 @@ public class EntriesDAO {
     }
 
     public static List<Entries> getTodayEntriesForMitarbeiter(Mitarbeiter mitarbeiter, LocalDate date) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        //Asc damit der Erste Eintrag der erste ist
-        List<Entries> entries = session.createQuery("from Entries where day.mitarbeiter.personalNummer = :personalNummer and day.date = :date ORDER BY startTime ASC", Entries.class)
-                .setParameter("personalNummer", mitarbeiter.getPersonalNummer())
-                .setParameter("date", date)
-                .list();
-
-
-        session.getTransaction().commit();
-        session.close();
-
-
-        return entries;
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            //Asc damit der Erste Eintrag der erste ist
+            return session.createQuery("from Entries where day.mitarbeiter.personalNummer = :personalNummer and day.date = :date ORDER BY startTime ASC", Entries.class)
+                    .setParameter("personalNummer", mitarbeiter.getPersonalNummer())
+                    .setParameter("date", date)
+                    .list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static int calculateDuration(String startTime, String endTime) {
