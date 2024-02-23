@@ -117,12 +117,7 @@ public class Mitarbeiter {
     public String getProfilePicture() {
         return profilePicture;
     }
-    public void setProfilePicture(String fileName) {
-        if (fileName == null || fileName.isEmpty()) {
-            this.profilePicture = "../resources/img/avatars/default.jpeg";
-        } else {
-            this.profilePicture = "../resources/img/avatars/" + fileName;}
-    }
+    public void setProfilePicture(String fileName) {this.profilePicture = fileName;}
 
     public int getWeekHoursProgress() {
         return weekHoursProgress;

@@ -157,3 +157,6 @@ ALTER TABLE Message
 ADD COLUMN `Read` BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE Message CHANGE `Read` seen BOOLEAN;
+
+ALTER TABLE `Mitarbeiter`
+MODIFY `verbleibendeUrlaubstage` INT DEFAULT 28;

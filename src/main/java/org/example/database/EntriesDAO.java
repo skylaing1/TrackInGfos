@@ -38,18 +38,6 @@ public class EntriesDAO {
         }
     }
 
-    public static List<Entries> getTodayEntriesForMitarbeiter(Mitarbeiter mitarbeiter, LocalDate date) {
-        try (Session session = ServerService.getSessionFactory().openSession()) {
-            //Asc damit der Erste Eintrag der erste ist
-            return session.createQuery("from Entries where day.mitarbeiter.personalNummer = :personalNummer and day.date = :date ORDER BY startTime ASC", Entries.class)
-                    .setParameter("personalNummer", mitarbeiter.getPersonalNummer())
-                    .setParameter("date", date)
-                    .list();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     public static String findStatusWithLargestSum(int personalNummer, LocalDate date) {
         try (Session session = ServerService.getSessionFactory().openSession()) {

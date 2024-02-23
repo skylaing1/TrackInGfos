@@ -53,7 +53,6 @@ public class ServletUtil {
                 break;
         }
 
-
         return entriesList;
     }
 
@@ -70,7 +69,6 @@ public class ServletUtil {
                             session = request.getSession(true);
                             session.setAttribute("SessionMitarbeiter", token.getLoginData().getMitarbeiter());
                             response.sendRedirect("/dashboard");
-                            System.out.println("Token funktionier"); //Test
                             return true;
                         }
                         cookie.setMaxAge(0);
@@ -78,7 +76,6 @@ public class ServletUtil {
                     }
                 }
             }
-
             return false;
         }
         response.sendRedirect("/dashboard");
@@ -203,6 +200,14 @@ public class ServletUtil {
         int duration;
 
         return duration = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
+    }
+
+    public static String capitalizeFirstLetter(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        } else {
+            return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        }
     }
 
 

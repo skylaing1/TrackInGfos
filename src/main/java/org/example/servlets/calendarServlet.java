@@ -116,6 +116,13 @@ public class calendarServlet extends HttpServlet {
         response.sendRedirect("/calendar");
     }
 
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int daysId = Integer.parseInt(request.getParameter("id"));
+        Alert alert = DaysDAO.deleteDayAndEntries(daysId);
+        HttpSession session = request.getSession(false);
+        session.setAttribute("alert", alert);
+    }
+
 
 
 }

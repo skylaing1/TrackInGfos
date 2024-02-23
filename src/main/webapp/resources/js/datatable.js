@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('DeleteConfirm').addEventListener('click', function () {
         // Send a DELETE request to the server
-        fetch(`/deleteMitarbeiter?id=${idToDelete}`, {
+        fetch(`/managment?id=${idToDelete}`, {
             method: 'DELETE',
         });
 

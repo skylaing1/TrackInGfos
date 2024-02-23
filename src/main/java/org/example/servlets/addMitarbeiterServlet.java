@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import org.example.database.MitarbeiterDAO;
 import org.example.entities.Mitarbeiter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.servlet.ServletException;
@@ -37,24 +38,26 @@ public class addMitarbeiterServlet extends HttpServlet {
         boolean admin = Boolean.parseBoolean(request.getParameter("input_admin"));
         int wochenstunden = Integer.parseInt(request.getParameter("input_wochenstunden"));
 
-        System.out.println("Vorname: " + vorname);
-        System.out.println("Personalnummer: " + personalNummer);
-        System.out.println("Name: " + nachname);
-        System.out.println("Geburtsdatum: " + geburtsdatum);
-        System.out.println("Eintrittsdatum: " + eintrittsdatum);
-        System.out.println("Position: " + position);
-        System.out.println("Onetimepassword: " + onetimepassword);
-        System.out.println("Wochenstunden: " + wochenstunden);
-        System.out.println("Admin: " + admin);
-
         //TODO: Einmal Passwort verschlüsseln vllt auch Generieren in der Erfolgsmeldung
         //TODO: Erfolgreich hinzugefügt Meldung
 
          String hashedPassword = BCrypt.hashpw(onetimepassword, BCrypt.gensalt(12));
 
-        MitarbeiterDAO.addMitarbeiter(vorname, personalNummer, nachname, geburtsdatum, eintrittsdatum, position, hashedPassword, wochenstunden, admin);
+        Mitarbeiter newMitarbeiter = new Mitarbeiter();
+        newMitarbeiter.setVorname(vorname);
+        newMitarbeiter.setPersonalNummer(personalNummer);
+        newMitarbeiter.setName(nachname);
+        newMitarbeiter.setGeburtsdatum(LocalDate.parse(geburtsdatum));
+        newMitarbeiter.setEinstellungsdatum(LocalDate.parse(eintrittsdatum));
+        newMitarbeiter.setPosition(position);
+        newMitarbeiter.setOnetimepassword(onetimepassword);
+        newMitarbeiter.setWochenstunden(wochenstunden);
+        newMitarbeiter.setVerbleibendeUrlaubstage(28);
+        newMitarbeiter.setAdmin(admin);
+        newMitarbeiter.setProfilePicture("../resources/img/avatars/default.jpeg");
+
+        MitarbeiterDAO.addMitarbeiter(newMitarbeiter);
 
         response.sendRedirect("/managment");
     }
 }
-//TODO: https://en.m.wikipedia.org/wiki/Post/Redirect/Get

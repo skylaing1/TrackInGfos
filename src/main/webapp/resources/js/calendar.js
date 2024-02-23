@@ -83,7 +83,7 @@ function saveEvent() {
 }
 
 function deleteEvent(e) {
-    fetch(`/deleteDay?id=${e.id}`, {
+    fetch(`/calendar?id=${e.id}`, {
         method: 'DELETE',
     })
         var dataSource = calendar.getDataSource();

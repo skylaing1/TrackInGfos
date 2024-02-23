@@ -259,7 +259,6 @@ public class dashboardServlet extends HttpServlet {
             day = new Days();
             day.setDate(Date.valueOf(date));
             day.setMitarbeiter(mitarbeiter);
-            day.setStatus(state);
             day.setDescription("Automatisch generiert");
             newDay = true;
         }

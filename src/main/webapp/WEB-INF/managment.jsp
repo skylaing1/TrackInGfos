@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Mitarbeiter - TrackIn</title>
+    <title>Verwaltung - TrackIn</title>
     <link rel="apple-touch-icon" sizes="180x180" href="../resources/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../resources/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
@@ -21,14 +21,12 @@
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link rel="stylesheet" href="../resources/css/datatable.css">
     <link rel='stylesheet' href="../resources/boxicons/css/boxicons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../resources/js-year-calendar/js-year-calendar.css">
     <script src="../resources/js-year-calendar/js-year-calendar.min.js"></script>
     <script src="../resources/js-year-calendar/js-year-calendar.de.js"></script>
     <link rel="stylesheet" href="../resources/css/calendar.css">
     <%
         String darkMode = (String) request.getAttribute("darkMode");
-        String currentTheme = (String) request.getAttribute("currentTheme");
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
     %>
 
@@ -80,7 +78,7 @@
                     </li>
                    <c:if test="<%=mitarbeiter.getAdmin()%>">
                         <li class="nav-link">
-                            <a href="${pageContext.request.contextPath}/managment">
+                            <a class="selected" href="${pageContext.request.contextPath}/managment">
                                 <i class='bx bx-group icon' ></i>
                                 <span class="text nav-text">Mitarbeiter</span>
                             </a>
@@ -110,89 +108,32 @@
     </nav>
     <div class="d-flex flex-column" id="content-wrapper" style="background: var(--bs-lvl1); height: 100vh;">
         <div id="content">
-            <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light"
-                 style=" ;background: var(--bs-lvl3);">
-                <div class="container-fluid">
-                    <button class="btn d-md-none rounded-circle me-3 " id="sidebarToggleTop" type="button"
-                            onclick="mobileToggle"><i class="fas fa-bars"></i></button>
-                    <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group" style="border-width: 1px;"><input class="form-control border-0 small"
-                                                                                   type="text" placeholder="Suche  ...">
-                            <button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button>
-                        </div>
-                    </form>
+            <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light" style="background: var(--bs-lvl3);">
+                <div class="container-fluid"><button class="btn d-md-none rounded-circle me-3 " id="sidebarToggleTop" type="button" onclick="mobileToggle"><i class="fas fa-bars"></i></button>
                     <ul class="navbar-nav flex-nowrap ms-auto" style="color: rgb(221, 223, 235);">
-                        <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
-                                                                            aria-expanded="false"
-                                                                            data-bs-toggle="dropdown" href="#"><i
-                                class="fas fa-search"></i></a>
-                            <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
-                                 aria-labelledby="searchDropdown">
-                                <form class="me-auto navbar-search w-100">
-                                    <div class="input-group"><input class="bg-light form-control border-0 small"
-                                                                    type="text" placeholder="Search for ...">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary py-0" type="button"><i
-                                                    class="fas fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       aria-expanded="false" data-bs-toggle="dropdown"
-                                                                       href="#"><span
-                                    class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"
-                                                                                      style="color: #a7a7a7;"></i></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#" id="messageDropdown"><span class="badge bg-danger badge-counter" id="messageCount">${messageCount}</span><i class="fas fa-bell fa-fw" style="color: #a7a7a7;"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                    <h6 class="dropdown-header">alerts center</h6><a
-                                        class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="me-3">
-                                        <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div><span class="small text-gray-500">December 12, 2019</span>
-                                        <p>A new monthly report is ready to download!</p>
-                                    </div>
-                                </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="me-3">
-                                        <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div><span class="small text-gray-500">December 7, 2019</span>
-                                        <p>$290.29 has been deposited into your account!</p>
-                                    </div>
-                                </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="me-3">
-                                        <div class="bg-warning icon-circle"><i
-                                                class="fas fa-exclamation-triangle text-white"></i></div>
-                                    </div>
-                                    <div><span class="small text-gray-500">December 2, 2019</span>
-                                        <p>Spending Alert: We've noticed unusually high spending for your account.</p>
-                                    </div>
-                                </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All
-                                    Alerts</a>
+                                    <h6 class="dropdown-header">Benachrichtigungen</h6>
+                                    <c:forEach items="${messages}" var="message">
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="me-3">
+                                                <div class="bg-${message.status} icon-circle"><i class="fas ${message.icon} text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">${message.messageDateFormatted}</span>
+                                                <p>${message.message}</p>
+                                            </div>
+                                        </a>
+                                    </c:forEach>
+                                    </a><a class="dropdown-item text-center small text-gray-500" href="${pageContext.request.contextPath}/messages">Zeige Alle Benachrichtigungen</a>
                                 </div>
                             </div>
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
-                                                                       aria-expanded="false" data-bs-toggle="dropdown"
-                                                                       href="#"><span
-                                    class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);"><%=mitarbeiter.getVorname() + " " + mitarbeiter.getName()%></span><img
-                                    class="border rounded-circle img-profile" src="<%=mitarbeiter.getProfilePicture()%>"></a>
-                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a
-                                        class="dropdown-item" href="#"><i
-                                        class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
-                                        class="dropdown-item" href="#"><i
-                                        class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a
-                                        class="dropdown-item" href="#"><i
-                                        class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline text-dark me-2 small"><%=mitarbeiter.getVorname() + " " + mitarbeiter.getName()%></span><img class="border rounded-circle img-profile" src="<%=mitarbeiter.getProfilePicture()%>"></a>
+                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="${pageContext.request.contextPath}/profile"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profie</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
                             </div>
                         </li>
@@ -203,33 +144,26 @@
                 <h3 class="text-dark mb-4">Verwaltung</h3>
                 <div class="card shadow">
                     <div class="card-header py-3" style="background: var(--bs-card-bg);">
-                        <p class="text-primary float-start m-0 fw-bold" style="font-size: 21px;padding-top: 4px;">
-                            Mitarbeiter</p>
-
+                        <p class="text-primary float-start m-0 fw-bold" style="font-size: 21px;padding-top: 4px;">Mitarbeiter</p>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-start dataTables_filter" id="dataTable_filter">
                                     <label class="form-label">
-                                        <input type="search" class="form-control form-control-m"
-                                               aria-controls="dataTable" placeholder="Suche">
+                                        <input type="search" class="form-control form-control-m" aria-controls="dataTable" placeholder="Suche">
                                     </label>
                                 </div>
-                                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#mitarbeiter">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#mitarbeiter">
                                     <i class="fas fa-plus"></i><span style="margin-left: 10px;">Hinzufügen</span>
                                 </button>
                             </div>
-                            <!-- TODO: Button für Handy -->
                             <div id="dataTable-1" class="table-responsive table mt-2" role="grid"
                                  aria-describedby="dataTable_info">
                                 <table id="dataTable" class="table table-hover my-0" style="white-space: nowrap;">
                                     <thead>
                                     <tr>
-                                        <th style="width: 20px;" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Personalnummer">
-                                            Nr.
-                                        </th>
+                                        <th style="width: 20px;" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Personalnummer">Nr.</th>
                                         <th class="col-auto" >Name</th>
                                         <th >Geburtsdatum</th>
                                         <th>Eintrittsdatum</th>
@@ -244,42 +178,30 @@
                                     <c:forEach var="mitarbeiter_inTable" items="${mitarbeiterList}">
                                         <tr>
                                             <td class="col-auto">${mitarbeiter_inTable.personalNummer}</td>
-                                            <td class="col-auto">
-                                                <div class="c-avatar"><img class="rounded-circle me-2" height="30"
-                                                                           src="${mitarbeiter_inTable.profilePicture}"
-                                                                           width="30"/><span
-                                                        class="c-avatar__status"></span></div>
-                                                    ${mitarbeiter_inTable.vorname} ${mitarbeiter_inTable.name}
-                                            </td>
+                                            <td class="col-auto"><div class="c-avatar"><img class="rounded-circle me-2" height="30" src="${mitarbeiter_inTable.profilePicture}" width="30"/><span class="c-avatar__status"></span></div>${mitarbeiter_inTable.vorname} ${mitarbeiter_inTable.name}</td>
                                             <td class="col-auto">${mitarbeiter_inTable.geburtsdatumFormatted}</td>
                                             <td class="col-auto">${mitarbeiter_inTable.einstellungsdatumFormatted}</td>
                                             <td class="col-auto">${mitarbeiter_inTable.position}</td>
                                             <td class="col-auto">${mitarbeiter_inTable.wochenstundenFormatted}</td>
                                             <td class="col-auto">${mitarbeiter_inTable.verbleibendeUrlaubstage} von 28 Tagen</td>
-                                            <td> <div class="row g-0 align-items-center">
-                                                <div class="col-3">
-                                                    <div class="text-dark fw-bold h8 me-1"><span>${mitarbeiter_inTable.weekHoursProgress}%</span></div>
-                                                </div>
-                                                <div class="col me-10">
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-success"  style="width: ${mitarbeiter_inTable.weekHoursProgress}%;"></div>
+                                            <td>
+                                                <div class="row g-0 align-items-center">
+                                                    <div class="col-3">
+                                                        <div class="text-dark fw-bold h8 me-1">
+                                                            <span>${mitarbeiter_inTable.weekHoursProgress}%</span></div>
+                                                    </div>
+                                                    <div class="col me-10">
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-success" style="width: ${mitarbeiter_inTable.weekHoursProgress}%;"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div></td>
+                                            </td>
                                             <td class="col-auto">
                                                 <div class="text-end">
                                                 <i class="far fa-eye iconeye" data-id='${mitarbeiter_inTable.personalNummer}'></i>
-                                                <i class='far fa-edit iconedit'
-                                                   data-id='${mitarbeiter_inTable.personalNummer}'
-                                                   data-name='${mitarbeiter_inTable.name}'
-                                                   data-vorname='${mitarbeiter_inTable.vorname}'
-                                                   data-geburtsdatum='${mitarbeiter_inTable.geburtsdatum}'
-                                                   data-einstellungsdatum='${mitarbeiter_inTable.einstellungsdatum}'
-                                                   data-position='${mitarbeiter_inTable.position}'
-                                                   data-wochenstunden='${mitarbeiter_inTable.wochenstunden}'
-                                                   data-admin='${mitarbeiter_inTable.admin}'></i>
-                                                <i class="far fa-trash-alt icontrash"
-                                                   data-id='${mitarbeiter_inTable.personalNummer}'></i>
+                                                <i class='far fa-edit iconedit' data-id='${mitarbeiter_inTable.personalNummer}' data-name='${mitarbeiter_inTable.name}' data-vorname='${mitarbeiter_inTable.vorname}' data-geburtsdatum='${mitarbeiter_inTable.geburtsdatum}' data-einstellungsdatum='${mitarbeiter_inTable.einstellungsdatum}' data-position='${mitarbeiter_inTable.position}' data-wochenstunden='${mitarbeiter_inTable.wochenstunden}' data-admin='${mitarbeiter_inTable.admin}'></i>
+                                                <i class="far fa-trash-alt icontrash" data-id='${mitarbeiter_inTable.personalNummer}'></i>
                                                 </div>
                                             </td>
                                         </tr>
@@ -289,16 +211,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
-                                    <p aria-live="polite">Mitarbeiter: ${totalRows}:
-                                        Abwesend: ${mitarbeiterList.size()}</p>
+                                    <p>Mitarbeiter: ${totalRows}: Abwesend: ${mitarbeiterList.size()}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                         <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" aria-label="Previous"
-                                                                     href="#"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span
-                                                    aria-hidden="true">»</span></a></li>
+                                            <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span>»</span></a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -307,29 +226,24 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-
     <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title"><i class="bi bi-exclamation-triangle" style="color: red;"></i> Achtung!</h4>
                 </div>
-
                 <div class="modal-body">
                     Möchten sie den Mitarbeiter wirklich löschen?
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
                     <button type="button" class="btn btn-secondary" id="DeleteConfirm" data-bs-dismiss="modal">
                         Bestätigen
                     </button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -338,28 +252,19 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em"
-                             fill="currentColor" style="font-size: 34px;">
-                            <path d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
-                        </svg>&nbsp; Mitarbeiter Hinzufügen
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" style="font-size: 34px;"><path d="M0 0h24v24H0z" fill="none"></path><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>&nbsp; Mitarbeiter Hinzufügen
                     </h4>
-                    <button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <form action="${pageContext.request.contextPath}/addMitarbeiter" method="post">
                             <div class="row">
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Vorname
-                                        *</strong></label><input class="form-control form-control" type="text"
-                                                                 id="service_name-1" name="input_vorname"
-                                                                 placeholder="Max" required=""></div>
-                                    <div class="mb-3"><label class="form-label form-label" for="Datalist"><strong>Personalnummer
-                                        *</strong></label><input onchange="resetIfInvalid(this);" id="Datalist"
-                                                                 class="form-control" name="input_personalnummer"
-                                                                 list="datalistOptions2" placeholder="1234" required>
-                                        <datalist name="datalistOptions2">
+                                    <div class="mb-3"><label class="form-label" for="service_name"><strong>Vorname
+                                        *</strong></label><input class="form-control" type="text" id="service_name-1" name="input_vorname" placeholder="Max" required=""></div>
+                                    <div class="mb-3"><label class="form-label" for="Datalist"><strong>Personalnummer *</strong></label><input onchange="resetIfInvalid(this);" id="Datalist" class="form-control" name="input_personalnummer" list="datalistOptions2" placeholder="1234" required>
+                                        <datalist id="datalistOptions2">
                                             <c:forEach var="personalNummer" items="${allAvailablePersonalNummer}">
                                                 <option value="${personalNummer}">${personalNummer}</option>
                                             </c:forEach>
@@ -367,74 +272,63 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for="service_name"><strong>Name
-                                        *</strong></label><input class="form-control form-control" type="text"
-                                                                 id="service_name" name="input_nachname"
-                                                                 placeholder="Mustermann" required=""></div>
-                                    <div class="mb-2"><label class="form-label form-label"><strong>Administrator
-                                        *</strong></label>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="service_name"><strong>Name *</strong></label>
+                                        <input class="form-control" type="text" id="service_name" name="input_nachname" placeholder="Mustermann" required="">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label"><strong>Administrator *</strong></label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="input_admin"
-                                                   id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Ja
-                                            </label>
+                                            <input class="form-check-input" type="radio" name="input_admin" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">Ja</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="input_admin"
-                                                   id="flexRadioDefault2" checked>
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Nein
-                                            </label>
+                                            <input class="form-check-input" type="radio" name="input_admin" id="flexRadioDefault2" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">Nein</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label"
-                                                             for="input_geburtsdatum"><strong>Geburtsdatum
-                                        *</strong></label><input class="form-control form-control"
-                                                                 id="input_geburtsdatum" type="date"
-                                                                 name="input_geburtsdatum" required=""></div>
+                                    <div class="mb-3"><label class="form-label" for="input_geburtsdatum"><strong>Geburtsdatum *</strong></label>
+                                        <input class="form-control" id="input_geburtsdatum" type="date" name="input_geburtsdatum" required="">
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label"
-                                                             for="input_einstellungsdatum"><strong>Einstellungsdatum
-                                        *</strong><br></label><input
-                                            class="form-control form-controlinput_einstellungsdatum"
-                                            id="input_einstellungsdatum" type="date" name="input_einstellungsdatum"
-                                            required=""></div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="input_einstellungsdatum"><strong>Einstellungsdatum *</strong><br></label>
+                                        <input class="form-control" id="input_einstellungsdatum" type="date" name="input_einstellungsdatum" required="">
+                                    </div>
                                 </div>
                             </div>
                             <div class="text-end mb-3"></div>
                             <div class="row mb-2">
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for="position"><strong>Position
-                                        *</strong></label>
-                                        <div class="form-group mb-3"><select class="form-select" id="position"
-                                                                             name="input_position" required="">
-                                            <option value="Praktikant" selected="">Praktikant</option>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="position"><strong>Position *</strong></label>
+                                        <div class="form-group mb-3"><select class="form-select" id="position" name="input_position" required="">
                                             <option value="Geschäftsführer">Geschäftsführung</option>
-                                        </select></div>
+                                            <option value="Mitarbeiter" selected="">Mitarbeiter</option>
+                                            <option value="Auszubildender">Auszubildender</option>
+                                            <option value="Praktikant">Praktikant</option>
+                                        </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label form-label" for=wochenstunden><strong>Wochenstunden
-                                        *</strong></label>
-                                        <div class="form-group mb-3" id="wochenstunden"><select class="form-select"
-                                                                                                name="input_wochenstunden"
-                                                                                                required="">
+                                    <div class="mb-3"><label class="form-label" for=wochenstunden><strong>Wochenstunden *</strong></label>
+                                        <div class="form-group mb-3" id="wochenstunden"><select class="form-select" name="input_wochenstunden" required="">
                                             <option value="40" selected="">Vollzeit (40h)</option>
                                             <option value="20">Teilzeit (20h)</option>
                                         </select></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-4"><label class="form-label form-label"
-                                                     for="input_einstellungsdatum"><strong>Einmalpasswort *</strong><br></label><input
-                                    class="form-control" type="password" placeholder="Max1234Mustermann"
-                                    name="input_password" required=""></div>
+                            <div class="mb-4">
+                                <label class="form-label" for="input_einstellungsdatum"><strong>Einmalpasswort *</strong><br></label>
+                                <input class="form-control" type="password" placeholder="Max1234Mustermann" name="input_password" required="">
+                            </div>
                             <div class="modal-footer">
                                 <button class="btn btn-danger" data-bs-dismiss="modal">Abbrechen</button>
                                 <button class="btn btn-primary" type="submit">Mitarbeiter Erstellen</button>
@@ -450,96 +344,77 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        <svg class="icon icon-tabler icon-tabler-user-edit" xmlns="http://www.w3.org/2000/svg"
-                             width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                             fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 34px;">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                            <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>
-                            <path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>
-                        </svg>
-                          Mitarbeiter Bearbeiten
+                        <svg class="icon icon-tabler icon-tabler-user-edit" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 34px;"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path><path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path></svg>  Mitarbeiter Bearbeiten
                     </h4>
-                    <button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form action="/updateMitarbeiter" method="post">
+                        <form action="${pageContext.request.contextPath}/managment" method="post">
                             <div class="row">
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label" for="input_edit_vorname_label"><strong>Vorname
-                                        *</strong></label><input id="input_edit_vorname_label" class="form-control form-control"
-                                                                 type="text" name="input_edit_vorname" placeholder="Max"
-                                                                 required/></div>
-                                    <div class="mb-3"><label class="form-label mb-2"
-                                                             for="input_edit_personalnummer_label"><strong>Personalnummer
-                                        *</strong></label><input onchange="resetIfInvalid(this);" id="input_edit_personalnummer_label"
-                                                                 class="form-control" name="input_edit_personalnummer"
-                                                                 list="datalistOptions_edit" required disabled>
-                                        <datalist id="datalistOptions_edit" >
+                                    <div class="mb-3">
+                                        <label class="form-label" for="input_edit_vorname_label"><strong>Vorname *</strong></label>
+                                        <input id="input_edit_vorname_label" class="form-control" type="text" name="input_edit_vorname" placeholder="Max" required/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label mb-2" for="input_edit_personalnummer_label"><strong>Personalnummer *</strong></label>
+                                        <input onchange="resetIfInvalid(this);" id="input_edit_personalnummer_label" class="form-control" name="input_edit_personalnummer" list="datalistOptions_edit" required disabled>
+                                        <datalist id="datalistOptions_edit">
                                             <option value="" selected></option>
                                         </datalist>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label" for="input_edit_nachname_label"><strong>Name
-                                        *</strong></label><input id="input_edit_nachname_label" class="form-control form-control"
-                                                                 type="text" name="input_edit_nachname"
-                                                                 placeholder="Mustermann" required/></div>
-                                    <div class="mb-2"><label class="form-label form-label"><strong>Administrator
-                                        *</strong></label>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="input_edit_nachname_label"><strong>Name *</strong></label>
+                                        <input id="input_edit_nachname_label" class="form-control" type="text" name="input_edit_nachname" placeholder="Mustermann" required/>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label"><strong>Administrator *</strong></label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="input_edit_admin"
-                                                   value="true" id="input_edit_admin_label1">
-                                            <label class="form-check-label" for="input_edit_admin_label1">
-                                                Ja
-                                            </label>
+                                            <input class="form-check-input" type="radio" name="input_edit_admin" value="true" id="input_edit_admin_label1">
+                                            <label class="form-check-label" for="input_edit_admin_label1">Ja</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="input_edit_admin"
-                                                   value="false" id="input_edit_admin_label2" checked>
-                                            <label class="form-check-label" for="input_edit_admin_label2">
-                                                Nein
-                                            </label>
+                                            <input class="form-check-input" type="radio" name="input_edit_admin" value="false" id="input_edit_admin_label2" checked>
+                                            <label class="form-check-label" for="input_edit_admin_label2">Nein</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label"
-                                                                 for="input_edit_geburtsdatum_label"><strong>Geburtsdatum
-                                            *</strong></label><input id="input_edit_geburtsdatum_label" class="form-control"
-                                                                     type="date" name="input_edit_geburtsdatum" required/>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="input_edit_geburtsdatum_label"><strong>Geburtsdatum *</strong></label>
+                                            <input id="input_edit_geburtsdatum_label" class="form-control" type="date" name="input_edit_geburtsdatum" required/>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label"
-                                                                 for="input_edit_einstellungsdatum_label"><strong>Einstellungsdatum
-                                            *</strong><br/></label><input id="input_edit_einstellungsdatum_label"
-                                                                          class="form-control" type="date"
-                                                                          name="input_edit_einstellungsdatum" required/>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="input_edit_einstellungsdatum_label"><strong>Einstellungsdatum *</strong><br/></label>
+                                            <input id="input_edit_einstellungsdatum_label" class="form-control" type="date" name="input_edit_einstellungsdatum" required/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-end mb-3"></div>
                                 <div class="row mb-2">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label"
-                                                                 for="input_edit_position_label"><strong>Position
-                                            *</strong></label>
-                                            <div class="form-group mb-3"><select id="input_edit_position_label" class="form-select"
-                                                                                 name="input_edit_position" required>
-                                                <option value="Praktikant" selected>Praktikant</option>
-                                                <option value="Geschäftsführer">Geschäftsführung</option>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="input_edit_position_label"><strong>Position *</strong></label>
+                                            <div class="form-group mb-3">
+                                                <select id="input_edit_position_label" class="form-select" name="input_edit_position" required>
+                                                    <option value="Geschäftsführer">Geschäftsführung</option>
+                                                    <option value="Mitarbeiter" selected="">Mitarbeiter</option>
+                                                    <option value="Auszubildender">Auszubildender</option>
+                                                    <option value="Praktikant">Praktikant</option>
                                             </select></div>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label"
-                                                                 for="input_edit_wochenstunden_label"><strong>Wochenstunden
-                                            *</strong></label>
-                                            <div class="form-group mb-3"><select id="input_edit_wochenstunden_label" class="form-select"
-                                                                                 name="input_edit_wochenstunden" required>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="input_edit_wochenstunden_label"><strong>Wochenstunden *</strong></label>
+                                            <div class="form-group mb-3">
+                                                <select id="input_edit_wochenstunden_label" class="form-select" name="input_edit_wochenstunden" required>
                                                 <option id="40" value="40">Vollzeit (40h)</option>
                                                 <option id="20" value="20">Teilzeit (20h)</option>
                                             </select></div>
@@ -547,11 +422,9 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="mb-3"><label class="form-label"
-                                                             for="input_edit_password_label"><strong>Anmeldeinformationen
-                                        zurücksetzen</strong></label><input id="input_edit_password_label" class="form-control"
-                                                                            type="password" name="input_edit_password"
-                                                                            placeholder="Neues Einmal Passwort"/></div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="input_edit_password_label"><strong>Anmeldeinformationen zurücksetzen</strong></label>
+                                        <input id="input_edit_password_label" class="form-control" type="password" name="input_edit_password" placeholder="Neues Einmal Passwort"/></div>
                                 </div>
                             </div>
                     <div class="modal-footer">
@@ -570,7 +443,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Test</h4>
+                <h4 class="modal-title"><svg class="icon icon-tabler-calendar" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 34px;">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M16 19h6"></path><path d="M19 16v6"></path>
+                </svg>  Kalendar</h4><button class="btn-close" type="button" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
@@ -580,7 +455,6 @@
         </div>
 </div>
 </div>
-
 <footer class="text-center" style="background: #3b3b3b;">
     <div class="container py-4 py-lg-5">
         <ul class="list-inline">
@@ -591,35 +465,23 @@
         </ul>
         <ul class="list-inline">
             <li class="list-inline-item me-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                     viewBox="0 0 16 16" class="bi bi-facebook text-light">
-                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"></path>
-                </svg>
+                <i  class='bx bxl-facebook' style="font-size: 20px;"></i>
             </li>
             <li class="list-inline-item me-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                     viewBox="0 0 16 16" class="bi bi-twitter text-light">
-                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15"></path>
-                </svg>
+                <i  class='bx bxl-twitter' style="font-size: 20px;"></i>
             </li>
             <li class="list-inline-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                     viewBox="0 0 16 16" class="bi bi-instagram text-light">
-                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"></path>
-                </svg>
+                <i  class='bx bxl-instagram' style="font-size: 20px;"></i>
             </li>
         </ul>
         <p class="text-muted mb-0">Copyright © 2024 TrackIn</p>
     </div>
 </footer>
 
-
     <script src="../resources/bootstrap/bootstrap.min.js"></script>
     <script src="../resources/js/sidebar.js"></script>
     <script src="../resources/js/datatable.js"></script>
     <script src="../resources/js/managmentcalendar.js"></script>
-
-
+    <script src="../resources/js/alertsAndMessages.js"></script>
 </body>
-
 </html>
