@@ -299,4 +299,9 @@ public class dashboardServlet extends HttpServlet {
       session.setAttribute("alert", alert);
       response.sendRedirect("/dashboard");
     }
+
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        EntriesDAO.deleteSingleEntry(id);
+    }
 }

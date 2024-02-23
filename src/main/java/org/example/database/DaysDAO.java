@@ -5,11 +5,13 @@ import org.example.ServerService;
 import org.example.ServletUtil;
 import org.example.entities.Days;
 import org.example.entities.Entries;
+import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -19,53 +21,61 @@ import java.util.List;
 
 public class DaysDAO {
     public static List<Days> fetchDaysByMitarbeiter(int personalNummer) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        List<Days> days = session.createQuery("from Days where mitarbeiter.personalNummer = :nummer", Days.class)
-                .setParameter("nummer", personalNummer)
-                .list();
-        for (Days day : days) {
-            if (day.getStatus().equals("Urlaub")) {
-                day.setColor("blue");
-            } else if (day.getStatus().equals("Krank")) {
-                day.setColor("var(--bs-warning)");
-            } else if (day.getStatus().equals("Anwesend")) {
-                day.setColor("var(--bs-success)");
-            } else if (day.getStatus().equals("Abwesend")) {
-                day.setColor("var(--bs-danger)");
-            } else if (day.getStatus().equals("Dienstreise")) {
-                day.setColor("darkgreen");
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            List<Days> days = session.createQuery("from Days where mitarbeiter.personalNummer = :nummer", Days.class)
+                    .setParameter("nummer", personalNummer)
+                    .list();
+            for (Days day : days) {
+                switch (day.getStatus()) {
+                    case "Urlaub" -> day.setColor("blue");
+                    case "Krank" -> day.setColor("var(--bs-warning)");
+                    case "Anwesend" -> day.setColor("var(--bs-success)");
+                    case "Abwesend" -> day.setColor("var(--bs-danger)");
+                    case "Dienstreise" -> day.setColor("darkgreen");
+                }
+                day.setSickHours(day.getSickDuration() / 60);
+                day.setPresentHours(day.getPresentDuration() / 60);
             }
-            day.setSickHours(day.getSickDuration() / 60);
-            day.setPresentHours(day.getPresentDuration() / 60);
-        }
 
-        session.close();
-        return days;
+            return days;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static void saveDaysList(List<Days> daysList) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
 
-        for (Days day : daysList) {
-            switch (day.getStatus()) {
-                case "Anwesend":
-                    day.setPresentDuration(480);
-                    break;
-                case "Krank":
-                    day.setSickDuration(480);
-                    break;
-                case "Dienstreise":
-                    day.setPresentDuration(600);
-                    break;
+            try {
+                transaction = session.beginTransaction();
+
+                for (Days day : daysList) {
+                    switch (day.getStatus()) {
+                        case "Anwesend":
+                            day.setPresentDuration(480);
+                            break;
+                        case "Krank":
+                            day.setSickDuration(480);
+                            break;
+                        case "Dienstreise":
+                            day.setPresentDuration(600);
+                            break;
+                    }
+                    session.persist(day);
+                }
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
             }
-            session.save(day);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        session.getTransaction().commit();
-        session.close();
     }
 
     public static Alert updateDayAndReplaceEntries(int daysId, String status, String startDateStr, String entrieDesc, Mitarbeiter mitarbeiter, String description) {

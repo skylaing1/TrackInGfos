@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link rel="stylesheet" href="../resources/css/datatable.css">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href="../resources/boxicons/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../resources/js-year-calendar/js-year-calendar.css">
     <script src="../resources/js-year-calendar/js-year-calendar.min.js"></script>

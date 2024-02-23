@@ -26,7 +26,8 @@
     <link rel="stylesheet" href="../resources/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../resources/boxicons/css/boxicons.min.css">
+    <link href='' rel='stylesheet'>
 
     <%
         String darkMode = (String) request.getAttribute("darkMode");

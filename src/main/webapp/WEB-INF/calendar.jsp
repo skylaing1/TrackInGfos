@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link rel="stylesheet" href="../resources/js-year-calendar/js-year-calendar.css">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../resources/boxicons/css/boxicons.min.css">
     <script src="../resources/js-year-calendar/js-year-calendar.min.js"></script>
     <script src="../resources/js-year-calendar/js-year-calendar.de.js"></script>
     <link rel="stylesheet" href="../resources/css/calendar.css">

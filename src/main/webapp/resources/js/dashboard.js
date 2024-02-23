@@ -8,7 +8,7 @@ icons.forEach(icon => {
     icon.addEventListener('click', function (event) {
         let idToDelete = icon.getAttribute('data-id');
 
-        fetch(`/deleteEntry?id=${idToDelete}`, {
+        fetch(`/dashboard?id=${idToDelete}`, {
             method: 'DELETE',
         })
 

@@ -5,9 +5,11 @@ import jakarta.servlet.http.HttpSession;
 import org.example.ServerService;
 import org.example.entities.Days;
 import org.example.entities.Entries;
+import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
@@ -17,16 +19,23 @@ import java.util.List;
 public class EntriesDAO {
 
     public static void createEntriesFromList(List<Entries> entriesList) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        for (Entries entry : entriesList) {
-            session.save(entry);
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                for (Entries entry : entriesList) {
+                    session.persist(entry);
+                }
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        session.getTransaction().commit();
-        session.close();
     }
 
     public static List<Entries> getTodayEntriesForMitarbeiter(Mitarbeiter mitarbeiter, LocalDate date) {
@@ -57,29 +66,39 @@ public class EntriesDAO {
     }
 
     public static void deleteSingleEntry(int id) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
 
-        Entries entry = session.get(Entries.class, id);
-        Days day = entry.getDay();
+            try {
+                transaction = session.beginTransaction();
 
-        if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
-            int currentDuration = day.getPresentDuration();
-            day.setPresentDuration(currentDuration - entry.getEntryDuration());
-            day.getEntries().remove(entry);
-            session.update(day);
-        } else if (entry.getState().equals("Krank")) {
-            int currentDuration = day.getSickDuration();
-            day.setSickDuration(currentDuration - entry.getEntryDuration());
-            day.getEntries().remove(entry);
-            session.update(day);
-        } else {
-            day.getEntries().remove(entry);
+                Entries entry = session.get(Entries.class, id);
+                Days day = entry.getDay();
+
+                if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
+                    int currentDuration = day.getPresentDuration();
+                    day.setPresentDuration(currentDuration - entry.getEntryDuration());
+                    day.getEntries().remove(entry);
+                    session.merge(day);
+                } else if (entry.getState().equals("Krank")) {
+                    int currentDuration = day.getSickDuration();
+                    day.setSickDuration(currentDuration - entry.getEntryDuration());
+                    day.getEntries().remove(entry);
+                    session.merge(day);
+                } else {
+                    day.getEntries().remove(entry);
+                }
+                session.remove(entry);
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        session.delete(entry);
-
-        session.getTransaction().commit();
-        session.close();
     }
 }
