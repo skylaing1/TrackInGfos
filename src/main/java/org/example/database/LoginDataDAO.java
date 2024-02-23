@@ -48,4 +48,25 @@ public class LoginDataDAO {
             e.printStackTrace();
         }
     }
+
+    public static void updateLoginData(LoginData loginData) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+
+            try {
+                transaction = session.beginTransaction();
+
+                session.merge(loginData);
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.Alert;
 import org.example.ServletUtil;
 import org.example.database.MitarbeiterDAO;
 import org.example.entities.Mitarbeiter;
@@ -87,6 +88,8 @@ public class managmentServlet extends HttpServlet {
 
         request.setAttribute("allAvailablePersonalNummer", allPersonalNummer);
         request.setAttribute("mitarbeiterList", sublist);
+        request.setAttribute("alert", request.getSession().getAttribute("alert"));
+        session.removeAttribute("alert");
 
         request.getRequestDispatcher("WEB-INF/managment.jsp").forward(request, response);
     }
@@ -104,22 +107,39 @@ public class managmentServlet extends HttpServlet {
         int wochenstunden = Integer.parseInt(request.getParameter("input_edit_wochenstunden"));
 
         String hashedPassword = null;
+         Mitarbeiter editMitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(personalNummer);
 
         if (onetimepassword != null) {
             hashedPassword = BCrypt.hashpw(onetimepassword, BCrypt.gensalt(12));
             MitarbeiterDAO.deleteLoginDataAndTokens(personalNummer);
+            editMitarbeiter.setOnetimepassword(hashedPassword);
         }
 
-        MitarbeiterDAO.updateMitarbeiter(vorname, personalNummer, nachname, geburtsdatum, eintrittsdatum, position, hashedPassword, wochenstunden, admin);
 
+
+
+        editMitarbeiter.setVorname(vorname);
+        editMitarbeiter.setPersonalNummer(personalNummer);
+        editMitarbeiter.setName(nachname);
+        editMitarbeiter.setGeburtsdatum(LocalDate.parse(geburtsdatum));
+        editMitarbeiter.setEinstellungsdatum(LocalDate.parse(eintrittsdatum));
+        editMitarbeiter.setPosition(position);
+        editMitarbeiter.setWochenstunden(wochenstunden);
+        editMitarbeiter.setAdmin(admin);
+        
+
+        MitarbeiterDAO.updateMitarbeiter(editMitarbeiter);
+
+        Alert alert = Alert.successAlert( "Mitarbeiter erfolgreich bearbeitet!", "Der Mitarbeiter wurde erfolgreich bearbeitet.");
+        request.getSession().setAttribute("alert", alert);
         response.sendRedirect("/managment");
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
         int id = Integer.parseInt(request.getParameter("id"));
 
         MitarbeiterDAO.deleteSingleMitarbeiter(id);
-
     }
 
 

@@ -2,6 +2,7 @@ package org.example.database;
 
 import org.example.ServerService;
 import org.example.entities.LoginData;
+import org.example.entities.Mitarbeiter;
 import org.example.entities.Token;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -94,4 +95,27 @@ public class TokenDAO {
         }
 
     }
+
+    public static void deleteToken(Mitarbeiter mitarbeiter) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                Query<Token> query = session.createNativeQuery("DELETE FROM Token WHERE credentials_id = :loginData", Token.class);
+                query.setParameter("loginData", mitarbeiter.getLoginData().getCredentialsId());
+                query.executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

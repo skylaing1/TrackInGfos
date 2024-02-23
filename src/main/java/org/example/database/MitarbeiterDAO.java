@@ -63,36 +63,39 @@ public class MitarbeiterDAO {
     }
 
     public static void updateProfilePicture(Mitarbeiter mitarbeiter, String fileName, String appPath) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
 
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory();
-             Session session = factory.openSession()) {
+                if (!mitarbeiter.getProfilePicture().equals("../resources/img/avatars/default.jpeg")) {
 
-            session.beginTransaction();
+                    String oldPicPath = appPath + File.separator + "resources" + File.separator + "img" + File.separator + "avatars" + File.separator + mitarbeiter.getProfilePicture();
 
-
-            if (!mitarbeiter.getProfilePicture().equals("../resources/img/avatars/default.jpeg")) {
-
-                String oldPicPath = appPath + File.separator + "resources" + File.separator + "img" + File.separator + "avatars" + File.separator + mitarbeiter.getProfilePicture();
-
-                File oldPicFile = new File(oldPicPath);
-                if (oldPicFile.exists()) {
-                    oldPicFile.delete();
+                    File oldPicFile = new File(oldPicPath);
+                    if (oldPicFile.exists()) {
+                        oldPicFile.delete();
+                    }
                 }
+
+                mitarbeiter.setProfilePicture("../resources/img/avatars/" + fileName);
+
+                session.merge(mitarbeiter);
+
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
             }
-
-
-            mitarbeiter.setProfilePicture(fileName);
-
-            session.update(mitarbeiter);
-
-            session.getTransaction().commit();
-
-            session.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 
     public static void addMitarbeiter(Mitarbeiter mitarbeiter) {
         try (Session session = ServerService.getSessionFactory().openSession()) {
@@ -114,23 +117,11 @@ public class MitarbeiterDAO {
         }
     }
 
-    public static void updateMitarbeiter(String vorname, int personalNummer, String nachname, String geburtsdatum, String eintrittsdatum, String position, String hashedPassword, int wochenstunden, boolean admin) {
+    public static void updateMitarbeiter(Mitarbeiter mitarbeiter) {
         try (Session session = ServerService.getSessionFactory().openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-
-                Mitarbeiter mitarbeiter = new Mitarbeiter();
-
-                mitarbeiter.setVorname(vorname);
-                mitarbeiter.setPersonalNummer(personalNummer);
-                mitarbeiter.setName(nachname);
-                mitarbeiter.setGeburtsdatum(LocalDate.parse(geburtsdatum));
-                mitarbeiter.setEinstellungsdatum(LocalDate.parse(eintrittsdatum));
-                mitarbeiter.setPosition(position);
-                mitarbeiter.setOnetimepassword(hashedPassword);
-                mitarbeiter.setWochenstunden(wochenstunden);
-                mitarbeiter.setAdmin(admin);
 
                 session.merge(mitarbeiter);
 

@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="jakarta.servlet.http.Cookie" %>
-<%@ page import="java.util.List" %>
-<%@ page import="org.example.entities.Entries" %>
-<%@ page import="org.example.Alert" %>
 <%@ page import="org.example.entities.Mitarbeiter" %>
-<%@ page import="org.example.entities.Message" %>
 
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -27,7 +22,6 @@
     <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link rel="stylesheet" href="../resources/boxicons/css/boxicons.min.css">
-    <link href='' rel='stylesheet'>
 
     <%
         String darkMode = (String) request.getAttribute("darkMode");
@@ -397,7 +391,7 @@
                                 <div class="mb-3"><label class="form-label" for="notizen"><strong>Notizen</strong></label><textarea id="notizen" class="form-control" maxlength="255" name="input_notizen"></textarea></div>
                             </div>
                         </div>
-                        <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input id="save-event" class="btn btn-primary" type="submit" value="Speichern" /></div>
+                        <div class="modal-footer"><a class="btn btn-danger" role="button" data-bs-dismiss="modal">Verwerfen</a><input id="save-event" class="btn btn-primary" type="submit" value="Speichern"/></div>
                     </form>
                 </div>
             </div>

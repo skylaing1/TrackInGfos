@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.Alert;
 import org.example.database.MitarbeiterDAO;
 import org.example.entities.Mitarbeiter;
 import java.io.IOException;
@@ -38,8 +39,6 @@ public class addMitarbeiterServlet extends HttpServlet {
         boolean admin = Boolean.parseBoolean(request.getParameter("input_admin"));
         int wochenstunden = Integer.parseInt(request.getParameter("input_wochenstunden"));
 
-        //TODO: Einmal Passwort verschlüsseln vllt auch Generieren in der Erfolgsmeldung
-        //TODO: Erfolgreich hinzugefügt Meldung
 
          String hashedPassword = BCrypt.hashpw(onetimepassword, BCrypt.gensalt(12));
 
@@ -50,7 +49,7 @@ public class addMitarbeiterServlet extends HttpServlet {
         newMitarbeiter.setGeburtsdatum(LocalDate.parse(geburtsdatum));
         newMitarbeiter.setEinstellungsdatum(LocalDate.parse(eintrittsdatum));
         newMitarbeiter.setPosition(position);
-        newMitarbeiter.setOnetimepassword(onetimepassword);
+        newMitarbeiter.setOnetimepassword(hashedPassword);
         newMitarbeiter.setWochenstunden(wochenstunden);
         newMitarbeiter.setVerbleibendeUrlaubstage(28);
         newMitarbeiter.setAdmin(admin);
@@ -58,6 +57,8 @@ public class addMitarbeiterServlet extends HttpServlet {
 
         MitarbeiterDAO.addMitarbeiter(newMitarbeiter);
 
+        Alert alert = Alert.successAlert("Mitarbeiter erfolgreich hinzugefügt", "Der Mitarbeiter wurde erfolgreich hinzugefügt.");
+        session.setAttribute("alert", alert);
         response.sendRedirect("/managment");
     }
 }

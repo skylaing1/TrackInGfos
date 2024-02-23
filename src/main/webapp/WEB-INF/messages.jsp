@@ -190,7 +190,6 @@
                 </div>
             </div>
         </div>
-
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
 <footer class="text-center" style="background: #3b3b3b;">

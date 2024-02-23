@@ -4,9 +4,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import org.example.Alert;
 import org.example.database.LoginDataDAO;
 import org.example.database.MitarbeiterDAO;
 import org.example.entities.Mitarbeiter;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,20 +21,20 @@ public class profileServlet extends HttpServlet {
 
     protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
-
-
-        request.setAttribute("mitarbeiter", mitarbeiter);
-
+        Alert alert = (Alert) session.getAttribute("alert");
+        session.removeAttribute("alert");
+        if (alert != null) {
+            request.setAttribute("alert", alert);
+        }
         request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
     }
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part filePart = request.getPart("file");
-
         HttpSession session = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+
+        Part filePart = request.getPart("file");
 
         String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         String extension = "";
@@ -42,12 +44,12 @@ public class profileServlet extends HttpServlet {
             extension = originalFileName.substring(i);
         }
 
+        //Unique filename um Überschreiben zu vermeiden und Errors
         String fileName = "avatar_" + System.currentTimeMillis() + extension;
 
         String appPath = request.getServletContext().getRealPath("");
 
         String savePath = appPath + File.separator + "resources" + File.separator + "img" + File.separator + "avatars";
-
         filePart.write(savePath + File.separator + fileName);
 
         MitarbeiterDAO.updateProfilePicture(mitarbeiter, fileName, appPath);
@@ -58,9 +60,11 @@ public class profileServlet extends HttpServlet {
 
         session.setAttribute("SessionMitarbeiter", mitarbeiter);
 
+        Alert alert = Alert.successAlert("Profilbild erfolgreich geändert", "Ihr Profilbild wurde erfolgreich geändert.");
 
 
-        response.sendRedirect("/profile");
+        request.setAttribute("alert", alert);
+        request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
 
     }
 }

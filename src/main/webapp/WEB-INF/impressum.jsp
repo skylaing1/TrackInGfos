@@ -1,4 +1,6 @@
+<%@ page import="org.example.entities.Mitarbeiter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -17,9 +19,15 @@
     <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
     <link rel='stylesheet' href="../resources/boxicons/css/boxicons.min.css">
+
+    <%
+        String darkMode = (String) request.getAttribute("darkMode");
+        Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+    %>
 </head>
 
-<body id="page-top" style="background: var(--bs-lvl1);">
+
+<body id="page-top" data-bs-theme="<%=darkMode.equals("true") ? "dark" : "light"%>">
 <div id="wrapper">
     <nav class="sidebarnew close">
         <header>
@@ -94,54 +102,32 @@
     </nav>
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content" style="background: var(--bs-lvl1);">
-            <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light" style=" ;background: var(--bs-lvl3);">
+            <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light" style="background: var(--bs-lvl3);">
                 <div class="container-fluid"><button class="btn d-md-none rounded-circle me-3 " id="sidebarToggleTop" type="button" onclick="mobileToggle"><i class="fas fa-bars"></i></button>
-                    <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group" style="border-width: 1px;"><input class="form-control border-0 small" type="text" placeholder="Suche  ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                    </form>
                     <ul class="navbar-nav flex-nowrap ms-auto" style="color: rgb(221, 223, 235);">
-                        <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
-                            <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="me-auto navbar-search w-100">
-                                    <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                        <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw" style="color: #a7a7a7;"></i></a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#" id="messageDropdown"><span class="badge bg-danger badge-counter" id="messageCount">${messageCount}</span><i class="fas fa-bell fa-fw" style="color: #a7a7a7;"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                    <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="me-3">
-                                        <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
-                                    </div>
-                                    <div><span class="small text-gray-500">December 12, 2019</span>
-                                        <p>A new monthly report is ready to download!</p>
-                                    </div>
-                                </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="me-3">
-                                        <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>
-                                    </div>
-                                    <div><span class="small text-gray-500">December 7, 2019</span>
-                                        <p>$290.29 has been deposited into your account!</p>
-                                    </div>
-                                </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="me-3">
-                                        <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
-                                    </div>
-                                    <div><span class="small text-gray-500">December 2, 2019</span>
-                                        <p>Spending Alert: We've noticed unusually high spending for your account.</p>
-                                    </div>
-                                </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                    <h6 class="dropdown-header">Benachrichtigungen</h6>
+                                    <c:forEach items="${messages}" var="message">
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="me-3">
+                                                <div class="bg-${message.status} icon-circle"><i class="fas ${message.icon} text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">${message.messageDateFormatted}</span>
+                                                <p>${message.message}</p>
+                                            </div>
+                                        </a>
+                                    </c:forEach>
+                                    </a><a class="dropdown-item text-center small text-gray-500" href="${pageContext.request.contextPath}/messages">Zeige Alle Benachrichtigungen</a>
                                 </div>
                             </div>
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" style="color: rgb(0,27,232);"><%=mitarbeiter.getVorname() + " " + mitarbeiter.getName()%></span><img class="border rounded-circle img-profile" src="img/avatars/avatar1.jpeg"></a>
-                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline text-dark me-2 small"><%=mitarbeiter.getVorname() + " " + mitarbeiter.getName()%></span><img class="border rounded-circle img-profile" src="<%=mitarbeiter.getProfilePicture()%>"></a>
+                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="${pageContext.request.contextPath}/profile"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profie</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                 </div>
                             </div>
                         </li>
