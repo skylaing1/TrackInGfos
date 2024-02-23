@@ -209,7 +209,7 @@ public class dashboardServlet extends HttpServlet {
       HttpSession session = request.getSession(false);
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
-        Boolean newDay = false;
+        boolean newDay = false;
 
       String state = request.getParameter("input_status");
       String startTime = request.getParameter("input_zeit_von");
@@ -217,6 +217,14 @@ public class dashboardServlet extends HttpServlet {
       String description = request.getParameter("input_notizen");
       List<Entries> entriesList = (List<Entries>) session.getAttribute("entriesSession");
       session.removeAttribute("entriesSession");
+
+      if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+          Alert alert = Alert.dangerAlert("Ungültiger Eintrag", "Es können keine Einträge für Sonntage gemacht werden");
+          session.setAttribute("alert", alert);
+          response.sendRedirect("/dashboard");
+          return;
+      }
+
 
 
         LocalTime newEntryStart = LocalTime.parse(startTime, formatter);
