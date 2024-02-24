@@ -180,4 +180,13 @@ public class MitarbeiterDAO {
             e.printStackTrace();
         }
     }
+
+    public static List<Mitarbeiter> fetchAllMitarbeiterForMitarbeiterRefresh() {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Mitarbeiter m JOIN FETCH m.days", Mitarbeiter.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -16,14 +16,16 @@ public class ServerService implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        //  SessionFactory nur einmal erstellen
+        sessionFactory = new Configuration().configure().buildSessionFactory();
 
         //  MessageCreater alle 30 Sekunden ausführen
         scheduler = Executors.newSingleThreadScheduledExecutor();
 //      scheduler.scheduleAtFixedRate(new MessageCreater(), 0, 30, TimeUnit.SECONDS);
-//        scheduler.scheduleAtFixedRate(new MitarbeiterRefresh(), 0, 1, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(new MitarbeiterRefresh(), 0, 10, TimeUnit.SECONDS);
 
-        //  SessionFactory nur einmal erstellen
-        sessionFactory = new Configuration().configure().buildSessionFactory();
+
+
     }
 
     @Override

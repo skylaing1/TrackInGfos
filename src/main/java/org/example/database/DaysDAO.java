@@ -52,17 +52,6 @@ public class DaysDAO {
                 transaction = session.beginTransaction();
 
                 for (Days day : daysList) {
-                    switch (day.getStatus()) {
-                        case "Anwesend":
-                            day.setPresentDuration(480);
-                            break;
-                        case "Krank":
-                            day.setSickDuration(480);
-                            break;
-                        case "Dienstreise":
-                            day.setPresentDuration(600);
-                            break;
-                    }
                     session.persist(day);
                 }
 
@@ -150,24 +139,26 @@ public class DaysDAO {
         }
     }
 
-    public static Alert deleteDayAndEntries(int daysId) {
-        try {
-            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
+    public static void deleteDayAndEntries(int daysId) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
 
+            try {
+                transaction = session.beginTransaction();
 
-            session.createQuery("delete from Days where daysId = :id")
-                    .setParameter("id", daysId)
-                    .executeUpdate();
+               Days day = session.get(Days.class, daysId);
+                session.remove(day);
 
-            session.getTransaction().commit();
-            session.close();
+                transaction.commit();
 
-            return Alert.successAlert("Erfolgreich", "Der Tag wurde erfolgreich gelöscht");
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return Alert.dangerAlert("Datenbankfehler", "Es ist ein Fehler beim Löschen der Daten aufgetreten");
         }
     }
 
@@ -217,4 +208,6 @@ public class DaysDAO {
             e.printStackTrace();
         }
     }
+
+
 }

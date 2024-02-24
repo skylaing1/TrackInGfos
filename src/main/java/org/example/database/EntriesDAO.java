@@ -18,7 +18,7 @@ import java.util.List;
 
 public class EntriesDAO {
 
-    public static void createEntriesFromList(List<Entries> entriesList) {
+    public static void saveEntriesFromList(List<Entries> entriesList) {
         try (Session session = ServerService.getSessionFactory().openSession()) {
             Transaction transaction = null;
             try {
@@ -62,6 +62,12 @@ public class EntriesDAO {
 
                 Entries entry = session.get(Entries.class, id);
                 Days day = entry.getDay();
+                if (day.getEntries().size() == 1) {
+                    session.remove(day);
+                    session.remove(entry);
+                    transaction.commit();
+                    return;
+                }
 
                 if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
                     int currentDuration = day.getPresentDuration();
@@ -75,6 +81,7 @@ public class EntriesDAO {
                     session.merge(day);
                 } else {
                     day.getEntries().remove(entry);
+                    session.merge(day);
                 }
                 session.remove(entry);
 

@@ -19,10 +19,30 @@
     border-radius: 100%;
 }
 
-.c-avatar__status {
+.c-avatar__status_1 {
     width: 12px;
     height: 12px;
     background: #99CC00;
+    border: 2px solid white;
+    position: absolute;
+    bottom: 1%;
+    right: 16%;
+    border-radius: 100%;
+}
+.c-avatar__status_2 {
+    width: 12px;
+    height: 12px;
+    background: rgba(220, 197, 0, 0.98);
+    border: 2px solid white;
+    position: absolute;
+    bottom: 1%;
+    right: 16%;
+    border-radius: 100%;
+}
+.c-avatar__status_0 {
+    width: 12px;
+    height: 12px;
+    background: #b03636;
     border: 2px solid white;
     position: absolute;
     bottom: 1%;

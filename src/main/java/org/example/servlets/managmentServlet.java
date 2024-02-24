@@ -28,6 +28,9 @@ public class managmentServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         Mitarbeiter mymitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
 
+        int presentCounter = 0;
+        int wasPresentTodayCounter = 0;
+
         if (mymitarbeiter == null || !mymitarbeiter.getAdmin()) {
             response.sendRedirect("/dashboard");
             return;
@@ -56,7 +59,14 @@ public class managmentServlet extends HttpServlet {
 
             mitarbeiter.setGeburtsdatumFormatted(formattedDate_GeburtsDatum);
             mitarbeiter.setEinstellungsdatumFormatted(formattedDate_EinstellungsDatum);
-
+            switch (mitarbeiter.getPresent()) {
+                case 1:
+                    presentCounter++;
+                    break;
+                case 2:
+                    wasPresentTodayCounter++;
+                    break;
+            }
         }
 
         List<Integer> usedPersonalNummer = mitarbeiterList.stream()
@@ -86,6 +96,9 @@ public class managmentServlet extends HttpServlet {
 
         List<Mitarbeiter> sublist = mitarbeiterList.subList(begin, end);
 
+
+        request.setAttribute("presentCounter", presentCounter);
+        request.setAttribute("wasPresentTodayCounter", wasPresentTodayCounter);
         request.setAttribute("allAvailablePersonalNummer", allPersonalNummer);
         request.setAttribute("mitarbeiterList", sublist);
         request.setAttribute("alert", request.getSession().getAttribute("alert"));

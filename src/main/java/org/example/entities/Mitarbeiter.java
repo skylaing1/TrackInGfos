@@ -48,6 +48,10 @@ public class Mitarbeiter {
     @Column(name = "onetimepassword")
     private String onetimepassword;
 
+
+    @Column(name = "present" , columnDefinition = "int default 0")
+    private int present;
+
     @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)
     private List<Days> days;
 
@@ -144,6 +148,9 @@ public class Mitarbeiter {
     public void setOnetimepassword(String onetimepassword) {
         this.onetimepassword = onetimepassword;
     }
+
+    public int getPresent() {return present;}
+    public void setPresent(int present) {this.present = present;}
 
     public List<Days> getDays() {return days;}
     public void setDays(List<Days> days) {this.days = days;}

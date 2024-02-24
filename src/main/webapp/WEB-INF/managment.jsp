@@ -138,9 +138,9 @@
                         </li>
                         <div class="d-none d-sm-block topbar-divider"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline text-dark me-2 small"><%=mitarbeiter.getVorname() + " " + mitarbeiter.getName()%></span><img class="border rounded-circle img-profile" src="<%=mitarbeiter.getProfilePicture()%>"></a>
-                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="${pageContext.request.contextPath}/profile"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profie</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#"><span class="d-none d-sm-inline text-dark me-2 small"><%=mitarbeiter.getVorname() + " " + mitarbeiter.getName()%></span><img class="border rounded-circle img-profile" src="<%=mitarbeiter.getProfilePicture()%>"></a>
+                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="${pageContext.request.contextPath}/profile"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profil</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Ausloggen</a>
                                 </div>
                             </div>
                         </li>
@@ -185,7 +185,7 @@
                                     <c:forEach var="mitarbeiter_inTable" items="${mitarbeiterList}">
                                         <tr>
                                             <td class="col-auto">${mitarbeiter_inTable.personalNummer}</td>
-                                            <td class="col-auto"><div class="c-avatar"><img class="rounded-circle me-2" height="30" src="${mitarbeiter_inTable.profilePicture}" width="30"/><span class="c-avatar__status"></span></div>${mitarbeiter_inTable.vorname} ${mitarbeiter_inTable.name}</td>
+                                            <td class="col-auto"><div class="c-avatar"><img class="rounded-circle me-2" height="30" src="${mitarbeiter_inTable.profilePicture}" width="30"/><span class="c-avatar__status_${mitarbeiter_inTable.present}"></span></div>${mitarbeiter_inTable.vorname} ${mitarbeiter_inTable.name}</td>
                                             <td class="col-auto">${mitarbeiter_inTable.geburtsdatumFormatted}</td>
                                             <td class="col-auto">${mitarbeiter_inTable.einstellungsdatumFormatted}</td>
                                             <td class="col-auto">${mitarbeiter_inTable.position}</td>
@@ -218,7 +218,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
-                                    <p>Mitarbeiter: ${totalRows}: Abwesend: ${mitarbeiterList.size()}</p>
+                                    <p>Mitarbeiter: ${totalRows}: davon Heute Anwesend: ${presentCounter}: davon ist Anwesend: ${wasPresentTodayCounter}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">

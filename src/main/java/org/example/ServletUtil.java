@@ -211,4 +211,8 @@ public class ServletUtil {
     }
 
 
+    public static List<Days> getweekDays(List<Days> daysListofCurrentWeek, int personalNummer) {
+        // assume daysListofCurrentWeek contains all days of the current week
+        return daysListofCurrentWeek;
+    }
 }

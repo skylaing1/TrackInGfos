@@ -160,3 +160,6 @@ ALTER TABLE Message CHANGE `Read` seen BOOLEAN;
 
 ALTER TABLE `Mitarbeiter`
 MODIFY `verbleibendeUrlaubstage` INT DEFAULT 28;
+
+ALTER TABLE Mitarbeiter
+ADD COLUMN present SMALLINT NOT NULL DEFAULT 0;

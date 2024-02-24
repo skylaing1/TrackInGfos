@@ -12,6 +12,7 @@ import org.example.Alert;
 import org.example.LocalDateSerializer;
 import org.example.ServletUtil;
 import org.example.database.DaysDAO;
+import org.example.database.MitarbeiterDAO;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 import org.example.entities.Mitarbeiter;
@@ -109,18 +110,40 @@ public class calendarServlet extends HttpServlet {
             }
         });
 
-        // Speichern der Tage in der Datenbank
-        DaysDAO.saveDaysList(daysList);
-        EntriesDAO.createEntriesFromList(entriesList);
+
+
+            for (Days day : daysList) {
+                switch (day.getStatus()) {
+                    case "Anwesend":
+                        mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
+                        day.setPresentDuration(480);
+                        break;
+                    case "Krank":
+                        mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
+                        day.setSickDuration(480);
+                        break;
+                    case "Dienstreise":
+                        mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
+                        day.setPresentDuration(600);
+                        break;
+                    case "Urlaub":
+                        mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
+                        break;
+                }
+            }
+            MitarbeiterDAO.updateMitarbeiter(mitarbeiter);
+            // Speichern der Tage in der Datenbank
+            DaysDAO.saveDaysList(daysList);
+            EntriesDAO.saveEntriesFromList(entriesList);
+
+
 
         response.sendRedirect("/calendar");
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int daysId = Integer.parseInt(request.getParameter("id"));
-        Alert alert = DaysDAO.deleteDayAndEntries(daysId);
-        HttpSession session = request.getSession(false);
-        session.setAttribute("alert", alert);
+        DaysDAO.deleteDayAndEntries(daysId);
     }
 
 
