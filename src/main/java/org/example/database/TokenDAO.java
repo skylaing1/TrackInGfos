@@ -52,9 +52,11 @@ public class TokenDAO {
                 transaction = session.beginTransaction();
 
                 Query<Token> query = session.createQuery("FROM Token WHERE token_content = :tokenContent", Token.class);
+                query.setParameter("tokenContent", tokenContent);
+                Token token = query.uniqueResult();
 
-                if (query != null) {
-                    session.remove(query);
+                if (token != null) {
+                    session.remove(token);
                 }
                 transaction.commit();
             } catch (Exception e) {
