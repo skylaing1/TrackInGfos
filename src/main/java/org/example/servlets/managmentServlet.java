@@ -108,8 +108,8 @@ public class managmentServlet extends HttpServlet {
         boolean admin = Boolean.parseBoolean(request.getParameter("input_edit_admin"));
         int wochenstunden = Integer.parseInt(request.getParameter("input_edit_wochenstunden"));
 
-        String hashedPassword = null;
-         Mitarbeiter editMitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(personalNummer);
+        String hashedPassword;
+        Mitarbeiter editMitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(personalNummer);
 
         if (onetimepassword != null) {
             hashedPassword = BCrypt.hashpw(onetimepassword, BCrypt.gensalt(12));

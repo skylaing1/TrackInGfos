@@ -23,7 +23,7 @@ public class UpdateMessage {
             Mitarbeiter user = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
 
             if (user != null) {
-                List<Message> messages = MessageDAO.fetchAllMessagesForUser(user);
+                List<Message> messages = MessageDAO.fetchLatestMessagesForUser(user);
 
                 if (messages != null) {
 

@@ -26,6 +26,9 @@ public class MitarbeiterRefresh implements Runnable {
                 // if Day is in the current week
                 if (ServletUtil.isInCurrentWeek(day.getDate().toLocalDate(), date)) {
                     weekHoursProgress += (day.getPresentDuration() + day.getSickDuration())/ 60;
+                    if (day.getStatus().equals("Urlaub"))  {
+                        weekHoursProgress += 8;
+                    }
                     if (date.equals(day.getDate().toLocalDate())) {
                         List<Entries> entriesList = day.getEntries();
                         for (Entries entry : entriesList) {
