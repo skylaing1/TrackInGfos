@@ -76,3 +76,8 @@
 .row-checkbox {
     vertical-align: middle;
 }
+
+.calendar-context-menu, .calendar-context-menu {
+    z-index: 2000;
+    position: fixed;
+}
