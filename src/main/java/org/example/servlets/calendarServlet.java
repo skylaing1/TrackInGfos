@@ -80,6 +80,12 @@ public class calendarServlet extends HttpServlet {
         // Wenn Update eines Tages
         if (daysIdStr != null && !daysIdStr.isEmpty()) {
             if (startDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
+                if (status.equals("Urlaub") && mitarbeiter.getVerbleibendeUrlaubstage() < 1) {
+                    Alert alert = Alert.dangerAlert("Zu wenig Urlaubstage", "Sie haben nicht genügend Urlaubstage");
+                    session1.setAttribute("alert", alert);
+                    response.sendRedirect("/calendar");
+                    return;
+                }
                 int daysId = Integer.parseInt(daysIdStr);
                 Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr ,entrieDescription, mitarbeiter, description);
                 session1.setAttribute("alert", alert);
@@ -128,9 +134,17 @@ public class calendarServlet extends HttpServlet {
                         break;
                     case "Urlaub":
                         mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
+                        mitarbeiter.setVerbleibendeUrlaubstage(mitarbeiter.getVerbleibendeUrlaubstage() - 1);
                         break;
                 }
             }
+        if (mitarbeiter.getVerbleibendeUrlaubstage() < 0) {
+            mitarbeiter.setVerbleibendeUrlaubstage(0);
+            Alert alert = Alert.dangerAlert("Zu wenig Urlaubstage", "Sie haben nicht genügend Urlaubstage");
+            session1.setAttribute("alert", alert);
+            response.sendRedirect("/calendar");
+            return;
+        }
             MitarbeiterDAO.updateMitarbeiter(mitarbeiter);
             // Speichern der Tage in der Datenbank
             DaysDAO.saveDaysList(daysList);
