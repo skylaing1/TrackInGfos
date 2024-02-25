@@ -30,6 +30,8 @@ public class calendarServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+        mitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(mitarbeiter.getPersonalNummer());
+        session.setAttribute("SessionMitarbeiter", mitarbeiter);
 
         Alert alert = (Alert) session.getAttribute("alert");
 
@@ -80,14 +82,15 @@ public class calendarServlet extends HttpServlet {
         // Wenn Update eines Tages
         if (daysIdStr != null && !daysIdStr.isEmpty()) {
             if (startDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
-                if (status.equals("Urlaub") && mitarbeiter.getVerbleibendeUrlaubstage() < 1) {
+                if (status.equals("Urlaub") && mitarbeiter.getVerbleibendeUrlaubstage() <= 0) {
                     Alert alert = Alert.dangerAlert("Zu wenig Urlaubstage", "Sie haben nicht genügend Urlaubstage");
                     session1.setAttribute("alert", alert);
                     response.sendRedirect("/calendar");
                     return;
                 }
                 int daysId = Integer.parseInt(daysIdStr);
-                Alert alert = DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr ,entrieDescription, mitarbeiter, description);
+                DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr ,entrieDescription, mitarbeiter, description);
+                Alert alert = Alert.successAlert("Erfolgreich", "Der Tag wurde erfolgreich aktualisiert");
                 session1.setAttribute("alert", alert);
                 response.sendRedirect("/calendar");
                 return;
@@ -116,30 +119,33 @@ public class calendarServlet extends HttpServlet {
             }
         });
 
+        if (startDateStr.equals(endDateStr) && startDate.getDayOfWeek() == DayOfWeek.SUNDAY){
+                Alert alert = Alert.dangerAlert("Fehler", "Der Tag darf nicht auf einen Sonntag fallen");
+                session1.setAttribute("alert", alert);
+                response.sendRedirect("/calendar");
+                return;
+        }
+
+
 
 
             for (Days day : daysList) {
                 switch (day.getStatus()) {
                     case "Anwesend":
-                        mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
                         day.setPresentDuration(480);
                         break;
                     case "Krank":
-                        mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
                         day.setSickDuration(480);
                         break;
                     case "Dienstreise":
-                        mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
                         day.setPresentDuration(600);
                         break;
                     case "Urlaub":
-                        mitarbeiter.setWeekHoursProgress(mitarbeiter.getWeekHoursProgress() + 8);
                         mitarbeiter.setVerbleibendeUrlaubstage(mitarbeiter.getVerbleibendeUrlaubstage() - 1);
                         break;
                 }
             }
-        if (mitarbeiter.getVerbleibendeUrlaubstage() < 0) {
-            mitarbeiter.setVerbleibendeUrlaubstage(0);
+        if (mitarbeiter.getVerbleibendeUrlaubstage() <= 0) {;
             Alert alert = Alert.dangerAlert("Zu wenig Urlaubstage", "Sie haben nicht genügend Urlaubstage");
             session1.setAttribute("alert", alert);
             response.sendRedirect("/calendar");
@@ -149,17 +155,15 @@ public class calendarServlet extends HttpServlet {
             // Speichern der Tage in der Datenbank
             DaysDAO.saveDaysList(daysList);
             EntriesDAO.saveEntriesFromList(entriesList);
-
-
+            Alert alert = Alert.successAlert("Erfolgreich", "Die Tage wurden erfolgreich hinzugefügt");
+            session1.setAttribute("alert", alert);
 
         response.sendRedirect("/calendar");
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int daysId = Integer.parseInt(request.getParameter("id"));
-        DaysDAO.deleteDayAndEntries(daysId);
+
+        DaysDAO.deleteDayAndEntries(daysId , (Mitarbeiter) request.getSession().getAttribute("SessionMitarbeiter"));
     }
-
-
-
 }

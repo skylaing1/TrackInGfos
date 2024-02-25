@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="jakarta.servlet.http.Cookie" %>
-<%@ page import="java.util.List" %>
-<%@ page import="org.example.entities.Entries" %>
-<%@ page import="org.example.Alert" %>
+
 <%@ page import="org.example.entities.Mitarbeiter" %>
 <%@ page import="org.example.entities.Message" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -118,7 +115,7 @@
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content" style="background: var(--bs-lvl1);">
             <nav class="navbar navbar-expand sticky-top mb-4 topbar static-top navbar-light" style="background: var(--bs-lvl3);">
-                <div class="container-fluid"><button class="btn d-md-none rounded-circle me-3 " id="sidebarToggleTop" type="button" onclick="mobileToggle"><i class="fas fa-bars"></i></button>
+                <div class="container-fluid"><button class="btn d-md-none rounded-circle me-3 " id="sidebarToggleTop" type="button" ><i class="fas fa-bars"></i></button>
                     <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group" style="border-width: 1px;"><input class="form-control border-0 small" type="text" placeholder="Suche  ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                     </form>
@@ -163,7 +160,7 @@
             </nav>
             <div class="container-fluid">
                 <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                    <h3 class="text-dark mb-0">Benachrichtigungen</h3>
+                    <h3 class="text-dark mb-0">Mitteilungen</h3>
                 </div>
                 <div class="card shadow mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center"
@@ -171,16 +168,16 @@
                         <h6 class="fw-bold text-primary m-1">Alle Benachrichtigungen der Letzten Woche</h6>
                     </div>
                     <div class="card-body">
-                        <c:forEach items="${messages}" var="message">
+                        <c:forEach items="${messagesList}" var="messageInList">
                             <div class="row">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
-                                        <div class="bg-${message.status} icon-circle"><i
-                                                class="fas ${message.icon} text-white"></i></div>
+                                        <div class="bg-${messageInList.status} icon-circle"><i
+                                                class="fas ${messageInList.icon} text-white"></i></div>
                                     </div>
                                     <div>
-                                        <span class="small text-gray-500">${message.messageDateFormatted}</span>
-                                        <p>${message.message}</p>
+                                        <span class="small text-gray-500">${messageInList.messageDateFormatted}</span>
+                                        <p>${messageInList.message}</p>
                                     </div>
                                 </div>
                             </div>

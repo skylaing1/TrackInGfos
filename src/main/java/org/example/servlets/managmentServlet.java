@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-
 @WebServlet(name = "managmentServlet", value = "/managment")
 public class managmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,27 +82,14 @@ public class managmentServlet extends HttpServlet {
 
         allPersonalNummer.removeAll(usedPersonalNummer);
 
-        int totalRows = mitarbeiterList.size();
+        request.setAttribute("totalRows", mitarbeiterList.size());
 
-        // Für die Pagination 1.Seite 2.Seite usw.
-        request.setAttribute("totalRows", totalRows);
-
-        String pageParam = request.getParameter("page");
-
-        int currentPage = (pageParam != null) ? Integer.parseInt(pageParam) : 1;
-        int rowsPerPage = 30;
-
-
-        int begin = (currentPage - 1) * rowsPerPage;
-        int end = Math.min(begin + rowsPerPage, mitarbeiterList.size());
-
-        List<Mitarbeiter> sublist = mitarbeiterList.subList(begin, end);
 
 
         request.setAttribute("presentCounter", presentCounter);
         request.setAttribute("wasPresentTodayCounter", wasPresentTodayCounter);
         request.setAttribute("allAvailablePersonalNummer", allPersonalNummer);
-        request.setAttribute("mitarbeiterList", sublist);
+        request.setAttribute("mitarbeiterList", mitarbeiterList);
         request.setAttribute("alert", request.getSession().getAttribute("alert"));
         session.removeAttribute("alert");
 

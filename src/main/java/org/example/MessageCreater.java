@@ -34,25 +34,29 @@ public class MessageCreater implements Runnable {
             assert mitarbeiters != null;
             for (Mitarbeiter mitarbeiter : mitarbeiters) {
                 // Wenn der Mitarbeiter weniger als 50% seiner Wochenstunden erreicht hat und heute Donnerstag, Freitag oder Samstag ist
-                if ((today.getDayOfWeek() == DayOfWeek.THURSDAY || today.getDayOfWeek() == DayOfWeek.FRIDAY || today.getDayOfWeek() == DayOfWeek.SATURDAY) && mitarbeiter.getWeekHoursProgress() < 50) {
+                if ((today.getDayOfWeek() == DayOfWeek.THURSDAY || today.getDayOfWeek() == DayOfWeek.FRIDAY || today.getDayOfWeek() == DayOfWeek.SATURDAY) && mitarbeiter.getWeekHoursProgress() != 0) {
+                    int weekHoursProgress = mitarbeiter.getWeekHoursProgress();
+                    if (((double)weekHoursProgress / mitarbeiter.getWochenstunden()) * 100 < 50) {
 
-                    // Erstelle eine neue Nachricht für den Mitarbeiter
-                    Message messageForMitarbeiter = new Message();
-                    messageForMitarbeiter.setStatus("warning");
-                    messageForMitarbeiter.setDatum(today);
-                    messageForMitarbeiter.setMessage("<strong>Dies ist eine Warnung – es wird knapp: </strong><br /> Du hast bisher nur die Hälfte deiner Wochenstunden erreicht. Bitte überprüfe und optimiere deine Arbeitszeiten, um dein Wochenziel zu erreichen.");
-                    messageForMitarbeiter.setMitarbeiter(mitarbeiter);
-                    MitarbeiterMessages.add(messageForMitarbeiter);
 
-                    // Erstelle eine neue Nachricht für den Administrator
-                    Message messageForAdmin = new Message();
-                    messageForAdmin.setStatus("warning");
-                    messageForAdmin.setDatum(today);
-                    messageForAdmin.setMessage("<strong>Unvollständige Arbeitsstundenwarnung</strong><br /> Mitarbeiter" + mitarbeiter.getName() + " " + mitarbeiter.getVorname() + " (Personalnummer: " + mitarbeiter.getPersonalNummer() + ") hat weniger als 50% Wochenarbeitsstunden erreicht.");
-                    messageForAdmin.setMitarbeiter(mitarbeiter);
-                    AdminMessages.add(messageForAdmin);
+                        // Erstelle eine neue Nachricht für den Mitarbeiter
+                        Message messageForMitarbeiter = new Message();
+                        messageForMitarbeiter.setStatus("warning");
+                        messageForMitarbeiter.setDatum(today);
+                        messageForMitarbeiter.setMessage("<strong>Dies ist eine Warnung – es wird knapp: </strong><br /> Du hast bisher nur die Hälfte deiner Wochenstunden erreicht. Bitte überprüfe und optimiere deine Arbeitszeiten, um dein Wochenziel zu erreichen.");
+                        messageForMitarbeiter.setMitarbeiter(mitarbeiter);
+                        MitarbeiterMessages.add(messageForMitarbeiter);
+
+                        // Erstelle eine neue Nachricht für den Administrator
+                        Message messageForAdmin = new Message();
+                        messageForAdmin.setStatus("warning");
+                        messageForAdmin.setDatum(today);
+                        messageForAdmin.setMessage("<strong>Unvollständige Arbeitsstundenwarnung</strong><br /> Mitarbeiter " + mitarbeiter.getVorname() + " " + mitarbeiter.getName() + " (Personalnummer: " + mitarbeiter.getPersonalNummer() + ") hat weniger als 50% Wochenarbeitsstunden erreicht.");
+                        messageForAdmin.setMitarbeiter(mitarbeiter);
+                        AdminMessages.add(messageForAdmin);
+                    }
                 }
-                if (today.getDayOfWeek() == DayOfWeek.SUNDAY && mitarbeiter.getWeekHoursProgress() < 100) {
+                if (today.getDayOfWeek() == DayOfWeek.SUNDAY && mitarbeiter.getWeekHoursProgress() < mitarbeiter.getWochenstunden()) {
 
                     Message messageForMitarbeiter = new Message();
                     messageForMitarbeiter.setStatus("danger");
@@ -72,7 +76,7 @@ public class MessageCreater implements Runnable {
                     AdminMessages.add(messageForAdmin);
                 }
 
-                if (mitarbeiter.getWeekHoursProgress() >= 100) {
+                if (mitarbeiter.getWeekHoursProgress() >= mitarbeiter.getWochenstunden()) {
                     Message messageForMitarbeiter = new Message();
                     messageForMitarbeiter.setStatus("success");
                     messageForMitarbeiter.setDatum(today);

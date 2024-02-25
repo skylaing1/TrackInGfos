@@ -46,6 +46,7 @@ public class SessionCookieCheckFilter implements Filter {
                         Token token = TokenDAO.getValidToken(cookie.getValue());
                         if (token != null) {
                             session = httpRequest.getSession();
+
                             session.setAttribute("SessionMitarbeiter", token.getLoginData().getMitarbeiter());
                             UpdateMessage.RefreshMessage();
                             chain.doFilter(request, response);

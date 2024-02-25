@@ -67,50 +67,66 @@ public class DaysDAO {
         }
     }
 
-    public static Alert updateDayAndReplaceEntries(int daysId, String status, String startDateStr, String entrieDesc, Mitarbeiter mitarbeiter, String description) {
-        try {
-            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
+    public static void updateDayAndReplaceEntries(int daysId, String status, String startDateStr, String entrieDesc, Mitarbeiter mitarbeiter, String description) {
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
+
+            try {
+                transaction = session.beginTransaction();
 
 
-            Days day = session.get(Days.class, daysId);
-            day.setStatus(status);
-            day.setDate(Date.valueOf(startDateStr));
-            day.setMitarbeiter(mitarbeiter);
-            day.setDescription(description);
-
-            List<Entries> entriesList = ServletUtil.createEntriesForDay(day, status, entrieDesc, new ArrayList<>());
-
-            session.createQuery("delete from Entries where day.daysId = :id")
-                    .setParameter("id", daysId)
-                    .executeUpdate();
-
-            int totalPresentDuration = 0;
-            int totalSickDuration = 0;
-
-            for (Entries entry : entriesList) {
-                if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
-                    totalPresentDuration += entry.getEntryDuration();
+                Days day = session.get(Days.class, daysId);
+                if (day.getStatus().equals("Urlaub") && !status.equals("Urlaub")) {
+                    mitarbeiter.setVerbleibendeUrlaubstage(mitarbeiter.getVerbleibendeUrlaubstage() + 1);
+                    session.merge(mitarbeiter);
                 }
-                if (entry.getState().equals("Krank")) {
-                    totalSickDuration += entry.getEntryDuration();
+                if (status.equals("Urlaub") && !day.getStatus().equals("Urlaub")) {
+                    mitarbeiter.setVerbleibendeUrlaubstage(mitarbeiter.getVerbleibendeUrlaubstage() - 1);
+                    session.merge(mitarbeiter);
                 }
-                session.save(entry);
+                day.setStatus(status);
+                day.setDate(Date.valueOf(startDateStr));
+                day.setMitarbeiter(mitarbeiter);
+                day.setDescription(description);
+
+                List<Entries> entriesList = ServletUtil.createEntriesForDay(day, status, entrieDesc, new ArrayList<>());
+
+
+                Query<LoginData> query = session.createNativeQuery("delete from Entries where days_id = :id", LoginData.class);
+                query.setParameter("id", daysId);
+                query.executeUpdate();
+
+
+                int totalPresentDuration = 0;
+                int totalSickDuration = 0;
+
+                for (Entries entry : entriesList) {
+                    if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
+                        totalPresentDuration += entry.getEntryDuration();
+                    }
+                    if (entry.getState().equals("Krank")) {
+                        totalSickDuration += entry.getEntryDuration();
+                    }
+                    session.persist(entry);
+                }
+
+                day.setSickDuration(totalSickDuration);
+                day.setPresentDuration(totalPresentDuration);
+
+                session.merge(day);
+                transaction.commit();
+
+
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
             }
-
-            day.setSickDuration(totalSickDuration);
-            day.setPresentDuration(totalPresentDuration);
-
-            session.update(day);
-            session.getTransaction().commit();
-            session.close();
-
-            return Alert.successAlert("Erfolgreich", "Der Tag wurde erfolgreich aktualisiert");
         } catch (Exception e) {
             e.printStackTrace();
-            return Alert.dangerAlert("Datenbankfehler", "Es ist ein Fehler beim Speichern der Daten aufgetreten");
         }
+
     }
 
     public static Days fetchDayByDateAndMitarbeiter(LocalDate date, int personalNummer) {
@@ -139,7 +155,7 @@ public class DaysDAO {
         }
     }
 
-    public static void deleteDayAndEntries(int daysId) {
+    public static void deleteDayAndEntries(int daysId, Mitarbeiter mitarbeiter) {
         try (Session session = ServerService.getSessionFactory().openSession()) {
             Transaction transaction = null;
 
@@ -147,8 +163,12 @@ public class DaysDAO {
                 transaction = session.beginTransaction();
 
                Days day = session.get(Days.class, daysId);
-                session.remove(day);
 
+                if (day.getStatus().equals("Urlaub")) {
+                    mitarbeiter.setVerbleibendeUrlaubstage(mitarbeiter.getVerbleibendeUrlaubstage() + 1);
+                    session.merge(mitarbeiter);
+                }
+                session.remove(day);
                 transaction.commit();
 
             } catch (Exception e) {
