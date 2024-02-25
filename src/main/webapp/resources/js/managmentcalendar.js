@@ -18,7 +18,7 @@ const calendar = new Calendar('#calendar', {
     enableRangeSelection: false,
     contextMenuItems:[
         {
-            text: 'Delete',
+            text: 'Löschen',
             click: deleteEvent
         }
     ],

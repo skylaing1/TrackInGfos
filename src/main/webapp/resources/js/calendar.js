@@ -114,7 +114,7 @@ const calendar = new Calendar('#calendar', {
     }),
     contextMenuItems:[
         {
-            text: 'Update',
+            text: 'Aktualisieren',
             click: function(e) {
                 var startDate = new Date(e.startDate.getTime() - e.startDate.getTimezoneOffset() * 60000).toISOString().split('T')[0];
                 var endDate = new Date(e.endDate.getTime() - e.endDate.getTimezoneOffset() * 60000).toISOString().split('T')[0];
@@ -122,7 +122,7 @@ const calendar = new Calendar('#calendar', {
             }
         },
         {
-            text: 'Delete',
+            text: 'Löschen',
             click: deleteEvent
         }
     ],
