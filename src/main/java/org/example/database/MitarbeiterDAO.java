@@ -159,13 +159,13 @@ public class MitarbeiterDAO {
         }
     }
 
-    public static void updateWeekHoursProgressAndVacationDays(int geleisteteMinutenInProzent, int leftVacation, Mitarbeiter mitarbeiter) {
+    public static void updateWeekHoursProgressAndVacationDays(int geleisteteStunden, int leftVacation, Mitarbeiter mitarbeiter) {
         try (Session session = ServerService.getSessionFactory().openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
 
-                mitarbeiter.setWeekHoursProgress(geleisteteMinutenInProzent);
+                mitarbeiter.setWeekHoursProgress(geleisteteStunden);
                 mitarbeiter.setVerbleibendeUrlaubstage(leftVacation);
                 session.merge(mitarbeiter);
 

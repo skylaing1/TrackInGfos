@@ -176,7 +176,7 @@ public class dashboardServlet extends HttpServlet {
 
 
         // Update der geleisteten Stunden und des Urlaubsanspruchs in der Datenbank
-        MitarbeiterDAO.updateWeekHoursProgressAndVacationDays(geleisteteMinutenInProzent, urlaubAnspruch , mitarbeiter);
+        MitarbeiterDAO.updateWeekHoursProgressAndVacationDays(geleisteteStunden, urlaubAnspruch , mitarbeiter);
 
 
 
