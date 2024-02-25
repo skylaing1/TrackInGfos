@@ -56,6 +56,9 @@ public class managmentServlet extends HttpServlet {
             String formattedDate_EinstellungsDatum = localDate_Einstellungsdatum.format(formatter);
             String formattedDate_GeburtsDatum = localDate_Geburtsdatum.format(formatter);
 
+            if (mitarbeiter.getWeekHoursProgress() != 0) {
+                mitarbeiter.setWochenstundenProgressInPercent((int)(((double)mitarbeiter.getWeekHoursProgress() / mitarbeiter.getWochenstunden()) * 100));
+            }
 
             mitarbeiter.setGeburtsdatumFormatted(formattedDate_GeburtsDatum);
             mitarbeiter.setEinstellungsdatumFormatted(formattedDate_EinstellungsDatum);

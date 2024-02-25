@@ -148,7 +148,9 @@
                 </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-1">Kalendar</h3>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                    <h3 class="text-dark mb-0">Kalender</h3>
+                </div>
                 <div class="row">
                     <div class="card card-calendar shadow">
                         <div class="card-body">

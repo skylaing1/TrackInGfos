@@ -71,6 +71,9 @@ public class Mitarbeiter {
     @Transient
     private String wochenstundenFormatted;
 
+    @Transient
+    private int wochenstundenProgressInPercent;
+
 
     //Getters und Setters
     public int getPersonalNummer() {return personalNummer;}
@@ -173,4 +176,7 @@ public class Mitarbeiter {
 
     public String getWochenstundenFormatted() {return wochenstundenFormatted;}
     public void setWochenstundenFormatted(String wochenstundenFormatted) {this.wochenstundenFormatted = wochenstundenFormatted;}
+
+    public int getWochenstundenProgressInPercent() {return wochenstundenProgressInPercent;}
+    public void setWochenstundenProgressInPercent(int wochenstundenProgressInPercent) {this.wochenstundenProgressInPercent = wochenstundenProgressInPercent;}
 }

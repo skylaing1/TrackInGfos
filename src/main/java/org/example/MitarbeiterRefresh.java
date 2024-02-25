@@ -41,12 +41,16 @@ public class MitarbeiterRefresh implements Runnable {
                             }
                         }
 
+                    } else {
+                        mitarbeiter.setPresent(0);
                     }
+
+                    mitarbeiter.setWeekHoursProgress(weekHoursProgress);
+                    MitarbeiterDAO.updateMitarbeiter(mitarbeiter);
                 }
 
             }
-            mitarbeiter.setWeekHoursProgress(weekHoursProgress);
-            MitarbeiterDAO.updateMitarbeiter(mitarbeiter);
+
         }
     }
 }
