@@ -1,5 +1,3 @@
-MYSQL ROOT= G9#xYp$2zLs!vT7*
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
