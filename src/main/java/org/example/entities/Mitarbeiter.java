@@ -26,20 +26,20 @@ public class Mitarbeiter {
     @Column(name = "einstellungsdatum",columnDefinition = "DATE default '1900-01-01'")
     private LocalDate einstellungsdatum;
 
-    @Column(name = "Position", columnDefinition = "varchar(255) default 'keine position'")
+    @Column(name = "Position", columnDefinition = "varchar(80) default 'Keine position'")
     private String position;
 
-    @Column(name = "Wochenstunden",columnDefinition = "int default 1")
+    @Column(name = "Wochenstunden",columnDefinition = "smallint default 1")
     private int wochenstunden;
 
     @Column(name = "profile_picture", columnDefinition = "varchar(255) default '../resources/img/avatars/default.jpeg'")
     private String profilePicture;
     //TODO: PricturePath wird doppelt irgendwo gesetzt
 
-    @Column(name = "WochenStundenFortschritt", columnDefinition = "int default 0")
+    @Column(name = "WochenStundenFortschritt", columnDefinition = "smallint default 0")
     private int weekHoursProgress;
 
-    @Column(name = "verbleibendeUrlaubstage", columnDefinition = "int default 28")
+    @Column(name = "verbleibendeUrlaubstage", columnDefinition = "smallint default 28")
     private int verbleibendeUrlaubstage;
 
     @Column(name = "admin",columnDefinition = "boolean default false")
@@ -49,7 +49,7 @@ public class Mitarbeiter {
     private String onetimepassword;
 
 
-    @Column(name = "present" , columnDefinition = "int default 0")
+    @Column(name = "present" , columnDefinition = "tinyint default 0")
     private int present;
 
     @OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL)

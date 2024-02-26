@@ -32,16 +32,22 @@ public class MitarbeiterTransaction {
 
     }
 
-    public static void deleteSingleMitarbeiter(int personalNummer) {
+    public static void deleteSingleMitarbeiter(int personalNummer, String appPath) {
         try (Session session = ServerService.getSessionFactory().openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
 
-                Mitarbeiter mitarbeiter = new Mitarbeiter();
-                mitarbeiter.setPersonalNummer(personalNummer);
-                session.remove(mitarbeiter);
+                Mitarbeiter mitarbeiter = session.get(Mitarbeiter.class, personalNummer);
+                if (mitarbeiter != null) {
+                    String profilePicturePath = appPath + mitarbeiter.getProfilePicture().replace("../", File.separator).replace("/", File.separator);
+                    File profilePictureFile = new File(profilePicturePath);
+                    if (profilePictureFile.exists() && !mitarbeiter.getProfilePicture().equals("../resources/img/avatars/default.jpeg")) {
+                        profilePictureFile.delete();
+                    }
 
+                    session.remove(mitarbeiter);
+                }
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) {

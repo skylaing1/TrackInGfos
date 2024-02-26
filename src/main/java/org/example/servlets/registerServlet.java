@@ -20,10 +20,8 @@ public class registerServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (ServletUtil.checkSessionAndRedirect(request, response)) {
-            System.out.println("RememberMe cookie angemeldet"); //Test
             return;
         }
-        System.out.println("Session war noch da"); //Test
         request.getRequestDispatcher("WEB-INF/register.jsp").forward(request, response);
     }
 

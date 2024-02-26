@@ -39,8 +39,6 @@ function formatDateStr(dateStr) {
 }
 
 function editEvent(days) {
-    console.log(days);
-
 
     // Setzen der Werte in das Modal aus Datenbank falls vorhanden
     daysIdInput.value = (days ? days.id : '') ?? null;
@@ -116,13 +114,10 @@ const calendar = new Calendar('#calendar', {
         }
     },
     selectRange: function (e) {
-        console.log(e.startDate);
 
         // Extrahieren das Datum im ISO-Format ohne Zeitzone
         var startDate = new Date(e.startDate.getTime() - e.startDate.getTimezoneOffset() * 60000).toISOString().split('T')[0];
         var endDate = new Date(e.endDate.getTime() - e.endDate.getTimezoneOffset() * 60000).toISOString().split('T')[0];
-
-        console.log(startDate);
 
         editEvent({ startDate: startDate, endDate: endDate });
     },

@@ -182,6 +182,7 @@
 </div>
 <script src="../resources/bootstrap/bootstrap.min.js"></script>
 <script src="../resources/js/sidebar.js"></script>
+<script src="../resources/js/alertsAndMessages.js"></script>
 </body>
 
 </html>

@@ -115,6 +115,7 @@ public class managmentServlet extends HttpServlet {
             hashedPassword = BCrypt.hashpw(onetimepassword, BCrypt.gensalt(12));
             MitarbeiterTransaction.deleteLoginDataAndTokens(personalNummer);
             editMitarbeiter.setOnetimepassword(hashedPassword);
+            editMitarbeiter.setLoginData(null);
         }
 
 
@@ -140,8 +141,8 @@ public class managmentServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         int id = Integer.parseInt(request.getParameter("id"));
-
-        MitarbeiterTransaction.deleteSingleMitarbeiter(id);
+        String appPath = request.getServletContext().getRealPath("");
+        MitarbeiterTransaction.deleteSingleMitarbeiter(id, appPath);
     }
 
 

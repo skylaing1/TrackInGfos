@@ -135,8 +135,8 @@
             </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-1" style="font-weight: bold;"> Datenschutzrichtlinie </h3>
-            </div>
-            <p><br>Letzte Aktualisierung: 06.01.2024<br><br>Willkommen auf der Website von Trackin. Diese Datenschutzrichtlinie erklärt, wie wir Informationen sammeln, verwenden, teilen und schützen, die im Zusammenhang mit Ihrer Nutzung unserer Website stehen.</p>
+
+            <p><br>Letzte Aktualisierung: 26.02.2024<br><br>Willkommen auf der Website von Trackin. Diese Datenschutzrichtlinie erklärt, wie wir Informationen sammeln, verwenden, teilen und schützen, die im Zusammenhang mit Ihrer Nutzung unserer Website stehen.</p>
             <h4 style="font-weight: bold;">1. Gesammelte Informationen</h4>
             <h5 style="font-weight: bold;">1.1. Personenbezogene Daten</h5>
             <p>Bei der Nutzung unserer Website können wir personenbezogene Daten von Ihnen erfassen, wie z.B. Ihren Namen, Ihre E-Mail-Adresse und Ihren Arbeitsort. Diese Informationen werden nur für interne Zwecke verwendet und nicht ohne Ihre Zustimmung an Dritte weitergegeben.</p>
@@ -154,6 +154,7 @@
             <p>Wir behalten uns das Recht vor, diese Datenschutzrichtlinie jederzeit zu ändern. Änderungen werden auf dieser Seite veröffentlicht.</p>
             <h4 style="font-weight: bold;">7. Kontakt</h4>
             <p>Bei Fragen oder Bedenken bezüglich unserer Datenschutzpraktiken können Sie uns unter&nbsp;<a href="#">Max.Mustermann@Trackin.com</a> erreichen.</p>
+        </div>
         </div>
 
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
