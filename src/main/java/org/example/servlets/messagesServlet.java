@@ -7,8 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.example.SessionListener;
-import org.example.database.MessageDAO;
+import org.example.database.MessageTransaction;
 import org.example.entities.Message;
 import org.example.entities.Mitarbeiter;
 
@@ -23,8 +22,8 @@ public class messagesServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Mitarbeiter user = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
         session.setAttribute("messageCount", "");
-        List<Message> messages = MessageDAO.fetchAllMessagesForUser(user);
-        MessageDAO.makeMassagesSeen(user);
+        List<Message> messages = MessageTransaction.fetchAllMessagesForUser(user);
+        MessageTransaction.makeMassagesSeen(user);
 
 
 
@@ -58,7 +57,7 @@ public class messagesServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Mitarbeiter user = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
         session.setAttribute("messageCount", "");
-        MessageDAO.makeMassagesSeen(user);
+        MessageTransaction.makeMassagesSeen(user);
     }
 
 

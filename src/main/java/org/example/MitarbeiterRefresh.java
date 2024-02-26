@@ -1,14 +1,12 @@
 package org.example;
 
-import org.example.database.DaysDAO;
-import org.example.database.MitarbeiterDAO;
+import org.example.database.MitarbeiterTransaction;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 import org.example.entities.Mitarbeiter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class MitarbeiterRefresh implements Runnable {
@@ -18,7 +16,7 @@ public class MitarbeiterRefresh implements Runnable {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        List<Mitarbeiter> mitarbeiterList = MitarbeiterDAO.fetchAllMitarbeiterForMitarbeiterRefresh();
+        List<Mitarbeiter> mitarbeiterList = MitarbeiterTransaction.fetchAllMitarbeiterForMitarbeiterRefresh();
         for (Mitarbeiter mitarbeiter : mitarbeiterList) {
             int weekHoursProgress = 0;
             List<Days> daysList = mitarbeiter.getDays();
@@ -49,7 +47,7 @@ public class MitarbeiterRefresh implements Runnable {
                     }
 
                     mitarbeiter.setWeekHoursProgress(weekHoursProgress);
-                    MitarbeiterDAO.updateMitarbeiter(mitarbeiter);
+                    MitarbeiterTransaction.updateMitarbeiter(mitarbeiter);
                 }
 
             }

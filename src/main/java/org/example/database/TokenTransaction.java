@@ -5,9 +5,7 @@ import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import org.example.entities.Token;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.time.LocalDateTime;
@@ -15,7 +13,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-public class TokenDAO {
+public class TokenTransaction {
 
     public static void storeTokenInDatabase(String token_content, LoginData loginData) {
         try (Session session = ServerService.getSessionFactory().openSession()) {

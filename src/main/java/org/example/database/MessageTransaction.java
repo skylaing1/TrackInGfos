@@ -1,13 +1,10 @@
 package org.example.database;
 
 import org.example.ServerService;
-import org.example.entities.LoginData;
 import org.example.entities.Message;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.time.LocalDateTime;
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MessageDAO {
+public class MessageTransaction {
     public static void deleteAllExpiredMessages() {
         try (Session session = ServerService.getSessionFactory().openSession()) {
             Transaction transaction = null;

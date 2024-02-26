@@ -7,8 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.Alert;
 import org.example.ServletUtil;
-import org.example.database.LoginDataDAO;
-import org.example.database.MitarbeiterDAO;
+import org.example.database.LoginDataTransaction;
+import org.example.database.MitarbeiterTransaction;
 import org.example.entities.Mitarbeiter;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -35,7 +35,7 @@ public class registerServlet extends HttpServlet {
         String personalNummer = request.getParameter("personalnummer");
         String oneTimePassword = request.getParameter("oneTimePassword");
 
-        Mitarbeiter mitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(Integer.parseInt(personalNummer));
+        Mitarbeiter mitarbeiter = MitarbeiterTransaction.getMitarbeiterByPersonalNummer(Integer.parseInt(personalNummer));
 
         if (mitarbeiter != null) {
             if (mitarbeiter.getLoginData() == null) {
@@ -43,7 +43,7 @@ public class registerServlet extends HttpServlet {
                     if (password.equals(password_repeat)) {
 
                         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
-                        LoginDataDAO.registerLoginData(email, hashedPassword, mitarbeiter);
+                        LoginDataTransaction.registerLoginData(email, hashedPassword, mitarbeiter);
 
                         Alert alert = Alert.successAlert("Registrierung erfolgreich", "Die Registrierung war erfolgreich. Sie können sich nun mit Ihren Anmeldedaten einloggen.");
                         request.setAttribute("alert", alert);

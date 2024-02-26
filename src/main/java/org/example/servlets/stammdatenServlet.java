@@ -1,6 +1,5 @@
 package org.example.servlets;
 
-import com.mysql.cj.log.Log;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,8 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
-import org.example.database.LoginDataDAO;
-import org.example.database.TokenDAO;
+import org.example.database.LoginDataTransaction;
+import org.example.database.TokenTransaction;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import org.mindrot.jbcrypt.BCrypt;
@@ -34,9 +33,9 @@ public class stammdatenServlet extends HttpServlet {
                 if (!NewPassword.isEmpty()) {
                     loginData.setPasswort(BCrypt.hashpw(NewPassword, BCrypt.gensalt()));
                 }
-                LoginDataDAO.updateLoginData(loginData);
+                LoginDataTransaction.updateLoginData(loginData);
                  alert = Alert.successAlert("Stammdaten erfolgreich geändert", "Ihre Stammdaten wurden erfolgreich geändert.");
-                TokenDAO.deleteToken(mitarbeiter);
+                TokenTransaction.deleteToken(mitarbeiter);
             } else {
                  alert = Alert.dangerAlert("Stammdaten nicht geändert", "Ihr Aktuelles Passwort ist nicht korrekt.");
             }

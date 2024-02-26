@@ -1,24 +1,16 @@
 package org.example.database;
 
-import jakarta.persistence.Tuple;
 import org.example.ServerService;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
-import org.example.entities.Token;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.io.File;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class MitarbeiterDAO {
+public class MitarbeiterTransaction {
 
 
     public static Mitarbeiter getMitarbeiterByPersonalNummer(int personalNummer) {

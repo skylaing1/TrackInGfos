@@ -5,14 +5,11 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import org.example.Alert;
-import org.example.database.LoginDataDAO;
-import org.example.database.MitarbeiterDAO;
+import org.example.database.MitarbeiterTransaction;
 import org.example.entities.Mitarbeiter;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Paths;
 
 @WebServlet(name = "profileServlet", value = "/profile")
@@ -52,7 +49,7 @@ public class profileServlet extends HttpServlet {
         String savePath = appPath + File.separator + "resources" + File.separator + "img" + File.separator + "avatars";
         filePart.write(savePath + File.separator + fileName);
 
-        MitarbeiterDAO.updateProfilePicture(mitarbeiter, fileName, appPath);
+        MitarbeiterTransaction.updateProfilePicture(mitarbeiter, fileName, appPath);
 
         String filePath = "../resources/img/avatars/" + fileName;
 

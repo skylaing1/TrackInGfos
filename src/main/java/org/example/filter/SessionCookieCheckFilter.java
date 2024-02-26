@@ -1,10 +1,9 @@
 package org.example.filter;
 
 import org.example.UpdateMessage;
-import org.example.database.TokenDAO;
+import org.example.database.TokenTransaction;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -43,7 +42,7 @@ public class SessionCookieCheckFilter implements Filter {
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("rememberMe")) {
-                        Token token = TokenDAO.getValidToken(cookie.getValue());
+                        Token token = TokenTransaction.getValidToken(cookie.getValue());
                         if (token != null) {
                             session = httpRequest.getSession();
 

@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.DailyStats;
 import org.example.ServletUtil;
-import org.example.database.DaysDAO;
-import org.example.database.EntriesDAO;
-import org.example.database.MitarbeiterDAO;
+import org.example.database.DaysTransaction;
+import org.example.database.EntriesTransaction;
+import org.example.database.MitarbeiterTransaction;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 
@@ -68,7 +68,7 @@ public class dashboardServlet extends HttpServlet {
 
 
         // Liste für die Tage im ganzen Jahr
-        List<Days> daysList = DaysDAO.getDaysofCurrentYear(mitarbeiter.getPersonalNummer());
+        List<Days> daysList = DaysTransaction.getDaysofCurrentYear(mitarbeiter.getPersonalNummer());
 
         if (daysList == null) {
             request.getRequestDispatcher("WEB-INF/dashboard.jsp").forward(request, response);
@@ -176,7 +176,7 @@ public class dashboardServlet extends HttpServlet {
 
 
         // Update der geleisteten Stunden und des Urlaubsanspruchs in der Datenbank
-        MitarbeiterDAO.updateWeekHoursProgressAndVacationDays(geleisteteStunden, urlaubAnspruch , mitarbeiter);
+        MitarbeiterTransaction.updateWeekHoursProgressAndVacationDays(geleisteteStunden, urlaubAnspruch , mitarbeiter);
 
 
 
@@ -253,7 +253,7 @@ public class dashboardServlet extends HttpServlet {
         entry.setDescription(description);
         entry.setEntryDuration(ServletUtil.calculateDuration(startTime, endTime));
 
-        Days day = DaysDAO.fetchDayByDateAndMitarbeiter(date, mitarbeiter.getPersonalNummer());
+        Days day = DaysTransaction.fetchDayByDateAndMitarbeiter(date, mitarbeiter.getPersonalNummer());
 
         if (day == null) {
             day = new Days();
@@ -281,18 +281,18 @@ public class dashboardServlet extends HttpServlet {
 
 
         if (!newDay) {
-            day.setStatus(EntriesDAO.findStatusWithLargestSum(mitarbeiter.getPersonalNummer(), date));
+            day.setStatus(EntriesTransaction.findStatusWithLargestSum(mitarbeiter.getPersonalNummer(), date));
             entry.setDay(day);
             entriesList.add(entry);
             day.setEntries(entriesList);
-            DaysDAO.updateDay(day);
+            DaysTransaction.updateDay(day);
 
         } else {
-            Days savedDay = DaysDAO.saveDay(day);
+            Days savedDay = DaysTransaction.saveDay(day);
             entry.setDay(day);
             entriesList.add(entry);
             savedDay.setEntries(entriesList);
-            DaysDAO.updateDay(savedDay);
+            DaysTransaction.updateDay(savedDay);
         }
 
         Alert alert = Alert.successAlert("Erfolgreich", "Der Eintrag wurde erfolgreich hinzugefügt");
@@ -303,6 +303,6 @@ public class dashboardServlet extends HttpServlet {
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        EntriesDAO.deleteSingleEntry(id);
+        EntriesTransaction.deleteSingleEntry(id);
     }
 }

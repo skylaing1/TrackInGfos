@@ -6,11 +6,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
-import org.example.database.MitarbeiterDAO;
+import org.example.database.MitarbeiterTransaction;
 import org.example.entities.Mitarbeiter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 
 import jakarta.servlet.ServletException;
 import org.mindrot.jbcrypt.BCrypt;
@@ -55,7 +54,7 @@ public class addMitarbeiterServlet extends HttpServlet {
         newMitarbeiter.setAdmin(admin);
         newMitarbeiter.setProfilePicture("../resources/img/avatars/default.jpeg");
 
-        MitarbeiterDAO.addMitarbeiter(newMitarbeiter);
+        MitarbeiterTransaction.addMitarbeiter(newMitarbeiter);
 
         Alert alert = Alert.successAlert("Mitarbeiter erfolgreich hinzugefügt", "Der Mitarbeiter wurde erfolgreich hinzugefügt.");
         session.setAttribute("alert", alert);

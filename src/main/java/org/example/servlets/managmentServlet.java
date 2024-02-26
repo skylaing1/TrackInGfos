@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
 import org.example.ServletUtil;
-import org.example.database.MitarbeiterDAO;
+import org.example.database.MitarbeiterTransaction;
 import org.example.entities.Mitarbeiter;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -35,7 +35,7 @@ public class managmentServlet extends HttpServlet {
             return;
         }
 
-        List<Mitarbeiter> mitarbeiterList = MitarbeiterDAO.fetchAllMitarbeiterForTable();
+        List<Mitarbeiter> mitarbeiterList = MitarbeiterTransaction.fetchAllMitarbeiterForTable();
 
         //Anpassen der Daten für die Anzeige
         for (Mitarbeiter mitarbeiter : mitarbeiterList) {
@@ -109,11 +109,11 @@ public class managmentServlet extends HttpServlet {
         int wochenstunden = Integer.parseInt(request.getParameter("input_edit_wochenstunden"));
 
         String hashedPassword;
-        Mitarbeiter editMitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(personalNummer);
+        Mitarbeiter editMitarbeiter = MitarbeiterTransaction.getMitarbeiterByPersonalNummer(personalNummer);
 
         if (onetimepassword != null) {
             hashedPassword = BCrypt.hashpw(onetimepassword, BCrypt.gensalt(12));
-            MitarbeiterDAO.deleteLoginDataAndTokens(personalNummer);
+            MitarbeiterTransaction.deleteLoginDataAndTokens(personalNummer);
             editMitarbeiter.setOnetimepassword(hashedPassword);
         }
 
@@ -130,7 +130,7 @@ public class managmentServlet extends HttpServlet {
         editMitarbeiter.setAdmin(admin);
         
 
-        MitarbeiterDAO.updateMitarbeiter(editMitarbeiter);
+        MitarbeiterTransaction.updateMitarbeiter(editMitarbeiter);
 
         Alert alert = Alert.successAlert( "Mitarbeiter erfolgreich bearbeitet!", "Der Mitarbeiter wurde erfolgreich bearbeitet.");
         request.getSession().setAttribute("alert", alert);
@@ -141,7 +141,7 @@ public class managmentServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         int id = Integer.parseInt(request.getParameter("id"));
 
-        MitarbeiterDAO.deleteSingleMitarbeiter(id);
+        MitarbeiterTransaction.deleteSingleMitarbeiter(id);
     }
 
 

@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
 import org.example.LocalDateSerializer;
 import org.example.ServletUtil;
-import org.example.database.DaysDAO;
-import org.example.database.MitarbeiterDAO;
+import org.example.database.DaysTransaction;
+import org.example.database.MitarbeiterTransaction;
 import org.example.entities.Days;
 import org.example.entities.Entries;
 import org.example.entities.Mitarbeiter;
@@ -23,14 +23,14 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import org.example.database.EntriesDAO;
+import org.example.database.EntriesTransaction;
 @WebServlet(name = "calendarServlet", value = "/calendar")
 public class calendarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
-        mitarbeiter = MitarbeiterDAO.getMitarbeiterByPersonalNummer(mitarbeiter.getPersonalNummer());
+        mitarbeiter = MitarbeiterTransaction.getMitarbeiterByPersonalNummer(mitarbeiter.getPersonalNummer());
         session.setAttribute("SessionMitarbeiter", mitarbeiter);
 
         Alert alert = (Alert) session.getAttribute("alert");
@@ -43,7 +43,7 @@ public class calendarServlet extends HttpServlet {
         int personalNummer = mitarbeiter.getPersonalNummer();
 
 
-       List<Days> dayslist = DaysDAO.fetchDaysByMitarbeiter(personalNummer);
+       List<Days> dayslist = DaysTransaction.fetchDaysByMitarbeiter(personalNummer);
 
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
@@ -89,7 +89,7 @@ public class calendarServlet extends HttpServlet {
                     return;
                 }
                 int daysId = Integer.parseInt(daysIdStr);
-                DaysDAO.updateDayAndReplaceEntries(daysId, status, startDateStr ,entrieDescription, mitarbeiter, description);
+                DaysTransaction.updateDayAndReplaceEntries(daysId, status, startDateStr ,entrieDescription, mitarbeiter, description);
                 Alert alert = Alert.successAlert("Erfolgreich", "Der Tag wurde erfolgreich aktualisiert");
                 session1.setAttribute("alert", alert);
                 response.sendRedirect("/calendar");
@@ -151,10 +151,10 @@ public class calendarServlet extends HttpServlet {
             response.sendRedirect("/calendar");
             return;
         }
-            MitarbeiterDAO.updateMitarbeiter(mitarbeiter);
+            MitarbeiterTransaction.updateMitarbeiter(mitarbeiter);
             // Speichern der Tage in der Datenbank
-            DaysDAO.saveDaysList(daysList);
-            EntriesDAO.saveEntriesFromList(entriesList);
+            DaysTransaction.saveDaysList(daysList);
+            EntriesTransaction.saveEntriesFromList(entriesList);
             Alert alert = Alert.successAlert("Erfolgreich", "Die Tage wurden erfolgreich hinzugefügt");
             session1.setAttribute("alert", alert);
 
@@ -164,6 +164,6 @@ public class calendarServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int daysId = Integer.parseInt(request.getParameter("id"));
 
-        DaysDAO.deleteDayAndEntries(daysId , (Mitarbeiter) request.getSession().getAttribute("SessionMitarbeiter"));
+        DaysTransaction.deleteDayAndEntries(daysId , (Mitarbeiter) request.getSession().getAttribute("SessionMitarbeiter"));
     }
 }

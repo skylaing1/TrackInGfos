@@ -3,7 +3,7 @@ package org.example.servlets;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import org.example.database.TokenDAO;
+import org.example.database.TokenTransaction;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ public class logoutServlet extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("rememberMe")) {
-                TokenDAO.deleteTokenByContent(cookie.getValue());
+                TokenTransaction.deleteTokenByContent(cookie.getValue());
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }

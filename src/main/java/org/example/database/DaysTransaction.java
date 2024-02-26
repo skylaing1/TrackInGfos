@@ -1,6 +1,5 @@
 package org.example.database;
 
-import org.example.Alert;
 import org.example.ServerService;
 import org.example.ServletUtil;
 import org.example.entities.Days;
@@ -8,9 +7,7 @@ import org.example.entities.Entries;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.sql.Date;
@@ -19,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DaysDAO {
+public class DaysTransaction {
     public static List<Days> fetchDaysByMitarbeiter(int personalNummer) {
         try (Session session = ServerService.getSessionFactory().openSession()) {
             List<Days> days = session.createQuery("from Days where mitarbeiter.personalNummer = :nummer", Days.class)

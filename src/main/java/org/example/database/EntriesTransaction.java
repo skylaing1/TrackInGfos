@@ -1,22 +1,16 @@
 package org.example.database;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.example.ServerService;
 import org.example.entities.Days;
 import org.example.entities.Entries;
-import org.example.entities.LoginData;
-import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class EntriesDAO {
+public class EntriesTransaction {
 
     public static void saveEntriesFromList(List<Entries> entriesList) {
         try (Session session = ServerService.getSessionFactory().openSession()) {

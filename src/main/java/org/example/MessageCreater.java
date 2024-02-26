@@ -1,12 +1,11 @@
 package org.example;
 
-import org.example.database.MitarbeiterDAO;
-import org.example.database.MessageDAO;
+import org.example.database.MitarbeiterTransaction;
+import org.example.database.MessageTransaction;
 import org.example.entities.Mitarbeiter;
 import org.example.entities.Message;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.DayOfWeek;
@@ -17,15 +16,15 @@ public class MessageCreater implements Runnable {
     public void run() {
         try {
             //Lösche alle Abgelaufenen Nachrichten
-            MessageDAO.deleteAllExpiredMessages();
+            MessageTransaction.deleteAllExpiredMessages();
 
 
             // Hole alle Mitarbeiter aus der Datenbank
-            List<Mitarbeiter> mitarbeiters = MitarbeiterDAO.fetchAllMitarbeiterForTable();
+            List<Mitarbeiter> mitarbeiters = MitarbeiterTransaction.fetchAllMitarbeiterForTable();
             List<Message> AdminMessages = new ArrayList<Message>();
             List<Message> MitarbeiterMessages = new ArrayList<Message>();
 
-            List<Message> messages = MessageDAO.fetchAllMessages();
+            List<Message> messages = MessageTransaction.fetchAllMessages();
 
 
 
@@ -87,10 +86,10 @@ public class MessageCreater implements Runnable {
             }
 
             if (!AdminMessages.isEmpty()) {
-                MessageDAO.saveAllMessagesToAdmins(AdminMessages, messages);
+                MessageTransaction.saveAllMessagesToAdmins(AdminMessages, messages);
             }
             if (!MitarbeiterMessages.isEmpty()) {
-                MessageDAO.saveAllMessages(MitarbeiterMessages, messages);
+                MessageTransaction.saveAllMessages(MitarbeiterMessages, messages);
             }
 
             UpdateMessage.RefreshMessage();

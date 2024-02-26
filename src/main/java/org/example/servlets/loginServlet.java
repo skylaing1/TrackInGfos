@@ -7,8 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
 import org.example.UpdateMessage;
-import org.example.database.LoginDataDAO;
-import org.example.database.TokenDAO;
+import org.example.database.LoginDataTransaction;
+import org.example.database.TokenTransaction;
 import org.example.ServletUtil;
 import org.example.entities.LoginData;
 import org.example.entities.Mitarbeiter;
@@ -32,7 +32,7 @@ public class loginServlet extends HttpServlet {
         String password = request.getParameter("password");
         boolean rememberMe = Boolean.parseBoolean(request.getParameter("rememberMe"));
 
-        LoginData loginData = LoginDataDAO.getLoginDataByEmail(email);
+        LoginData loginData = LoginDataTransaction.getLoginDataByEmail(email);
 
         // Wenn Email nicht in der Datenbank gefunden wurde
         if (loginData == null) {
@@ -52,7 +52,7 @@ public class loginServlet extends HttpServlet {
 
            if (rememberMe) {
                String token_content = UUID.randomUUID().toString();
-               TokenDAO.storeTokenInDatabase(token_content, loginData);
+               TokenTransaction.storeTokenInDatabase(token_content, loginData);
                Cookie rememberMeCookie = new Cookie("rememberMe", token_content);
                rememberMeCookie.setMaxAge(60 * 60 * 24 * 14); // 14 Tage
                rememberMeCookie.setHttpOnly(true);

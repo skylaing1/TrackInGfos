@@ -4,9 +4,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.example.database.TokenDAO;
+import org.example.database.TokenTransaction;
 import org.example.entities.*;
-import org.example.database.EntriesDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
@@ -64,7 +63,7 @@ public class ServletUtil {
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("rememberMe")) {
-                        Token token = TokenDAO.getValidToken(cookie.getValue());
+                        Token token = TokenTransaction.getValidToken(cookie.getValue());
                         if (token != null) {
                             session = request.getSession(true);
                             session.setAttribute("SessionMitarbeiter", token.getLoginData().getMitarbeiter());

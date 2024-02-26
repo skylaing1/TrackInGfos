@@ -3,14 +3,11 @@ package org.example.database;
 import org.example.ServerService;
 import org.example.entities.Mitarbeiter;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.example.entities.LoginData;
 import org.hibernate.query.Query;
-import org.mindrot.jbcrypt.BCrypt;
 
-public class LoginDataDAO {
+public class LoginDataTransaction {
 
     public static LoginData getLoginDataByEmail(String email) {
         try (Session session = ServerService.getSessionFactory().openSession()) {

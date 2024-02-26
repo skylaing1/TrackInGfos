@@ -1,7 +1,7 @@
 package org.example;
 
 import jakarta.servlet.http.HttpSession;
-import org.example.database.MessageDAO;
+import org.example.database.MessageTransaction;
 import org.example.entities.Message;
 import org.example.entities.Mitarbeiter;
 
@@ -23,7 +23,7 @@ public class UpdateMessage {
             Mitarbeiter user = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
 
             if (user != null) {
-                List<Message> messages = MessageDAO.fetchLatestMessagesForUser(user);
+                List<Message> messages = MessageTransaction.fetchLatestMessagesForUser(user);
 
                 if (messages != null) {
 
