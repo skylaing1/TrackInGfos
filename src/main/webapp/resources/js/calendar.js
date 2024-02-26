@@ -54,28 +54,11 @@ function editEvent(days) {
     endDateInput.min = startDateInput.value;
     startDateInput.max = endDateInput.value;
 
-    //ToDo: Datepicker beim Updaten deaktivieren
-    //TODO: Modal datepicker limitieren auf benutzte tage
 
     myModal.show();
 }
 
 function saveEvent() {
-
-
-
-    var days = {
-
-        //TODO: Entfernen wenn nicht mehr benötigt
-        status: document.querySelector('#event-modal select[name="input_status"]').value,
-        startDate: new Date(document.querySelector('#event-modal input[name="input_datum_von"]').value),
-        endDate: new Date(document.querySelector('#event-modal input[name="input_datum_bis"]').value),
-        description: document.querySelector('#event-modal textarea[name="input_notizen"]').value,
-
-
-    };
-
-    console.log(days);
 
     form.action = "/calendar";
     form.method = "POST";
