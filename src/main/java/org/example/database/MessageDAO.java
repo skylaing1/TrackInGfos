@@ -164,20 +164,25 @@ public class MessageDAO {
     }
 
     public static void makeMassagesSeen(Mitarbeiter user) {
-        try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-            Session session = factory.getCurrentSession();
+        try (Session session = ServerService.getSessionFactory().openSession()) {
+            Transaction transaction = null;
 
-            session.beginTransaction();
+            try {
+                transaction = session.beginTransaction();
 
-            String sql = "UPDATE Message SET seen = true WHERE Mitarbeiter_personalNummer = :personalNummer";
+                String sql = "UPDATE Message SET seen = true WHERE Mitarbeiter_personalNummer = :personalNummer";
 
-            session.createNativeQuery(sql)
-                    .setParameter("personalNummer", user.getPersonalNummer())
-                    .executeUpdate();
+                int updatedRows = session.createNativeQuery(sql)
+                        .setParameter("personalNummer", user.getPersonalNummer())
+                        .executeUpdate();
 
-            session.getTransaction().commit();
-            session.close();
-
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
