@@ -139,7 +139,6 @@ public class managmentServlet extends HttpServlet {
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
         int id = Integer.parseInt(request.getParameter("id"));
         String appPath = request.getServletContext().getRealPath("");
         MitarbeiterTransaction.deleteSingleMitarbeiter(id, appPath);

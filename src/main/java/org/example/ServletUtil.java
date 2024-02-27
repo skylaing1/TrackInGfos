@@ -196,9 +196,7 @@ public class ServletUtil {
         int endHour = Integer.parseInt(endTime.substring(0, 2));
         int endMinute = Integer.parseInt(endTime.substring(3, 5));
 
-        int duration;
-
-        return duration = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
+        return (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
     }
 
     public static String capitalizeFirstLetter(String str) {
@@ -207,11 +205,5 @@ public class ServletUtil {
         } else {
             return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
         }
-    }
-
-
-    public static List<Days> getweekDays(List<Days> daysListofCurrentWeek, int personalNummer) {
-        // assume daysListofCurrentWeek contains all days of the current week
-        return daysListofCurrentWeek;
     }
 }

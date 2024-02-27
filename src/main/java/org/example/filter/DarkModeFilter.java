@@ -18,12 +18,22 @@ public class DarkModeFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         Cookie[] cookies = httpRequest.getCookies();
-        String darkMode = getDarkModeFromCookies(cookies);
+        String darkMode = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("darkMode".equals(cookie.getName())) {
+                    darkMode = cookie.getValue();
+                }
+            }
+        }
 
 
         if (darkMode == null) {
             darkMode = "true";
-            createDarkModeCookie(httpResponse, darkMode);
+            Cookie darkModeCookie = new Cookie("darkMode", darkMode);
+            darkModeCookie.setMaxAge(Integer.MAX_VALUE);
+            darkModeCookie.setPath("/");
+            ((HttpServletResponse) response).addCookie(darkModeCookie);
         }
 
         request.setAttribute("darkMode", darkMode);
@@ -32,22 +42,6 @@ public class DarkModeFilter implements Filter {
     }
 
 
-    private String getDarkModeFromCookies(Cookie[] cookies) {
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("darkMode".equals(cookie.getName())) {
-                    return cookie.getValue();
-                }
-            }
-        }
-        return null;
-    }
 
-    private void createDarkModeCookie(HttpServletResponse response, String darkModeValue) {
-        Cookie darkModeCookie = new Cookie("darkMode", darkModeValue);
-        darkModeCookie.setMaxAge(Integer.MAX_VALUE);
-        darkModeCookie.setPath("/");
-        response.addCookie(darkModeCookie);
-    }
 
 }
