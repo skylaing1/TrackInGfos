@@ -14,7 +14,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../resources/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
     <link rel="stylesheet" href="../resources/lib/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
@@ -212,11 +211,7 @@
     </div>
 </footer>
 <script src="../resources/lib/bootstrap/bootstrap.min.js"></script>
-<script src="../resources/lib/chartjs/chart.min.js"></script>
-<script src="../resources/lib/chartjs/bs-init.js"></script>
 <script src="../resources/js/sidebar.js"></script>
-<script src="../resources/js/alertsAndMessages.js"></script>
-<script src="../resources/js/dashboard.js"></script>
 </body>
 
 </html>
