@@ -17,6 +17,7 @@ public class ServerService implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         //  SessionFactory nur einmal erstellen
+        // Erstelle die sessionFactory aus hibernate.cfg.xml
         sessionFactory = new Configuration().configure().buildSessionFactory();
 
         //  MessageCreater alle 30 Sekunden ausführen

@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../resources/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../resources/img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="../resources/img/favicon_io/site.webmanifest">
-    <link rel="stylesheet" href="../resources/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/lib/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="../resources/css/style.css">
 </head>

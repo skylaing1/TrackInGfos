@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `trackindatabase`.`mitarbeiter` (
 `admin` TINYINT(1) NULL DEFAULT '0',
 `profile_picture` VARCHAR(255) NULL DEFAULT '../resources/img/avatars/default.jpeg',
 `einstellungsdatum` DATE NULL DEFAULT '1900-01-01',
-`position` VARCHAR(80) NULL DEFAULT 'Keine Position',
+`position` VARCHAR(80) NULL DEFAULT 'Keine Positio  n',
 `wochenstunden` TINYINT NULL DEFAULT 1,
 `WochenStundenFortschritt` TINYINT NULL DEFAULT 0,
 `verbleibendeUrlaubstage` TINYINT NULL DEFAULT 28,
