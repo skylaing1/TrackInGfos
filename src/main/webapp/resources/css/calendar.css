@@ -1,4 +1,4 @@
-@import url(/resources/bootstrap/bootstrap.min.css);
+@import url(/resources/lib/bootstrap/bootstrap.min.css);
 
 .card-calendar {
     max-width: 1240px;

@@ -1,4 +1,4 @@
-@import url(/resources/bootstrap/bootstrap.min.css);
+@import url(/resources/lib/bootstrap/bootstrap.min.css);
 
 .large-checkbox {
     transform: scale(1.5);

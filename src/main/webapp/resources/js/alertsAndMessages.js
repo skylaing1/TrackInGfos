@@ -12,7 +12,7 @@ alertsToClose.forEach((alert, index) => {
 });
 
 document.getElementById('messageDropdown').addEventListener('click', function() {
-    // Set the message count to null
+
     document.getElementById('messageCount').textContent = '';
 
     // Ajax um die Nachrichten zu markieren

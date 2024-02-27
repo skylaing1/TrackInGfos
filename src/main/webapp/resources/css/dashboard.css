@@ -1,4 +1,4 @@
-@import url(/resources/bootstrap/bootstrap.min.css);
+@import url(/resources/lib/bootstrap/bootstrap.min.css);
 .activity-box {
     position: relative;
     padding: 10px;
