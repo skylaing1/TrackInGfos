@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.Alert;
+import org.example.MitarbeiterRefresh;
 import org.example.ServletUtil;
 import org.example.database.MitarbeiterTransaction;
 import org.example.entities.Mitarbeiter;
@@ -34,6 +35,7 @@ public class managmentServlet extends HttpServlet {
             response.sendRedirect("/dashboard");
             return;
         }
+
 
         List<Mitarbeiter> mitarbeiterList = MitarbeiterTransaction.fetchAllMitarbeiterForTable();
 
@@ -97,6 +99,8 @@ public class managmentServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        Mitarbeiter mymitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
 
         String vorname = request.getParameter("input_edit_vorname");
         int personalNummer = Integer.parseInt(request.getParameter("input_edit_personalnummer_hidden"));
@@ -111,11 +115,12 @@ public class managmentServlet extends HttpServlet {
         String hashedPassword;
         Mitarbeiter editMitarbeiter = MitarbeiterTransaction.getMitarbeiterByPersonalNummer(personalNummer);
 
-        if (onetimepassword != null) {
+        if (!onetimepassword.isEmpty()) {
             hashedPassword = BCrypt.hashpw(onetimepassword, BCrypt.gensalt(12));
             MitarbeiterTransaction.deleteLoginDataAndTokens(personalNummer);
             editMitarbeiter.setOnetimepassword(hashedPassword);
             editMitarbeiter.setLoginData(null);
+
         }
 
 
@@ -134,6 +139,9 @@ public class managmentServlet extends HttpServlet {
         MitarbeiterTransaction.updateMitarbeiter(editMitarbeiter);
 
         Alert alert = Alert.successAlert( "Mitarbeiter erfolgreich bearbeitet!", "Der Mitarbeiter wurde erfolgreich bearbeitet.");
+        if (editMitarbeiter.getPersonalNummer() == mymitarbeiter.getPersonalNummer()) {
+            request.getSession().setAttribute("SessionMitarbeiter", editMitarbeiter);
+        }
         request.getSession().setAttribute("alert", alert);
         response.sendRedirect("/managment");
     }

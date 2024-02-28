@@ -16,8 +16,11 @@ public class MitarbeiterRefresh implements Runnable {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
+
+
         List<Mitarbeiter> mitarbeiterList = MitarbeiterTransaction.fetchAllMitarbeiterForMitarbeiterRefresh();
         for (Mitarbeiter mitarbeiter : mitarbeiterList) {
+            mitarbeiter.setPresent(0);
             int weekHoursProgress = 0;
             List<Days> daysList = mitarbeiter.getDays();
             for (Days day : daysList) {
@@ -33,24 +36,28 @@ public class MitarbeiterRefresh implements Runnable {
                             LocalTime entryStartTime = LocalTime.parse(entry.getStartTime());
                             LocalTime entryEndTime = LocalTime.parse(entry.getEndTime());
                             if (entry.getState().equals("Anwesend") || entry.getState().equals("Dienstreise")) {
-                                mitarbeiter.setPresent(2);
                                 if (entryStartTime.isBefore(time) && entryEndTime.isAfter(time)) {
                                     mitarbeiter.setPresent(1);
+                                    continue;
                                 }
+                                mitarbeiter.setPresent(2);
                             } else {
-                                mitarbeiter.setPresent(0);
+                                if (mitarbeiter.getPresent() != 1 && mitarbeiter.getPresent() != 2) {
+                                    mitarbeiter.setPresent(0);
+                                }
                             }
                         }
-
                     } else {
-                        mitarbeiter.setPresent(0);
-                    }
+                        if (mitarbeiter.getPresent() != 1 && mitarbeiter.getPresent() != 2) {
+                            mitarbeiter.setPresent(0);
+                        }
 
-                    mitarbeiter.setWeekHoursProgress(weekHoursProgress);
-                    MitarbeiterTransaction.updateMitarbeiter(mitarbeiter);
+                    }
                 }
 
             }
+            mitarbeiter.setWeekHoursProgress(weekHoursProgress);
+            MitarbeiterTransaction.updateMitarbeiter(mitarbeiter);
 
         }
     }

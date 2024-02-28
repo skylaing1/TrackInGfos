@@ -164,7 +164,7 @@
                                         <form action="${pageContext.request.contextPath}/stammdaten" method="post">
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="mb-3"><label class="form-label" for="email"><strong>E-mail Adresse</strong></label><input class="form-control" type="email" id="email" placeholder="benutzer@beispiel.com" name="email" value="<%=mitarbeiter.getLoginData().getEmail()%>" required=""></div>
+                                                    <div class="mb-3"><label class="form-label" for="email"><strong>E-mail Adresse</strong></label><input class="form-control" type="email" id="email" placeholder="benutzer@beispiel.com" name="email" value="${loginData.email}" required=""></div>
                                                 </div>
                                             </div>
                                             <div class="row">
