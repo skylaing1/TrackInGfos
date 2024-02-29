@@ -60,11 +60,13 @@ public class MitarbeiterTransaction {
         }
     }
 
-    public static void updateProfilePicture(Mitarbeiter mitarbeiter, String fileName, String appPath) {
+    public static void updateProfilePicture(Mitarbeiter mymitarbeiter, String fileName, String appPath) {
         try (Session session = ServerService.getSessionFactory().openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
+
+                Mitarbeiter mitarbeiter = session.get(Mitarbeiter.class, mymitarbeiter.getPersonalNummer());
 
                 if (!mitarbeiter.getProfilePicture().equals("../resources/img/avatars/default.jpeg")) {
 

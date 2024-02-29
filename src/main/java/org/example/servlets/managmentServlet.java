@@ -27,6 +27,8 @@ public class managmentServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         Mitarbeiter mymitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+        mymitarbeiter = MitarbeiterTransaction.getMitarbeiterByPersonalNummer(mymitarbeiter.getPersonalNummer());
+        session.setAttribute("SessionMitarbeiter", mymitarbeiter);
 
         int presentCounter = 0;
         int wasPresentTodayCounter = 0;

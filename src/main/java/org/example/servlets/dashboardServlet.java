@@ -31,6 +31,8 @@ public class dashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         Mitarbeiter mitarbeiter = (Mitarbeiter) session.getAttribute("SessionMitarbeiter");
+        mitarbeiter = MitarbeiterTransaction.getMitarbeiterByPersonalNummer(mitarbeiter.getPersonalNummer());
+        session.setAttribute("SessionMitarbeiter", mitarbeiter);
 
         LocalDate today = LocalDate.now();
 
